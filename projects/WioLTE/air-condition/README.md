@@ -3,13 +3,12 @@
 起動すると、温湿度を計測してそこから不快指数を計算し、SORACOM Harvest にデータを送信します。
 また不快指数に応じて LED の色を変更します(涼しい時には青色、ちょうどいい時には緑色、暑い時には赤色)。
 
+![グラフ例](../../../images/projects/WioLTE/air-condition/harvest.png)
+
 # 配線
 D38 に「GROVE - デジタル温度・湿度センサ」を接続します。
 
 ![配線](../../../images/projects/WioLTE/air-condition/sensor.jpg)
-
-# グラフ
-![グラフ例](../../../images/projects/WioLTE/air-condition/harvest.png)
 
 # スケッチ解説
 基本的には、Wio LTE for Arduino ライブラリのサンプル soracom-harvest スケッチをベースに、不快指数の計算部分とそれに応じた LED 色の設定を加えました。
