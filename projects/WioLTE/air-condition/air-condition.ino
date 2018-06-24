@@ -3,7 +3,7 @@
 
 #define INTERVAL        (60000)
 #define RECEIVE_TIMEOUT (10000)
-
+#define LED_VALUE (255)
 #define SENSOR_PIN    (WIOLTE_D38)
 
 WioLTE Wio;
@@ -32,37 +32,56 @@ void setup() {
     SerialUSB.println("### ERROR! ###");
     return;
   }
-
-#ifdef SENSOR_PIN
   TemperatureAndHumidityBegin(SENSOR_PIN);
-#endif // SENSOR_PIN
-
   SerialUSB.println("### Setup completed.");
 }
 
 void loop() {
   char data[100];
-
-#ifdef SENSOR_PIN
   float temp;
   float humi;
+  float heat;
+  int r,g,b;
 
   if (!TemperatureAndHumidityRead(&temp, &humi)) {
     SerialUSB.println("ERROR!");
     goto err;
   }
+  // https://ja.wikipedia.org/wiki/%E4%B8%8D%E5%BF%AB%E6%8C%87%E6%95%B0
+  heat = 0.81*temp + 0.01*humi*(0.99*temp-14.3) + 46.3;
 
   SerialUSB.print("Current humidity = ");
   SerialUSB.print(humi);
   SerialUSB.print("%  ");
   SerialUSB.print("temperature = ");
   SerialUSB.print(temp);
-  SerialUSB.println("C");
+  SerialUSB.print("C  ");
+  SerialUSB.print("heat index = ");
+  SerialUSB.print(heat);
+  SerialUSB.println("%");
 
-  sprintf(data,"{\"temp\":%.1f,\"humi\":%.1f}", temp, humi);
-#else
-  sprintf(data, "{\"uptime\":%lu}", millis() / 1000);
-#endif // SENSOR_PIN
+  // setting LED color according to heat index.
+  if(heat < 60)
+  {
+    r=0;
+    g=0;
+    b = LED_VALUE * (60-heat)/(25);
+  }
+  else if(heat < 75)
+  {
+    r = 0;
+    g = LED_VALUE;
+    b = 0;
+  }
+  else
+  {
+    r = LED_VALUE;
+    g = 0;
+    b = 0;
+  }
+  Wio.LedSetRGB(r, g, b);
+
+  sprintf(data,"{\"temp\":%.1f,\"humi\":%.1f,\"heat\":%.1f}", temp, humi, heat);
 
   SerialUSB.println("### Open.");
   int connectId;
@@ -108,10 +127,6 @@ err:
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
-//
-
-#ifdef SENSOR_PIN
-
 int TemperatureAndHumidityPin;
 
 void TemperatureAndHumidityBegin(int pin)
@@ -138,13 +153,7 @@ bool TemperatureAndHumidityRead(float* temperature, float* humidity)
   return true;
 }
 
-#endif // SENSOR_PIN
-
 ////////////////////////////////////////////////////////////////////////////////////////
-//
-
-#ifdef SENSOR_PIN
-
 void DHT11Init(int pin)
 {
   digitalWrite(pin, HIGH);
@@ -206,7 +215,4 @@ bool DHT11Check(const byte* data, int dataSize)
 
   return data[dataSize - 1] == sum;
 }
-
-#endif // SENSOR_PIN
-
 ////////////////////////////////////////////////////////////////////////////////////////
