@@ -1,5 +1,5 @@
 var device = null;
-(function() {
+(function () {
     'use strict';
 
     function hex4(n) {
@@ -97,7 +97,7 @@ var device = null;
 
         let button = form.getElementsByTagName("button")[0];
 
-        for (let i=0; i < interfaces.length; i++) {
+        for (let i = 0; i < interfaces.length; i++) {
             let radio = document.createElement("input");
             radio.type = "radio";
             radio.name = "interfaceIndex";
@@ -136,19 +136,19 @@ var device = null;
 
                 if (funcDesc) {
                     return {
-                        WillDetach:            ((funcDesc.bmAttributes & 0x08) != 0),
+                        WillDetach: ((funcDesc.bmAttributes & 0x08) != 0),
                         ManifestationTolerant: ((funcDesc.bmAttributes & 0x04) != 0),
-                        CanUpload:             ((funcDesc.bmAttributes & 0x02) != 0),
-                        CanDnload:             ((funcDesc.bmAttributes & 0x01) != 0),
-                        TransferSize:          funcDesc.wTransferSize,
-                        DetachTimeOut:         funcDesc.wDetachTimeOut,
-                        DFUVersion:            funcDesc.bcdDFUVersion
+                        CanUpload: ((funcDesc.bmAttributes & 0x02) != 0),
+                        CanDnload: ((funcDesc.bmAttributes & 0x01) != 0),
+                        TransferSize: funcDesc.wTransferSize,
+                        DetachTimeOut: funcDesc.wDetachTimeOut,
+                        DFUVersion: funcDesc.bcdDFUVersion
                     };
                 } else {
                     return {};
                 }
             },
-            error => {}
+            error => { }
         );
     }
 
@@ -218,15 +218,13 @@ var device = null;
 
     document.addEventListener('DOMContentLoaded', event => {
         let connectButton = document.querySelector("#connect");
-        let downloadButton = document.querySelector("#download");
+        let downloadButtons = document.querySelectorAll(".download");
         let statusDisplay = document.querySelector("#status");
         let infoDisplay = document.querySelector("#usbInfo");
         let dfuDisplay = document.querySelector("#dfuInfo");
         let vidField = document.querySelector("#vid");
         let interfaceDialog = document.querySelector("#interfaceDialog");
         let interfaceForm = document.querySelector("#interfaceForm");
-        let interfaceSelectButton = document.querySelector("#selectInterface");
-        let firmwareSelect = document.querySelector("#firmwares");
 
         let searchParams = new URLSearchParams(window.location.search);
         let fromLandingPage = false;
@@ -253,7 +251,7 @@ var device = null;
             serial = searchParams.get("serial");
             // Workaround for Chromium issue 339054
             if (window.location.search.endsWith("/") && serial.endsWith("/")) {
-                serial = serial.substring(0, serial.length-1);
+                serial = serial.substring(0, serial.length - 1);
             }
             fromLandingPage = true;
         }
@@ -271,14 +269,6 @@ var device = null;
 
         let manifestationTolerant = true;
 
-        let firmwareBinaryURLFields = document.querySelectorAll("input[name=firmware]");
-        let firmwareBinaryURL = document.querySelector("input[name=firmware]:checked").value;
-        firmwareBinaryURLFields.forEach(e => {
-            e.addEventListener("click", function() {
-                firmwareBinaryURL = this.value;
-            })
-        });
-
         //let device;
 
         function onDisconnect(reason) {
@@ -289,7 +279,9 @@ var device = null;
             connectButton.textContent = "Connect";
             infoDisplay.textContent = "";
             dfuDisplay.textContent = "";
-            downloadButton.disabled = true;
+            downloadButtons.forEach(e => {
+                e.disabled = true;
+            });
         }
 
         function onUnexpectedDisconnect(event) {
@@ -363,12 +355,12 @@ var device = null;
                                 propertySummary = "inaccessible";
                             }
 
-                            memorySummary += `\n${hexAddr8(segment.start)}-${hexAddr8(segment.end-1)} (${propertySummary})`;
+                            memorySummary += `\n${hexAddr8(segment.start)}-${hexAddr8(segment.end - 1)} (${propertySummary})`;
                         }
                     }
                 }
             }
-            
+
             // Bind logging methods
             device.logDebug = logDebug;
             device.logInfo = logInfo;
@@ -401,10 +393,14 @@ var device = null;
             // Update buttons based on capabilities
             if (device.settings.alternate.interfaceProtocol == 0x01) {
                 // Runtime
-                downloadButton.disabled = true;
+                downloadButtons.forEach(e => {
+                    e.disabled = true;
+                });
             } else {
                 // DFU
-                downloadButton.disabled = false;
+                downloadButtons.forEach(e => {
+                    e.disabled = false;
+                });
             }
 
             if (device.memoryInfo) {
@@ -462,11 +458,11 @@ var device = null;
             );
         }
 
-        transferSizeField.addEventListener("change", function() {
+        transferSizeField.addEventListener("change", function () {
             transferSize = parseInt(transferSizeField.value);
         });
 
-        dfuseStartAddressField.addEventListener("change", function(event) {
+        dfuseStartAddressField.addEventListener("change", function (event) {
             const field = event.target;
             let address = parseInt(field.value, 16);
             if (isNaN(address)) {
@@ -484,7 +480,7 @@ var device = null;
             }
         });
 
-        connectButton.addEventListener('click', function() {
+        connectButton.addEventListener('click', function () {
             if (device) {
                 device.close().then(onDisconnect);
                 device = null;
@@ -495,7 +491,7 @@ var device = null;
                 } else if (vid) {
                     filters.push({ 'vendorId': vid });
                 }
-                filters.push({"vendorId": 1155});
+                filters.push({ "vendorId": 1155 });
                 navigator.usb.requestDevice({ 'filters': filters }).then(
                     async selectedDevice => {
                         let interfaces = dfu.findDeviceDfuInterfaces(selectedDevice).filter(element => {
@@ -532,7 +528,8 @@ var device = null;
             }
         });
 
-        downloadButton.addEventListener('click', async function(event) {
+
+        var dl_act = async function (event) {
             event.preventDefault();
             event.stopPropagation();
             if (!configForm.checkValidity()) {
@@ -542,55 +539,58 @@ var device = null;
 
             setLogContext(downloadLog);
             clearLog(downloadLog);
-            logInfo(`Downloading the firmware from ${firmwareBinaryURL}`);
-            downloadButton.disabled = true;
-            fetch(firmwareBinaryURL)
-            .catch(e => {
-                downloadButton.disabled = false;
-                logInfo(`Network error raised. Please retry.`);
-                throw new Error(e);
-            })
-            .then(function(response) {
-                if(response.ok) {
-                    return response.arrayBuffer();
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .then(async function(arrayBuffer) {
-                if (device && arrayBuffer != null) {
-                    try {
-                        let status = await device.getStatus();
-                        if (status.state == dfu.dfuERROR) {
-                            await device.clearStatus();
-                        }
-                    } catch (error) {
-                        device.logWarning("Failed to clear status");
+            logInfo(`Downloading the firmware from ${this.value}`);
+            downloadButtons.forEach(e => { e.disabled = true; });
+            fetch(this.value)
+                .catch(e => {
+                    downloadButtons.forEach(e => { e.disabled = false; });
+                    logInfo(`Network error raised. Please retry.`);
+                    throw new Error(e);
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        return response.arrayBuffer();
                     }
-                    await device.do_download(transferSize, arrayBuffer, manifestationTolerant).then(
-                        () => {
-                            logInfo("Done!");
-                            setLogContext(null);
-                            if (!manifestationTolerant) {
-                                device.waitDisconnected(5000).then(
-                                    dev => {
-                                        onDisconnect();
-                                        device = null;
-                                    },
-                                    error => {
-                                        // It didn't reset and disconnect for some reason...
-                                        console.log("Device unexpectedly tolerated manifestation.");
-                                    }
-                                );
+                    throw new Error('Network response was not ok.');
+                })
+                .then(async function (arrayBuffer) {
+                    if (device && arrayBuffer != null) {
+                        try {
+                            let status = await device.getStatus();
+                            if (status.state == dfu.dfuERROR) {
+                                await device.clearStatus();
                             }
-                        },
-                        error => {
-                            logError(error);
-                            setLogContext(null);
+                        } catch (error) {
+                            device.logWarning("Failed to clear status");
                         }
-                    )
-                }
-            });
+                        await device.do_download(transferSize, arrayBuffer, manifestationTolerant).then(
+                            () => {
+                                logInfo("Done!");
+                                setLogContext(null);
+                                if (!manifestationTolerant) {
+                                    device.waitDisconnected(5000).then(
+                                        dev => {
+                                            onDisconnect();
+                                            device = null;
+                                        },
+                                        error => {
+                                            // It didn't reset and disconnect for some reason...
+                                            console.log("Device unexpectedly tolerated manifestation.");
+                                        }
+                                    );
+                                }
+                            },
+                            error => {
+                                logError(error);
+                                setLogContext(null);
+                            }
+                        )
+                    }
+                });
             //return false;
+        };
+        downloadButtons.forEach(e => {
+            e.addEventListener("click", dl_act);
         });
 
         // Check if WebUSB is available
