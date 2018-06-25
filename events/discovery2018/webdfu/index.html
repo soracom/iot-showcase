@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>WebUSB DFU</title>
+  <script src="dfu.js"></script>
+  <script src="dfuse.js"></script>
+  <script src="dfu-util.js"></script>
+  <style>
+    p.warning {
+      color: red;
+    }
+
+    p.error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <button id="connect">Connect</button>
+  </p>
+  <p>
+    <span id="status"></span>
+  </p>
+  <ul id="firmwares">
+    <li><input type="radio" name="firmware" value="./air-condition.ino.bin" checked>室内環境センシング (<a href="https://github.com/soracom/iot-showcase/tree/master/projects/WioLTE/air-condition">air-condition.ino</a>)</input></li>
+    <li><input type="radio" name="firmware" value="./parking.ino.bin">駐車場管理 (<a href="https://github.com/soracom/iot-showcase/tree/master/projects/WioLTE/parking">parking.ino</a>)</input></li>
+    <li><input type="radio" name="firmware" value="./gps-tracker.ino.bin">GPS トラッカー (<a href="https://github.com/soracom/iot-showcase/tree/master/projects/WioLTE/gps-tracker">gps-tracker.ino</a>)</input></li>
+    <p></p>
+    <li><input type="radio" name="firmware" value="./LedSetRGB.ino.bin">オンボード LED の点灯 (LedSetRGB.ino)</input></li>
+    <li><input type="radio" name="firmware" value="./empty.ino.bin">Wio LTE 初期化用スケッチ (empty.ino)</input></li>
+  </ul>
+  <p>
+    <button id="download" disabled="true">write to USB device</button>
+  </p>
+  <div class="log" id="downloadLog"></div>
+
+  <!-- params for working -->
+  <form id="configForm">
+    <div id="dfuseFields" hidden="true">
+      <label for="transferSize">Transfer Size:</label>
+      <input type="number" name="transferSize" id="transferSize" value="1024" />
+      <label for="dfuseStartAddress">DfuSe Start Address:</label>
+      <input type="text" name="dfuseStartAddress" id="dfuseStartAddress" size="10" pattern="0x[A-Fa-f0-9]+" />
+      <label for="dfuseUploadSize">DfuSe Upload Size:</label>
+      <input type="number" name="dfuseUploadSize" id="dfuseUploadSize" min="1" />
+    </div>
+  </form>
+  <p>
+    <div id="usbInfo" style="white-space: pre"></div>
+    <div id="dfuInfo" style="white-space: pre"></div>
+  </p>
+  <!-- params for working <end> -->
+</body>
+
+</html>
