@@ -39,9 +39,9 @@ DFUモードへの移行方法
 
 ## Wio LTE ハンズオンでできること
 本 Wio LTE ハンズオンは、3種類の簡単なIoTの仕組みを体験いただきます。
-1. 室内環境センシングシステムを作ってみよう！
-2. 駐車場管理システムを作ってみよう！
-3. GPSトラッカーを作ってみよう！
+1. [室内環境センシングシステムを作ってみよう！](#handson1)
+2. [駐車場管理システムを作ってみよう！](#handson2)
+3. [GPSトラッカーを作ってみよう！](#handson3)
 
 
 ## スケッチ例を書き込んでみよう
@@ -52,7 +52,9 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続します。 W
 ![配線](../../images/projects/WioLTE/air-condition/sensor.jpg)
 
 1-2. Wio LTEにスケッチ例を書き込む
-[こちら](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)のページをクリックし、手順に沿って書き込みを行ってください。
+
+下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 1-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して接続します。
 
@@ -65,6 +67,7 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続します。 W
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRyhUTHrXJXJ7jT6RWL25Dv4ZzuGTmoLGa37ypqUqg2AsCqIfYtB1oE3EzRfm_ykYV6cX1j5NwbRroL/pub?w=480&h=360)
 
 1-3. SORACOM Harvestでデータを可視化しよう
+
 ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
 メールアドレス、パスワードを入力し、ログインをクリックします。
 
@@ -86,7 +89,9 @@ A6 端子に 超音波センサーを取りつけます。
 ![配線](../../images/projects/WioLTE/parking/parking.jpg)
 
 2-2. Wio LTEにスケッチ例を書き込む
-[こちら](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)のページをクリックし、手順に沿って書き込みを行ってください。
+
+下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 2-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
@@ -99,6 +104,7 @@ A6 端子に 超音波センサーを取りつけます。
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTkEx3-P_uEmgUsz08BlOswjE0thl1TfmkKGmm85hRxfIe_SPVxtyP7sLZsidhff-3L2ZicRCpsMbKJ/pub?w=480&h=360)
 
 2-3. SORACOM Harvest で駐車時間を可視化します。
+
 ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
 メールアドレス、パスワードを入力し、ログインをクリックします。
 
@@ -115,15 +121,20 @@ WioLTE で 駐車場の管理を行うスケッチです。超音波距離セン
 ![地図](../../images/projects/WioLTE/parking/harvest.png)
 
 
-<h3 id="handson2">3. GPSトラッカーを作ってみよう！</h3>
+<h3 id="handson3">3. GPSトラッカーを作ってみよう！</h3>
 
 3-1. 配線
+
 UART 端子に GPS モジュールを接続します。
 D20 端子にボタンを接続しておくと、ボタンを押した時にすぐデータを送信します。
 ![配線](../../images/projects/WioLTE/gps-tracker/gps-tracker.jpg)
 
 3-2. Wio LTEにスケッチ例を書き込む
-[こちら](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)のページをクリックし、手順に沿って書き込みを行ってください。
+
+
+下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
+
 
 3-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
@@ -136,6 +147,7 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vQv9l2M5ylFyVP1rdZw97NPg_U4W3KtPGBi-MMp3tDArwztb9gjuh8H4AjifPhqIt8FCC7sEgDv-JwF/pub?w=468&h=201)
 
 3-3. SORACOM Harvestでデータを位置情報をマッピングしよう
+
 ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
 メールアドレス、パスワードを入力し、ログインをクリックします。
 
