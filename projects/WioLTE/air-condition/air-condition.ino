@@ -5,6 +5,7 @@
 #define RECEIVE_TIMEOUT (10000)
 #define LED_VALUE (255)
 #define SENSOR_PIN    (WIOLTE_D38)
+#define BUTTON_PIN    (WIOLTE_D20)
 
 WioLTE Wio;
 
@@ -18,6 +19,7 @@ void setup() {
   Wio.Init();
 
   SerialUSB.println("### Power supply ON.");
+  Wio.PowerSupplyGrove(true);
   Wio.PowerSupplyLTE(true);
   delay(500);
 
@@ -32,11 +34,13 @@ void setup() {
     SerialUSB.println("### ERROR! ###");
     return;
   }
+  pinMode(BUTTON_PIN, INPUT);
   TemperatureAndHumidityBegin(SENSOR_PIN);
   SerialUSB.println("### Setup completed.");
 }
 
 void loop() {
+  unsigned long next = millis() + INTERVAL;
   char data[100];
   float temp;
   float humi;
@@ -123,7 +127,15 @@ err_close:
   }
 
 err:
-  delay(INTERVAL);
+  while(millis() < next)
+  {
+    if(digitalRead(BUTTON_PIN))
+    {
+      SerialUSB.println("exit delay loop.");
+      break;
+    }
+    delay(100);
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
