@@ -5,7 +5,7 @@
 LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/products/wio_lte/)、様々なGroveセンサー、SORACOM SIMカードを使い、簡単なIoTシステムを体感いただきます。
 
 ## 本日の前提
-こちらのハンズオンでは、既に SORACOM アカウントとそれに紐づくSIMカードに加え、Wio LTEデバイスを利用するために必要な環境のセットアップを今回は用意しています。
+こちらのハンズオンでは、既に PC、SORACOM アカウントとそれに紐づくSIMカードに加え、Wio LTEデバイスを利用するために必要な環境のセットアップを用意しています。
 また、本ハンズオンはご自身でテキストに沿って進めていただく形式です。スタッフはおりませんので、自力で対応いただける方にご参加いただいてます。
 
 ## 本日の機材
@@ -66,15 +66,19 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続します。 W
 
 1-3. SORACOM Harvestでデータを可視化しよう
 ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
+メールアドレス、パスワードを入力し、ログインをクリックします。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTy5KORqQjieOg-ijF5CLyfhALMq-CmE8G9822NahydZSw5zIYqcz4efiru6R5n1RjAEaotdmfNmXsN/pub?w=444&h=250)
+
 SIMを選択し、「操作」からデータを確認を選びます。
 
-![フロー](https://docs.google.com/presentation/d/e/2PACX-1vSu5rC9tWnoJWSPlp38m5cgOGwU_qGw9X5fc9o4Xs_CwHCb5-BfkruMPcXndIRWynkclRyD5B26QUxl/pub?start=false&loop=false&delayms=3000)
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTyI9zm46Q4RYmDi6wYD0_Q0sFUfmJu-XH_KYR_eDmR7u0ydc1nqIj0jhV_bf1fB5NNn2N_OUEcYHY-/pub?w=455&h=522)
 
 Harvestのグラフで下記のように表示されたら成功です。
 涼しい時には青色、ちょうどいい時には緑色、暑い時には赤色と、不快指数に応じて LED の色を変更します。
 ![グラフ例](../../images/projects/WioLTE/air-condition/harvest.png)
 
-<h3 id="handson2">2. 駐車場管理システムを作ってみよう！/h3>
+<h3 id="handson2">2. 駐車場管理システムを作ってみよう！</h3>
 
 2-1. 配線
 A6 端子に 超音波センサーを取りつけます。
@@ -93,6 +97,23 @@ A6 端子に 超音波センサーを取りつけます。
 2-2-2. 「【駐車場管理】を書き込む」をクリックして、スケッチ例を書き込みます。
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTkEx3-P_uEmgUsz08BlOswjE0thl1TfmkKGmm85hRxfIe_SPVxtyP7sLZsidhff-3L2ZicRCpsMbKJ/pub?w=480&h=360)
+
+2-3. SORACOM Harvest で駐車時間を可視化します。
+ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
+メールアドレス、パスワードを入力し、ログインをクリックします。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTy5KORqQjieOg-ijF5CLyfhALMq-CmE8G9822NahydZSw5zIYqcz4efiru6R5n1RjAEaotdmfNmXsN/pub?w=444&h=250)
+
+SIMを選択し、「操作」からデータを確認を選びます。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTyI9zm46Q4RYmDi6wYD0_Q0sFUfmJu-XH_KYR_eDmR7u0ydc1nqIj0jhV_bf1fB5NNn2N_OUEcYHY-/pub?w=455&h=522)
+
+WioLTE で 駐車場の管理を行うスケッチです。超音波距離センサーを使って車がとの距離を計測し、一定の距離以下であった時は駐車しているとみなします。
+
+現在の車が駐車している時間と、のべ駐車時間を Harvest に送信し、グラフにします。
+
+![地図](../../images/projects/WioLTE/parking/harvest.png)
+
 
 <h3 id="handson2">3. GPSトラッカーを作ってみよう！/h3>
 
@@ -114,4 +135,19 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vQv9l2M5ylFyVP1rdZw97NPg_U4W3KtPGBi-MMp3tDArwztb9gjuh8H4AjifPhqIt8FCC7sEgDv-JwF/pub?w=468&h=201)
 
-3-3. 
+3-3. SORACOM Harvestでデータを位置情報をマッピングしよう
+ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
+メールアドレス、パスワードを入力し、ログインをクリックします。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTy5KORqQjieOg-ijF5CLyfhALMq-CmE8G9822NahydZSw5zIYqcz4efiru6R5n1RjAEaotdmfNmXsN/pub?w=444&h=250)
+
+SIMを選択し、「操作」からデータを確認を選びます。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTyI9zm46Q4RYmDi6wYD0_Q0sFUfmJu-XH_KYR_eDmR7u0ydc1nqIj0jhV_bf1fB5NNn2N_OUEcYHY-/pub?w=455&h=522)
+
+GPSの座標を SORACOM Harvest に送信します。SORACOM Harvest の位置情報データ表示モードを使うことで、簡単に GPS データの可視化が行えます。
+
+GPSモジュールが接続されていない場合や、GPS モジュールの測位が出来ていない場合には、LTE の基地局情報を元に大雑把な位置を求めることが出来ます。
+
+![地図](../../images/projects/WioLTE/gps-tracker/map.jpg)
+
