@@ -115,7 +115,7 @@ WioLTE で 駐車場の管理を行うスケッチです。超音波距離セン
 ![地図](../../images/projects/WioLTE/parking/harvest.png)
 
 
-<h3 id="handson2">3. GPSトラッカーを作ってみよう！/h3>
+<h3 id="handson2">3. GPSトラッカーを作ってみよう！</h3>
 
 3-1. 配線
 UART 端子に GPS モジュールを接続します。
