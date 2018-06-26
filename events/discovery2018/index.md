@@ -54,6 +54,7 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続します。 W
 1-2. Wio LTEにスケッチ例を書き込む
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+
 [スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 1-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して接続します。
@@ -91,6 +92,7 @@ A6 端子に 超音波センサーを取りつけます。
 2-2. Wio LTEにスケッチ例を書き込む
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+
 [スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 2-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
@@ -133,6 +135,7 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+
 [スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 
