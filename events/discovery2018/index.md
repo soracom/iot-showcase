@@ -49,18 +49,20 @@ DFUモードへの移行方法
 
 1-1. 配線
 D38 に「GROVE - デジタル温度・湿度センサ」を接続します。 Wio LTEをPCにつなげてください。
-![配線](../../../images/projects/WioLTE/air-condition/sensor.jpg)
+![配線](../../images/projects/WioLTE/air-condition/sensor.jpg)
 
 1-2. Wio LTEにスケッチ例を書き込む
 [こちら](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)のページをクリックし、手順に沿って書き込みを行ってください。
 
 1-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して接続します。
 
-![フロー](https://docs.google.com/presentation/d/e/2PACX-1vRl1GGk8vt5BRxcVqzckw2ogFBfGUmA2IJP-a1uxRK4w0nKFZSguSTf7rHwhw5syej417kUNoBsb_71/pub?start=false&loop=false&delayms=3000)
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
 
-1-2-2. 室内環境センシングをクリックし書き込みます。
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
 
-![フロー](https://docs.google.com/presentation/d/e/2PACX-1vSqfk2K9GJM2gvGhT4WSngqssHUNKkMYeKoPyop0bDLJYAiA3PtUtHOvdMM3iy3tIPwgNOE1h6U0VS1/pub?start=false&loop=false&delayms=3000)
+1-2-2. 「【室内環境センシング】を書き込む」をクリックして、スケッチ例を書き込みます。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRyhUTHrXJXJ7jT6RWL25Dv4ZzuGTmoLGa37ypqUqg2AsCqIfYtB1oE3EzRfm_ykYV6cX1j5NwbRroL/pub?w=480&h=360)
 
 1-3. SORACOM Harvestでデータを可視化しよう
 ソラコムのアカウントにログインします。ログイン情報はPC横の紙をご覧ください。
@@ -70,25 +72,46 @@ SIMを選択し、「操作」からデータを確認を選びます。
 
 Harvestのグラフで下記のように表示されたら成功です。
 涼しい時には青色、ちょうどいい時には緑色、暑い時には赤色と、不快指数に応じて LED の色を変更します。
-![グラフ例](../../../images/projects/WioLTE/air-condition/harvest.png)
+![グラフ例](../../images/projects/WioLTE/air-condition/harvest.png)
 
 <h3 id="handson2">2. 駐車場管理システムを作ってみよう！/h3>
 
 2-1. 配線
 A6 端子に 超音波センサーを取りつけます。
 
-![配線](../../../images/projects/WioLTE/parking/parking.jpg)
+![配線](../../images/projects/WioLTE/parking/parking.jpg)
 
+2-2. Wio LTEにスケッチ例を書き込む
+[こちら](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)のページをクリックし、手順に沿って書き込みを行ってください。
+
+2-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
+
+2-2-2. 「【駐車場管理】を書き込む」をクリックして、スケッチ例を書き込みます。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTkEx3-P_uEmgUsz08BlOswjE0thl1TfmkKGmm85hRxfIe_SPVxtyP7sLZsidhff-3L2ZicRCpsMbKJ/pub?w=480&h=360)
 
 <h3 id="handson2">3. GPSトラッカーを作ってみよう！/h3>
 
 3-1. 配線
+UART 端子に GPS モジュールを接続します。
+D20 端子にボタンを接続しておくと、ボタンを押した時にすぐデータを送信します。
+![配線](../../images/projects/WioLTE/gps-tracker/gps-tracker.jpg)
 
 3-2. Wio LTEにスケッチ例を書き込む
 [こちら](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)のページをクリックし、手順に沿って書き込みを行ってください。
 
-3-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して接続します。
-![フロー](https://docs.google.com/presentation/d/e/2PACX-1vRl1GGk8vt5BRxcVqzckw2ogFBfGUmA2IJP-a1uxRK4w0nKFZSguSTf7rHwhw5syej417kUNoBsb_71/pub?start=false&loop=false&delayms=3000)
+3-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
 
 3-2-2. GPSトラッカーをクリックし書き込みます。
 
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vQv9l2M5ylFyVP1rdZw97NPg_U4W3KtPGBi-MMp3tDArwztb9gjuh8H4AjifPhqIt8FCC7sEgDv-JwF/pub?w=468&h=201)
+
+3-3. 
