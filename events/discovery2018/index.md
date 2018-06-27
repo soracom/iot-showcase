@@ -2,7 +2,7 @@
 ## 今すぐ始めよう SORACOM ”自習”コーナー Wio LTE ハンズオン
 
 ## 目的
-LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/products/wio_lte/)、様々なGroveセンサー、SORACOM SIMカードを使い、簡単なIoTシステムを体感いただきます。
+LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/products/wio_lte/)、様々なGroveセンサー、SORACOMを使い、簡単なIoTシステムを体感いただきます。
 
 ## 本日の前提
 こちらのハンズオンでは、既に PC、SORACOM アカウントとそれに紐づくSIMカードに加え、Wio LTEデバイスを利用するために必要な環境のセットアップを用意しています。
@@ -15,7 +15,7 @@ LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/pro
 * SORACOMアカウントに登録済みの SORACOM Air SIM （すでにWio LTEの中に入っています）
 * [Grove IoT スターターキット for SORACOM](https://soracom.jp/products/#grovestarter_kit)
 
-![機材](https://docs.google.com/drawings/d/e/2PACX-1vQDtAOALHo8MhG_Hr1LUfVJvOfrVJjOslUvKhTvGKmcQ1KH849J-RsXl3VXsuTCytJJceyVkG3Rjlbl/pub?w=376&h=304)
+![機材](https://docs.google.com/drawings/d/e/2PACX-1vQDtAOALHo8MhG_Hr1LUfVJvOfrVJjOslUvKhTvGKmcQ1KH849J-RsXl3VXsuTCytJJceyVkG3Rjlbl/pub?w=757&h=540)
 
 ## DFUモードへの切り替え方
 Wio LTE は２つのモードを持っています
@@ -52,7 +52,7 @@ DFUモードへの移行方法
 1-1. 配線
 D38 に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子にボタンを接続します。 Wio LTEをPCにつなげてください。
 
-![配線](https://docs.google.com/drawings/d/e/2PACX-1vRGopQ9w7dm2zPRSmiQJ4ybo0J9vJTxeovG0Ch2ZR27xewwxm8KIcHOyT5p1gZ2Rz2ScE0IYr_-X6YC/pub?w=392&h=271)
+![配線](https://docs.google.com/drawings/d/e/2PACX-1vRGopQ9w7dm2zPRSmiQJ4ybo0J9vJTxeovG0Ch2ZR27xewwxm8KIcHOyT5p1gZ2Rz2ScE0IYr_-X6YC/pub?w=777&h=528)
 
 1-2. Wio LTEにスケッチ例を書き込む
 
@@ -62,13 +62,20 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子�
 
 1-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して接続します。
 
+「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
+
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
 
+
 1-2-2. 「【室内環境センシング】を書き込む」をクリックして、スケッチ例を書き込みます。
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRyhUTHrXJXJ7jT6RWL25Dv4ZzuGTmoLGa37ypqUqg2AsCqIfYtB1oE3EzRfm_ykYV6cX1j5NwbRroL/pub?w=480&h=360)
+
+下記のように表示されたら書き込み終了です。
+
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vS6GCEu22XTTC6XkXAie1VA935XZZ8eglrArgIi6Hephf7N4CZpVakGiwXpyfn3dd7eB_bw4LlGOaQN/pub?w=458&h=181)
 
 書き込んだコードを知りたい方はこちらをクリックください。
 
@@ -111,6 +118,8 @@ A6 端子に 超音波センサーを取りつけます。
 
 2-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
+「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
+
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
@@ -138,12 +147,13 @@ SIMを選択し、「操作」からデータを確認を選びます。
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTyI9zm46Q4RYmDi6wYD0_Q0sFUfmJu-XH_KYR_eDmR7u0ydc1nqIj0jhV_bf1fB5NNn2N_OUEcYHY-/pub?w=455&h=522)
 
-WioLTE で 駐車場の管理を行うスケッチです。超音波距離センサーを使って車がとの距離を計測し、一定の距離以下であった時は駐車しているとみなします。
+超音波距離センサーを使って車との距離を計測し、一定の距離以下であった時は駐車しているとみなします。
+
 超音波センサーに机の上にある車を近づけ、パーキングをしてみてください。
 
 現在の車が駐車している時間（CurrentParkingSeconds)と、のべ駐車時間(TotalParkingSeconds)を Harvest に送信し、グラフにします。
 
-![地図](https://docs.google.com/drawings/d/e/2PACX-1vTaIKS1s_HP3ygPyJGBq6sqSsSjgr15Hqw5fDn7K_VHK5xC0LbaCgqSybqM7bgw7uioixlYGVCfkGo7/pub?w=892&h=543)
+![parking](https://docs.google.com/drawings/d/e/2PACX-1vSSa_HTsUnGurBhtTo0UTDry01HDujPAx1CNybl2nkvOsdGtqNmYYSpOI8dsMtNxl8w0yEoVDb4XYe_/pub?w=937&h=441)
 
 
 <h3 id="handson3">3. GPSトラッカーを作ってみよう！</h3>
@@ -164,6 +174,8 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 
 3-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
+「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
+
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
@@ -171,10 +183,6 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 3-2-2. GPSトラッカーをクリックし書き込みます。
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vQv9l2M5ylFyVP1rdZw97NPg_U4W3KtPGBi-MMp3tDArwztb9gjuh8H4AjifPhqIt8FCC7sEgDv-JwF/pub?w=468&h=201)
-
-下記のように表示されたら書き込み終了です。
-
-![フロー](https://docs.google.com/drawings/d/e/2PACX-1vS6GCEu22XTTC6XkXAie1VA935XZZ8eglrArgIi6Hephf7N4CZpVakGiwXpyfn3dd7eB_bw4LlGOaQN/pub?w=458&h=181)
 
 書き込んだコードを知りたい方はこちらをクリックください。
 
@@ -201,4 +209,13 @@ GPSの座標を SORACOM Harvest に送信します。SORACOM Harvest の位置�
 GPSモジュールが接続されていない場合や、GPS モジュールの測位が出来ていない場合には、LTE の基地局情報を元に大雑把な位置を求めることが出来ます。
 
 ![地図](https://docs.google.com/drawings/d/e/2PACX-1vRZxVF2mgqfq0FAcUfojE6ARSAHIW0Wl7FMNQ7CEZTPHtsSkR2z4MiwrYpx6LHZ0DJ76h14cvbtB6UQ/pub?w=902&h=693)
+
+### 片付け
+
+これでハンズオンは終了です。最後まで終わった方は、センサーを外し元あった場所にお戻しください。
+
+終了後は、SORACOM社員に声をかけ片付けのチェックを受けてください。最後に皆様にクーポンをお渡しします。
+
+よろしくお願いいたします。
+これでハンズオンのコンテンツ
 
