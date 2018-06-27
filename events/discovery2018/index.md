@@ -35,6 +35,8 @@ Wio LTE は２つのモードを持っています
 DFUモードへの移行方法  
 ※動画ではmicroUSB接続をしていませんが、実際は接続した状態で行ってください
 
+外観からはどちらのモードで動いているのか判別できません。
+
 ![DFUモードへの移行](http://drive.google.com/uc?export=view&id=1447mCTbYS7iMTtVWaTkXJzHD8vJ8lprJ)
 ![Wio LTE を横からみた図](https://docs.google.com/drawings/d/e/2PACX-1vRnhRiZC7-jRCqLaxJO6E7Bmq0_8BxornXgP1y6UHdYXhr6iBm_RNoV148oSzJKeHBYXRjYai9msQoz/pub?w=480&h=249)
 
@@ -214,8 +216,5 @@ GPSモジュールが接続されていない場合や、GPS モジュールの�
 
 これでハンズオンは終了です。最後まで終わった方は、センサーを外し元あった場所にお戻しください。
 
-終了後は、SORACOM社員に声をかけ片付けのチェックを受けてください。最後に皆様にクーポンをお渡しします。
-
-よろしくお願いいたします。
-これでハンズオンのコンテンツ
+終了後は、ソラコム社員に声をかけ片付けのチェックを受けてください。最後に皆様にクーポンをお渡しします。
 
