@@ -60,7 +60,8 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子�
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
 
-[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)  
+[https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 1-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して接続します。
 
@@ -87,7 +88,8 @@ D38 に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子�
 
 ソラコムのアカウントにログインします。
 
-[アカウントログインページ](https://console.soracom.io/#/?coverage_type=jp)
+[アカウントログインページ](https://console.soracom.io/#/?coverage_type=jp)  
+[https://console.soracom.io/#/?coverage_type=jp](https://console.soracom.io/#/?coverage_type=jp)
 
 ログイン情報はPC横の紙をご覧ください。
 メールアドレス、パスワードを入力し、ログインをクリックします。
@@ -116,7 +118,8 @@ A6 端子に 超音波センサーを取りつけます。
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
 
-[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)   
+[https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 2-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
@@ -138,7 +141,8 @@ A6 端子に 超音波センサーを取りつけます。
 
 ソラコムのアカウントにログインします。
 
-[アカウントログインページ](https://console.soracom.io/#/?coverage_type=jp)
+[アカウントログインページ](https://console.soracom.io/#/?coverage_type=jp)  
+[https://console.soracom.io/#/?coverage_type=jp](https://console.soracom.io/#/?coverage_type=jp)
 
 ログイン情報はPC横の紙をご覧ください。
 メールアドレス、パスワードを入力し、ログインをクリックします。
@@ -171,7 +175,8 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
 
-[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)  
+[https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 
 3-2-1. Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
@@ -195,7 +200,9 @@ D20 端子にボタンを接続しておくと、ボタンを押した時にす�
 
 ソラコムのアカウントにログインします。
 
-[アカウントログインページ](https://console.soracom.io/#/?coverage_type=jp)
+[アカウントログインページ](https://console.soracom.io/#/?coverage_type=jp)  
+[https://console.soracom.io/#/?coverage_type=jp](https://console.soracom.io/#/?coverage_type=jp)
+
 
 ログイン情報はPC横の紙をご覧ください。
 メールアドレス、パスワードを入力し、ログインをクリックします。
