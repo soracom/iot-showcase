@@ -105,6 +105,8 @@ tempは気温、humiは湿度、heatは不快進数を表示しています。
 
 涼しい時には青色、ちょうどいい時には緑色、暑い時には赤色と、不快指数に応じて LED の色が変更します。
 
+机の上のホッカイロを温湿度センサーに近づけて温度をあげてみてください。
+
 ![グラフ例](https://docs.google.com/drawings/d/e/2PACX-1vQTyEmgPl4GJGw-FmHeM6KaDzDaapLHAjM8jytT3UuIv4vuCU-TE2CQ5oli_7mtIh6Evy4FHfWt87of/pub?w=923&h=425)
 
 <h3 id="handson2">2. 駐車場管理システムを作ってみよう！</h3>
