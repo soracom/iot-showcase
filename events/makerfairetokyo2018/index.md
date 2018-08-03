@@ -43,6 +43,10 @@ D20端子にボタンセンサーを取り付けます。
 
 - 赤色のデバイスにスケッチ例を書き込む
 
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/)
+
+[https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/](https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/)
+
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
 「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
@@ -66,6 +70,10 @@ A6端子に超音波センサーを取り付けます。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRbHNbn3um_R6Y6HydoY5Hn2E__ggjxtuy5qKGan5wy5TvZNmyYZwZGVnfl3PH_OS-8IK13bao9Thz4/pub?w=831&amp;h=474">
 
 - 赤色のデバイスにスケッチ例を書き込む
+
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/)
+
+[https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/](https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/)
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
@@ -95,6 +103,10 @@ A4端子にブザーと、I2C端子に3軸デジタル加速度センサーを�
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSovCwPE9qSJI2KD9Y2gWxExarpw03r4wa-ubcju3mB7YirJEt0ux9oBmN8x4TXVCRxAOrD9Xd69ffS/pub?w=930&amp;h=617">
 
 - 赤色のデバイスにスケッチ例を書き込む
+
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/)
+
+[https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/](https://soracom.github.io/iot-showcase/events/makerfairetokyo2018/webdfu/)
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
