@@ -36,6 +36,7 @@ DFUモードへの移行方法
 <h2 id="handson1">1. LEDの色を変えてみよう！</h2>
 
 1. 配線
+
 D20端子にボタンセンサーを取り付けます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQ3pNyAow0Q7A7POrhHF6X7fPOzTd9QywxTHXWVTiXVzuSs_0snALgZYHuVjQ5pqTr33_J5ezkae3y5/pub?w=845&amp;h=567">
@@ -50,7 +51,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQ-XijjLxTrEF-rBCw90vMEb9NbGukflIj3CaNWlIckzY6vQnti8pQVGMA_MEMcr2vnq4mbJ80fVv5F/pub?w=715&amp;h=456">
 
-「【LEDの色を変えてみよう】を書き込む」をクリックして、スケッチ例を書き込みます。
+「【ボタンでLEDの色を変えてみよう】を書き込む」をクリックして、スケッチ例を書き込みます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vStGWiiB8GMC7lJwWCaun3sLyJTwkD0JkhjWRYnk_4wJra6LjfkV-zqJkmoIRuB1N7iZdKv_EN42uev/pub?w=922&amp;h=389">
 
@@ -59,6 +60,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 <h2 id="handson2">2. 超音波センサーでLEDの色を変えてみよう！</h2>
 
 1. 配線
+
 A6端子に超音波センサーを取り付けます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRbHNbn3um_R6Y6HydoY5Hn2E__ggjxtuy5qKGan5wy5TvZNmyYZwZGVnfl3PH_OS-8IK13bao9Thz4/pub?w=831&amp;h=474">
@@ -87,6 +89,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 <h2 id="handson3">3. 地震測定計を作ってみよう！</h2>
 
 1. 配線
+
 A4端子にブザーと、I2C端子に3軸デジタル加速度センサーを取り付けます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSovCwPE9qSJI2KD9Y2gWxExarpw03r4wa-ubcju3mB7YirJEt0ux9oBmN8x4TXVCRxAOrD9Xd69ffS/pub?w=930&amp;h=617">
