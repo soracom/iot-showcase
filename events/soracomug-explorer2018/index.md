@@ -1,5 +1,6 @@
-# Maker Faire Tokyo 2018 
-## 地震測定計を作ってみよう！ IoT ハンズオン
+# SORACOM UG Explorer 2018
+
+## 駐車場管理システムを作ってみよう！
 
 ## 本日の機材
 各自の机の上に、本日必要な機材を用意しています。
@@ -33,74 +34,37 @@ DFUモードへの移行方法
 ![DFUモードへの移行](http://drive.google.com/uc?export=view&id=1447mCTbYS7iMTtVWaTkXJzHD8vJ8lprJ)
 ![Wio LTE を横からみた図](https://docs.google.com/drawings/d/e/2PACX-1vRnhRiZC7-jRCqLaxJO6E7Bmq0_8BxornXgP1y6UHdYXhr6iBm_RNoV148oSzJKeHBYXRjYai9msQoz/pub?w=480&h=249)
 
-<h2 id="handson1">1. LEDの色を変えてみよう！</h3>
+<h2 id="handson2">駐車場管理システムを作ってみよう！</h3>
 
 1. 配線
-D20端子にボタンセンサーを取り付けます。
+A6 端子に 超音波センサーを取りつけます。
 
-写真
+![配線](https://docs.google.com/drawings/d/e/2PACX-1vTaIKS1s_HP3ygPyJGBq6sqSsSjgr15Hqw5fDn7K_VHK5xC0LbaCgqSybqM7bgw7uioixlYGVCfkGo7/pub?w=892&h=543)
 
-2. 赤色のデバイスにスケッチ例を書き込む
+2. Wio LTEにスケッチ例を書き込む
+
+下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
+
+[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)   
+[https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
 「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
 
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vSLU7C6SEV16bra_ko2xoBdlNYC64JaSbK06EZ7YG0-tkYS7nwk5EWGzJTPkLwFcdBTkApn7E08d3_U/pub?w=480&h=360)
 
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vRqDKcttYBSi-f9uHFkOa5f-DKWIwafpvZExjS_SKInhhK4L4Rv3cHmwuHtZAZoeKfGn9iD-NzYm1mg/pub?w=480&h=360)
 
-「【LEDの色を変えてみよう】を書き込む」をクリックして、スケッチ例を書き込みます。
+「【駐車場管理】を書き込む」をクリックして、スケッチ例を書き込みます。
 
+![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTkEx3-P_uEmgUsz08BlOswjE0thl1TfmkKGmm85hRxfIe_SPVxtyP7sLZsidhff-3L2ZicRCpsMbKJ/pub?w=480&h=360)
 
-<h2 id="handson1">2. 超音波センサーでLEDの色を変えてみよう！</h3>
+書き込んだコードを知りたい方はこちらをクリックください。
 
-1. 配線
-A6端子に超音波センサーを取り付けます。
+[駐車場管理コード](https://github.com/soracom/iot-showcase/tree/master/projects/WioLTE/parking)
 
-写真
-
-2. 赤色のデバイスにスケッチ例を書き込む
-
-Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
-
-「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
-
-
-
-「【超音波センサーでLEDの色を変えてみよう】を書き込む」をクリックして、スケッチ例を書き込みます。
-
-
-
-3. LEDの色を確認
-超音波センサーに手を近づけてみてください。超音波センサーの距離に応じて、LEDの色が変化します。
-
-
-<h2 id="handson2">3. 地震測定計を作ってみよう！</h3>
-
-1. 配線
-A4端子にブザーと、I2C端子に3軸デジタル加速度センサーを取り付けます。
-
-写真
-
-2. 赤色のデバイスにスケッチ例を書き込む
-
-Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
-「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
-
-
-「【地震測定計を作ってみよう】を書き込む」をクリックして、スケッチ例を書き込みます。
-
-
-3. 震度を測ってみよう
-
-センサーを家に取り付けてお家を揺らしてみましょう。
-
-震度の大きさによりLEDの色が変化します。
-
-
-
-
-4. SORACOM  Harvestで地震測定状況を可視化します。
-どれくらいの震度の地震が発生したかを、グラフで表示します。
+3. SORACOM Harvest で駐車時間を可視化します。
 
 ソラコムのアカウントにログインします。
 
@@ -116,12 +80,13 @@ SIMを選択し、「操作」からデータを確認を選びます。
 
 ![フロー](https://docs.google.com/drawings/d/e/2PACX-1vTyI9zm46Q4RYmDi6wYD0_Q0sFUfmJu-XH_KYR_eDmR7u0ydc1nqIj0jhV_bf1fB5NNn2N_OUEcYHY-/pub?w=455&h=522)
 
-SORACOM Harvest のグラフで下記のように表示されたら成功です。
-5秒間のうちに一番大きなデータが送信されます。
+超音波距離センサーを使って車との距離を計測し、一定の距離以下であった時は駐車しているとみなします。
 
+超音波センサーに机の上にある車を近づけ、パーキングをしてみてください。
 
+現在の車が駐車している時間（CurrentParkingSeconds)と、のべ駐車時間(TotalParkingSeconds)を Harvest に送信し、グラフにします。
 
-## SORACOM Lagoonで可視化する
-SORACOM Harvestで収集したデータを利用して、ダッシュボードを作成することができます。
+![parking](https://docs.google.com/drawings/d/e/2PACX-1vSSa_HTsUnGurBhtTo0UTDry01HDujPAx1CNybl2nkvOsdGtqNmYYSpOI8dsMtNxl8w0yEoVDb4XYe_/pub?w=937&h=441)
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vS-bFScvPoTOptNh5O2sJb1dMtwEunlQ7MadcTuIj9JtLXWmD7knnpKx5SDe1NE-TSkbRdqj8KgWvRq/pub?w=932&amp;h=433">
+## 片付け
+これでハンズオンは終了です。最後まで終わった方は、センサーを外し元あった場所にお戻しください。
