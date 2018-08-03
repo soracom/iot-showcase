@@ -33,7 +33,7 @@ DFUモードへの移行方法
 ![DFUモードへの移行](http://drive.google.com/uc?export=view&id=1447mCTbYS7iMTtVWaTkXJzHD8vJ8lprJ)
 ![Wio LTE を横からみた図](https://docs.google.com/drawings/d/e/2PACX-1vRnhRiZC7-jRCqLaxJO6E7Bmq0_8BxornXgP1y6UHdYXhr6iBm_RNoV148oSzJKeHBYXRjYai9msQoz/pub?w=480&h=249)
 
-<h2 id="handson1">1. LEDの色を変えてみよう！</h3>
+<h2 id="handson1">1. LEDの色を変えてみよう！</h2>
 
 1. 配線
 D20端子にボタンセンサーを取り付けます。
@@ -56,7 +56,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRSXSCsMq8nWcRY-ev-JcWex8b-Xql14NjTroVok9R07kO5Jwp0JS4hGsjeyBqydqfspFhaBWeW_81L/pub?w=934&amp;h=430">
 
-<h2 id="handson2">2. 超音波センサーでLEDの色を変えてみよう！</h3>
+<h2 id="handson2">2. 超音波センサーでLEDの色を変えてみよう！</h2>
 
 1. 配線
 A6端子に超音波センサーを取り付けます。
@@ -84,7 +84,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vT2dgUscWaw_DO_rCqYiujKWt6kyEylUOR4Dl4HWevogxEGQM97A-5-AYfuoHQvr5aU66bY41x8Mkl6/pub?w=927&amp;h=537">
 
-<h2 id="handson3">3. 地震測定計を作ってみよう！</h3>
+<h2 id="handson3">3. 地震測定計を作ってみよう！</h2>
 
 1. 配線
 A4端子にブザーと、I2C端子に3軸デジタル加速度センサーを取り付けます。
