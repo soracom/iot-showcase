@@ -35,13 +35,13 @@ DFUモードへの移行方法
 
 <h2 id="handson1">1. LEDの色を変えてみよう！</h2>
 
-1. 配線
+- 配線
 
 D20端子にボタンセンサーを取り付けます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQ3pNyAow0Q7A7POrhHF6X7fPOzTd9QywxTHXWVTiXVzuSs_0snALgZYHuVjQ5pqTr33_J5ezkae3y5/pub?w=845&amp;h=567">
 
-2. 赤色のデバイスにスケッチ例を書き込む
+- 赤色のデバイスにスケッチ例を書き込む
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
@@ -59,13 +59,13 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 
 <h2 id="handson2">2. 超音波センサーでLEDの色を変えてみよう！</h2>
 
-1. 配線
+- 配線
 
 A6端子に超音波センサーを取り付けます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRbHNbn3um_R6Y6HydoY5Hn2E__ggjxtuy5qKGan5wy5TvZNmyYZwZGVnfl3PH_OS-8IK13bao9Thz4/pub?w=831&amp;h=474">
 
-2. 赤色のデバイスにスケッチ例を書き込む
+- 赤色のデバイスにスケッチ例を書き込む
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
@@ -81,20 +81,20 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQzArbiqjaFa0_s5BqQXlK8OkG9lWnlkkV9Umh83IRXi7QKlry1eOGe4RDKulcus0eLlwjUZ2CU4AqC/pub?w=922&amp;h=389">
 
 
-3. LEDの色を確認
+- LEDの色を確認
 超音波センサーに手を近づけてみてください。超音波センサーの距離に応じて、LEDの色が変化します。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vT2dgUscWaw_DO_rCqYiujKWt6kyEylUOR4Dl4HWevogxEGQM97A-5-AYfuoHQvr5aU66bY41x8Mkl6/pub?w=927&amp;h=537">
 
 <h2 id="handson3">3. 地震測定計を作ってみよう！</h2>
 
-1. 配線
+- 配線
 
 A4端子にブザーと、I2C端子に3軸デジタル加速度センサーを取り付けます。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSovCwPE9qSJI2KD9Y2gWxExarpw03r4wa-ubcju3mB7YirJEt0ux9oBmN8x4TXVCRxAOrD9Xd69ffS/pub?w=930&amp;h=617">
 
-2. 赤色のデバイスにスケッチ例を書き込む
+- 赤色のデバイスにスケッチ例を書き込む
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 「対応デバイスが見つかりませんでした」 が一覧に表示された場合は Wio LTE が DFU モードになっていません。 DFU モードへの移行操作をしてください。
@@ -107,7 +107,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vR0CIpQNXC6KD7uqai2uIWHg4H1HORx7XLeBZsj0dxUOQOaX04dMQbgUJa1Clf7aYkpnpJylwFdVXwN/pub?w=927&amp;h=379">
 
-3. 震度を測ってみよう
+- 震度を測ってみよう
 
 センサーを家に取り付けてお家を揺らしてみましょう。
 
@@ -118,7 +118,7 @@ Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」を�
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vR5T24WqRus8i7PnA-qpGjZP_4XwRaKfGtNdB16ol0Uwa4uHZwiE0M8MTBR7cvKhqsen5whtj25Lhfl/pub?w=925&amp;h=599">
 
 
-4. SORACOM  Harvestで地震測定状況を可視化します。
+- SORACOM  Harvestで地震測定状況を可視化します。
 どれくらいの震度の地震が発生したかを、グラフで表示します。
 
 ソラコムのアカウントにログインします。
