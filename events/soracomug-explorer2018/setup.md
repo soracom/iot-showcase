@@ -2,7 +2,7 @@
 
 SORACOM UG Explore 2018 ハンズオンへようこそ！
 
-このページではハンズオンが受講できるようにするためのセットアップについて解説しています。
+このページではハンズオンが受講できるようにするためのセットアップについて解説しています。  
 OS 毎に準備がありますので、それぞれの OS を選んでセットアップを進めてください。
 
 * [Windows 編](#windows)
@@ -16,7 +16,7 @@ OS 毎に準備がありますので、それぞれの OS を選んでセット�
 
 ハンズオンでは **Wio LTE JP Version** (以下、Wio LTE) を使います。
 
-Wio LTE は Seeed Studio が開発・販売しているマイコンモジュールです。
+Wio LTE は Seeed Studio が開発・販売しているマイコンモジュールです。  
 Grove コネクタと STM32F4 マイコン、LTE Cat.1 モジュールが搭載されており、 Arduino IDE で素早くプロトタイピングができます。
 
 ![Wio LTE](https://soracom.jp/img/products_wio_lte.png)
@@ -60,7 +60,7 @@ Wio LTE を DFU モード (プログラムをマイコンに書き込み可能�
 
 #### 5. "STM32 BOOTLOADER" を選んだ後、Driver の右側が "WinUSB" になっている事を確認してから "Install Driver" (もしくは "Replace Driver" ) をクリックします
 
-※ "STM32 BOOTLOADER" が見つからない場合は Wio LTE が DFU モードになっていません。[DFU モードへの切り替え方]()に沿って DFU モードに切り替えてください。
+※ "STM32 BOOTLOADER" が見つからない場合は Wio LTE が DFU モードになっていません。[DFU モードへの切り替え方]()に沿って DFU モードに切り替えてください。  
 ※ WinUSBになっていなかった場合は、WinUSBに切り替えてください。
 
 ![](https://raw.githubusercontent.com/wiki/SeeedJP/WioLTEforArduino/img/11.png)
@@ -81,8 +81,8 @@ Wio LTE を DFU モード (プログラムをマイコンに書き込み可能�
 
 ハンズオンでは **Wio LTE JP Version** (以下、Wio LTE) を使います。
 
-Wio LTE は Seeed Studio が開発・販売しているマイコンモジュールです。
-Grove コネクタと STM32F4 マイコン、LTE Cat.1 モジュールが搭載されており、 Arduino IDE で素早くプロトタイピングができます。
+Wio LTE は Seeed Studio が開発・販売しているマイコンモジュールです。  
+Grove コネクタと STM32F4 マイコン、LTE Cat.1 モジュールが搭載されており、 Arduino IDE で素早くプロトタイピングができます。  
 
 ![Wio LTE](https://soracom.jp/img/products_wio_lte.png)
 
@@ -109,7 +109,7 @@ Grove コネクタと STM32F4 マイコン、LTE Cat.1 モジュールが搭載�
 
 #### 1. Terminal.app を起動して、コマンドを実行する
 
-Terminal.app 内で下記コマンドを実行します。
+Terminal.app 内で下記コマンドを実行します。  
 ※ 実行中でパスワード入力を求めらたら macOS ログイン時のパスワードを入力してください。
 
 ```
@@ -152,7 +152,7 @@ brew install libusb
 
 <h1 id="dfu">DFU モードへの切り替え方</h1>
 
-プログラムを書き込むことができる状態のことを指します。
+プログラムを書き込むことができる状態のことを指します。  
 以下の一連の操作で DFU モードにすることができます。
 
 1. microUSB ケーブルを接続する
@@ -164,7 +164,7 @@ brew install libusb
 
 ![Wio LTE を横からみた図](https://docs.google.com/drawings/d/e/2PACX-1vRnhRiZC7-jRCqLaxJO6E7Bmq0_8BxornXgP1y6UHdYXhr6iBm_RNoV148oSzJKeHBYXRjYai9msQoz/pub?w=480&h=249)
 
-操作の様子は動画にまとめてあります。
+操作の様子は動画にまとめてあります。  
 （見やすいように microUSB ケーブルは外していますが、実際は取り付けてから行ってください）
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5hgTU6tyIJ0?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
