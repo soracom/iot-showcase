@@ -45,8 +45,8 @@ A6 端子に 超音波センサーを取りつけます。
 
 下記の「スケッチ書き込みページをページをクリックし、手順に沿って書き込みを行ってください。
 
-[スケッチ書き込みページ](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)   
-[https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/](https://soracom.github.io/iot-showcase/events/discovery2018/webdfu/)
+[スケッチ書き込みページ](webdfu/)   
+[https://soracom.github.io/iot-showcase/events/soracomug-explorer2018/webdfu](webdfu/)
 
 Connect ボタンを押し、**STM32 BOOTLOADER**を選択して「接続」をクリックします。
 
