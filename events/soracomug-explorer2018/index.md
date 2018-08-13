@@ -34,7 +34,7 @@ DFUモードへの移行方法
 ![DFUモードへの移行](http://drive.google.com/uc?export=view&id=1447mCTbYS7iMTtVWaTkXJzHD8vJ8lprJ)
 ![Wio LTE を横からみた図](https://docs.google.com/drawings/d/e/2PACX-1vRnhRiZC7-jRCqLaxJO6E7Bmq0_8BxornXgP1y6UHdYXhr6iBm_RNoV148oSzJKeHBYXRjYai9msQoz/pub?w=480&h=249)
 
-<h2 id="handson2">駐車場管理システムを作ってみよう！</h3>
+<h2 id="handson2">駐車場管理システムを作ってみよう！</h2>
 
 1. 配線
 A6 端子に 超音波センサーを取りつけます。
