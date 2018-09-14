@@ -5,6 +5,7 @@
 ## 本日の機材
 各自の机の上に、本日必要な機材を用意しています。
 * パソコン
+    * 事前に案内済みの [セットアップ](setup) が完了していること
 * 有効なSORACOMアカウント（すでにソラコム側でアカウントを作成済みです）
 * SORACOMアカウントに登録済みの SORACOM Air SIM （すでにWio LTEの中に入っています）
 * [Grove IoT スターターキット for SORACOM](https://soracom.jp/products/#grovestarter_kit)
@@ -12,7 +13,8 @@
 ![機材](https://docs.google.com/drawings/d/e/2PACX-1vQDtAOALHo8MhG_Hr1LUfVJvOfrVJjOslUvKhTvGKmcQ1KH849J-RsXl3VXsuTCytJJceyVkG3Rjlbl/pub?w=757&h=540)
 
 ## DFUモードへの切り替え方
-Wio LTE は２つのモードを持っています
+
+Wio LTE は２つのモードを持っています。  
 **この操作は Wio LTE の開発で何度も行うことになりますので、必ず覚えてください**
 
 * 書き込まれたプログラムを実行する「通常モード」
@@ -29,7 +31,8 @@ Wio LTE は２つのモードを持っています
 DFUモードへの移行方法  
 ※動画ではmicroUSB接続をしていませんが、実際は接続した状態で行ってください
 
-外観からはどちらのモードで動いているのか判別できません。
+外観からはどちらのモードで動いているのか判別できません。PC のデバイスマネージャ（もしくはシステム情報）で確認することができます。  
+確認方法は[DFU モードの確認の仕方](setup#dfu2)を参照してください。
 
 ![DFUモードへの移行](http://drive.google.com/uc?export=view&id=1447mCTbYS7iMTtVWaTkXJzHD8vJ8lprJ)
 ![Wio LTE を横からみた図](https://docs.google.com/drawings/d/e/2PACX-1vRnhRiZC7-jRCqLaxJO6E7Bmq0_8BxornXgP1y6UHdYXhr6iBm_RNoV148oSzJKeHBYXRjYai9msQoz/pub?w=480&h=249)

@@ -10,19 +10,14 @@ OS 毎に準備がありますので、それぞれの OS を選んでセット�
 
 [ハンズオンドキュメントへ戻る](index)
 
+---
+
 <h1 id="windows">ハンズオン準備 Windows 編</h1>
-
-## 《知識》Wio LTE とは？
-
-ハンズオンでは **Wio LTE JP Version** (以下、Wio LTE) を使います。
-
-Wio LTE は Seeed Studio が開発・販売しているマイコンモジュールです。  
-Grove コネクタと STM32F4 マイコン、LTE Cat.1 モジュールが搭載されており、 Arduino IDE で素早くプロトタイピングができます。
-
-![Wio LTE](https://soracom.jp/img/products_wio_lte.png)
 
 ## 《確認》 準備するもの
 
+* Wio LTE 本体 / 1個
+    * パソコンとの接続用 USB ケーブル / 1本
 * パソコン / 1台
     * インターネットに接続できる環境
     * USB Type-A ポートが最低 1 つ以上あり、利用可能なこと
@@ -60,8 +55,8 @@ Wio LTE を DFU モード (プログラムをマイコンに書き込み可能�
 
 #### 5. "STM32 BOOTLOADER" を選んだ後、Driver の右側が "WinUSB" になっている事を確認してから "Install Driver" (もしくは "Replace Driver" ) をクリックします
 
-※ "STM32 BOOTLOADER" が見つからない場合は Wio LTE が DFU モードになっていません。[DFU モードへの切り替え方]()に沿って DFU モードに切り替えてください。  
-※ WinUSBになっていなかった場合は、WinUSBに切り替えてください。
+※ "STM32 BOOTLOADER" が見つからない場合は Wio LTE が DFU モードになっていません。[DFU モードへの切り替え方](#dfu)に沿って DFU モードに切り替えてください。  
+※ Driver が WinUSB になっていなかった場合は WinUSB に切り替えてください。
 
 ![](https://raw.githubusercontent.com/wiki/SeeedJP/WioLTEforArduino/img/11.png)
 
@@ -75,16 +70,9 @@ Wio LTE を DFU モード (プログラムをマイコンに書き込み可能�
 
 [ハンズオンドキュメントへ戻る](index)
 
+---
+
 <h1 id="macos">ハンズオン準備 macOS 編</h1>
-
-## 《知識》Wio LTE とは？
-
-ハンズオンでは **Wio LTE JP Version** (以下、Wio LTE) を使います。
-
-Wio LTE は Seeed Studio が開発・販売しているマイコンモジュールです。  
-Grove コネクタと STM32F4 マイコン、LTE Cat.1 モジュールが搭載されており、 Arduino IDE で素早くプロトタイピングができます。  
-
-![Wio LTE](https://soracom.jp/img/products_wio_lte.png)
 
 ## 《確認》 準備するもの
 
@@ -150,6 +138,8 @@ brew install libusb
 
 [ハンズオンドキュメントへ戻る](index)
 
+---
+
 <h1 id="dfu">DFU モードへの切り替え方</h1>
 
 プログラムを書き込むことができる状態のことを指します。  
@@ -169,7 +159,7 @@ brew install libusb
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5hgTU6tyIJ0?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## DFU モードの確認の仕方
+<h2 id="dfu2">DFU モードの確認の仕方</h2>
 
 ### Windows の場合
 
@@ -190,7 +180,7 @@ brew install libusb
 * WinUSB ドライバのインストールが完了していない
     * → [WinUSB ドライバのインストール](#winusb)に沿って作業を行ってください
 
-[ハンズオンドキュメントへ戻る](index)
+**DFU モードの説明はこれで終了です。元の手順に戻ってください**
 
 ### macOS の場合
 
@@ -213,4 +203,4 @@ brew install libusb
 * DFU モードへの移行をしていない
     * → DFU モードへの移行操作を再度行ってみてください
 
-[ハンズオンドキュメントへ戻る](index)
+**DFU モードの説明はこれで終了です。元の手順に戻ってください**
