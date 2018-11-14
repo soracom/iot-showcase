@@ -15,6 +15,70 @@ LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/pro
 
 ## 駐車場管理システムを作ってみよう！
 ### 手順
-1. SORACOM アカウントの作成
-2. SORACOM SIM 登録
-3. SORACOM Harvest 設定
+1. [SORACOM アカウント作成]
+2. [支払い情報の設定]
+3. [SORACOM SIM 登録]
+4. [SORACOM Harvest 設定]
+5. [Wio LTEにSIMを挿入]
+6. [SORACOM Harvest でデータを可視化]
+
+### 1. SORACOM アカウント作成
+[SORACOM ウェブサイト](https://soracom.jp/)から、User Consoleをクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vR7ktcIhkVAi4SHnsxjtNyesTwkcRqyWH13O06P7IDgPTWQgZu90wbMxMucWiHkomr1kZwQ6GcqHD0V/pub?w=921&amp;h=408">
+
+アカウントを作成をクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRIbsOZm8KiysVlqsQTR6Yxvxi5XlsIxb2gDxPVwQcFKTav036YROtcOLgVQUlX8kp6zPeG9OOrhmIJ/pub?w=930&amp;h=406">
+
+「カバレッジタイプJapan」を選択します。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSkgiSvtFlsUQJegTkLPiJVJg8vB0zhlujcxbLJ_2c6bko6Y4GcU_FN9VATHuLuO_I--TWndMYM_iru/pub?w=678&amp;h=261">
+
+必要事項を入力します。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vReb-X0b1hNlM6ncDw7DZtRJOxccL3R9BaTyymLVSSPDV6EXapy-V_L74YOukki1BdUompNAUhhFTaO/pub?w=274&amp;h=667">
+
+入力が終了したら「アカウントを作成」をクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQsccaDXfmA0BaSrCXGMdg-LhE0d4pCGo8LtNdd7PtO9hED_unQynsdJJt-k6Rpf3nDrHNPTD_RXew6/pub?w=674&amp;h=329">
+
+メール送信完了のメッセージが表示されますので、メールの到着をお待ちください。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ7fBRpDPtkt9VL7lGjgZwSXQsWvWCrKeGcVNGmo3EFdlXP2qUf14Lw6e4Xxco87jCvJLnPJd3HTMM8/pub?w=927&amp;h=351">
+
+メールが届いたらリンクをクリックしてください。自動的にログイン画面に遷移します。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ6cRun2KmVkTYV8xCXf0DDG9NdSjBlh-bGhBGvO8lhh7er2IHXr2RdMJEUQopZLwqb1yOgPYekuV4Q/pub?w=620&amp;h=413">
+
+### 2. 支払い情報の設定
+通信料の支払い方法はクレジットカード払いとなります(法人のお客様は請求書払いにも対応しています)。クレジットカードの情報を登録するには、メイン画面右上のユーザー名が表示されているボタンから [お支払い方法設定] をクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQEdcNmOnSQYbaolqmEUN8HF55sstp1DxOvhU_uuckJTDbm4FCHAqlR9--xZ_0v67uRpWharuHS81wC/pub?w=762&amp;h=418">
+
+入力画面が表示されたら、入力フォームに沿ってクレジットカード情報を入力します。最後に[登録] ボタンをクリックすると支払い方法の登録完了です。
+
+### 3. SORACOM SIM 登録
+左上の [SIM 登録] ボタンをクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRNnZLOT3ztm_m3Nbi-ORGtZTgHK-LCthd3onZDiVqJzkics9hksK4_mVlxKkgvlSlqZ4uX9d8hNM1A/pub?w=756&amp;h=310">
+
+「SIM 登録」画面が表示されたら、Air SIM の台紙の裏面に貼ってある IMSI と PASSCODE を入力してください。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQPQ03CBEX9D4MLwFGK1ubSw49tummvvwOwqtDvoB4QawP7UiVDfBnVGl1F3K8_9-4LsMhNkZr2kPv0/pub?w=509&amp;h=392">
+
+名前、グループは空欄のままでも構いません。[登録] を押して SIM 登録を完了してください。複数の Air SIM を続けて登録することも可能です。
+
+### 4. SORACOM Harvest 設定
+SORACOM Webコンソール で 左上[Menu] > [SIM グループ] を選択します。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSn0Zi77g_YUfJPD4SMgpspn-sCiShXibex_Bd288IC5d8-TfFPfCxanjfTdza-7OT5FgQNCuU8UPls/pub?w=691&amp;h=397">
+
+[追加] で、SIMグループを作成します (グループ名 harvest もしくは任意でかまいません)
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSPANZwqx8KjZsVl_gzqv09OKc-i4-CJb1SjrlCiNj6zFN0XM-4ialXN270wHaIgBqYApUjcH1BaUwH/pub?w=639&amp;h=625">
+
+
+先ほど作成した SIMグループ をクリックし、 SORACOM Harvest の設定を ON にして保存をクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ3JxlDr0DwQ3D_4RNWiMYPBwW3Z-OyftYaNmuM-NIZ0grqn5qgnZvO_gAhCkcQs8nBA7RZ1qeyPlCT/pub?w=867&amp;h=681">
+
+SORACOM Webコンソール で 左上[Menu] > [SIM 管理]を選択します。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vR1p_9PqCjBoB3xh_nEta2grhXZlJI3zyrXOjXjH59Vgq69cD5XbVA3PIppl0X6sNYqM538K8G2iK4U/pub?w=704&amp;h=393">
+
+先ほど登録したSIM を選択 > [操作] > [所属グループ変更]をクリックします。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vR9udoWlimJIJv51_uvGoJ2SxIiOga1VQS09JnCr1gjUXg9LxmDoMH33mAagYZQDDCIUm-9Fn3K8TzB/pub?w=544&amp;h=506">
+
+先ほど作成した SIMグループ に所属させます。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSlVDzWGlXw6w6CpMhGG5weDgJYzcr2Uo7bXXpMfOG5ZfGX53y7yLVfTBY7DvSvFrm0yL5L_HJlYU2L/pub?w=650&amp;h=336">
+
+以上で SORACOM Web コンソール上での作業は終了です
+下記のように先ほど登録した SIM の “グループ” が、先ほど作った SIM グループ名になっていれば成功です。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQLn4aBcEup1UuMJQ3XZ5oKDasjDtHSfqjvAykYAnK_EU1TbBI9l9HFS19yOoLeaCYh3_YCh6rAy6BO/pub?w=526&amp;h=485">
