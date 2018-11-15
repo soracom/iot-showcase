@@ -1,8 +1,13 @@
 # SORACOM Technology Camp 2018
 ## SORACOM ハンズオンコーナー
 
-## 目的
-LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/products/wio_lte/)、様々なGroveセンサー、SORACOMを使い、簡単なIoTシステムを体感いただきます。
+## ハンズオンの内容
+LTEモジュールが搭載された[Wio LTEデバイス](https://soracom.jp/products/wio_lte/)、超音波Groveセンサー、SORACOM Air for セルラーを使い、駐車場管理システムを作ります。既にWio LTEデバイスにはコードは書き込まれているので、データの取得、可視化を体験いただきます。
+
+## 費用
+参加費用はかかりませんが、本ハンズオンでご登録いただくSIMカードは1日10円の基本料金と通信量に応じた料金、追加サービスSORACOM Harvestの料金が発生します。
+SORACOM Air for セルラーの料金は[こちら](https://soracom.jp/services/air/cellular/price/)をご覧ください。
+SORACOM Harvest の料金は[こちら](https://soracom.jp/services/harvest/price/)をご覧ください。
 
 ## 本日の機材（ソラコムが提供するもの）
 * [Grove IoT スターターキット for SORACOM](https://soracom.jp/products/#grovestarter_kit)
@@ -93,6 +98,7 @@ SORACOM Webコンソール で 左上[Menu] > [SIM 管理]を選択します。
 
 先ほど登録したSIMカードを、赤色のWio LTEデバイスの中に挿入します。
 スロットが上下に二箇所ありますが、必ず基板側のSIMスロットにSIMを差し込んで下さい。
+
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQnYVov-k_BRy-k_rWqQWwIXq3MwGc4af2EXcC9XuodRuDvwtZPNFLeh11S8lD8_WesE7U9tVJLEIJX/pub?w=512&amp;h=250">
 
 A6 端子に 超音波センサーを取りつけ、USBケーブルをPCに接続します。
