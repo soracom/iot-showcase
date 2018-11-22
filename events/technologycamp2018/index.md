@@ -127,3 +127,7 @@ Wio LTEデバイスに取り付けたSIMを外します。SIMを取り出す際�
 本日設定したSORACOM Harvestは、SIM グループのHarvestの設定をオフにしてください。
 
 以上になります。本日ご利用いただいたSIMカードはお持ち帰りいただけます。
+
+
+本日Wio LTEに書き込んであるコードを知りたい方は、こちらをクリックしてください。
+[駐車場管理コード](https://github.com/soracom/iot-showcase/tree/master/projects/WioLTE/parking)
