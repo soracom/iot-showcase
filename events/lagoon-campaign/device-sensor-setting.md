@@ -20,7 +20,7 @@ Wio LTE に SIM (nanoサイズ) を取り付けます。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSjFtHLe1w7RS7KgECUq55icvRf9sLf7KZH6pPIVNVUKSobIC4YXZ1oSa6fFYfxXptueKaAqo9b5Vk2/pub?w=689&amp;h=687">
 
 ### センサーを取り付ける
-Wio LTE のD38 端子に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子にボタンを接続し、Wio LTEをPCにつなげてください。
+Wio LTE のD38 端子に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子に「マグネットセンサー」を接続し、Wio LTEをPCにつなげてください。
 
 
 
@@ -28,9 +28,8 @@ Wio LTE のD38 端子に「GROVE - デジタル温度・湿度センサ」を接
 Arduinoを立ち上げます。
 [ファイル]>[新規ファイル]をクリックします。
 
-Wio LTE と PC を接続して DFUモード にし、マイコンボードに書き込むをクリックします。
-
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vSAT_XAOAaE00Ex43eItitVxM_eH_OLdhbDINq0PK7yS0WmvP0ITen77WlAOHxb03zbKebw6fNusnCS/pub?w=825&amp;h=695">
+Wio LTE と PC を接続して DFUモード にし、下記のスケッチをコピーし、新規ファイルに貼り付け右矢印をクリックしWio LTEにスケッチを書き込みます。
+下の動画を参考にしてください。
 
 ![https://github.com/soracom/iot-showcase/blob/master/events/lagoon-campaign/fridge_monitoring.gif](https://github.com/soracom/iot-showcase/blob/master/events/lagoon-campaign/fridge_monitoring.gif)
 
