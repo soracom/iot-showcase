@@ -25,3 +25,4 @@ Wio LTE に取り付けている SIM を SORACOM Webコンソール上で選択�
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQWBdzfKyvYRijHcnzkZuWNnMtcHphbdQ-tQNwXG1fhrJcv29fEs4WlStoTDlvDw5CGDnvs6Ax9Jyyg/pub?w=546&amp;h=499">
 
 下図のように SORACOM Harvest 上で温湿度のデータ、ドアの開閉状況のデータを表示しています。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQnel3b-6Q_NlVfWl19749zoRV3W_mNbloqyQUVLmAQktxG1_Dvzz7EUL6RJUICnEUAQicqQk2w3nNw/pub?w=934&amp;h=393">
