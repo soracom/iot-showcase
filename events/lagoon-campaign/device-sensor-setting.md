@@ -21,8 +21,7 @@ Wio LTE に SIM (nanoサイズ) を取り付けます。
 
 ### センサーを取り付ける
 Wio LTE のD38 端子に「GROVE - デジタル温度・湿度センサ」を接続、D20 端子に「マグネットセンサー」を接続し、Wio LTEをPCにつなげてください。
-
-
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRoI9ZYS-bzn4Qqv7GPlINs7d1j_IERlh5J95pUB6Iihfej1eF9SnuxS8NvP0_IxSUEXNcvjfboqiZZ/pub?w=836&amp;h=610">
 
 ### スケッチを作成し、書き込む
 Arduinoを立ち上げます。
