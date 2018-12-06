@@ -1,7 +1,7 @@
 ## センシングデータを SORACOM Harvest で可視化
 
 ### SIMグループを作成
-SORACOM Webコンソール で 左上[Menu] > [SIM グループ]を選択します。
+[SORACOM Webコンソール](https://console.soracom.io/#/login?coverage_type=jp) で 左上[Menu] > [SIM グループ]を選択します。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSA_Ja2Y2IDFu45-17hHpUVh1Y8dHO0gOIWeG20RcJ3xRN6rgBc1RPPFDyS08oCTFb8FrJYMVjWk23M/pub?w=714&amp;h=400">
 
 [追加] で、SIMグループを作成します (グループ名 harvest もしくは任意でかまいません)。
