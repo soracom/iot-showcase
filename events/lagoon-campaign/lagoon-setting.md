@@ -2,7 +2,8 @@
 
 
 ### SORACOM Lagoon アカウントの設定
-SORACOMのユーザーコンソールの[Menu]> 「ダッシュボード作成・共有」 をクリックします。
+[SORACOM Web コンソール](https://console.soracom.io/#/login?return_to=)の[Menu]> 「ダッシュボード作成・共有」 をクリックします。
+
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vTMMlRhzS5KKB1UoIjCFN3UYo2NjaoOATnPZJKOaeCPbt-axRdH9xPXSRErSff9QiPy0nKevNCFKphC/pub?w=435&amp;h=427">
 
 #### Lagoon を有効化する
@@ -20,7 +21,7 @@ SORACOMのユーザーコンソールの[Menu]> 「ダッシュボード作成�
 オペレータアカウントのメールアドレスと先ほど設定したパスワードを入力しログインします。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRMnwpb0e7nrYVMF2_emXJfwioll6cewS0KJ7bR75gXEHkWY811rcCMh2a4uX0_zCJRjTCItpFsZhXA/pub?w=594&amp;h=340">
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ8usRUkU_wNm5wG17mljYoKQAQT97M5SDppj6Ufv8cUUqROzPLwVPML8Fyy7pHUNpIIhG5x8yxLn5n/pub?w=930&amp;h=423">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRUY5V5rociUbX60oo3wz9JkQj1740GVrzcLe8nvf0tXApV1uAnLSVqFuGv2MLKQ-v9bhwo8gSAbk08/pub?w=953&h=541">
 SORACOM Lagoonにログイン後、上記の画面が出てきたら、ログイン成功です。
 
 ### SORACOM Lagoon を使ってセンシングデータを可視化
