@@ -7,8 +7,8 @@
 
 
 ## 手順
-1. [セットアップ~動作確認](https://soracom.github.io/iot-showcase/common/dev_environment_setup)
-2. [SORACOM アカウントの登録](https://soracom.github.io/iot-showcase/common/soracom-getting-started)
-3. [デバイス、センサーのセッティング](https://soracom.github.io/iot-showcase/events/lagoon-campaign/device-sensor-setting)
-4. [センシングデータを SORACOM Harvest で可視化](https://soracom.github.io/iot-showcase/events/lagoon-campaign/harvest-setting)
-5. [センシングデータを SORACOM Lagoon で可視化](https://soracom.github.io/iot-showcase/events/lagoon-campaign/harvest-setting)
+1. [セットアップ~動作確認](/common/dev_environment_setup)
+2. [SORACOM アカウントの登録](/common/soracom-getting-started)
+3. [デバイス、センサーのセッティング](/events/lagoon-campaign/device-sensor-setting)
+4. [センシングデータを SORACOM Harvest で可視化](/events/lagoon-campaign/harvest-setting)
+5. [センシングデータを SORACOM Lagoon で可視化](/events/lagoon-campaign/harvest-setting)
