@@ -30,7 +30,7 @@ Arduinoを立ち上げます。
 Wio LTE と PC を接続して DFUモード にし、下記のスケッチをコピーし、新規ファイルに貼り付け右矢印をクリックしWio LTEにスケッチを書き込みます。
 下の動画を参考にしてください。
 
-![fridge_monitoring.gif](xfridge_monitoring.gif)
+![fridge_monitoring.gif](fridge_monitoring.gif)
 
 下記がコードです。
 
