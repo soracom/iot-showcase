@@ -166,7 +166,7 @@ Wio LTE の開発（ソースコード記述、コンパイル、バイナリフ
 
 ※スタートメニュー内の **Arduino** が「Arduino IDE」です。これをダブルクリックで Arduino IDE を起動することになります
 
-<h2 id="arduino-ide-board-manager">5. Wio LTE ボード定義のインストール
+<h2 id="arduino-ide-board-manager">5. Wio LTE ボード定義のインストール</h2>
 
 Wio LTE を Arduino IDE で扱えるようにするための機能を追加します
 
