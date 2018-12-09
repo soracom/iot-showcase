@@ -1,4 +1,4 @@
-# IoT もくもく会 (SORACOM LTE-M Button powered by AWS 編)
+<h1>IoT もくもく会 <br> (SORACOM LTE-M Button powered by AWS 編)</h1>
 
 <h2 id="prepare">必要なもの</h2>
 
@@ -20,7 +20,7 @@
 <h2 id="standby">作業前の準備</h2>
 
 * Wi-Fi に接続してください (接続情報は別途お知らせします)
-* 「進ちょく表」を開いてください (URL は別途お知らせします)
+* 「進ちょく表」を開いてください (URL は別途お知らせします。完全に自習の場合は不要です)
 
 <h2 id="workflow">作業の進め方</h2>
 
