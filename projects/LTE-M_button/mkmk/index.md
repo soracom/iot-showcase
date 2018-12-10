@@ -28,30 +28,30 @@
 
 ![mkmk-button / 作業の進め方](https://docs.google.com/drawings/d/e/2PACX-1vQQcIicnB1MaVrvyJQAZLl9dX581hPE3W6VSTZlgNlwQ8I58HjYsishVw_JFjllk27ajG2ZJhfH_E9d/pub?w=607&h=453)
 
-<h2 id="a-work">作業: Ａ</h2>
+<h2 id="work-a">作業: Ａ</h2>
 
-1. [AWS アカウントの作成]()
-    * [すでに AWS アカウント持っている場合の確認事項]()
-2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録し、メールを使い動作確認]()
-3. [メールの内容を変えてみる]()
+1. [AWS アカウントの作成](create-aws-account)
+    * [すでに AWS アカウント持っている場合の確認事項](aws-account-available)
+2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録し、メールを使い動作確認](1st-button)
+3. [メールの内容を変えてみる](customize-lambda-function)
 
 <h2 id="b-work">作業: Ｂ</h2>
 
 これより先は、どの手順から開始しても構いません。それぞれで追加で必要なものがあります。
 
-1. [AWS IoT Core を使って会場にあるデバイスを制御]()
+1. [AWS IoT Core を使って会場にあるデバイスを制御](b-work/device-control-with-awsiotcore-shadow)
     * **追加で必要なもの**: とくに無し
     * デバイス側も作ってみたい方は[おまけコンテンツ](#appendix)を見てください
-2. [IFTTT を使って LINE に送信]()
+2. [IFTTT を使って LINE に送信](b-work/line-notify-with-ifttt)
     * **追加で必要なもの**: LINE アカウント
 
 <h2 id="closing">作業: あとかたづけ</h2>
 
-* (貸し出しの方のみ) [SORACOM LTE-M Button を AWS IoT 1-Click から解除]()
-* (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録する]()
+* (貸し出しの方のみ) [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim)
+* (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録する](closing/add-to-soracom)
 * (全員) [料金について]()
 
 <h2 id="appendix">おまけコンテンツ</h2>
 
-* [AWS IoT Core の Device Shadow を使ったデバイス制御]()
-    * [AWS IoT Core を使って会場にあるデバイスを制御]() で使用したデバイス側の開発について解説しています
+* [AWS IoT Core の Device Shadow を使ったデバイス制御](appendix/awsiotcore-device-shadow)
+    * [AWS IoT Core を使って会場にあるデバイスを制御](b-work/device-control-with-awsiotcore-shadow) で使用したデバイス側の開発について解説しています
