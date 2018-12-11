@@ -64,9 +64,9 @@ SORACOM LTE-M Button からのボタン押下を待ち受ける状態になり�
 
 登録したボタンは解除することができます。主に別の AWS アカウントへ再登録する際に利用する機能です。
 
-登録解除方法は [SORACOM LTE-M Button を AWS IoT 1-Click から解除](../closing/unclaim) をご覧ください。
+登録解除方法は [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim) をご覧ください。
 
-AWS IoT 1-Click の費用を抑えたい場合は解除ではなく "無効" にすることで実現できます。詳しくは [料金について](../#fee) をご覧ください。
+AWS IoT 1-Click の費用を抑えたい場合は解除ではなく "無効" にすることで実現できます。詳しくは [料金について](./#fee) をご覧ください。
 
 <h4 id="life">ボタンの「ヘルス」について</h4>
 
