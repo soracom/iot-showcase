@@ -54,7 +54,7 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録し、メールを使い動作確認](claim-and-email-with-amazon-ses)
 3. [メールの内容を変えてみる](customize-lambda-function)
 
-<h2 id="b-work">作業: Ｂ</h2>
+<h2 id="work-b">作業: Ｂ</h2>
 
 これより先は、どの手順から開始しても構いません。それぞれで追加で必要なものがあります。
 
