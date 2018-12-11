@@ -71,7 +71,36 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 
 <h3 id="fee">料金について</h3>
 
+SORACOM LTE-M Button を利用するためには SORACOM LTE-M Button の他 AWS 各種サービスの料金がかかります。
 
+#### AWS 各種サービスの利用料金の目安
+
+* [AWS IoT 1-Click 料金](https://aws.amazon.com/jp/iot-1-click/pricing/)
+    * `有効な AWS IoT 1-Click デバイスの台数` x `有効なデバイスあたりの日割り料金` = `AWS IoT 1-Click の月額料金` となります
+    * 1 デバイスの場合: 0.25 USD / 月 であるため、 **1 日の利用であれば 約 0.0083 USD (約 1 円) が目安** です
+    * *無効* と設定されたデバイスは課金対象外となります
+    * 無料枠はありません
+* [Amazon SES 料金](https://aws.amazon.com/jp/ses/pricing/)
+    * AWS Lambda からの送信は "Amazon EC2 でホストされているアプリケーションからの E メール送信
+" に該当し、 1,000 件ごとに 0.10 USD となりますが月間 62000 通までの無料枠があります
+* [AWS Lambda 料金](https://aws.amazon.com/jp/lambda/pricing/#Lambda_pricing_details)
+    * メモリ 128MB における 100 ミリ秒単位の価格は 0.000000208 USD ですが月間 100 万リクエストの無料枠があります
+
+※ AWS における料金は目安であり保証するものはありません。必ず各自でご確認ください。
+※ 料金は全て税抜きです。
+
+#### SORACOM LTE-M Button
+
+販売価格 7980 円 の中に以下のものが含まれています
+
+* SORACOM LTE-M Button 本体価格
+* 1 年間の基本料金
+* 1500 回分のクリック時の通信費
+
+SORACOM ユーザーコンソールへの登録は無料です。  
+契約内容更新などの詳細は [SORACOM LTE-M Button の商品ページ](https://soracom.jp/products/gadgets/aws_button/)をご覧ください
+
+※ 料金は全て送料や税抜きです。
 
 ### 資料集
 
