@@ -1,6 +1,6 @@
 <h1>SORACOM LTE-M Button を AWS IoT 1-Click に登録して、メールを使い動作確認</h1>
 
-[目次に戻る](./#work-a)
+[目次に戻る](index#work-a)
 
 SORACOM LTE-M Button が使えるように AWS IoT 1-Click に登録した後、動作確認のためにメールを送ってみましょう。
 
@@ -66,7 +66,7 @@ SORACOM LTE-M Button からのボタン押下を待ち受ける状態になり�
 
 登録解除方法は [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim) をご覧ください。
 
-AWS IoT 1-Click の費用を抑えたい場合は解除ではなく "無効" にすることで実現できます。詳しくは [料金について](./#fee) をご覧ください。
+AWS IoT 1-Click の費用を抑えたい場合は解除ではなく "無効" にすることで実現できます。詳しくは [料金について](index#fee) をご覧ください。
 
 <h3 id="life">ボタンの「ヘルス」について</h3>
 
@@ -191,7 +191,7 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 ### 次へ進む
 
 * [メールの内容を変えてみる](customize-lambda-function) へ進む
-* [目次に戻る](./#work-a)
+* [目次に戻る](index#work-a)
 
 ## トラブルシューティング
 
