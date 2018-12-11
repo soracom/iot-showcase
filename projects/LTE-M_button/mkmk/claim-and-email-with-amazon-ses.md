@@ -1,6 +1,6 @@
 <h1>SORACOM LTE-M Button を AWS IoT 1-Click に登録して、メールを使い動作確認</h1>
 
-[目次に戻る](index#work-a)
+[目次に戻る](./#work-a)
 
 SORACOM LTE-M Button が使えるように AWS IoT 1-Click に登録した後、動作確認のためにメールを送ってみましょう。
 
@@ -169,4 +169,29 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 (もしメールアドレスを変更する場合は、ステップ３が終わったら再度 AWS IoT 1-Click コンソールからテンプレートに設定したメールアドレスを変更する必要があります。)
 
 ![mkmk-button / 3-6 ses verified](https://docs.google.com/drawings/d/e/2PACX-1vTgN6ur9EWU6-lQ913PWOKHUBi2I7cTYTr9c_ucQsqbj33QiHZoRG5eARmUZwzm8Nd15NRKYyObPiCo/pub?w=928&h=170)
+
+## 作業4: SORACOM LTE-M Button からメールを送信してみる
+
+ここまでの作業で AWS IoT 1-Click を通じて Amazon SES 経由でメールが送信されるようになりました。
+
+実際に SORACOM LTE-M Button を押してみてください。  
+以下のようなメールが届いたら成功です。
+
+![mkmk-button / 4-1 mail](https://docs.google.com/drawings/d/e/2PACX-1vSXsDZ8opJBE0Vllxt-cbbPEbj00UWvCJhv5eYiGX0csnP0yY860DgKKbY85PS2tChueI70mCPvpG2c/pub?w=316&h=204)
+
+ボタン押下の内容に応じて `SINGLE` の部分が `DOUBLE` や `LONG` に変わりますので試してみてください。
+
+## メールが届いたらこの章は終了です
+
+* [メールの内容を変えてみる](customize-lambda-function) へ進む
+* [目次に戻る](./#work-a)
+
+## トラブルシューティング
+
+### メールが届かない
+
+* 原因: Amazon SES での認証メール、もしくは SORACOM LTE-M Button を押した時のメールが迷惑メール扱いになっている可能性があります
+* 対策: 以下を確認してください
+    * 送信先メールアドレスが verified になっている (Amazon SES コンソールで確認できます)
+        * これでも届かない場合は Amazon SES 上で *Send a Test Email* をしてみてください
 
