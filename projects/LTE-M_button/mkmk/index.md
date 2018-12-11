@@ -14,8 +14,12 @@
     * 本ドキュメント内では SORACOM LTE-M Button と省略表記します
 * 有効なクレジットカード / 1 つ
     * AWS アカウントならびに SORAOCM アカウントを作成いただくのに必要となります
+* 会場で着信可能な電話 (携帯電話) / 1 つ
+    * AWS アカウント作成時に電話音声による認証が必要となります
+    * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
 * 会場で確認可能なメールアドレス / 1 つ
-    * 各種アカウント作成時に加え、SORACOM LTE-M Button の動作確認に使用します
+    * SORACOM LTE-M Button の動作確認に使用します
+    * SORACOM アカウント作成時を行う場合 (オプション) で必要となります
 
 <h2 id="standby">作業前の準備</h2>
 
@@ -26,7 +30,7 @@
 
 SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて AWS Lambda (= あらかじめ作成しておいたプログラム)を実行できます。
 
-![mkmk-button / 全体像]()
+![mkmk-button / 全体像](https://docs.google.com/drawings/d/e/2PACX-1vQWfrmF_w_-tmW6ztypukUXverP4_WS_ECeDmGe9ibqVYilMxP0kWPr6arvFE6oWyypQkAH9SNzjZ6s/pub?w=927&h=521)
 
 必要な作業は以下の通りとなります。
 
@@ -47,7 +51,7 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 
 1. [AWS アカウントの作成](create-aws-account)
     * [すでに AWS アカウント持っている場合の確認事項](aws-account-available)
-2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録し、メールを使い動作確認](1st-button)
+2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録し、メールを使い動作確認](claim-and-email-with-amazon-ses)
 3. [メールの内容を変えてみる](customize-lambda-function)
 
 <h2 id="b-work">作業: Ｂ</h2>
@@ -64,7 +68,12 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 
 * (貸し出しの方のみ) [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim)
 * (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録する](closing/add-to-soracom)
-* (全員) [料金について]()
+
+<h3 id="fee">料金について</h3>
+
+
+
+### 資料集
 
 <h2 id="appendix">おまけコンテンツ</h2>
 
