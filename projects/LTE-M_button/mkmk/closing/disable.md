@@ -6,6 +6,8 @@
 
 ## 作業: 無効化をする
 
+※プレイスメントに割り当てられても本作業は可能です。
+
 [管理] > [デバイス] とクリックした後、解除を行いたいデバイスの [...] をクリックした後に表示される [デバイスの無効化] をクリックします。  
 
 ![mkmk-button / 1 disable](https://docs.google.com/drawings/d/e/2PACX-1vRK-JQadfhtAhXgWz6HFbAHCMqAWsmITUvaAT4DkUTTA3PTa5WCsQkr3lBWNBVCDIE8O50kmfsWNViz/pub?w=922&h=259)
