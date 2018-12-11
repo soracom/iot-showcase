@@ -76,7 +76,8 @@ SORACOM LTE-M Button においての *ヘルス* は電池残量ではありま�
 
 押下回数、開始日からの経過日数、電池残量を具体的に管理したい場合は SORACOM LTE-M Button を SORACOM に登録することで SORACOM ユーザーコンソールおよび API で確認することができます。
 
-SORACOM への登録の方法は [SORACOM LTE-M Button を SORACOM へ登録する](../closing/add-to-soracom) をご覧ください。（**貸し出しの方は SORACOM への登録しないでください！**）
+SORACOM への登録の方法は [SORACOM LTE-M Button を SORACOM へ登録する](../closing/add-to-soracom) をご覧ください。  
+**注意：貸し出しの方は SORACOM への登録しないでください！**
 
 ## 作業2: AWS IoT 1-Click で Email 送信設定を行う
 
