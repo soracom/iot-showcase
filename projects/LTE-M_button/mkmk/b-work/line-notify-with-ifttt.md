@@ -195,4 +195,4 @@ SORACOM LTE-M Button を押してメッセージが届くか確認してくだ�
 
 ---
 
-* [目次に戻る](index#work-b)
+* [目次に戻る](../index#work-b)
