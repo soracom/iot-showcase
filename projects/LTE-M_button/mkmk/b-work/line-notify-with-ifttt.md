@@ -190,7 +190,7 @@ SORACOM LTE-M Button を押してメッセージが届くか確認してくだ�
     * [LINE Notify のマイページ](https://notify-bot.line.me/my/) の連携中サービスで IFTTT との接続を解除
 * AWS 関連
     * Lambda 関数の削除
-    * IAM ロールの削除 (作った場合)
+    * IAM ロール / ポリシーの削除 (作った場合)
     * AWS IoT 1-Click のプロジェクトの削除
 
 ---
