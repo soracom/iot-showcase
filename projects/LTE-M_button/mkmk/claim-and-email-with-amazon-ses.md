@@ -81,9 +81,11 @@ SORACOM への登録の方法は [SORACOM LTE-M Button を SORACOM へ登録す�
 
 ## 作業2: AWS IoT 1-Click で Email 送信設定を行う
 
-AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。
+AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。  
+なっていなければ **オレゴン** に切り替えてください。
 
 ![mkmk-button / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSgprF60wQZHq5nvPUcueml_-wNwuVn3EWx9FqRV73-7mxS0bapShs6fPVD2LMV-Lrr6GLlb-aEhjIr/pub?w=928&h=189)
+AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。
 
 AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開いた後 [プロジェクトの作成] をクリックします。
 
@@ -130,4 +132,41 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 ![mkmk-button / 2-7 placement](https://docs.google.com/drawings/d/e/2PACX-1vR33NlAAkYpwifDiTx1wAMyy6NnGNeBYABdJS3AvlI0V4U3vKhJafNsXgSrrahs1P-FyTUkHTZxEXzL/pub?w=927&h=349)
 
 ## 作業3: Amazon SES で送信先 Email の認証を行う
+
+Amazon SES (Simple Email Service) のコンソールを開きます。
+
+[サービス] をクリックした後、検索窓に `ses` と入れるか、 "カスタマーエンゲージメント" カテゴリの中の Simple Email Service をクリックしてください。
+
+![mkmk-button / 3-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vRlCqRPj4jRjUwRkiB9FqvGEyGZP8BpRZuDBMjFqLKCI2_NbP_kowp3fOgcghVN1LAL2nI6l6c5l1hK/pub?w=678&h=232)
+
+AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。  
+なっていなければ **オレゴン** に切り替えてください。
+
+![mkmk-button / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSgprF60wQZHq5nvPUcueml_-wNwuVn3EWx9FqRV73-7mxS0bapShs6fPVD2LMV-Lrr6GLlb-aEhjIr/pub?w=928&h=189)
+
+[Email Addresses] をクリックした後、[Verify a New Email Address] をクリックします。
+
+![mkmk-button / 3-2 ses](https://docs.google.com/drawings/d/e/2PACX-1vShW6Y3eJLbvu3UzCfFC7e90OFrsck7D4W10T7l2B02RiY3NMlJKKkkYywd46eOqoW8PwrWPQ9dEdYK/pub?w=552&h=331)
+
+フォームに以下のように入力して [Verify This Email Address] をクリックします。  
+その後表示されたダイアログは [Close] をクリックします。
+
+* Email Address: {ボタンで送信したい先の E メールアドレス}
+
+![mkmk-button / 3-3 ses](https://docs.google.com/drawings/d/e/2PACX-1vSrCb0jqeMBwmFsQ6xau8kXkEJlC2WNnbtbi8gBxokO6hPu-wgtDib3kax75EykDnn1Nsb4sAAe1_4o/pub?w=662&h=259)
+
+直後の状態は以下の通りです。pending verification と表示されている事を確認してください。
+
+![mkmk-button / 3-4 ses sent](https://docs.google.com/drawings/d/e/2PACX-1vQ6LLE8QfqqsmHzW7VjUXxhH6zOGzpoxrt7Vj7mAG7gx9OfUf6mXsisZeEitoL6q0zZ038XduxGr4KV/pub?w=928&h=156)
+
+メールソフトを開き、下記のようなメールが届いている事を確認したら、メール本文内の URL をクリックしてください。 (クリックした後は削除してしまって構いません)  
+クリックすると「検証に成功しました」というページが表示されます。
+
+![mkmk-button / 3-5 email](https://docs.google.com/drawings/d/e/2PACX-1vRhBENOTyD9iW8fJo5ly_S71nMJC4FqxZvRB6NycGwliB8fFN0Zr8i0SdPgQwy5eOC03pk_2J3G88CT/pub?w=258&h=438)
+
+Amazon SES コンソールに戻り [リロードボタン] で表示を更新した後に verified と表示されている事を確認してください。  
+そうでない場合は *resend* をしてメールを再送するか、もしくは別のメールアドレスで再度同じ手順を行ってください。  
+(もしメールアドレスを変更する場合は、ステップ３が終わったら再度 AWS IoT 1-Click コンソールからテンプレートに設定したメールアドレスを変更する必要があります。)
+
+![mkmk-button / 3-6 ses verified](https://docs.google.com/drawings/d/e/2PACX-1vTgN6ur9EWU6-lQ913PWOKHUBi2I7cTYTr9c_ucQsqbj33QiHZoRG5eARmUZwzm8Nd15NRKYyObPiCo/pub?w=928&h=170)
 
