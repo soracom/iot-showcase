@@ -12,4 +12,6 @@
         * `AWSLambdaIoTButtonSNSExecutionRole-*` (SMS の場合)
         * `AWSLambdaIoTButtonBasicExecutionRole-*`
 
+---
+
 * [目次に戻る](../index#closing)
