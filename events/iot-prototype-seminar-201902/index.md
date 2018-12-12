@@ -11,3 +11,32 @@
 ### Day 2
 
 * <a href="https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js" target="_blank">IFTTT 送信用 Lambda 関数 (別のタブで開きます)</a>
+* AWS Lambda 関数 (1click-ifttt) のテスト用 JSON:
+    ```json
+    {
+        "deviceEvent": {
+            "buttonClicked": {
+                "clickType": "SINGLE",
+                "reportedTime": "2018-05-04T23:26:33.747Z"
+            }
+        },
+        "deviceInfo": {
+            "attributes": {},
+            "type": "button",
+            "deviceId": " G030PMXXXXXXXXXX ",
+            "remainingLife": 5
+        },
+        "placementInfo": {
+            "projectName": "TestProject",
+            "placementName": "button1",
+            "attributes": {
+                "event": "button",
+                "key": "YOUR_WEBHOOK_KEY",
+                "value1": "値1"
+            },
+            "devices": {
+                "myButton": " G030PMXXXXXXXXXX "
+            }
+        }
+    }
+    ```
