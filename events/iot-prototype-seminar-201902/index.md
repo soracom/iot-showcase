@@ -10,6 +10,8 @@
 
 ### Day 2
 
+* <a href="https://notify-bot.line.me/ja/" target="_blank">LINE Notify (別のタブで開きます)</a>
+* <a href="https://ifttt.com/discover" target="_blank">IFTTT (別のタブで開きます)</a>
 * <a href="https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js" target="_blank">IFTTT 送信用 Lambda 関数 (別のタブで開きます)</a>
 * AWS Lambda 関数 (1click-ifttt) のテスト用 JSON:
     ```json
