@@ -26,7 +26,7 @@ Lambda 関数の一覧が表示されます。この中で `iot1click_onclick_em
 
 ![1-2 lambda list](https://docs.google.com/drawings/d/e/2PACX-1vSjLoxIuYGaHHMBCQYtygx_Sk9d85YjzL5c4AMrVqYtbASyzKzHlxvyzxDrZH0l7ILSohoKzKa-iq-l/pub?w=927&h=344)
 
-※もしも Lambda 関数一覧が表示されなかった場合は以下のように、左上のメニューから [関数] を選んでください。
+※もしも Lambda 関数一覧が表示されなかった場合は以下のように、右上のメニューから [関数] を選んでください。
 
 ![1-2 lambda menu](https://docs.google.com/drawings/d/e/2PACX-1vTDMmoIxiJdKQq4C1ld7nBDa5zuaaMmnBh-6WCU8gxS-w8UIUa85gwlGm384prnlfjhvYw_FPThIs1-/pub?w=758&h=342)
 
@@ -48,7 +48,7 @@ Lambda 関数の一覧が表示されます。この中で `iot1click_onclick_em
 
 ![2-3 lambda edit](https://docs.google.com/drawings/d/e/2PACX-1vT1gR43OibwvTrF6a2oGIA6uUmfQUlyRnkyK8Bi3qFcfiRGH2-Xv7DgmYFME-IjOzYcyfI8k-YBtYQc/pub?w=778&h=388)
 
-左上の [保存] をクリックします。
+右上の [保存] をクリックします。
 
 ![2-3 lambda save](https://docs.google.com/drawings/d/e/2PACX-1vQS6wli8JFrkd8cXEn5XTd526lFK5TYcAeSocjUeVWfORWpqP63c5XM4T9r-XPO2kJ5LD4gsqCl0DYF/pub?w=638&h=259)
 
@@ -56,7 +56,7 @@ Lambda 関数の一覧が表示されます。この中で `iot1click_onclick_em
 
 編集した内容が正常に動くかテストをしてみます。
 
-Lambda 関数の編集画面 左上の [テストイベントの選択...] > [テストイベントの設定] をクリックします。
+Lambda 関数の編集画面 右上の [テストイベントの選択...] > [テストイベントの設定] をクリックします。
 
 ![2-4 lambda test event](https://docs.google.com/drawings/d/e/2PACX-1vQsW2isyThiYxS0VusJPUobmIJoGIM600c7hseEGYL1YS9wpRoS_dvAOEsHqZgsOsEegmj1_BKhGs0X/pub?w=641&h=182)
 
@@ -100,7 +100,7 @@ Lambda 関数の編集画面 左上の [テストイベントの選択...] > [�
 
 ![2-5 lambda test event](https://docs.google.com/drawings/d/e/2PACX-1vSinELxr9AW0KBLxmz151VKMwFR0xwO3AANvDZZ34LT1hSLRkYJAIDfNs_x1k0k2xWpgJ2uwlR64cns/pub?w=960&h=720)
 
-Lambda 関数の編集画面 左上が **1click** になっている事を確認したら [テスト] をクリックします。
+Lambda 関数の編集画面 右上が **1click** になっている事を確認したら [テスト] をクリックします。
 
 ![2-6 lambda test](https://docs.google.com/drawings/d/e/2PACX-1vQ3a80etJXpApHrp2SKC-ibVRsKkXGMQztywfEGOskxq8w7yBTA2UIF5_rpd7kU-QD8aBGi0GMqQPQg/pub?w=605&h=163)
 

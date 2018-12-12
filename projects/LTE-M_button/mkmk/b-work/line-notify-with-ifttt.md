@@ -14,6 +14,10 @@ LINE へのメッセージ送信に使用する [LINE Notify](https://notify-bot
 ログイン出来れば設定は完了です。  
 マイページから連携中のサービスが確認/管理ができます。
 
+### LINE Notify にログインするためのメールアドレスを確認する方法
+
+[LINE Notify ヘルプセンター / 登録しているメールアドレスを確認するには？](https://help.line.me/line/?contentId=20000056) をご覧ください。
+
 ## 作業2: IFTTT の設定を行う
 
 ### IFTTT のアカウントを作成する
@@ -37,6 +41,8 @@ Complete trigger fields では、以下のように入力してから [Create Tr
 * Event Name: `button` (任意の文字列)
     * 後ほど使用しますのでメモをしておいてください
 
+《画像は後ほど用意いたします》
+
 **that** をクリックします。
 
 Choose action service では、 **LINE** をクリックします。 (`line` で検索すると見つけやすいです)
@@ -56,10 +62,14 @@ Complete action fields では、以下のように入力してから [Create act
     * 編集すればメッセージが変わります。Value1 ~ Value3 は AWS IoT 1-Click のプレイスメントで設定した値を入れることができます
 * Photo URL: 空のままでＯＫです
 
+《画像は後ほど用意いたします》
+
 Review and finish では以下のように入力してから [Finish] をクリックしてください。
 
 * Receive notifications when this Applet runs: オフにします
     * 今回作成したアプレットの実行毎に IFTTT でも通知が発生するのを抑制します
+
+《画像は後ほど用意いたします》
 
 ### WebHook のキーを入手する
 
@@ -67,7 +77,7 @@ Review and finish では以下のように入力してから [Finish] をクリ�
 
 一覧の中から **Webhooks** をクリックします。 (`webhooks` で検索すると見つけやすいです)
 
-**Documetation** をクリックすると Your key is と Webhooks のキーが表示されるのでメモをしておいてください。
+**Documetation** をクリックすると **Your key is** に Webhooks の キーが表示されるのでメモをしておいてください。
 
 以上で IFTTT の設定は終了です。  
 作成したアプレットは IFTTT の **My Applets** で管理・編集できます。
@@ -96,9 +106,12 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 * ハンドラ: `index.handle` (デフォルトで `index.handler` と入力されていますのでご注意)
 
 コードを以下の URL のコードと入れ替えて [保存] をクリックします。  
-https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js
+[https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js](https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js)
 
-テストイベントには以下の JSON を使います。その際、以下の値を変更してください。
+《画像は後ほど用意いたします》
+
+メールの時同様に、テストを作成します。  
+テストイベントは以下の JSON を使います。その際、以下の値を変更してください。
 
 * event: IFTTT で設定した `Event Name`
 * key: IFTTT の Webhooks で入手したキー
@@ -122,7 +135,7 @@ https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js
     "placementName": "button1",
     "attributes": {
       "event": "button",
-      "key": "clHt8Wld2WFANk3mntbrnG",
+      "key": "YOUR_WEBHOOK_KEY",
       "value1": "値1",
       "value2": "値2",
       "value3": "値3"
@@ -159,11 +172,13 @@ AWS Lambda 上でテストをして LINE Nofity からメッセージが届け�
     * プレイスメントの属性
         * `event` = (IFTTT で設定した `Event Name`)
         * `key` = (IFTTT の Webhooks で入手したキー)
-        * `value1` = (任意の文字列)
-        * `value2` = (任意の文字列)
-        * `value3` = (任意の文字列)
+        * `value1` = `朝` (任意の文字列)
+        * `value2` = `昼` (任意の文字列)
+        * `value3` = `晩` (任意の文字列)
 
-以下、プレイスメント内での設定です。
+《画像は後ほど用意いたします》
+
+[プレイスメントの作成] をクリックした後、プレイスメント内での設定を以下のようにします。
 
 * デバイスのプレイスメント名: `button1` (任意の文字列)
 * デバイスの選択: 割り当てたいデバイスを選択

@@ -85,7 +85,6 @@ AWS マネジメントコンソールのリージョンが **オレゴン** (us-
 なっていなければ **オレゴン** に切り替えてください。
 
 ![mkmk-button / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSgprF60wQZHq5nvPUcueml_-wNwuVn3EWx9FqRV73-7mxS0bapShs6fPVD2LMV-Lrr6GLlb-aEhjIr/pub?w=928&h=189)
-AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。
 
 AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開いた後 [プロジェクトの作成] をクリックします。
 
