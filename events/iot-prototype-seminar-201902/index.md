@@ -1,22 +1,13 @@
 # Let's IoT プロトタイピング！ オンライン講座 〜今から帰るよボタンを作ってみよう〜
 
-[イベントページ](https://pages.soracom.jp/20190205_IoT-Prototype_lp.html)
+* [イベントページ Day1](https://pages.soracom.jp/20190205_IoT-Prototype_lp.html) [Day2](https://pages.soracom.jp/20190206_IoT-Prototype_lp.html)
 
-## セミナー中で使用するプログラム（スケッチ）の配布
+## セミナー中で使用するプログラムの配布
 
-### Day 1 : デバイス Day
+### Day 1
 
-* [SORACOM_iot-proto_day1-1.ino](https://gist.github.com/ma2shita/d1e4026c542c6ccaa1761abe1d7690b6)
+* (特に配布するプログラムはありません)
 
-### Day 2 : クラウド Day
+### Day 2
 
-* [SORACOM_iot-proto_day2-1.ino](https://gist.github.com/ma2shita/ef641d1a3a4fbf4a3003f680442cb1c8)
-* [SORACOM_iot-proto_day2-2.ino](https://gist.github.com/ma2shita/f6a93f29a56a91db5f619aacce2ea330)
-
-### Day 3 : グロースアップ Day
-
-* [SORACOM_iot-proto_day3-1.ino](https://gist.github.com/ma2shita/3cc81acd913ebc712faa873ba3e3d6b9)
-
-## ライセンスについて
-
-* 本ページで掲載されているソースコードはいずれも [MIT License](https://opensource.org/licenses/MIT) としています。
+* [IFTTT 送信用 Lambda 関数] https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js
