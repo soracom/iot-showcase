@@ -12,6 +12,8 @@
         * `AWSLambdaIoTButtonSNSExecutionRole-*` (SMS の場合)
         * `AWSLambdaIoTButtonBasicExecutionRole-*`
 
+これ以外にも Amazon SES で追加した verified email address の削除も必要であれば行ってください。
+
 ---
 
 * [目次に戻る](../index#closing)

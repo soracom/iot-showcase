@@ -4,7 +4,7 @@ AWS IoT Core を利用して、会場に設置されたデバイスを制御し�
 
 AWS IoT Core とその先の環境は運営側で準備しているため、この章では AWS IoT 1-Click から AWS IoT Core への送信までを行うのがゴールになります。
 
-![button-mkmk / AWS IoT Core 全体像]()
+![button-mkmk / AWS IoT Core 全体像](https://docs.google.com/drawings/d/e/2PACX-1vSs0tF-8s21WZHxe7bWXMOkl5V06Y8hEdLnoQZQyDAMhnw5NCgCNYNJK_R-erEGY3sigR5RNlKS-2nj/pub?w=813&h=457)
 
 ## 作業1: AWS Lambda を作成する
 
@@ -28,17 +28,20 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 関数コードでは、以下のようにします。
 
 コードを以下の URL のコードと入れ替えて [保存] をクリックします。  
-https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee
+[https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee](https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee)
 
-環境変数を
+環境変数では、以下のようにします。
 
-* `ENDPOINT`: ()
-* `ACCESS_KEY_ID`: ()TODO
-* `SECRET_ACCESS_KEY`: ()TODO
+* `ENDPOINT`: **ハンズオン運営から入手** (endpoint)
+* `ACCESS_KEY_ID`: **ハンズオン運営から入手** (aws-accesskey-id)
+* `SECRET_ACCESS_KEY`: **ハンズオン運営から入手** (aws-secret-accesskey-id)
 
-テストイベントには以下の JSON を使います。その際、以下の値を変更してください。
+《画像は後ほど用意いたします》
 
-* thingName: ()TODO
+メールの時同様に、テストを作成します。  
+テストイベントは以下の JSON を使います。その際、以下の値を変更してください。
+
+* thingName: **ハンズオン運営から入手** (awsiot-thing-name)
 
 ```json
 {
@@ -58,7 +61,7 @@ https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee
     "projectName": "TestProject",
     "placementName": "button1",
     "attributes": {
-      "thingName": "button"
+      "thingName": "_REPLACE_THING_NAME_"
     },
     "devices": {
       "myButton": " G030PMXXXXXXXXXX "
@@ -67,7 +70,8 @@ https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee
 }
 ```
 
-AWS Lambda 上でテストをして LINE Nofity からメッセージが届けば成功です。
+AWS Lambda 上でテストをして会場にあるデバイスが動けば成功です。  
+**テスト前にはスタッフにお声がけください**
 
 ## 作業4: AWS IoT 1-Click の設定を行う
 
@@ -82,21 +86,19 @@ AWS Lambda 上でテストをして LINE Nofity からメッセージが届け�
 以下、プロジェクト内での設定です。
 
 * ステップ 1/2
-    * プロジェクト名: `IFTTT` (任意の文字列)
+    * プロジェクト名: `DeviceControl` (任意の文字列)
 * ステップ 2/2
     * デバイステンプレートの定義: 全てのボタンタイプ
-    * デバイステンプレート名: `IFTTT` (任意の文字列 (プロジェクト名と異なってもＯＫ))
+    * デバイステンプレート名: `AWSIoTCore` (任意の文字列)
     * アクション: Lambda 関数の選択
         * AWS リージョン: オレゴン
         * Lambda 関数: `1click-updateAWSIoTCoreShadow` (先ほど作成した Lambda 関数)
     * プレイスメントの属性
-        * `event` = (IFTTT で設定した `Event Name`)
-        * `key` = (IFTTT の Webhooks で入手したキー)
-        * `value1` = (任意の文字列)
-        * `value2` = (任意の文字列)
-        * `value3` = (任意の文字列)
+        * `thingName` = **ハンズオン運営から入手** (awsiot-thing-name)
 
-以下、プレイスメント内での設定です。
+《画像は後ほど用意いたします》
+
+[プレイスメントの作成] をクリックした後、プレイスメント内での設定を以下のようにします。
 
 * デバイスのプレイスメント名: `button1` (任意の文字列)
 * デバイスの選択: 割り当てたいデバイスを選択
@@ -106,21 +108,18 @@ AWS Lambda 上でテストをして LINE Nofity からメッセージが届け�
 
 ### 作業5: ボタンからの動作を確認してみる
 
-SORACOM LTE-M Button を押してメッセージが届くか確認してください。
+SORACOM LTE-M Button を押して会場にあるデバイスが動くか確認してください。  
+**実施前にスタッフにお声がけください**
 
-#### いろいろ試してみる
+ボタンのアクションとデバイスの制御は以下のように対応しています。
 
-* AWS IoT 1-Click のプレイスメントの属性における value1 などを編集してみてください
-* IFTTT のアプレットにおける Message を変更してみたり、 Photo URL を入れてみてください。
-    * 画像サンプル: https://blog.soracom.jp/images/2018-07-04-soracom-lte-m-button/soracom-lte-m-button-powered-by-aws.png
+* SINGLE = デバイス ON
+* DOUBLE or LONG = デバイス OFF
 
 #### あとかたづけ
 
 作業は任意です。
 
-* IFTTT と LINE の接続を切断する
-    * [IFTTT の Services から LINE](https://ifttt.com/line) を選択、Settings で *Disconnect LINE* で切断。
-    * [LINE Notify のマイページ](https://notify-bot.line.me/my/) の連携中サービスで IFTTT との接続を解除
 * AWS 関連
     * Lambda 関数の削除
     * IAM ロール / ポリシーの削除 (作った場合)
