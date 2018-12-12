@@ -1,5 +1,7 @@
 # IFTTT を使って LINE に送信
 
+[目次に戻る](../index#work-b)
+
 IFTTT と呼ばれる中継サービスを経由して LINE にメッセージを送ってみます。
 
 ![button-mkmk / IFTTT+LINE 全体像](https://docs.google.com/drawings/d/e/2PACX-1vQbWIX2XTRLVz7IVVbEoe9VjDC8CyP_7ausIMbQ_1DYC-p0ZQSOIO-8IlLsyfNAPpsYb3GosWPznFRf/pub?w=927&h=510)
