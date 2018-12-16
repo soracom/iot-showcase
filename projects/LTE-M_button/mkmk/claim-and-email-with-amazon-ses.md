@@ -40,9 +40,7 @@ SORACOM LTE-M Button からのボタン押下を待ち受ける状態になり�
 
 ![mkmk-button / 1-6 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vSKoIzpJwqKkSXsDLEGAbdO4a6tKHx5-PKpSVv7KBWgY5_4wcZS3rhLZ_CSUlZ-Eqv6O4GsJFdPjAub/pub?w=499&h=726)
 
-以下のようにデバイス一覧が表示されていれば登録成功です。
-この時点では `無効` と表示されていますが、この後の作業で有効にしていきます。この時点ではこれでＯＫとなります。
-
+以下のようにデバイス一覧が表示されていれば登録成功です。  
 一覧に表示されている意味は以下の通りです
 
 * デバイス ID
@@ -59,6 +57,12 @@ SORACOM LTE-M Button からのボタン押下を待ち受ける状態になり�
     * ボタンの寿命です。詳しくは後述する [ボタンの「ヘルス」について](#life) をご覧ください。
 
 ![mkmk-button / 1-7 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vQXuiKDLSeAUC9TbELS5yzMgC-_Ndl7KRuXcWScAYI_hu4t0xqK85Jn_qpGNSWwlxTdKCRTWqhdMd90/pub?w=929&h=315)
+
+登録したボタンの右にある [...] をクリックした後、[デバイスの有効化] をクリックします。
+
+![mkmk-button / 1-8 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vRZvuTrcEL7gn72cEFK11VO1HZticJRaUUgt0_znxQOX0MORBdVup1GDCdH32Rq1o_vLNqxP-Wm9p3c/pub?w=926&h=298)
+
+これでボタンが利用可能な状態になりました。
 
 ### ボタンを登録解除したい場合
 
@@ -182,6 +186,8 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 
 ## メールが届いたらこの章は終了です
 
+メールが届かない場合は [トラブルシューティング](#t) をご覧ください。
+
 ### まとめ
 
 * AWS マネジメントコンソールを通して AWS IoT 1-Click へのボタンの登録方法
@@ -192,12 +198,11 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 * [メールの内容を変えてみる](customize-lambda-function) へ進む
 * [目次に戻る](index#work-a)
 
-## トラブルシューティング
+<h2 id="t">トラブルシューティング</h2>
 
 ### メールが届かない
 
-* 原因: Amazon SES での認証メール、もしくは SORACOM LTE-M Button を押した時のメールが迷惑メール扱いになっている可能性があります
-* 対策: 以下を確認してください
-    * 送信先メールアドレスが verified になっている (Amazon SES コンソールで確認できます)
-        * これでも届かない場合は Amazon SES 上で *Send a Test Email* をしてみてください
-
+* 原因: メール受信側で「迷惑メール」として判定されている可能があります
+* 対策: お使いのメールソフトの「迷惑メールフォルダ」を確認してみてください
+    * Amazon SES の管理画面上から *Send a Test Email* をしてみて、届くか確認してください。
+    * Amazon SES 上で verified となった事で「送信先」としては認証できましたが、受信側がどのように判定するかは制御できません。特に Gmail ですと高確率で迷惑メールとして判定されるようです。
