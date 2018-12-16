@@ -40,8 +40,11 @@ SORACOM LTE-M Button からのボタン押下を待ち受ける状態になり�
 
 ![mkmk-button / 1-6 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vSKoIzpJwqKkSXsDLEGAbdO4a6tKHx5-PKpSVv7KBWgY5_4wcZS3rhLZ_CSUlZ-Eqv6O4GsJFdPjAub/pub?w=499&h=726)
 
-以下のようにデバイス一覧が表示されていれば登録成功です。  
-一覧に表示されている意味は以下の通りです
+以下のようにデバイス一覧が表示されていれば登録成功です。
+
+![mkmk-button / 1-7 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vQXuiKDLSeAUC9TbELS5yzMgC-_Ndl7KRuXcWScAYI_hu4t0xqK85Jn_qpGNSWwlxTdKCRTWqhdMd90/pub?w=929&h=315)
+
+一覧に表示されている意味は以下の通りです。
 
 * デバイス ID
     * DSN と呼ばれる一意の番号です。 AWS IoT 1-Click 対応デバイスには SORACOM LTE-M Button の他に AWS IoT エンタープライズボタンといったものがありますが、それら全てにおいて一意になる番号です。
@@ -55,8 +58,6 @@ SORACOM LTE-M Button からのボタン押下を待ち受ける状態になり�
     * ボタンに紐づいた機能(Lambda 関数)の状況です。初期状態は双方とも _未割り当て_ です。
 * ヘルス
     * ボタンの寿命です。詳しくは後述する [ボタンの「ヘルス」について](#life) をご覧ください。
-
-![mkmk-button / 1-7 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vQXuiKDLSeAUC9TbELS5yzMgC-_Ndl7KRuXcWScAYI_hu4t0xqK85Jn_qpGNSWwlxTdKCRTWqhdMd90/pub?w=929&h=315)
 
 登録したボタンの右にある [...] をクリックした後、[デバイスの有効化] をクリックします。
 
