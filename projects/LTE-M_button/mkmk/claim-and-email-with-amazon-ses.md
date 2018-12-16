@@ -10,6 +10,14 @@ SORACOM LTE-M Button が使えるように AWS IoT 1-Click に登録した後、
 
 * SORACOM LTE-M Button を手元に用意してください
 
+## AWS IoT 1-Click 「テンプレート」「プレイスメント」
+
+AWS IoT 1-Click ではボタンと Lambda 関数を結びつける概念として「プレイスメント」と「テンプレート」そして「プロジェクト」が存在します。これらを全て作成したうえで、それぞれボタンと Lambda 関数に結び付けていきます。
+
+![mkmk-button / overview-aws-iot-1-click-structure](https://docs.google.com/drawings/d/e/2PACX-1vRNsm3bCso3sEDoLqx0F7ReWgvOUvpyxAxbIkRDHHhhhTCkIbc8xuLW2zwsfSFIkHntgxUSaXCoHC0B/pub?w=927&h=520)
+
+以降の作業は全てこの構成を作っていく事になります。
+
 <h2 id="claim">作業1: AWS IoT 1-Click へ SORACOM LTE-M Button を登録する</h2>
 
 [AWS マネジメントコンソール](https://console.aws.amazon.com/console/home) を開きログインしたあと、リージョンを "オレゴン" に変更し、 AWS IoT 1-Click のコンソールを開きます。
