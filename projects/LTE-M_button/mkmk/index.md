@@ -70,7 +70,7 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 <h2 id="closing">作業: あとかたづけ</h2>
 
 * (貸し出しの方のみ) [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim)
-* (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録して便利に使う](closing/add-to-soracom)
+* (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録して便利に使う](https://dev.soracom.io/jp/start/aws_button_registration/)
 * (参考資料) [SORACOM LTE-M Button を無効化する](closing/disable)
 * (参考資料) [AWS IoT 1-Click で自動生成された Lambda 関数や IAM ロール/ポリシー](closing/generated)
 
@@ -114,7 +114,11 @@ SORACOM ユーザーコンソールへの登録は無料です。
 * [(ブログ) SORACOM LTE-M Button powered by AWS でできる事や環境の準備まとめ](https://blog.soracom.jp/blog/2018/10/25/are-you-ready-for-lte-m-button/)
 * [(スライド) SORACOM LTE-M Button の始め方 / SORACOM Technology Camp 2018 ベーシックトラック4](https://www.slideshare.net/SORACOM/soracom-technology-camp-2018-4-soracom-ltem-button)
 
+<!--
+
 <h2 id="appendix">おまけコンテンツ</h2>
 
 * [AWS IoT Core の Device Shadow を使ったデバイス制御](appendix/awsiotcore-device-shadow)
     * [AWS IoT Core を使って会場にあるデバイスを制御](b-work/device-control-with-awsiotcore-shadow) で使用したデバイス側の開発について解説しています
+
+-->
