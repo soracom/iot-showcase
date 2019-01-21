@@ -70,7 +70,7 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 <h2 id="closing">作業: あとかたづけ</h2>
 
 * (貸し出しの方のみ) [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim)
-* (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録して便利に使う](closing/add-to-soracom)
+* (持ち込みの方のみ) [SORACOM LTE-M Button を SORACOM へ登録して便利に使う](https://dev.soracom.io/jp/start/aws_button_registration/)
 * (参考資料) [SORACOM LTE-M Button を無効化する](closing/disable)
 * (参考資料) [AWS IoT 1-Click で自動生成された Lambda 関数や IAM ロール/ポリシー](closing/generated)
 
