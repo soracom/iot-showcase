@@ -114,7 +114,11 @@ SORACOM ユーザーコンソールへの登録は無料です。
 * [(ブログ) SORACOM LTE-M Button powered by AWS でできる事や環境の準備まとめ](https://blog.soracom.jp/blog/2018/10/25/are-you-ready-for-lte-m-button/)
 * [(スライド) SORACOM LTE-M Button の始め方 / SORACOM Technology Camp 2018 ベーシックトラック4](https://www.slideshare.net/SORACOM/soracom-technology-camp-2018-4-soracom-ltem-button)
 
+<!--
+
 <h2 id="appendix">おまけコンテンツ</h2>
 
 * [AWS IoT Core の Device Shadow を使ったデバイス制御](appendix/awsiotcore-device-shadow)
     * [AWS IoT Core を使って会場にあるデバイスを制御](b-work/device-control-with-awsiotcore-shadow) で使用したデバイス側の開発について解説しています
+
+-->
