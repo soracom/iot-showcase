@@ -43,7 +43,7 @@ Complete trigger fields では、以下のように入力してから [Create Tr
 * Event Name: `button` (任意の文字列)
     * 後ほど使用しますのでメモをしておいてください
 
-《画像は後ほど用意いたします》
+![button-mkmk / ifttt / Receive a web request](https://docs.google.com/drawings/d/e/2PACX-1vSr93bOgMd9m-wd_znCau55m5Wwq4R-lXt0d2qmM_kaloVis6TeJWS_M0fxsOo4aB44bXwTv3fN7Moc/pub?w=561&h=575)
 
 **that** をクリックします。
 
@@ -64,14 +64,14 @@ Complete action fields では、以下のように入力してから [Create act
     * 編集すればメッセージが変わります。Value1 ~ Value3 は AWS IoT 1-Click のプレイスメントで設定した値を入れることができます
 * Photo URL: 空のままでＯＫです
 
-《画像は後ほど用意いたします》
+![button-mkmk / ifttt / LINE](https://docs.google.com/drawings/d/e/2PACX-1vRmXPfVwP-IIivA1rMdgzq9cvQvuu-0ADMowxrjM3cPfDQ7FHDL_iUWK5RvDPvQD52tQKM_ZyBAhP45/pub?w=470&h=690)
 
 Review and finish では以下のように入力してから [Finish] をクリックしてください。
 
 * Receive notifications when this Applet runs: オフにします
     * 今回作成したアプレットの実行毎に IFTTT でも通知が発生するのを抑制します
 
-《画像は後ほど用意いたします》
+![button-mkmk / ifttt / finish](https://docs.google.com/drawings/d/e/2PACX-1vRvIz9ojhP-emB9r38mRbDa5i_xyiNopwplsRw1ipNOk-t57bPWzCjUF2nOFLT6VJktTExiCTLKApAo/pub?w=441&h=685)
 
 ### WebHook のキーを入手する
 
@@ -80,6 +80,8 @@ Review and finish では以下のように入力してから [Finish] をクリ�
 一覧の中から **Webhooks** をクリックします。 (`webhooks` で検索すると見つけやすいです)
 
 **Documetation** をクリックすると **Your key is** に Webhooks の キーが表示されるのでメモをしておいてください。
+
+![button-mkmk / ifttt / webhook key](https://docs.google.com/drawings/d/e/2PACX-1vT9tXORFG8l287iAG479DCs4kSml1yp_woRoIU2l12NYfh7KgehpXjJoLE4TXAafUZ1OSIF0-W1hd9s/pub?w=960&h=720)
 
 以上で IFTTT の設定は終了です。  
 作成したアプレットは IFTTT の **My Applets** で管理・編集できます。
@@ -105,17 +107,17 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 
 関数コードでは、以下のようにします。
 
-* ハンドラ: `index.handle` (デフォルトで `index.handler` と入力されていますのでご注意)
+* ハンドラ: `index.handle` (デフォルトで `index.handler` と入っています。**必ず直すようにしてください**)
 
 コードを以下の URL のコードと入れ替えて [保存] をクリックします。  
 [https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js](https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js)
 
-《画像は後ほど用意いたします》
+![button-mkmk / AWS Lambda コード (ifttt)](https://docs.google.com/drawings/d/e/2PACX-1vSgN3tcrsHi-BcDvkNE0-Ew-o-9S9NK7RqeaMAOHMkakyeWr8brr9S8Gx-bwNGKHe7uTjhMqEYCdN9M/pub?w=841&h=670)
 
 メールの時同様に、テストを作成します。  
 テストイベントは以下の JSON を使います。その際、以下の値を変更してください。
 
-* event: IFTTT で設定した `Event Name`
+* event: IFTTT で設定した `Event Name` (テキスト通りの場合は `button` になります)
 * key: IFTTT の Webhooks で入手したキー
 
 ```json
@@ -137,7 +139,7 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
     "placementName": "button1",
     "attributes": {
       "event": "button",
-      "key": "YOUR_WEBHOOK_KEY",
+      "key": "`IFTTT` の Webhook key を入れる",
       "value1": "値1",
       "value2": "値2",
       "value3": "値3"
@@ -178,6 +180,7 @@ AWS Lambda 上でテストをして LINE Nofity からメッセージが届け�
         * `value2` = `昼` (任意の文字列)
         * `value3` = `晩` (任意の文字列)
 
+![button-mkmk / AWS IoT 1-Click (ifttt)](https://docs.google.com/drawings/d/e/2PACX-1vTKtPdLxGG-_Ek5JdJcrgL63-IfNLEm7wj9xb61Ch5CrS93ZoG7egd4oWZld6A5x0oBP794YZ7QHsm0/pub?w=534&h=720)
 《画像は後ほど用意いたします》
 
 [プレイスメントの作成] をクリックした後、プレイスメント内での設定を以下のようにします。
