@@ -12,7 +12,7 @@ SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押した�
 * SMS を受けることができる携帯電話
 
 ## 参加費用
-無料（ただしAWSの利用料金は発生します）
+無料（ただしAWSの利用料金、数円は発生します）
 
 ## 目次
 1. [AWS アカウントの作成](#content1)
