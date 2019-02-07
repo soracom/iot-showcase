@@ -91,6 +91,7 @@ LTE-M Button からのボタン押下を待ち受ける状態になります。�
 
 <h3 id="content3">3. SMSを送ってみよう！</h3>
 左のメニューから「管理」->「プロジェクト」をクリックして、「プロジェクトの作成」をクリックします。
+
 ![aws-iot-1click3](https://docs.google.com/drawings/d/e/2PACX-1vTLb69Qn6f_8IAaD_4clObCuXcls8tGz9uCMvNJZoysrNEonsLN5tdFljQwZkmjFaMyI00DqoCXjFGo/pub?w=933&amp;h=437)
 
 プロジェクト名を入力します。
@@ -126,7 +127,7 @@ SMSが送信されない場合、これまでの設定をご確認ください�
 
 [管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。
 
-![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
+![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vQ5QgL25ObwbFDcqpdM7eJd9a2UEItxLOxXzrDKB2AkOtKF1Z-9DbdSmhpg5ve29jc5647a-a_IPeG6/pub?w=601&h=591)
 
 [プレイスメント] から解除したいデバイスの [...] をクリックした後に表示される [プレイスメントの編集] をクリックします。
 
