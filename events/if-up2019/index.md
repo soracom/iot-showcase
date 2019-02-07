@@ -2,6 +2,8 @@
 
 ## ハンズオンの内容
 SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押したらSMSが飛ぶように設定しよう！
+### ハンズオンの構成
+![overview](https://docs.google.com/drawings/d/e/2PACX-1vR1eFaqcp4VeFmDOOl3DXbue9XbuUKU4WwX4QbijfCwJvxKDEvXW96dFk9fzhCxlt7egnBUjFxg_mnV/pub?w=882&amp;h=268)
 
 ## 本日の貸し出し機材
 * SORACOM LTE-M Button powered by AWS
