@@ -42,7 +42,7 @@ AWS IoT 1-Click ではボタンと Lambda 関数を結びつける概念とし�
 
 AWS IoT 1-Click へ LTE-M Button を登録する
 
-AWS マネジメントコンソールを開きログインしたあと、リージョンをオレゴンに変更し、 AWS IoT 1-Click のコンソールを開きます。
+[AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインしたあと、リージョンをオレゴンに変更し、 AWS IoT 1-Click のコンソールを開きます。
 
 ![mkmk-button / 1-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSzawNDQ3RDZ0RiN6lu1nv5Y57aUOlSuYoK47BZIs72nt6bHnlbhHf6QAn4bxmJQnZHmQES6gAAn-j5/pub?w=927&h=284)
 
