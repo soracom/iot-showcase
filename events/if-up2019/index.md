@@ -1,4 +1,4 @@
-# if-up 2019
+# if-up 2019 ハンズオン
 
 ## ハンズオンの内容
 SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押したらメールが送られるように設定しよう！
@@ -11,7 +11,9 @@ SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押した�
 ## お客様の持ち物
 * Wifi に繋がるPC
 * クレジットカード（AWSアカウント作成に必要になります）
+* 会場で着信可能な電話/携帯電話(AWS アカウント作成時に電話音声による認証が必要となります/「非通知」からの電話に対する着信拒否設定の解除が必要となります)
 * 受信可能なメールアドレス
+
 
 ## 参加費用
 無料（ただしAWSの利用料金、数円は発生します）
@@ -196,7 +198,7 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 
 
 <h3 id="content4">4. プレイスメントからデバイスの割り当てを外し、SORACOM LTE-M Button を AWS IoT 1-Click から解除</h3>
-
+AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。
 [管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。
 
 ![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
