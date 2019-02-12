@@ -1,9 +1,9 @@
 # if-up 2019
 
 ## ハンズオンの内容
-SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押したらSMSが飛ぶように設定しよう！
+SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押したらメールが送られるように設定しよう！
 ### ハンズオンの構成
-![overview](https://docs.google.com/drawings/d/e/2PACX-1vR1eFaqcp4VeFmDOOl3DXbue9XbuUKU4WwX4QbijfCwJvxKDEvXW96dFk9fzhCxlt7egnBUjFxg_mnV/pub?w=882&amp;h=268)
+![button-mkmk / Email 全体像](https://docs.google.com/drawings/d/e/2PACX-1vQcTupxolXoBHeRzGr_UBp3TIZbV1nniNrINjKl16fwh4Kddle8zG9I5kaJp0SwuZCfjUAxAiKHNTV8/pub?w=721&h=406)
 
 ## 本日の貸し出し機材
 * SORACOM LTE-M Button powered by AWS
@@ -11,7 +11,7 @@ SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押した�
 ## お客様の持ち物
 * Wifi に繋がるPC
 * クレジットカード（AWSアカウント作成に必要になります）
-* SMS を受けることができる携帯電話
+* 受信可能なメールアドレス
 
 ## 参加費用
 無料（ただしAWSの利用料金、数円は発生します）
@@ -19,8 +19,8 @@ SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押した�
 ## 目次
 1. [AWS アカウントの作成](#content1)
 2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録しよう](#content2)
-3. [SMSを送ってみよう！](#content3)
-4. [プレイスメントからデバイスの割り当てを外そう](#content4)
+3. [メールを送ってみよう](#content3)
+4. [プレイスメントからデバイスの割り当てを外し、SORACOM LTE-M Button を AWS IoT 1-Click から解除](#content4)
 
 <h3 id="content1">1. AWS アカウントの作成</h3>
 <a href="https://aws.amazon.com/jp/register-flow/" target="_blank">AWS アカウント作成の流れ (AWS のページに飛びます)</a> から進み、作成してください。
@@ -91,45 +91,115 @@ LTE-M Button からのボタン押下を待ち受ける状態になります。�
 
 これでボタンが利用可能な状態になりました。
 
-<h3 id="content3">3. SMSを送ってみよう！</h3>
-左のメニューから「管理」->「プロジェクト」をクリックして、「プロジェクトの作成」をクリックします。
+<h3 id="content3">3. メールを送ってみよう！</h3>
 
-![aws-iot-1click3](https://docs.google.com/drawings/d/e/2PACX-1vTLb69Qn6f_8IAaD_4clObCuXcls8tGz9uCMvNJZoysrNEonsLN5tdFljQwZkmjFaMyI00DqoCXjFGo/pub?w=933&amp;h=437)
+**AWS IoT 1-Click で Email 送信設定を行う**
 
-プロジェクト名を入力します。
-![aws-iot-1click4](https://docs.google.com/drawings/d/e/2PACX-1vSUawRU2ywznZ5Ukc35TQkA6YLeWEJZ3wKKvfDkdh1VIsVmA8dXKGGsKCxxlGl96kQFn2o-ns2MfIoG/pub?w=932&amp;h=567)
+AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開いた後 [プロジェクトの作成] をクリックします。
 
-次にデバイステンプレートを作成します。 デバイステンプレート名を入力し、ここではアクションに「SMSを送信する」を選択します。
-![aws-iot-1click5](https://docs.google.com/drawings/d/e/2PACX-1vQSLxymO2zZhUzAPpt9bFCMTS1qfsr4ATeJ-qtyhNjBSzqs0fjafEY8eJxeDtmLzKUOSytg8JtfdqLT/pub?w=929&amp;h=511)
+![mkmk-button / 2-2 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vSQtO8MYnq7k9drY2LWfYrhuWNmjZ16USKNslZr0L6mGvOET8KPYkePkvI3Sq8s3-HCelF3tfeFB5Vz/pub?w=897&h=473)
 
-続いて、プレイスメントの属性に電話番号とSMSメッセージを入力します。 (SMSが受信できる電話番号を入力してください。電話番号は国番号から入力してください。)
-![aws-iot-1click7](https://docs.google.com/drawings/d/e/2PACX-1vS1Fy_7YSCb9HqnRaLYHzvdh0joAZfDrif-BV_xVz-Esyf3-jpAnzS1T_SwE-1sfxLe8ZnUvPqQzcva/pub?w=935&amp;h=426)
+プロジェクト情報の指定で以下のように入力した後 [次へ] をクリックします。
+
+* プロジェクト名: `TestEmail` (任意の文字列)
+
+![mkmk-button / 2-3 project](https://docs.google.com/drawings/d/e/2PACX-1vSOzmOCZiQg7eXh1pBAy_51zVEpmI9Qg8ApzlMeF1LIWcxOOvpG3_wZNRrNeiKVh4eS0zxE_Nhclbps/pub?w=765&h=451)
+
+プロジェクトのプレイスメントのテンプレートの定義では以下のように設定した後 [プロジェクトの作成] をクリックします。
+
+1. **デバイステンプレートの定義** の [開始] をクリックします
+![device-template1](https://docs.google.com/drawings/d/e/2PACX-1vSiNKEFeTGGTCiEj0SghjYbSd_h_RI41cLzHiwoEUrv9QYAbp2D4DcrH6AwzFTr1FGsABZn7U_XsVSz/pub?w=932&amp;h=323)
+
+2. **テンプレートのデバイスタイプを選択する** 一覧で _すべてのボタンタイプ_ をクリックします
+![device-template2](https://docs.google.com/drawings/d/e/2PACX-1vSISeAl3NGe_o-wT3M115UGi595L9rcvxtrmrwMsYlvXpRXcbQxc9xuMlwUGca_GpbSlgj4Czn2T840/pub?w=926&amp;h=615)
+
+3. 表示されたフォームを下記のように設定します
+    * デバイステンプレート名: `Email` (任意の文字列)
+    * アクション: _E メールの送信_
+4. **プレイスメントの属性** を以下のように設定します
+    * 必須の E メールのデフォルト値: {ボタンで送信したい先の E メールアドレス}
+    * 必須の件名のデフォルト値: `テスト送信` (任意の文字列)
+    * 必須の本文のデフォルト値: `SORACOM LTE-M Button のテスト送信` (任意の文字列)
+
+![mkmk-button / 2-4 placement](https://docs.google.com/drawings/d/e/2PACX-1vSBzdRl0kI1SI42nj_NnEIBvMOw5snK82NfOq009BKfXjEVTxcdlc6AW79DwdmYd8udtoqahtTGF4vT/pub?w=598&h=842)
+
+プロジェクトとテンプレートが正常に作成されたら [プレイスメントの作成] をクリックします。
+
+![mkmk-button / 2-5 placement](https://docs.google.com/drawings/d/e/2PACX-1vQ2UY0jIXKzzKf5hSu9a5RVxgsgARi3vGzN_BEfX5o_6E_US3Ky8WeSHOY72x2-ELlJbv7srJnKUq-L/pub?w=765&h=446)
+
+プロジェクトの新しいプレイスメントでは以下のように設定した後 [プレイスメントの作成] をクリックします。
+
+* デバイスのプレイスメント名: `button1` (任意の文字列)
+* [デバイスの選択] をクリック
+    * ボタンの一覧が表示されます。結び付けたいボタンをクリックします。
+* プレイスメントの属性は特に編集することはありません
+    * 先に作成した「テンプレート」で設定した内容が引き継がれています
+    * 逆にここでテンプレートから引き継がれた内容を上書きすることも可能です
 
 
-「プロジェクトの作成」をクリックします。
-次にプレイスメントを作成します。 「プレイスメントの作成」をクリックします。
-![aws-iot-1click7](https://docs.google.com/drawings/d/e/2PACX-1vS4xj56dkNmVD9uE5O9zHva6VCjIT9ZZW5ApdnHp0muL2ZMqVHeyDbOkLG0u-A14Eb8pD7gJarOwgWq/pub?w=936&amp;h=572)
+![mkmk-button / 2-6 placement](https://docs.google.com/drawings/d/e/2PACX-1vQGcMIdUNmqnbc1iY9q75kSZRUmj6NT7GScR-5Ld1Ta9KH0xH8IRNnjTwEegvOQsRqij_p3lhiSmOCE/pub?w=649&h=793)
+
+以下のような画面になれば完了です。  
+バックボタン (←) をクリックして AWS IoT 1-Click コンソールに戻ります。
+
+![mkmk-button / 2-7 placement](https://docs.google.com/drawings/d/e/2PACX-1vR33NlAAkYpwifDiTx1wAMyy6NnGNeBYABdJS3AvlI0V4U3vKhJafNsXgSrrahs1P-FyTUkHTZxEXzL/pub?w=927&h=349)
+
+**Amazon SES で送信先 Email の認証を行う**
+
+Amazon SES (Simple Email Service) のコンソールを開きます。
+
+[サービス] をクリックした後、検索窓に `ses` と入れるか、 "カスタマーエンゲージメント" カテゴリの中の Simple Email Service をクリックしてください。
+
+![mkmk-button / 3-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vRlCqRPj4jRjUwRkiB9FqvGEyGZP8BpRZuDBMjFqLKCI2_NbP_kowp3fOgcghVN1LAL2nI6l6c5l1hK/pub?w=678&h=232)
+
+AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。  
+なっていなければ **オレゴン** に切り替えてください。
+
+![mkmk-button / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSgprF60wQZHq5nvPUcueml_-wNwuVn3EWx9FqRV73-7mxS0bapShs6fPVD2LMV-Lrr6GLlb-aEhjIr/pub?w=928&h=189)
+
+[Email Addresses] をクリックした後、[Verify a New Email Address] をクリックします。
+
+![mkmk-button / 3-2 ses](https://docs.google.com/drawings/d/e/2PACX-1vShW6Y3eJLbvu3UzCfFC7e90OFrsck7D4W10T7l2B02RiY3NMlJKKkkYywd46eOqoW8PwrWPQ9dEdYK/pub?w=552&h=331)
+
+フォームに以下のように入力して [Verify This Email Address] をクリックします。  
+その後表示されたダイアログは [Close] をクリックします。
+
+* Email Address: {ボタンで送信したい先の E メールアドレス}
+
+![mkmk-button / 3-3 ses](https://docs.google.com/drawings/d/e/2PACX-1vSrCb0jqeMBwmFsQ6xau8kXkEJlC2WNnbtbi8gBxokO6hPu-wgtDib3kax75EykDnn1Nsb4sAAe1_4o/pub?w=662&h=259)
+
+直後の状態は以下の通りです。pending verification と表示されている事を確認してください。
+
+![mkmk-button / 3-4 ses sent](https://docs.google.com/drawings/d/e/2PACX-1vQ6LLE8QfqqsmHzW7VjUXxhH6zOGzpoxrt7Vj7mAG7gx9OfUf6mXsisZeEitoL6q0zZ038XduxGr4KV/pub?w=928&h=156)
+
+メールソフトを開き、下記のようなメールが届いている事を確認したら、メール本文内の URL をクリックしてください。 (クリックした後は削除してしまって構いません)  
+クリックすると「検証に成功しました」というページが表示されます。
+
+![mkmk-button / 3-5 email](https://docs.google.com/drawings/d/e/2PACX-1vRhBENOTyD9iW8fJo5ly_S71nMJC4FqxZvRB6NycGwliB8fFN0Zr8i0SdPgQwy5eOC03pk_2J3G88CT/pub?w=258&h=438)
+
+Amazon SES コンソールに戻り [リロードボタン] で表示を更新した後に verified と表示されている事を確認してください。  
+そうでない場合は *resend* をしてメールを再送するか、もしくは別のメールアドレスで再度同じ手順を行ってください。  
+(もしメールアドレスを変更する場合は、ステップ３が終わったら再度 AWS IoT 1-Click コンソールからテンプレートに設定したメールアドレスを変更する必要があります。)
+
+![mkmk-button / 3-6 ses verified](https://docs.google.com/drawings/d/e/2PACX-1vTgN6ur9EWU6-lQ913PWOKHUBi2I7cTYTr9c_ucQsqbj33QiHZoRG5eARmUZwzm8Nd15NRKYyObPiCo/pub?w=928&h=170)
+
+**SORACOM LTE-M Button からメールを送信してみる**
+
+ここまでの作業で AWS IoT 1-Click を通じて Amazon SES 経由でメールが送信されるようになりました。
+
+実際に SORACOM LTE-M Button を押してみてください。  
+以下のようなメールが届いたら成功です。
+
+![mkmk-button / 4-1 mail](https://docs.google.com/drawings/d/e/2PACX-1vSXsDZ8opJBE0Vllxt-cbbPEbj00UWvCJhv5eYiGX0csnP0yY860DgKKbY85PS2tChueI70mCPvpG2c/pub?w=316&h=204)
+
+ボタン押下の内容に応じて `SINGLE` の部分が `DOUBLE` や `LONG` に変わりますので試してみてください。
 
 
-デバイスのプレイスメント名を入力し、さきほど登録した SORACOM LTE-M Buttonを選択します。
-![aws-iot-1click8](https://docs.google.com/drawings/d/e/2PACX-1vRQVthnV6fjzyEbkQ_dbhiD4cYeqMB0YFBDsI4gPg1E1lgbOoaZBwX7fSfDsv0i7YdvnwRgZjrhbC_X/pub?w=841&amp;h=692)
-
-「プレイスメントの作成」をクリックします。
-Buttonをクリックして、SMSが送信されることを確認してください。
-
-![aws-iot-1clic11](https://docs.google.com/drawings/d/e/2PACX-1vQmP2TdPjM8wGSLbtQwAYzZrU29sctmPOlFB3rRUs8K-cGTm7MjVNZRbdMXU4bRvrck3wpHy9Igacwn/pub?w=323&amp;h=570)
-
-SMSが送信されない場合、これまでの設定をご確認ください。 また、AWS IoT 1-Click のダッシュボードから呼び出し回数を確認できますので、こちらも合わせてご確認ください。
-
-![aws-iot-1click12](https://docs.google.com/drawings/d/e/2PACX-1vQCVDnHA_m2gQuOwDHD_KQ1jKBetmxn7g2KxU5mnF27XBLRv21_ZhcrJhOCpBVQZUcoTkGnDiGF7UxS/pub?w=864&amp;h=688)
-
-
-<h3 id="content4">4. プレイスメントからデバイスの割り当てを外そう</h3>
-
+<h3 id="content4">4. プレイスメントからデバイスの割り当てを外し、SORACOM LTE-M Button を AWS IoT 1-Click から解除</h3>
 
 [管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。
 
-![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vQ5QgL25ObwbFDcqpdM7eJd9a2UEItxLOxXzrDKB2AkOtKF1Z-9DbdSmhpg5ve29jc5647a-a_IPeG6/pub?w=601&h=591)
+![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
 
 [プレイスメント] から解除したいデバイスの [...] をクリックした後に表示される [プレイスメントの編集] をクリックします。
 
@@ -140,6 +210,15 @@ SMSが送信されない場合、これまでの設定をご確認ください�
 ![3 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vSAticSljF3nnjF3xLZrwUNKVY7PHmwzPjSfFJqmcJJ8-n6S1LMqUtdm_IVDrZdkfQThKlSLa-pbMls/pub?w=928&h=407)
 
 これでデバイスとプレイスメントの割り当てが無くなりました。
+
+[管理] > [デバイス] とクリックした後、解除を行いたいデバイスの [...] をクリックした後に表示される [デバイスの登録解除] をクリックします。  
+最後に確認ダイアログの [登録解除] で解除が完了します。
+
+※プレイスメントに割り当てられているデバイスは解除できませんので、プレイスメントから外してから行ってください。
+
+![mkmk-button / 1 unclaim](https://docs.google.com/drawings/d/e/2PACX-1vTCsBV32iOWgBn8QZJbmiRQIIv1k4JxFmtw3STpYFl_I-iGZn-ejHO_7gSg1Nvv-IxkdtnpbOMHHUB8/pub?w=928&h=269)
+
+一覧から対象デバイスが無くなれば解除完了です。
 
 こちらでハンズオンは終了です。お疲れ様でした。
 
