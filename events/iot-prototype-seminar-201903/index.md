@@ -20,12 +20,12 @@
 6. 同ページの [Incoming Webhook インテグレーションの追加] をクリック
 7. Webhook URL をメモ (後ほど利用します)
 
-#### 2-2. Slack へ投稿する Lambda 関数 (post_to_slack) の作成
+#### 2-2. Slack へ投稿する Lambda 関数の作成
 
-##### コード
+##### コード (post_to_slack)
 
 ```python
-# Name: post_to_slack
+# Runtime: Python 3.7, Name: post_to_slack
 import json
 import os
 import logging
@@ -35,16 +35,16 @@ import urllib.request, urllib.parse
 
 INCOMING_WEBHOOK = os.environ['INCOMING_WEBHOOK']
 THING_MAP = {
-    'LONG':   {'thingName': 'yaman'},
-    'SINGLE': {'thingName': 'max'},
-    'DOUBLE': {'thingName': 'moto'},
+    'SINGLE': {'memberName': 'max'},
+    'DOUBLE': {'memberName': 'moto'},
+    'LONG':   {'memberName': 'yaman'}
 }
 
 def lambda_handler(event, context):
     logger.info('Received event: ' + json.dumps(event)) # Output to Cloudwatch Log
-    t = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['thingName']
+    memberName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['memberName']
 
-    body = {'text': '<!here> {} が呼ばれたよ！'.format(t)}
+    body = {'text': '<!here> {} が呼ばれたよ！'.format(memberName)}
     headers = {'Content-Type': 'application/json'}
     req = urllib.request.Request(INCOMING_WEBHOOK,
                                   data=json.dumps(body).encode('utf-8'),
@@ -52,14 +52,14 @@ def lambda_handler(event, context):
     with urllib.request.urlopen(req) as res:
         logger.info(res.read().decode("utf-8"))
 
-    return {"statusCode": 200}
+    return {"statusCode": 204}
 ```
 
-##### INCOMING_WEBHOOK 環境変数の設定
+##### INCOMING_WEBHOOK 環境変数の設定 (post_to_slack)
 
-`post_to_slack` の環境変数 `INCOMING_WEBHOOK` に Slack から得た Incoming Webhook の URL を記載
+環境変数 `INCOMING_WEBHOOK` に Slack の Incoming Webhook の URL を記載
 
-##### post_to_slack 用のテストデータ
+##### テスト (post_to_slack)
 
 ```json
 {
@@ -96,15 +96,397 @@ def lambda_handler(event, context):
 
 ### Day 2
 
-#### AWS IoT Core / モノを作成
+#### 1. AWS IoT Core で "モノ" の作成と、エンドポイント URL を入手
 
-`max` , `yaman` , `moto` という "モノ" を作成
+`soracom_max` , `soracom_moto` , `soracom_yaman` という "モノ" を作成
 
-※この名称は AWS IoT Core 上の "モノ" と、後述する Lambda 関数とで全て一致させてください
+* この "モノ" の名称は 、後述する Lambda 関数とで全て一致させてください
 
-#### Slack へ投稿しつつ、シャドウを更新する Lambda 関数の作成 (post_to_slack_and_update_shadow)
-#### API Gateway をトリガーにシャドウを更新する Lambda 関数の作成 (update_shadow_from_api_gateway)
-#### Amazon API Gateway の設定
-#### Slack / Outgoing Webhook の設定
-#### 一定時間でシャドウを更新する Lambda 関数の作成
-#### Web への表示
+##### シャドウの初期設定
+
+```json
+{
+  "reported": {
+    "status":"idle",
+    "welcome":null
+  },
+  "desired":{
+    "status":null,
+    "welcome":null
+  }
+}
+```
+
+* AWS IoT Core の "設定" からカスタムエンドポイントをメモ (後ほど利用)
+
+#### 2-1. Amazon Cognito, AWS IAM の設定
+
+Amazon Cognito;
+
+* ID プールの作成
+  * *認証されていない ID に対してアクセスを有効にする* を有効に
+  * 新規にロールを作成
+  * `ID プールの ID` をメモ (後ほど利用)
+
+AWS IAM;
+
+* `Cognito_**UnAuth_Role` へポリシーを割り当て
+  * テスト環境下においては `AWSIoTDataAccess` を割り当て
+  * 本番においては Appendix を参照のこと
+
+#### 2-2. Web ページの準備
+
+* [call_monitor.html](https://gist.github.com/ma2shita/4a43d39a8d61f6be8f1163050498e498) で以下を編集
+  * `YOUR_AMAZON_COGNITO_POOL_ID` を Amazon Cognito で得た `ID プール ID` にする
+  * `YOUR_AWS_IOTCORE_CUSTOM_ENDPOINT` を AWS IoT Core で得た `カスタムエンドポイント` にする
+
+以上が終了したら Amazon S3 へアップロード、公開設定とする
+
+**この時点で Web をロードすると "呼び出しOK!" と表示されているはずです。**
+
+#### 3. Slack へ投稿しつつ、シャドウを更新する Lambda 関数の作成
+
+##### コード (post_to_slack_and_update_shadow)
+
+```python
+# Runtime: Python 3.7, Name: post_to_slack_and_update_shadow
+import json
+import os
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+import urllib.request, urllib.parse
+import boto3
+iot = boto3.client('iot-data')
+
+INCOMING_WEBHOOK = os.environ['INCOMING_WEBHOOK']
+THING_MAP = {
+    'SINGLE': {'memberName': 'max', 'thingName': 'soracom‗max'},
+    'DOUBLE': {'memberName': 'moto', 'thingName': 'soracom_moto'},
+    'LONG':   {'memberName': 'yaman', 'thingName': 'soracom_yaman'}
+}
+
+def lambda_handler(event, context):
+    logger.info('Received event: ' + json.dumps(event)) # Output to Cloudwatch Log
+    memberName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['memberName']
+
+    body = {'text': '<!here> {} が呼ばれたよ！現場に行けそうなら `ok ~~` と返すとステータスが更新されるよ。気付いてなさそうならフォローを！'.format(memberName)}
+    headers = {'Content-Type': 'application/json'}
+    req = urllib.request.Request(INCOMING_WEBHOOK,
+                                  data=json.dumps(body).encode('utf-8'),
+                                  method='POST', headers=headers)
+    with urllib.request.urlopen(req) as res:
+        logger.info(res.read().decode("utf-8"))
+    
+    thingName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['thingName']
+    shadowDoc = {'state':{'reported':{'status':'calling'}}}
+    iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
+
+    return {"statusCode": 204}
+```
+
+##### INCOMING_WEBHOOK 環境変数の設定やテスト (post_to_slack_and_update_shadow)
+
+`post_to_slack` 同様に設定
+
+#### 4. 一定時間でシャドウを更新する Lambda 関数の作成
+
+##### コード (transition_maker)
+
+```python
+# Runtime: Python 3.7, Name: transition_maker
+import json
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+import time
+import boto3
+iot = boto3.client('iot-data')
+
+def lambda_handler(event, context):
+    logger.info('Received event: ' + json.dumps(event))    
+    time.sleep(event['transition_wating_sec'])
+    
+    shadowDoc = {'state':{'reported':{'status': event['transition_to']}}}
+    iot.update_thing_shadow(thingName=event['thing_name'], payload=json.dumps(shadowDoc))
+    
+    return {"statusCode": 204}
+```
+
+* 基本設定の **タイムアウト** を `transition_wating_sec` よりも長く設定すること (1 分など)
+
+##### テスト (transition_maker)
+
+```json
+{
+  "transition_wating_sec": 5,
+  "thing_name": "soracom_max",
+  "transition_to": "idle"
+}
+```
+
+##### コード (post_to_slack_and_update_shadow_with_transition_to_idle)
+
+```python
+# Runtime: Python 3.7, Name: post_to_slack_and_update_shadow_with_transition_to_idle
+import json
+import os
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+import urllib.request, urllib.parse
+import boto3
+iot = boto3.client('iot-data')
+f = boto3.client('lambda')
+
+INCOMING_WEBHOOK = os.environ['INCOMING_WEBHOOK']
+THING_MAP = {
+    'SINGLE': {'memberName': 'max', 'thingName': 'soracom_max'},
+    'DOUBLE': {'memberName': 'moto', 'thingName': 'soracom_moto'},
+    'LONG':   {'memberName': 'yaman', 'thingName': 'soracom_yaman'}
+}
+
+def lambda_handler(event, context):
+    logger.info('Received event: ' + json.dumps(event)) # Output to Cloudwatch Log
+    memberName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['memberName']
+
+    body = {'text': '<!here> {} が呼ばれたよ！現場に行けそうなら `ok ~~` と返すとステータスが更新されるよ。気付いてなさそうならフォローを！'.format(memberName)}
+    headers = {'Content-Type': 'application/json'}
+    req = urllib.request.Request(INCOMING_WEBHOOK,
+                                  data=json.dumps(body).encode('utf-8'),
+                                  method='POST', headers=headers)
+    with urllib.request.urlopen(req) as res:
+        logger.info(res.read().decode("utf-8"))
+    
+    thingName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['thingName']
+    shadowDoc = {'state':{'reported':{'status':'calling'}}}
+    iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
+    
+    f.invoke(
+        FunctionName='transition_maker',
+        InvocationType='Event',
+        Payload=json.dumps({
+            'thing_name': thingName,
+            'transition_wating_sec': 10,
+            'transition_to': 'idle'
+        })
+    )
+    
+    return {"statusCode": 204}
+```
+
+##### INCOMING_WEBHOOK 環境変数の設定やテスト (post_to_slack_and_update_shadow_with_transition_to_idle)
+
+`post_to_slack` 同様に設定
+
+#### 5. API Gateway をトリガーにシャドウを更新する Lambda 関数の作成
+
+##### コード (transition_to_running_then_to_idle)
+
+```python
+# Runtime: Python 3.7, Name: transition_to_running_then_to_idle
+import json
+import os
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+import urllib.parse
+import boto3
+iot = boto3.client('iot-data')
+f = boto3.client('lambda')
+
+SLACK_NAME_MAP = {
+    'ma2shita': {'thingName': 'soracom_max'},
+    'moto': {'thingName': 'soracom_moto'},
+    'katayama': {'thingName': 'soracom_yaman'}
+}
+
+def lambda_handler(event, context):
+    logger.info('Received event: ' + json.dumps(event)) # Output to Cloudwatch Log
+    b = urllib.parse.parse_qs(event['body'])
+    logger.info('Parsed body: ' + json.dumps(b)) # Output to Cloudwatch Log
+
+    thingName = SLACK_NAME_MAP[b['user_name'][0]]['thingName']
+    shadowDoc = {'state':{'reported':{'status':'running'}}}
+    iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
+    
+    f.invoke(
+        FunctionName='transition_maker',
+        InvocationType='Event',
+        Payload=json.dumps({
+            'thing_name': thingName,
+            'transition_wating_sec': 10,
+            'transition_to': 'idle'
+        })
+    )
+    
+    return {"statusCode": 204}
+```
+
+##### テスト (transition_to_running_then_to_idle)
+
+```json
+{
+    "body": "user_name=ma2shita"
+}
+```
+
+#### 6. Amazon API Gateway の設定
+
+* 新しい API
+* リソース: `slack-outgoing-acceptor`
+  * POST メソッドを作成
+    * 統合タイプ: Lambda
+    * Lambda プロキシ統合の使用: ON
+    * Lambda 関数: `transition_to_running_then_to_idle`
+
+##### テスト
+
+リクエスト本文
+
+```
+user_name=ma2shita
+```
+
+※エディタ上で文法不正のようなチェックがつきますが、無視して構いません
+
+テストが成功したら **API のデプロイ** をして、URL を入手しメモ (後ほど利用)
+
+#### 7-1. Slack / Outgoing Webhook の設定
+
+1. Slack にログイン
+2. チーム名(右上) > [その他管理項目] > [App 管理]
+3. (App ディレクトリを検索) で `Outgoing Webhook` を検索、(発信 Webフックを)クリック
+4. **発信 Webフック** のページで [設定を追加] をクリック
+5. 設定ページで以下のように設定
+    * チャンネル: **#random** (任意のチャンネルを選んでください)
+    * 引き金となる言葉: `ok ` (末尾にスペースを入れた方が誤判定が少なくなる)
+    * URL: **API Gateway の URL**
+    * （トークンをメモ (後ほど利用)）
+6. 同ページの [設定を保存する] をクリック
+
+この時点でチャンネル上で `ok 駆けつける` など ok から始まる文字を投稿すると API Gateway を経由して `transition_to_running_then_to_idle` が動くようになります。
+
+#### 7-2. Slack の トークンを検証する Lambda 関数の作成と API Gateway の設定
+
+このままだと API Gateway に POST をするだけで誰でも更新できてしまうため、トークンを検証して Slack からの Outgoing リクエストであることを確認します。
+
+##### コード (transition_to_running_then_to_idle_with_token_validator)
+
+```python
+# Runtime: Python 3.7, Name: transition_to_running_then_to_idle_with_token_validator
+import json
+import os
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+import urllib.parse
+import boto3
+iot = boto3.client('iot-data')
+f = boto3.client('lambda')
+
+SLACK_NAME_MAP = {
+    'ma2shita': {'thingName': 'soracom_max'},
+    'moto': {'thingName': 'soracom_moto'},
+    'katayama': {'thingName': 'soracom_yaman'}
+}
+
+def lambda_handler(event, context):
+    logger.info('Received event: ' + json.dumps(event)) # Output to Cloudwatch Log
+    b = urllib.parse.parse_qs(event['body'])
+    logger.info('Parsed body: ' + json.dumps(b)) # Output to Cloudwatch Log
+    
+    if b['token'][0] != os.environ['OUTGOING_TOKEN']:
+        return {
+            'statusCode': 403,
+            'body': json.dumps('Invalid Token')
+        }
+
+    thingName = SLACK_NAME_MAP[b['user_name'][0]]['thingName']
+    shadowDoc = {'state':{'reported':{'status':'running'}}}
+    iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
+    
+    f.invoke(
+        FunctionName='transition_maker',
+        InvocationType='Event',
+        Payload=json.dumps({
+            'thing_name': thingName,
+            'transition_wating_sec': 10,
+            'transition_to': 'idle'
+        })
+    )
+    
+    return {"statusCode": 204}
+```
+
+##### 環境変数の設定 (transition_to_running_then_to_idle_with_token_validator)
+
+環境変数 `OUTGOING_TOKEN` に Slack の発信 Webフックのトークンを記載
+
+##### テスト (transition_to_running_then_to_idle_with_token_validator)
+
+```json
+{
+  "body": "user_name=ma2shita&token=トークンに置き換える"
+}
+```
+
+##### Amazon API Gateway の呼び出し Lambda 関数を変更してデプロイ
+
+`slack-outgoing-acceptor` の POST メソッドから呼び出される Lambda 関数を `transition_to_running_then_to_idle_with_token_validator` に変更してデプロイ
+
+##### テスト
+
+リクエスト本文
+
+```
+user_name=ma2shita&token=トークンに置き換える
+```
+
+※改行に気を付けてください
+
+## Appendix: AWS IoT Core シャドウへのアクセス制限 (AWS IAM の policy での制限の場合)
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "iot1",
+            "Effect": "Allow",
+            "Action": "iot:Publish",
+            "Resource": [
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/update",
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get",
+            ]
+        },
+        {
+            "Sid": "iot2",
+            "Effect": "Allow",
+            "Action": "iot:Receive",
+            "Resource": [
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/update/documents",
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get/accepted",
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get/rejected",
+            ]
+        },
+        {
+            "Sid": "iot3",
+            "Effect": "Allow",
+            "Action": "iot:Connect",
+            "Resource": [
+                "arn:aws:iot:*:*:client/webclient0"
+            ]
+        },
+        {
+            "Sid": "iot4",
+            "Effect": "Allow",
+            "Action": "iot:Subscribe",
+            "Resource": [
+                "arn:aws:iot:*:*:topicfilter/$aws/things/+/shadow/update/documents",
+                "arn:aws:iot:*:*:topicfilter/$aws/things/+/shadow/get/+"
+            ]
+        }
+    ]
+}
+```
