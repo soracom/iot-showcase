@@ -279,6 +279,10 @@ def lambda_handler(event, context):
 
 `post_to_slack` 同様に設定
 
+##### AWS IoT 1-Click の設定変更
+
+`post_to_slack_and_update_shadow_with_transition_to_idle` を実行するように変更
+
 #### 5. API Gateway をトリガーにシャドウを更新する Lambda 関数の作成
 
 ##### コード (transition_to_running_then_to_idle)
