@@ -35,7 +35,8 @@ import urllib.request, urllib.parse
 
 INCOMING_WEBHOOK = os.environ['INCOMING_WEBHOOK']
 THING_MAP = {
-    'SINGLE': {'memberName': 'max'},
+    'SINGLE': {'memberName': '
+    '},
     'DOUBLE': {'memberName': 'moto'},
     'LONG':   {'memberName': 'yaman'}
 }
@@ -161,7 +162,7 @@ iot = boto3.client('iot-data')
 
 INCOMING_WEBHOOK = os.environ['INCOMING_WEBHOOK']
 THING_MAP = {
-    'SINGLE': {'memberName': 'max', 'thingName': 'soracom‗max'},
+    'SINGLE': {'memberName': 'max', 'thingName': 'soracom_max'},
     'DOUBLE': {'memberName': 'moto', 'thingName': 'soracom_moto'},
     'LONG':   {'memberName': 'yaman', 'thingName': 'soracom_yaman'}
 }
