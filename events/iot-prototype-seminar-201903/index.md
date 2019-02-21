@@ -9,7 +9,7 @@
 
 ### Day 1
 
-#### 2-1. Slack / Incoming Webhook の設定
+#### 1. Slack / Incoming Webhook の設定
 
 1. Slack にログイン
 2. チーム名(右上) > [その他管理項目] > [App 管理]
@@ -20,7 +20,7 @@
 6. 同ページの [Incoming Webhook インテグレーションの追加] をクリック
 7. Webhook URL をメモ (後ほど利用します)
 
-#### 2-2. Slack へ投稿する Lambda 関数の作成
+#### 2. Slack へ投稿する Lambda 関数の作成
 
 ##### コード (post_to_slack)
 
@@ -356,7 +356,7 @@ user_name=ma2shita
 
 テストが成功したら **API のデプロイ** をして、URL を入手しメモ (後ほど利用)
 
-#### 7-1. Slack / Outgoing Webhook の設定
+#### 7. Slack / Outgoing Webhook の設定
 
 1. Slack にログイン
 2. チーム名(右上) > [その他管理項目] > [App 管理]
@@ -370,6 +370,52 @@ user_name=ma2shita
 6. 同ページの [設定を保存する] をクリック
 
 この時点でチャンネル上で `ok 駆けつける` など ok から始まる文字を投稿すると API Gateway を経由して `transition_to_running_then_to_idle` が動くようになります。
+
+## Appendix: AWS IoT Core シャドウへのアクセス制限 (AWS IAM の policy での制限の場合)
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "iot1",
+            "Effect": "Allow",
+            "Action": "iot:Publish",
+            "Resource": [
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/update",
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get",
+            ]
+        },
+        {
+            "Sid": "iot2",
+            "Effect": "Allow",
+            "Action": "iot:Receive",
+            "Resource": [
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/update/documents",
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get/accepted",
+                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get/rejected",
+            ]
+        },
+        {
+            "Sid": "iot3",
+            "Effect": "Allow",
+            "Action": "iot:Connect",
+            "Resource": [
+                "arn:aws:iot:*:*:client/webclient0"
+            ]
+        },
+        {
+            "Sid": "iot4",
+            "Effect": "Allow",
+            "Action": "iot:Subscribe",
+            "Resource": [
+                "arn:aws:iot:*:*:topicfilter/$aws/things/+/shadow/update/documents",
+                "arn:aws:iot:*:*:topicfilter/$aws/things/+/shadow/get/+"
+            ]
+        }
+    ]
+}
+```
 
 #### 7-2. Slack の トークンを検証する Lambda 関数の作成と API Gateway の設定
 
@@ -448,49 +494,3 @@ user_name=ma2shita&token=トークンに置き換える
 ```
 
 ※改行に気を付けてください
-
-## Appendix: AWS IoT Core シャドウへのアクセス制限 (AWS IAM の policy での制限の場合)
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "iot1",
-            "Effect": "Allow",
-            "Action": "iot:Publish",
-            "Resource": [
-                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/update",
-                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get",
-            ]
-        },
-        {
-            "Sid": "iot2",
-            "Effect": "Allow",
-            "Action": "iot:Receive",
-            "Resource": [
-                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/update/documents",
-                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get/accepted",
-                "arn:aws:iot:*:*:topic/$aws/things/soracom_max/shadow/get/rejected",
-            ]
-        },
-        {
-            "Sid": "iot3",
-            "Effect": "Allow",
-            "Action": "iot:Connect",
-            "Resource": [
-                "arn:aws:iot:*:*:client/webclient0"
-            ]
-        },
-        {
-            "Sid": "iot4",
-            "Effect": "Allow",
-            "Action": "iot:Subscribe",
-            "Resource": [
-                "arn:aws:iot:*:*:topicfilter/$aws/things/+/shadow/update/documents",
-                "arn:aws:iot:*:*:topicfilter/$aws/things/+/shadow/get/+"
-            ]
-        }
-    ]
-}
-```
