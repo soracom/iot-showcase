@@ -35,8 +35,7 @@ import urllib.request, urllib.parse
 
 INCOMING_WEBHOOK = os.environ['INCOMING_WEBHOOK']
 THING_MAP = {
-    'SINGLE': {'memberName': '
-    '},
+    'SINGLE': {'memberName': 'max'},
     'DOUBLE': {'memberName': 'moto'},
     'LONG':   {'memberName': 'yaman'}
 }
@@ -178,7 +177,7 @@ def lambda_handler(event, context):
                                   method='POST', headers=headers)
     with urllib.request.urlopen(req) as res:
         logger.info(res.read().decode("utf-8"))
-    
+
     thingName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['thingName']
     shadowDoc = {'state':{'reported':{'status':'calling'}}}
     iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
@@ -207,10 +206,10 @@ iot = boto3.client('iot-data')
 def lambda_handler(event, context):
     logger.info('Received event: ' + json.dumps(event))    
     time.sleep(event['transition_wating_sec'])
-    
+
     shadowDoc = {'state':{'reported':{'status': event['transition_to']}}}
     iot.update_thing_shadow(thingName=event['thing_name'], payload=json.dumps(shadowDoc))
-    
+
     return {"statusCode": 204}
 ```
 
@@ -258,11 +257,11 @@ def lambda_handler(event, context):
                                   method='POST', headers=headers)
     with urllib.request.urlopen(req) as res:
         logger.info(res.read().decode("utf-8"))
-    
+
     thingName = THING_MAP[event['deviceEvent']['buttonClicked']['clickType']]['thingName']
     shadowDoc = {'state':{'reported':{'status':'calling'}}}
     iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
-    
+
     f.invoke(
         FunctionName='transition_maker',
         InvocationType='Event',
@@ -272,7 +271,7 @@ def lambda_handler(event, context):
             'transition_to': 'idle'
         })
     )
-    
+
     return {"statusCode": 204}
 ```
 
@@ -314,7 +313,7 @@ def lambda_handler(event, context):
     thingName = SLACK_NAME_MAP[b['user_name'][0]]['thingName']
     shadowDoc = {'state':{'reported':{'status':'running'}}}
     iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
-    
+
     f.invoke(
         FunctionName='transition_maker',
         InvocationType='Event',
@@ -324,7 +323,7 @@ def lambda_handler(event, context):
             'transition_to': 'idle'
         })
     )
-    
+
     return {"statusCode": 204}
 ```
 
@@ -400,7 +399,7 @@ def lambda_handler(event, context):
     logger.info('Received event: ' + json.dumps(event)) # Output to Cloudwatch Log
     b = urllib.parse.parse_qs(event['body'])
     logger.info('Parsed body: ' + json.dumps(b)) # Output to Cloudwatch Log
-    
+
     if b['token'][0] != os.environ['OUTGOING_TOKEN']:
         return {
             'statusCode': 403,
@@ -410,7 +409,7 @@ def lambda_handler(event, context):
     thingName = SLACK_NAME_MAP[b['user_name'][0]]['thingName']
     shadowDoc = {'state':{'reported':{'status':'running'}}}
     iot.update_thing_shadow(thingName=thingName, payload=json.dumps(shadowDoc))
-    
+
     f.invoke(
         FunctionName='transition_maker',
         InvocationType='Event',
@@ -420,7 +419,7 @@ def lambda_handler(event, context):
             'transition_to': 'idle'
         })
     )
-    
+
     return {"statusCode": 204}
 ```
 
