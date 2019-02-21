@@ -373,6 +373,15 @@ user_name=ma2shita
 
 ## Appendix: AWS IoT Core シャドウへのアクセス制限 (AWS IAM の policy での制限の場合)
 
+AWS IAM 上での Policy ドキュメント内の Resource に指定できるのは、実際の Publish や Subscribe で指定される文字列との一致を確認しています。(いるようです) そのため「意味的には同じ」となるはずの文字列でもマッチしません。
+
+例えば `$aws/things/+/shadow/update` は `$aws/things/THING_NAME/shadow/update` に MQTT 的なトピック名としてはマッチはしますが、AWS IAM Policy ドキュメントでは一致しません。MQTT トピック的なマッチをさせたい場合は AWS IoT Core における Policy で設定することになります。
+
+Amazon Cognito と AWS IoT Core の Policy を結びつけることは、Auth な ID に対しては可能ですが、UnAuth な ID については確認が取れなかったため、ここでは Amazon Cognio から AWS IAM ロール/ポリシーにて制限するようにしています。
+
+この場合、対象の "モノ" が増えた場合の運用が柔軟ではないため、要自動化ポイントになるかと思います。
+
+
 ```json
 {
     "Version": "2012-10-17",
@@ -417,7 +426,15 @@ user_name=ma2shita
 }
 ```
 
-#### 7-2. Slack の トークンを検証する Lambda 関数の作成と API Gateway の設定
+### iot:Subscribe と iot:Receive の違い
+
+一見すると同じ意味で、特に iot:Receive の役割がわかりづらいため解説します。
+
+iot:Subscribe は **MQTT クライアントから subscribe 操作の受付** です。一方 iot:Receive は **接続済みの MQTT クライアントに対してのデータ配信** になります。そのため **Subscribe は成功したが、(Receive で制限されていたため)データが降ってこない** ということになります。
+
+例として `/shadow/get` は `/shadow/get/accepted` と `/shadow/get/rejected` を持っています。そのため `/shadow/get/+` とすれば双方からデータが得られますが、例えば `Receive Deny /shadow/get/accepted` というポリシーが適用されたら `/shadow/get/+` に Subscribe はできるけど `/shadow/get/rejected` からのみデータが得られるという構成を作ることができます。
+
+## Appendix: Slack の Outgoing Webhook トークンを検証する Lambda 関数の作成と API Gateway の設定
 
 このままだと API Gateway に POST をするだけで誰でも更新できてしまうため、トークンを検証して Slack からの Outgoing リクエストであることを確認します。
 
