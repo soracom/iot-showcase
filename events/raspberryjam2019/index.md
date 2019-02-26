@@ -25,14 +25,19 @@
 
 1. ジャンパーワイヤーの配線
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSISfzAOhFFCChRHmMp9r8Pq8xmzhVpIG4tVTcOS0N4OTX68Ikayzqnq0G3QNxfQiii8k47UWf8CgzB/pub?w=564&amp;h=599">
+
 ブレッドボードを下記のように配線します。配線を間違えないようご注意ください。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSXjAe5AyzwIMR70av_F04xp5TzxHuJPrNs6XvOv3GWrCWf205ZQJQRqcueUYxPkc88LUSjMhNL1LF9/pub?w=882&amp;h=664">
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQfBmQsDKwOH6bGQxSMJFb5Krh69Yz2qZsKMLiAbYAoo9RqlRxBtDpe1Atjlkdd1MIef2cN6R-CEe5k/pub?w=842&amp;h=636">
 
 2. ドングルを配置
 
 白色のドングルをRaspberry Piに差し込みます。どこのUSBポートを使っていただいても構いません。
 
 3. Raspberry Piに電源を入れます。
-
 
 
 <h2 id="handson2">2. SORACOM Harvest でデータを可視化しよう</h2>
@@ -79,7 +84,6 @@ SORACOM Harvestの設定をしたSIMを選択し、「操作」からデータ�
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vSYWVlDGdxtdbWqPrup7KjoO-Rl97fhd6NRE_er3xxNBh3thdIXb5AQiJcEocyyvJcymEF6Cy96UbNC/pub?w=931&amp;h=454">
 
-
 <h2 id="handson3">3. SORACOM Lagoon でダッシュボードを作成しよう</h2>
 
 1.  SORACOM Lagoon ログイン
@@ -111,18 +115,28 @@ Graph を選択します。
 
 複数のSIMをお持ちの場合は、メトリックスから該当するSIMを選択します。（今日は1アカウントにSIMが1つ登録されているだけなので選択する必要はありません）
 
-
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ9J2fu0tvKOFRsKO8O2UslNp-NYK8RNEM_rwe3oeTNmBIgtGzxVEeFayHP_jDqUxHG4KdCfKgDjrB3/pub?w=930&amp;h=584">
 
 右上の時刻設定から、画面に表示するデータの時間と自動更新の頻度を設定し、適用をクリックします。
 
-右上の保存ボタンをクリックします。名前をつけて保存をいうポップアップが表示されるので、任意の名前をつけて保存します。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vT0Eaex8TcO6xVTNduPyoqXym_BqLPWPpK-3vEfbgkzStXqFaHIPngXW0-ASZhC7MuZKJ62jYxVU0uP/pub?w=930&amp;h=359">
 
+右上の保存ボタンをクリックします。名前をつけて保存をするのポップアップが表示されるので、任意の名前をつけて保存します。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQNVwaUywETqEWCDuCxGP0CD8wwjmzr-FouJtFGaElfGHQmbJkYQ43o22hiXvAbuHP3fxiF6px6s3I4/pub?w=930&amp;h=285">
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSzW0jl7QrOILaj7Q8wRDd5v8KKdkMGxljMJswxhjrT9ogvAHp-NiYTYSIjSaPtnqHXjqN-9KxWb42y/pub?w=822&amp;h=459">
 
 新たにパネルを追加します。
 右上の「パネルの追加」をクリックします。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSYh6WhDrL6tB4AUtjJRiBzVjguKJTgnIzSQqZLqs6JJrhTrLaY6n7_Y7tb5PsceaUQBvsOCuEtD-Y9/pub?w=930&amp;h=297">
+
 Singlestat を選択、「Panel Title」>「編集」をクリックします。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ3PCE_b10lF8egnRyUCawgHB_Zjg5Va81Yu21hAH0EJrrwOJ0o_Vo2WcxJDKCUrW7_J_pxow_vRyrw/pub?w=930&amp;h=420">
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRwUpdsALE4GvIv7jPFtumqNCHZV0nenVSTYMwRAuUEHfPOP7xkwo48UywOHf_h6hr-AkdJPMBEJinG/pub?w=930&amp;h=469">
 
 オプションで、下記のように設定を変更します
 
@@ -131,12 +145,23 @@ Singlestat を選択、「Panel Title」>「編集」をクリックします。
 - 色 > 色 > 反転をクリック
 - ゲージ：表示にチェックを入れます。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQjRN2wAwFMMWpCnoAtKM31xvOY-uV0kq8ToWxzhQvodVH2F0Nc5Q5VhzuECGNGhhz9TGec5LdPvZDT/pub?w=931&amp;h=280">
+
+右上の時刻設定から、画面に表示するデータの時間と自動更新の頻度を設定し、適用をクリックします。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vT0Eaex8TcO6xVTNduPyoqXym_BqLPWPpK-3vEfbgkzStXqFaHIPngXW0-ASZhC7MuZKJ62jYxVU0uP/pub?w=930&amp;h=359">
+
 ダッシュボードを保存し、ダッシュボードに戻るをクリックします。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vTVmtEpCD0e73N0uwjnljZxbOOgloYqvwVsT3o4rX1xtC70mgOLdw4v8QdtbrL1UyfdE670NH-sun3u/pub?w=877&amp;h=565">
 
 ダッシュボードにこのように表示されたら成功です。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSAhqtmAH_r8RnR1XrbcfjkoX6Wdrqn-PNIWdL0Nd_Tgw5l4q5mSY5rtlKJXYp6_yTtj5PfDOkRYFA3/pub?w=933&amp;h=270">
+
 超音波センサーに手を近づけて変化を確認してください。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQPF8yA8I4QymkXuliO5rI5VYho8-2ySBFCqbqQ5ZE9VdJD8qTjDurm2jszWJMQP8i5WPOOYA-LlpuV/pub?w=917&amp;h=682">
 
 ## 片付け
 
