@@ -7,6 +7,7 @@
 * ドングル
 * ブレットボード
 * 有効なSORACOMアカウント（すでにソラコム側でアカウントを作成済みです）
+* SIM カード（ドングルの中にすでに入った状態です）
 
 機材の写真
 
@@ -14,7 +15,10 @@
 * wifiに繋がるPC（最新のGoogle Chromeが利用可能なこと）
 
 ## 本日のハンズオンでできること
-画像
+Raspberry pi に超音波センサーを取り付け、SORACOM のネットワークを通じて、SORACOM Harvest というデータ蓄積サービスにデータを溜めます。
+溜めたデータを、SORACOM Harvest, SORACOM Lagoon を利用し簡単にデータの可視化、ダッシュボードのの作成を行います。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQd9mqUF2oEUjMWNT8QHnVes4ZbgW8lUnKQw0jFsaHjqhMsJ3ZQlS2w9h-eGLdchtRm3NFFjRUDKnNv/pub?w=754&amp;h=206">
 
 ## 手順
 1. [Raspberry Pi のセットアップをしよう](#handson1)
