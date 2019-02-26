@@ -72,6 +72,12 @@ SIM の “グループ” が、先ほど作った SIM グループ名になっ
 
 3. SORACOM Harvest を見てみよう
 
+SORACOM Harvestの設定をしたSIMを選択し、「操作」からデータを確認を選びます。
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQxHPmjEN5pewXexVuFcfkue4qwxG0fxYbLEdpRpOAeBxIUN8_F-5fFP0iI6WcpaZDL9dLXk74Wi85K/pub?w=932&amp;h=483">
+
+右上の自動更新（5秒）をONにします。前にハンズオンをした方のデータが残っているのが気になる方は、時刻を変更していただくことで、ご自身のデータのみをご覧いただけます。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSYWVlDGdxtdbWqPrup7KjoO-Rl97fhd6NRE_er3xxNBh3thdIXb5AQiJcEocyyvJcymEF6Cy96UbNC/pub?w=931&amp;h=454">
 
 
 <h2 id="handson3">3. SORACOM Lagoon でダッシュボードを作成しよう</h2>
@@ -83,16 +89,29 @@ SORACOM Lagoon のコンソールログインします。URは[こちら](https:
 
 [https://jp.lagoon.soracom.io/login](https://jp.lagoon.soracom.io/login)
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRlp1wuAgkuzhIS1FzMoLD-Hx70WuWTxTMxkGx4A_ymzlwYD0xGAhk04X8j3XOGLwYqTHBtIorlh4Jc/pub?w=925&amp;h=498">
+
+ログイン後の画面は下記のようになってます。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQKJ9qiFNrBBVS2jbv1o7TIIzpcLG8AYVe3VA2aLuAZxdP5rYm24YqU6AOOMq8lZ2N_Mtp0m7QmWi8r/pub?w=932&amp;h=396">
+
 2. SORACOM Lagoon でダッシュボードを作成
 
 左側の「＋」>「ダッシュボード」をクリックします。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ7PBYFSgwxUavkgHxKMnY0IdlpHGoGozBjCxgofJewfSDrOl-BlzIQxln8vpDsgDuFR1blqF5U5Xkl/pub?w=550&amp;h=468">
+
 Graph を選択します。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vTI7gkqYnvGg2zEypONVJ5ra4n68LO2APBovo4eMbC8SBqQ7chGAz3VahAkoQsMueuu_z4ZToheUfna/pub?w=931&amp;h=450">
 
 「Panel Title」>「編集」をクリックします。
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQJdKY68TSAb8I8ksHNhxiyTdjvppKmrAZdZmUVPgMvAZ8x0nVDUI6CmBm_oJRRgVwVyq76huZw6RR1/pub?w=931&amp;h=478">
+
 複数のSIMをお持ちの場合は、メトリックスから該当するSIMを選択します。（今日は1アカウントにSIMが1つ登録されているだけなので選択する必要はありません）
+
+
 
 右上の時刻設定から、画面に表示するデータの時間と自動更新の頻度を設定し、適用をクリックします。
 
