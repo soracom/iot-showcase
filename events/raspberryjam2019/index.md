@@ -4,19 +4,18 @@
 ## 本日の機材
 * Raspberry Pi
 * 超音波センサー
-* ドングル
+* 3Gドングル
+* ジャンパーワイヤー
 * ブレットボード
 * 有効なSORACOMアカウント（すでにソラコム側でアカウントを作成済みです）
 * SIM カード（ドングルの中にすでに入った状態です）
-
-機材の写真
 
 ## 参加者の持ち物
 * wifiに繋がるPC（最新のGoogle Chromeが利用可能なこと）
 
 ## 本日のハンズオンでできること
 Raspberry pi に超音波センサーを取り付け、SORACOM のネットワークを通じて、SORACOM Harvest というデータ蓄積サービスにデータを溜めます。
-溜めたデータを、SORACOM Harvest, SORACOM Lagoon を利用し簡単にデータの可視化、ダッシュボードのの作成を行います。
+溜めたデータを、SORACOM Harvest, SORACOM Lagoon を利用し簡単にデータの可視化、ダッシュボードを作成します。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQd9mqUF2oEUjMWNT8QHnVes4ZbgW8lUnKQw0jFsaHjqhMsJ3ZQlS2w9h-eGLdchtRm3NFFjRUDKnNv/pub?w=754&amp;h=206">
 
@@ -29,15 +28,15 @@ Raspberry pi に超音波センサーを取り付け、SORACOM のネットワ�
 
 1. ジャンパーワイヤーの配線
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vSISfzAOhFFCChRHmMp9r8Pq8xmzhVpIG4tVTcOS0N4OTX68Ikayzqnq0G3QNxfQiii8k47UWf8CgzB/pub?w=564&amp;h=599">
-
 ブレッドボードを下記のように配線します。配線を間違えないようご注意ください。
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vSXjAe5AyzwIMR70av_F04xp5TzxHuJPrNs6XvOv3GWrCWf205ZQJQRqcueUYxPkc88LUSjMhNL1LF9/pub?w=882&amp;h=664">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSISfzAOhFFCChRHmMp9r8Pq8xmzhVpIG4tVTcOS0N4OTX68Ikayzqnq0G3QNxfQiii8k47UWf8CgzB/pub?w=564&amp;h=599">
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vQfBmQsDKwOH6bGQxSMJFb5Krh69Yz2qZsKMLiAbYAoo9RqlRxBtDpe1Atjlkdd1MIef2cN6R-CEe5k/pub?w=842&amp;h=636">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vSXjAe5AyzwIMR70av_F04xp5TzxHuJPrNs6XvOv3GWrCWf205ZQJQRqcueUYxPkc88LUSjMhNL1LF9/pub?w=625&amp;h=484">
 
-2. ドングルを配置
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQfBmQsDKwOH6bGQxSMJFb5Krh69Yz2qZsKMLiAbYAoo9RqlRxBtDpe1Atjlkdd1MIef2cN6R-CEe5k/pub?w=644&amp;h=494">
+
+2. ドングルを接続
 
 白色のドングルをRaspberry Piに差し込みます。どこのUSBポートを使っていただいても構いません。
 
@@ -69,6 +68,7 @@ SORACOM Webコンソール で 左上[Menu] > [SIM 管理]を選択します。
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vR1p_9PqCjBoB3xh_nEta2grhXZlJI3zyrXOjXjH59Vgq69cD5XbVA3PIppl0X6sNYqM538K8G2iK4U/pub?w=704&amp;h=393">
 
 すでに登録されているSIM を選択 > [操作] > [所属グループ変更]をクリックし、先ほど追加したグループ名を選択します。
+
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vR9udoWlimJIJv51_uvGoJ2SxIiOga1VQS09JnCr1gjUXg9LxmDoMH33mAagYZQDDCIUm-9Fn3K8TzB/pub?w=544&amp;h=506">
 
 SIMグループ に所属させます。
@@ -125,11 +125,9 @@ Graph を選択します。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vT0Eaex8TcO6xVTNduPyoqXym_BqLPWPpK-3vEfbgkzStXqFaHIPngXW0-ASZhC7MuZKJ62jYxVU0uP/pub?w=930&amp;h=359">
 
-右上の保存ボタンをクリックします。名前をつけて保存をするのポップアップが表示されるので、任意の名前をつけて保存します。
+右上のダッシュボードに戻るをクリックします。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQNVwaUywETqEWCDuCxGP0CD8wwjmzr-FouJtFGaElfGHQmbJkYQ43o22hiXvAbuHP3fxiF6px6s3I4/pub?w=930&amp;h=285">
-
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vSzW0jl7QrOILaj7Q8wRDd5v8KKdkMGxljMJswxhjrT9ogvAHp-NiYTYSIjSaPtnqHXjqN-9KxWb42y/pub?w=822&amp;h=459">
 
 新たにパネルを追加します。
 右上の「パネルの追加」をクリックします。
@@ -155,9 +153,9 @@ Singlestat を選択、「Panel Title」>「編集」をクリックします。
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vT0Eaex8TcO6xVTNduPyoqXym_BqLPWPpK-3vEfbgkzStXqFaHIPngXW0-ASZhC7MuZKJ62jYxVU0uP/pub?w=930&amp;h=359">
 
-ダッシュボードを保存し、ダッシュボードに戻るをクリックします。
+ダッシュボードに戻るをクリックします。
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vTVmtEpCD0e73N0uwjnljZxbOOgloYqvwVsT3o4rX1xtC70mgOLdw4v8QdtbrL1UyfdE670NH-sun3u/pub?w=877&amp;h=565">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vTVmtEpCD0e73N0uwjnljZxbOOgloYqvwVsT3o4rX1xtC70mgOLdw4v8QdtbrL1UyfdE670NH-sun3u/pub?w=878&amp;h=234">
 
 ダッシュボードにこのように表示されたら成功です。
 
