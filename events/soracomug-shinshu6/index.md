@@ -1,12 +1,11 @@
 # SORACOM UG 信州 #6 2019/3/30
 
 ## ハンズオンの内容
-SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio経由で電話が掛かってくるようにしよう
+SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio経由で電話が掛かってくるようにする  
 （[会議脱出ボタン](https://kizawa.info/soracombutton-escape)）
 
 ### ハンズオンの構成
 ![soracomug_shinshu6 / Twilio全体像](https://kizawa.info/wp-content/uploads/2018/11/soracombutton-arch3.png)
-
 
 ## 本日の貸し出し機材
 * SORACOM LTE-M Button powered by AWS（※あのボタン貸出枠で参加の方）
@@ -14,8 +13,10 @@ SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio�
 ## お客様の持ち物
 * Wifi に繋がるPC
 * クレジットカード（AWSアカウント作成に必要になります）
-* 会場で着信可能な電話/携帯電話 (AWS及びTwilioのアカウント作成時に電話音声による認証が必要となります/「非通知」からの電話に対する着信拒否設定の解除が必要となります)
-* 受信可能なメールアドレス
+* 会場で着信可能な携帯電話
+   * AWSのアカウント作成時に電話音声による認証が必要となります(「非通知」からの電話に対する着信拒否設定の解除が必要となります)
+   * Twilioのアカウント作成時にSMSによる認証が必要となります
+   * ボタンを押したら電話がかかってくる宛先となります
 
 ## 参加費用
 無料（ただしAWSの利用料金、数円が発生します）
@@ -31,26 +32,24 @@ SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio�
 8. [動作確認](#content8)
 9. [お片付け](#contentE)
 
-<h3 id="content1">1. AWS アカウントの作成</h3> (※既にアカウントをお持ちの方は読み飛ばして下さい)
+<h3 id="content1">1. AWS アカウントの作成</h3> (※既にアカウントをお持ちの方は読み飛ばして下さい)  
 <a href="https://aws.amazon.com/jp/register-flow/" target="_blank">AWS アカウント作成の流れ (AWS のページに飛びます)</a> から進み、作成してください。
 
-アカウント作成時のポイント
+**アカウント作成時のポイント**  
 電話音声による認証が必要となります
 「非通知」からの着信となるため、必要ならば非通知着信が可能になるようにしてください
 
-AWS サポートプランについて
+** AWS サポートプランについて **
 理由がない限り「ベーシックプラン」を選択してください。それ以外のプランは費用がかかります
 
-
 <h3 id="content2">2. SORACOM LTE-M Button を AWS IoT 1-Click に登録する</h3>
-
 AWS IoT 1-Click ではボタンと Lambda 関数を結びつける概念として「プレイスメント」と「テンプレート」そして「プロジェクト」が存在します。これらを全て作成したうえで、それぞれボタンと Lambda 関数に結び付けていきます。
 
 ![soracomug_shinshu6 / AWSIoT1Click概念図](https://docs.google.com/drawings/d/e/2PACX-1vRNsm3bCso3sEDoLqx0F7ReWgvOUvpyxAxbIkRDHHhhhTCkIbc8xuLW2zwsfSFIkHntgxUSaXCoHC0B/pub?w=927&h=520)
 
-AWS IoT 1-Click へ LTE-M Button を登録する
+**AWS IoT 1-Click へ LTE-M Button を登録する**
 
-[AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインしたあと、リージョンをオレゴンに変更し、 AWS IoT 1-Click のコンソールを開きます。
+[AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインした後、リージョンをオレゴンに変更し、AWS IoT 1-Clickのコンソールを開きます。
 
 ![soracomug_shinshu6 / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSzawNDQ3RDZ0RiN6lu1nv5Y57aUOlSuYoK47BZIs72nt6bHnlbhHf6QAn4bxmJQnZHmQES6gAAn-j5/pub?w=927&h=284)
 
@@ -101,16 +100,16 @@ LTE-M Button からのボタン押下を待ち受ける状態になります。�
 
 <h3 id="content3">3. Twilio アカウントの作成</h3> (※既にアカウントをお持ちの方は読み飛ばして下さい)
 
-TwilioはAPIによってコントロールできる電話サービスです。
+TwilioはAPIによってコントロールできる電話サービスです。  
 登録することで電話番号を取得でき、その電話番号での受発信がAPIでコントロールできます。今回は発信のコントロールを行います。
 
 **アカウントの取得**
 
-[Twilioのページ](https://twilio.kddi-web.com/)を開き、無料サインアップのアイコンをクリックします。
+[Twilioのページ](https://twilio.kddi-web.com/)を開き、無料サインアップのアイコンをクリックします。  
 ![soracomug_shinshu6 / 3-1 Twilio-Top](https://kizawa.info/wp-content/uploads/2018/11/twilio-1-768x377.png)
 
-利用規約に同意後、氏名・メールアドレス等の情報を入力した後、携帯電話の電話番号の入力を求められます。
-なお、トライアル（無料）アカウントではここで登録した電話番号のみに発信が可能であるため、今回電話を着信したい携帯電話の番号を入力して下さい。
+利用規約に同意後、氏名・メールアドレス等の情報を入力した後、携帯電話の電話番号の入力を求められます。  
+なお、トライアル（無料）アカウントではここで登録した電話番号のみに発信が可能であるため、今回電話を着信したい携帯電話の番号を入力して下さい。  
 （有料アカウントにアップグレードすることで任意の番号に発信可能となります）
 
 入力した携帯電話に対してSMSで検証コードが送信され認証が完了です。
@@ -118,26 +117,26 @@ TwilioはAPIによってコントロールできる電話サービスです。
 
 <h3 id="content4">4. Twilio セットアップ</h3>
 
-**電話番号の取得**
-Twilioで利用できる電話番号を取得します。
+**電話番号の取得**  
+Twilioで利用できる電話番号を取得します。  
 [電話番号の取得画面](https://jp.twilio.com/console/phone-numbers/getting-started)にアクセスします。
 ![soracomug_shinshu6 / 4-1 Twilio-GetNumber](https://kizawa.info/wp-content/uploads/2018/11/twilio-3-768x208.png)
 
 「最初のTwilio電話番号を取得」をクリックし電話番号を取得します。
 ![soracomug_shinshu6 / 4-2 Twilio-GetNumber](https://kizawa.info/wp-content/uploads/2018/11/twilio-4.png)
 
-気に入らない場合は選び直しが可能です。
+気に入らない場合は選び直しが可能です。  
 なおトライアルアカウントで取得可能な電話番号は050のIP電話番号のみとなります。
 
-**クレデンシャル情報の確認**
-AWS側からAPIで呼び出しできるよう、クレデンシャル情報を確認しておきます。
+**クレデンシャル情報の確認**  
+AWS側からAPIで呼び出しできるよう、クレデンシャル情報を確認しておきます。  
 [Twilioの設定画面](https://jp.twilio.com/console/project/settings)にアクセスします。
 ![soracomug_shinshu6 / 4-3 Twilio-Credential](https://kizawa.info/wp-content/uploads/2018/11/twilio-5-768x533.png)
-ライブクレデンシャルの ACCOUNT SID と AUTH TOKENの内容をメモしておきます。
+ライブクレデンシャルの ACCOUNT SID と AUTH TOKENの内容をメモしておきます。  
 この情報がLambda関数からの呼び出しに必要になります。
 
 <h3 id="content5">5. Twilio Studio Flowの作成</h3>
-電話を受けた後、任意のメッセージを再生できるよう、Studio Flowの作成を行います。
+電話を受けた後、任意のメッセージを再生できるよう、Studio Flowの作成を行います。  
 [Studio Dashboard](https://jp.twilio.com/console/studio)にアクセスし、Create a flowをクリックします。
 
 ![soracomug_shinshu6 / 5-1 Twilio-Studio](https://kizawa.info/wp-content/uploads/2018/11/tstudio-1-1024x371.png)
@@ -147,12 +146,12 @@ AWS側からAPIで呼び出しできるよう、クレデンシャル情報を�
 作成方法はStart from scratchとします。
 ![soracomug_shinshu6 / 5-3 Twilio-Studio](https://kizawa.info/wp-content/uploads/2018/11/tstudio-3.png)
 
-下のようなフロー作成画面が開きます。
-右側のWIDGET LIBRARYから、”Make Outgoing Call” と “Say/Play” のウィジェットをドラッグ、フローを繋げて以下のように設定します。
+下のようなフロー作成画面が開きます。  
+右側のWIDGET LIBRARYから、”Make Outgoing Call” と “Say/Play” のウィジェットをドラッグ、フローを繋げて以下のように設定します。  
 また、Say/Playのウィジェットでは読み上げるメッセージと言語(Japanese)を設定します。
 ![soracomug_shinshu6 / 5-4 Twilio-Studio](https://kizawa.info/wp-content/uploads/2018/11/tstudio-5-1024x657.png)
 
-作成できたら、右上にあるPublishボタンを押して完成です。
+作成できたら、右上にあるPublishボタンを押して完成です。  
 Studio Dashboardに戻りますので、作成したフローのSIDをメモしておきます。
 ![soracomug_shinshu6 / 5-5 Twilio-Studio](https://kizawa.info/wp-content/uploads/2018/11/tstudio-7-1024x221.png)
 
@@ -165,7 +164,7 @@ Studio Dashboardに戻りますので、作成したフローのSIDをメモし�
 
 <h3 id="content7">7. AWS IoT 1-Clickのプロジェクト・プレイスメント設定</h3>
 
-**AWS IoT 1-Clickプロジェクト設定**
+**AWS IoT 1-Clickプロジェクト設定**  
 AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開いた後 [プロジェクトの作成] をクリックします。
 ![soracomug_shinshu6 / 7-1 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vSQtO8MYnq7k9drY2LWfYrhuWNmjZ16USKNslZr0L6mGvOET8KPYkePkvI3Sq8s3-HCelF3tfeFB5Vz/pub?w=897&h=473)
 
@@ -179,13 +178,10 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 ![soracomug_shinshu6 / 7-4 projectCreate](https://kizawa.info/wp-content/uploads/2018/11/aws1click-8.png)
 [プレイスメントの作成] をクリックします。
 
-**プレイスメント設定**
-
-続けてプレイスメントの設定を行います。
+**プレイスメント設定**  
+続けてプレイスメントの設定を行います。  
 プレイスメントの設定で、登録したボタンのDSNコードと紐付けます。
-
 ![soracomug_shinshu6 / 7-5 placement](https://kizawa.info/wp-content/uploads/2018/11/aws1click-9.png)
-
 プロジェクトの新しいプレイスメントでは以下のように設定した後 [プレイスメントの作成] をクリックします。
 
 * デバイスのプレイスメント名: `button1` (任意の文字列)
@@ -200,7 +196,7 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 ここまでの作業で AWS IoT 1-Click を通じて Twilio経由で電話がかけられるようになりました。
 
 <h3 id="contentE">9. お片付け</h3>
-AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。
+AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。  
 [管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。
 
 ![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
@@ -222,10 +218,9 @@ AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴ�
 
 ![mkmk-button / 1 unclaim](https://docs.google.com/drawings/d/e/2PACX-1vTCsBV32iOWgBn8QZJbmiRQIIv1k4JxFmtw3STpYFl_I-iGZn-ejHO_7gSg1Nvv-IxkdtnpbOMHHUB8/pub?w=928&h=269)
 
-一覧から対象デバイスが無くなれば解除完了です。
-
+一覧から対象デバイスが無くなれば解除完了です。  
 こちらでハンズオンは終了です。お疲れ様でした。
 
 ## 最後に
-最後に貸し出ししたSORACOM LTE-M Buttonをスタッフに手渡してください。
+最後に貸し出ししたSORACOM LTE-M Buttonをスタッフに手渡してください。  
 お渡し頂くタイミングで、プレイスメントの割り当てが無くなっているかを確認させていただきます。
