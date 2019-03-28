@@ -124,11 +124,12 @@ Twilioで利用できる電話番号を取得します。
 **クレデンシャル情報の確認**  
 AWS側からAPIで呼び出しできるよう、クレデンシャル情報を確認しておきます。  
 [Twilioの設定画面](https://jp.twilio.com/console/project/settings)にアクセスします。  
-![soracomug_shinshu6 / 4-3 Twilio-Credential](https://kizawa.info/wp-content/uploads/2018/11/twilio-5-768x533.png)
+![soracomug_shinshu6 / 4-3 Twilio-Credential](https://kizawa.info/wp-content/uploads/2018/11/twilio-5-768x533.png)  
 ライブクレデンシャルの ACCOUNT SID と AUTH TOKENの内容をメモ帳等にコピーしておきます。この情報がLambda関数からの呼び出しに必要になります。
 
 <h3 id="content5">5. Twilio Studio Flowの作成</h3>
-電話を受けた後、任意のメッセージを再生できるよう、Studio Flowの作成を行います。  
+電話を受けた後、任意のメッセージを再生できるよう、Studio Flowの作成を行います。
+
 [Studio Dashboard](https://jp.twilio.com/console/studio)にアクセスし、Create a flowをクリックします。  
 ![soracomug_shinshu6 / 5-1 Twilio-Studio](https://kizawa.info/wp-content/uploads/2018/11/tstudio-1-1024x371.png)
 
