@@ -263,6 +263,8 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 
 <h3 id="contentE">9. お片付け</h3>
 
+**※ あのボタン貸出枠で参加の方は、ボタン返却のため以下の手順の実施をしてください。**
+
 AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。  
 [管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。  
 ![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
