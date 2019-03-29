@@ -176,7 +176,7 @@ SORACOM LTE-M Buttonが押された際にTwilioを呼び出すプログラム(La
 [AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインした後、リージョンをオレゴンに変更し、Lambdaのコンソールを開きます。  
 ![soracomug_shinshu6 / 6-1 Lambda1](https://kizawa.info/wp-content/uploads/2019/03/lambda-1.png)
 
-Lambdaコンソールが開きますので、ダッシュボードから関数の作成をクリックします。  
+関数の作成をクリックします。  
 ![soracomug_shinshu6 / 6-2 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-0.png)
 
 関数の作成画面が開きます。以下の情報を入力します。
@@ -224,18 +224,17 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 
 **プレイスメントの属性**  
 引き続き画面下の方にあるプレイスメントの属性に以下の情報を入力します。
-|属性の名前|デフォルト値|
-|:--------|:----------|
-|twilio_sid|(TwilioのACCOUNT SID)|
-|twilio_token|(TwilioのAUTH TOKEN)|
-|twilio_flowid|(Twilio Studio FlowのSID)|
-|twilio_number|(Twilioで取得した電話番号 +8150xxxxxxxx の形式)|
-|twilio_callto|(電話の発信先：Twilioに登録したご自身の携帯電話番号 +81xxxxxxxxxx の形式)|
 
+| 属性の名前 | デフォルト値 |
+|:--------------|:------------|
+| twilio_sid    | (TwilioのACCOUNT SID)     |
+| twilio_token  | (TwilioのAUTH TOKEN)      |
+| twilio_flowid | (Twilio Studio FlowのSID) |
+| twilio_number | (Twilioで取得した電話番号 +8150xxxxxxxx の形式) |
+| twilio_callto | (電話の発信先：Twilioに登録したご自身の携帯電話番号 +81xxxxxxxxxx の形式) |
+
+ここまで入力が完了したら「プロジェクトの作成」をクリックします。  
 ![soracomug_shinshu6 / 7-6 placement](https://kizawa.info/wp-content/uploads/2019/03/1click-4.png)  
-ここまで入力が完了したら「プロジェクトの作成」をクリックします。
-
-![soracomug_shinshu6 / 7-3 projectLambda](https://kizawa.info/wp-content/uploads/2018/11/aws1click-7.png)
 
 プロジェクトが作成されました。  
 ![soracomug_shinshu6 / 7-4 projectCreate](https://kizawa.info/wp-content/uploads/2018/11/aws1click-8.png)  
@@ -244,7 +243,7 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 **プレイスメント設定**  
 続けてプレイスメントの設定を行います。  
 プレイスメントの設定で、登録したボタンのDSNコードと紐付けます。  
-![soracomug_shinshu6 / 7-5 placement](https://kizawa.info/wp-content/uploads/2018/11/aws1click-9.png)
+![soracomug_shinshu6 / 7-5 placement](https://kizawa.info/wp-content/uploads/2019/03/1click-5.png)
 プロジェクトの新しいプレイスメントでは以下のように設定した後 [プレイスメントの作成] をクリックします。
 
 * デバイスのプレイスメント名: `button1` (任意の文字列)
@@ -263,6 +262,7 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 （※うまく動作しない方はスタッフまでお問い合わせ下さい）
 
 <h3 id="contentE">9. お片付け</h3>
+
 AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。  
 [管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。  
 ![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
