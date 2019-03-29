@@ -1,7 +1,7 @@
 # SORACOM UG 信州 #6 2019/3/30
 
 ## ハンズオンの内容
-SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio経由で電話が掛かってくるようにする  
+SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio経由で電話が掛かってくるようにする仕組みを作成します  
 （参考：[SORACOM Buttonで会議脱出ボタンをつくる](https://kizawa.info/soracombutton-escape)）
 
 ### ハンズオンの構成
@@ -14,7 +14,7 @@ SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio�
 * Wifi に繋がるPC
 * クレジットカード（AWSアカウント作成に必要になります）
 * 会場で着信可能な携帯電話
-   * AWSのアカウント作成時に電話音声による認証が必要となります(「非通知」からの電話に対する着信拒否設定の解除が必要となります)
+   * AWSのアカウント作成時に電話音声による認証が必要となります(非通知からの電話に対する着信拒否設定の解除が必要)
    * Twilioのアカウント作成時にSMSによる認証が必要となります
    * ボタンを押したら電話がかかってくる宛先となります
 
@@ -35,7 +35,7 @@ SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio�
 ## プログラム
 <h3 id="content1">1. AWS アカウントの作成</h3>
 (※既にアカウントをお持ちの方は読み飛ばして下さい)  
-<a href="https://aws.amazon.com/jp/register-flow/" target="_blank">AWS アカウント作成の流れ (AWS のページに飛びます)</a> から進み、作成してください。
+<a href="https://aws.amazon.com/jp/register-flow/" target="_blank">AWS アカウント作成の流れ (AWS のページに飛びます)</a> から進み作成してください。  
 
 **アカウント作成時のポイント**  
 電話音声による認証が必要となります
@@ -64,8 +64,9 @@ LTE-M Button の電池カバーを開けて DSN を AWS IoT 1-Click に入力し
 
 ![soracomug_shinshu6 / 2-5 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vR0FV0g7ywhbb7-02pDvuB-ZB3oiwfomAyUur4Lfx0pLKXQT2EcaSv6tK8RKDVg6GeDoLNG8Vk0j8W1/pub?w=578&h=516)
 
-LTE-M Button からのボタン押下を待ち受ける状態になります。このタイミングで LTE-M Button のボタンを１回押してください。  
-(LED が赤点灯(= データ送信失敗)だった場合は、再度ボタンを１回押してください)
+LTE-M Button からのボタン押下を待ち受ける状態になります。  
+このタイミングで LTE-M Button のボタンを１回押してください。  
+(LED が赤点灯(= データ送信失敗)となった場合は、再度ボタンを押して下さい)
 
 登録済みになりましたら [完了] をクリックします。  
 ![soracomug_shinshu6 / 2-6 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vSKoIzpJwqKkSXsDLEGAbdO4a6tKHx5-PKpSVv7KBWgY5_4wcZS3rhLZ_CSUlZ-Eqv6O4GsJFdPjAub/pub?w=499&h=726)
@@ -101,25 +102,43 @@ TwilioはAPIによってコントロールできる電話サービスです。
 [Twilioのページ](https://twilio.kddi-web.com/)を開き、無料サインアップのアイコンをクリックします。  
 ![soracomug_shinshu6 / 3-1 Twilio-Top](https://kizawa.info/wp-content/uploads/2018/11/twilio-1-768x377.png)
 
-利用規約に同意後、氏名・メールアドレス等の情報を入力した後、携帯電話の電話番号の入力を求められます。  
-なお、トライアル（無料）アカウントではここで登録した電話番号のみに発信が可能であるため、今回電話を着信したい携帯電話の番号を入力して下さい。  
-（有料アカウントにアップグレードすることで任意の番号に発信可能となります）
+利用規約に同意します。  
+![soracomug_shinshu6 / 3-2 Twilio-signup1](https://kizawa.info/wp-content/uploads/2019/03/twilio-1.png)
+
+氏名・メールアドレス・パスワードの情報を入力します。  
+パスワードは14桁以上必要となります。  
+![soracomug_shinshu6 / 3-3 Twilio-signup2](https://kizawa.info/wp-content/uploads/2019/03/twilio-2.png)
+
+身元検証用に携帯電話の電話番号の入力を行います。  
+携帯電話番号は最初のゼロを取り、80xxxxxxxx のように入力して下さい。  
+なお、トライアル（無料）アカウントではここで登録した電話番号のみに発信が可能であるため、今回のハンズオンで電話を着信したい携帯電話の番号を入力して下さい。  
+（有料アカウントにアップグレードすることで任意の番号に発信可能となります）  
+![soracomug_shinshu6 / 3-4 Twilio-signup3](https://kizawa.info/wp-content/uploads/2019/03/twilio-3.png)
 
 入力した携帯電話に対してSMSで検証コードが送信され認証が完了です。  
-![soracomug_shinshu6 / 3-2 Twilio-Validate](https://kizawa.info/wp-content/uploads/2018/11/twilio-2.png)
+![soracomug_shinshu6 / 3-5 Twilio-Validate1](https://kizawa.info/wp-content/uploads/2018/11/twilio-2.png)
+
+チュートリアル画面が出ます。今回は「Skip to dashboard」をクリックしてください。  
+![soracomug_shinshu6 / 3-6 Twilio-Validate2](https://kizawa.info/wp-content/uploads/2019/03/twilio-4.png)
+
+トップ画面が表示されます。  
+![soracomug_shinshu6 / 3-7 Twilio-Validate3](https://kizawa.info/wp-content/uploads/2019/03/twilio-5.png)
 
 <h3 id="content4">4. Twilio セットアップ</h3>
 
 **電話番号の取得**  
 Twilioで利用できる電話番号を取得します。  
 [電話番号の取得画面](https://jp.twilio.com/console/phone-numbers/getting-started)にアクセスします。  
-![soracomug_shinshu6 / 4-1 Twilio-GetNumber](https://kizawa.info/wp-content/uploads/2018/11/twilio-3-768x208.png)
+![soracomug_shinshu6 / 4-1 Twilio-GetNumber1](https://kizawa.info/wp-content/uploads/2018/11/twilio-3-768x208.png)
 
 「最初のTwilio電話番号を取得」をクリックし電話番号を取得します。  
-![soracomug_shinshu6 / 4-2 Twilio-GetNumber](https://kizawa.info/wp-content/uploads/2018/11/twilio-4.png)
-
 気に入らない場合は選び直しが可能です。  
-なおトライアルアカウントで取得可能な電話番号は050のIP電話番号のみとなります。
+なおトライアルアカウントで取得可能な電話番号は050のIP電話番号のみとなります。  
+![soracomug_shinshu6 / 4-2 Twilio-GetNumber2](https://kizawa.info/wp-content/uploads/2018/11/twilio-4.png)
+
+電話番号が取得できました。終了ボタンをクリックします。  
+作成した電話番号はメモ帳等にコピーしておきます。  
+![soracomug_shinshu6 / 4-3 Twilio-GetNumber3](https://kizawa.info/wp-content/uploads/2019/03/twilio-6.png)
 
 **クレデンシャル情報の確認**  
 AWS側からAPIで呼び出しできるよう、クレデンシャル情報を確認しておきます。  
@@ -150,10 +169,33 @@ Studio Dashboardに戻りますので、作成したフローのSIDをメモ帳�
 
 <h3 id="content6">6. AWS Lambda関数の設置</h3>
 
+SORACOM LTE-M Buttonが押された際にTwilioを呼び出すプログラム(Lambda関数)を設置します。  
+（※今回はハンズオン時間の関係上、作成済の関数をアップロードして設置します）
+[Lambda関数一式(zip)](https://github.com/kizawa2020/iot-showcase/blob/master/events/soracomug-shinshu6/lambda.zip)をダウンロードしてください。
 
+[AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインした後、リージョンをオレゴンに変更し、Lambdaのコンソールを開きます。  
+![soracomug_shinshu6 / 6-1 Lambda1](https://kizawa.info/wp-content/uploads/2019/03/lambda-1.png)
 
+Lambdaコンソールが開きますので、ダッシュボードから関数の作成をクリックします。  
+![soracomug_shinshu6 / 6-2 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-2.png)
 
+関数の作成画面が開きます。以下の情報を入力します。  
+* 関数名：任意の名前
+* ランタイム：Python3.7
+* 実行ロール：基本的なLambdaアクセス権限で新しいロールを作成
+![soracomug_shinshu6 / 6-3 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-3.png)
 
+続いて関数の編集画面が開きます。以下の設定を行います  
+* 関数コードのセクション
+    * コードエントリタイプ：.zipファイルをアップロード
+    * 関数パッケージ：アップロードボタンをクリックし、先程ダウンロードしたzipファイルを指定
+* 基本設定のセクション
+    * タイムアウト時間を 3秒⇒10秒 に変更
+![soracomug_shinshu6 / 6-4 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-4.png)  
+![soracomug_shinshu6 / 6-5 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-5.png)  
+
+最後に画面上方にある「保存」ボタンをクリックして下さい。  
+以上で完了です。
 
 <h3 id="content7">7. AWS IoT 1-Clickのプロジェクト・プレイスメント設定</h3>
 
@@ -164,7 +206,34 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 プロジェクト名として任意の名前を入力します。  
 ![soracomug_shinshu6 / 7-2 projectName](https://kizawa.info/wp-content/uploads/2018/11/aws1click-6.png)
 
-続けて先程作成したLambda関数と紐付けます。  
+**プレイスメントのテンプレート**  
+プロジェクトのプレイスメントのテンプレートの定義画面に移ります。  
+デバイステンプレートの定義の箇所をクリックします。  
+![soracomug_shinshu6 / 7-3 devicetemplate1](https://kizawa.info/wp-content/uploads/2019/03/1click-1.png)
+
+「すべてのボタンタイプ」の箇所をクリックします。  
+![soracomug_shinshu6 / 7-4 devicetemplate2](https://kizawa.info/wp-content/uploads/2019/03/1click-2.png)
+
+続けて先程作成したLambda関数と紐付けます。以下の情報を入力します。　　
+* デバイステンプレート名：任意の名前
+* アクション：Lambda関数の選択
+* AWSリージョン：（先程Lambda関数を作成したリージョン）
+* Lambda関数：先程作成したLambda関数名
+![soracomug_shinshu6 / 7-5 devicetemplate3](https://kizawa.info/wp-content/uploads/2019/03/1click-3.png)
+
+**プレイスメントの属性**  
+引き続き画面下の方にあるプレイスメントの属性に以下の情報を入力します。
+|属性の名前|デフォルト値|
+|:--------|:----------|
+|twilio_sid|(TwilioのACCOUNT SID)|
+|twilio_token|(TwilioのAUTH TOKEN)|
+|twilio_flowid|(Twilio Studio FlowのSID)|
+|twilio_number|(Twilioで取得した電話番号 +8150xxxxxxxx の形式)|
+|twilio_callto|(電話の発信先：Twilioに登録したご自身の携帯電話番号 +81xxxxxxxxxx の形式)|
+
+![soracomug_shinshu6 / 7-6 placement](https://kizawa.info/wp-content/uploads/2019/03/1click-4.png)  
+ここまで入力が完了したら「プロジェクトの作成」をクリックします。
+
 ![soracomug_shinshu6 / 7-3 projectLambda](https://kizawa.info/wp-content/uploads/2018/11/aws1click-7.png)
 
 プロジェクトが作成されました。  
@@ -184,9 +253,13 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
     * 先に作成した「テンプレート」で設定した内容が引き継がれています
     * 逆にここでテンプレートから引き継がれた内容を上書きすることも可能です
 
+以上で設定は完了です。
+
 <h3 id="content8">8. 動作確認</h3>
 
-ここまでの作業で AWS IoT 1-Click を通じて Twilio経由で電話がかけられるようになりました。
+ここまでの作業で AWS IoT 1-Click を通じて Twilio経由で電話がかけられるようになりました。  
+ボタンを押すと、ご自身の携帯電話に電話が掛かってくるようになったでしょうか。  
+（※うまく動作しない方はスタッフまでお問い合わせ下さい）
 
 <h3 id="contentE">9. お片付け</h3>
 AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。  
