@@ -171,15 +171,16 @@ Studio Dashboardに戻りますので、作成したフローのSIDをメモ帳�
 
 SORACOM LTE-M Buttonが押された際にTwilioを呼び出すプログラム(Lambda関数)を設置します。  
 （※今回はハンズオン時間の関係上、作成済の関数をアップロードして設置します）
-[Lambda関数一式(zip)](https://github.com/kizawa2020/iot-showcase/blob/master/events/soracomug-shinshu6/lambda.zip)をダウンロードしてください。
+[Lambda関数一式(zip)](https://github.com/kizawa2020/iot-showcase/raw/master/events/soracomug-shinshu6/lambda.zip)をダウンロードしてください。
 
 [AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインした後、リージョンをオレゴンに変更し、Lambdaのコンソールを開きます。  
 ![soracomug_shinshu6 / 6-1 Lambda1](https://kizawa.info/wp-content/uploads/2019/03/lambda-1.png)
 
 Lambdaコンソールが開きますので、ダッシュボードから関数の作成をクリックします。  
-![soracomug_shinshu6 / 6-2 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-2.png)
+![soracomug_shinshu6 / 6-2 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-0.png)
 
-関数の作成画面が開きます。以下の情報を入力します。  
+関数の作成画面が開きます。以下の情報を入力します。
+* 作成方法：一から作成  
 * 関数名：任意の名前
 * ランタイム：Python3.7
 * 実行ロール：基本的なLambdaアクセス権限で新しいロールを作成
