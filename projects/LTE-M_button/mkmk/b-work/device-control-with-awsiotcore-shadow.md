@@ -4,7 +4,7 @@ AWS IoT Core を利用して、会場に設置されたデバイスを制御し�
 
 AWS IoT Core とその先の環境は運営側で準備しているため、この章では AWS IoT 1-Click から AWS IoT Core への送信までを行うのがゴールになります。
 
-![button-mkmk / AWS IoT Core 全体像](https://docs.google.com/drawings/d/e/2PACX-1vSs0tF-8s21WZHxe7bWXMOkl5V06Y8hEdLnoQZQyDAMhnw5NCgCNYNJK_R-erEGY3sigR5RNlKS-2nj/pub?w=813&h=457)
+![mkmk-button / AWS IoT Core 全体像](https://docs.google.com/drawings/d/e/2PACX-1vSs0tF-8s21WZHxe7bWXMOkl5V06Y8hEdLnoQZQyDAMhnw5NCgCNYNJK_R-erEGY3sigR5RNlKS-2nj/pub?w=813&h=457)
 
 ## 作業1: AWS Lambda を作成する
 
@@ -21,18 +21,16 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 
 * 名前: `1click-updateAWSIoTCoreShadow` (任意の文字列)
 * ランタイム: _Node.js 8.10_
-* ロール: _1つ以上のテンプレートから新しいロールを作成します_
-* ロール名: `1click-updateAWSIoTCoreShadow` (任意の文字列)
-* ポリシーテンプレート: 空のままでＯＫです
+* （アクセス権限は編集する必要はありませんが、選択する場合は `基本的な Lambda アクセス権限でロールを作成` を選んでください）
 
-![button-mkmk / AWS Lambda 作成](https://docs.google.com/drawings/d/e/2PACX-1vSaizKKpVN_v5vhtVed2QzXGAXlVCuSDd7M-nkZKoPWGAiJu-mF6Vi6o1Mo40fWHEZp1f3Fo3qGLlT-/pub?w=929&h=594)
+![mkmk-button / AWS Lambda 作成](https://docs.google.com/drawings/d/e/2PACX-1vSaizKKpVN_v5vhtVed2QzXGAXlVCuSDd7M-nkZKoPWGAiJu-mF6Vi6o1Mo40fWHEZp1f3Fo3qGLlT-/pub?w=929&h=594)
 
 関数コードでは、以下のようにします。
 
 コードを以下の URL のコードと入れ替えて [保存] をクリックします。  
 [https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee](https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee)
 
-![button-mkmk / AWS Lambda コード](https://docs.google.com/drawings/d/e/2PACX-1vSovMN3Ab8Ewgx3qFLk2afThD6j_20H8XDM6QlXwg-iSRF-YNBQaOxZMcXYBo2mZOQOhEnytgB6ACaX/pub?w=841&h=670)
+![mkmk-button / AWS Lambda コード](https://docs.google.com/drawings/d/e/2PACX-1vSovMN3Ab8Ewgx3qFLk2afThD6j_20H8XDM6QlXwg-iSRF-YNBQaOxZMcXYBo2mZOQOhEnytgB6ACaX/pub?w=841&h=670)
 
 環境変数では、以下のようにします。
 
@@ -40,7 +38,7 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 * `ACCESS_KEY_ID`: **ハンズオン運営から入手** (aws-accesskey-id)
 * `SECRET_ACCESS_KEY`: **ハンズオン運営から入手** (aws-secret-accesskey-id)
 
-![button-mkmk / AWS Lambda 環境変数](https://docs.google.com/drawings/d/e/2PACX-1vTt-iOLSHOljgkwY6lI7WqH4rqM7SHRLMfT-wDyqdyv3EFUOrsDc0Y1U2FT8VE9ThxRQmubYnj6Bbtm/pub?w=919&h=457)
+![mkmk-button / AWS Lambda 環境変数](https://docs.google.com/drawings/d/e/2PACX-1vTt-iOLSHOljgkwY6lI7WqH4rqM7SHRLMfT-wDyqdyv3EFUOrsDc0Y1U2FT8VE9ThxRQmubYnj6Bbtm/pub?w=919&h=457)
 
 メールの時同様に、テストを作成します。  
 テストイベントは以下の JSON を使います。その際、以下の値を変更してください。
@@ -100,7 +98,7 @@ AWS Lambda 上でテストをして会場にあるデバイスが動けば成功
     * プレイスメントの属性
         * `thingName` = **ハンズオン運営から入手** (awsiot-thing-name)
 
-![button-mkmk / AWS IoT 1-Click プロジェクト](https://docs.google.com/drawings/d/e/2PACX-1vS_Q8YXX3Dt80EYyGtlcpjLIPST0L7IUoEzL9Fo4xfpVg1rCb1FvPlojWaYnN_sh_spXSGWIgnAh0de/pub?w=601&h=689)
+![mkmk-button / AWS IoT 1-Click プロジェクト](https://docs.google.com/drawings/d/e/2PACX-1vS_Q8YXX3Dt80EYyGtlcpjLIPST0L7IUoEzL9Fo4xfpVg1rCb1FvPlojWaYnN_sh_spXSGWIgnAh0de/pub?w=601&h=689)
 
 [プレイスメントの作成] をクリックした後、プレイスメント内での設定を以下のようにします。
 
@@ -126,7 +124,7 @@ SORACOM LTE-M Button を押して会場にあるデバイスが動くか確認�
 
 * AWS 関連
     * Lambda 関数の削除
-    * IAM ロール / ポリシーの削除 (作った場合)
+    * IAM ロール (自動生成のロールは `Lambda 関数名-role-ランダム文字` となります。テキストに沿って作った場合は `1click-updateAWSIoTCoreShadow-role-ランダム文字` となっています)
     * AWS IoT 1-Click のプロジェクトの削除
 
 ---
