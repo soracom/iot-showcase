@@ -1,6 +1,6 @@
 # kintone の設定
 
-kintone のアプリ作成、認証情報取得について記載します。
+kintoneのアプリ作成、認証情報取得について記載します。
 
 ## 手順
 
@@ -11,7 +11,7 @@ kintone のアプリ作成、認証情報取得について記載します。
 
 <h2 id="step1">アプリの新規作成</h2>
 
-kintone のトップページ右側の「+ボタン」よりアプリ作成画面を開きます。
+kintoneのトップページ右側の「+ボタン」よりアプリ作成画面を開きます。
 
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/kintone-capture1.png"/>
 
@@ -36,7 +36,7 @@ kintone のトップページ右側の「+ボタン」よりアプリ作成画�
 
 <h2 id="step3">APIトークンの生成</h2>
 
-kintone には **ログイン認証 / APIトークン認証 / セッション認証** の3つの認証が利用できます。<br/>
+kintoneには **ログイン認証 / APIトークン認証 / セッション認証** の3つの認証が利用できます。<br/>
 今回はその中の **APIトークン認証** を利用します。<br/>
 
 <br/>
@@ -81,4 +81,4 @@ https://◯◯.cybozu.com/k/ **{数字}**
 - ドメイン
 - アプリID
 
-を[こちら](aws-lambda-setting.md#step4)の Lambda 関数の環境変数に指定します。
+を[こちら](aws-lambda-setting.md#step4)のLambda関数の環境変数に指定します。
