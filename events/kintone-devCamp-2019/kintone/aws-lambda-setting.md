@@ -8,24 +8,24 @@
 右側の「関数の作成」よりLambda関数を新規作成します。
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture1.png">
 <br/>
-関数名を入力し(kintone-soracom-button)、「関数の作成」を選択します。
+関数名を入力し(kintone-soracom-button)、「関数の作成」を選択します。<br/>
 (今回は Node.js でプログラムを記述するため、ランタイムは初期設定のままで大丈夫です)
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture2.png">
 <br/>
 Lambda 関数が作成できたら、次はトリガーに「API Gateway」を指定します。
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture3.png">
-API Gatewayの設定をそれぞれ指定します。
+API Gatewayの設定をそれぞれ指定します。<br/>
 (今回は新規のAPI作成/セキュリティはオープンにしていますが、ご自身の設定に合わせてください。)
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture4.png">
 <br/>
-API Gatewayの設定後、一度画面右上の「保存」ボタンを押すことで、API GatewayのURLが生成されます。
+API Gatewayの設定後、一度画面右上の「保存」ボタンを押すことで、API GatewayのURLが生成されます。<br/>
 こちらのURLを SORACOM Beam の送信先として指定します。
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture5.png">
 
 ## Lambda 関数のプログラム作成
 
-今回は 「ボタンを押したらkintoneへレコード登録する」プログラムを記述します。
-SORACOM LTE-M Button は **シングルクリック / ダブルクリック / ロングクリック** の3つの押し方に対応しているため、
+今回は 「ボタンを押したらkintoneへレコード登録する」プログラムを記述します。<br/>
+SORACOM LTE-M Button は **シングルクリック / ダブルクリック / ロングクリック** の3つの押し方に対応しているため、<br/>
 それぞれで異なるデータが登録できるようにしています。
 
 ### Node プロジェクトの準備
@@ -52,7 +52,7 @@ $ npm i request-promise
 
 ## 実行プログラムの作成
 
-index.js として以下を記述したJavaScriptを作成します。
+index.js として以下を記述したJavaScriptを作成します。<br/>
 (一部Lambdaの環境変数を利用しています。)
 
 ```javascript
@@ -121,7 +121,7 @@ exports.handler = async (event) => {
 
 ## 実行ファイルのアップロード
 
-Lambdaへアップロードするために実行ファイルをZip化します。
+Lambdaへアップロードするために実行ファイルをZip化します。<br/>
 (-r オプションをつけて、node_module配下のものもすべてZip化します)
 
 ```bash
@@ -133,11 +133,11 @@ $ zip -r LambdaFunction.zip index.js node_module/
 
 ## 環境変数の設定
 
-Lambdaの環境変数を設定します。ここに **kintoneのURL / APIトークン / アプリID** を記述します。
-この環境変数を利用することで、JavaScript上で `process.env.◯◯` と記述できます。
+Lambdaの環境変数を設定します。ここに **kintoneのURL / APIトークン / アプリID** を記述します。<br/>
+この環境変数を利用することで、JavaScript上で `process.env.◯◯` と記述できます。<br/>
 (kintoneの準備は [こちら](kintone-setting.md) をご覧ください)
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture7.png">
 
-以上でLambda関数の準備は環境です。
-API Gatewayの設定で生成した URL をSORACOM Beamに設定することで、
+以上でLambda関数の準備は環境です。<br/>
+API Gatewayの設定で生成した URL をSORACOM Beamに設定することで、<br/>
 `SORACOM LTE-M Button -> SORACOM Beam -> AWS Lambda -> kintone` という流れが完成します。
