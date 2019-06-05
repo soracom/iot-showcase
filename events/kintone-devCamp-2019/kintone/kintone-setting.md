@@ -1,6 +1,6 @@
 # kintone の設定
 
-kintoneのアプリ作成、認証情報取得について記載します。
+kintone のアプリ作成、認証情報取得について記載します。
 
 ## 手順
 
@@ -11,13 +11,14 @@ kintoneのアプリ作成、認証情報取得について記載します。
 
 <h2 id="step1">アプリの新規作成</h2>
 
-kintoneのトップページ右側の「+ボタン」よりアプリ作成画面を開きます。
+kintone のトップページ右側の「+ボタン」よりアプリ作成画面を開きます。
 
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/kintone-capture1.png"/>
 
 <br/><br/>
 
 「はじめから作成」を選択します。
+
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/kintone-capture2.png"/>
 
 <h2 id="step2">フォームの設定</h2>
@@ -35,7 +36,7 @@ kintoneのトップページ右側の「+ボタン」よりアプリ作成画面
 
 <h2 id="step3">APIトークンの生成</h2>
 
-kintoneには **ログイン認証 / APIトークン認証 / セッション認証** の3つの認証が利用できます。<br/>
+kintone には **ログイン認証 / APIトークン認証 / セッション認証** の3つの認証が利用できます。<br/>
 今回はその中の **APIトークン認証** を利用します。<br/>
 
 <br/>
