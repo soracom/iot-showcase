@@ -2,7 +2,14 @@
 
 今回利用した Lambda 関数の設定方法、およびプログラムについて記載します。
 
-## Lambda 関数の作成
+## 手順
+
+- [Lambda 関数の作成](#step1)
+- [Lambda 関数のプログラム作成](#step2)
+- [実行ファイルのアップロード](#step3)
+- [環境変数の設定](#step4)
+
+<h2 id="step1">Lambda 関数の作成</h2>
 
 [AWSマネジメントコンソール](https://aws.amazon.com/jp/console/) からコンソールへログインして、Lambdaのページへアクセスします。<br/>
 右側の「関数の作成」よりLambda関数を新規作成します。
@@ -36,7 +43,7 @@ API Gatewayの設定後、一度画面右上の「保存」ボタンを押すこ
 
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture5.png">
 
-## Lambda 関数のプログラム作成
+<h2 id="step2">Lambda 関数のプログラム作成</h2>
 
 今回は 「ボタンを押したらkintoneへレコード登録する」プログラムを記述します。<br/>
 SORACOM LTE-M Button は **シングルクリック / ダブルクリック / ロングクリック** の3つの押し方に対応しているため、<br/>
@@ -64,7 +71,7 @@ $ npm i request
 $ npm i request-promise
 ```
 
-## 実行プログラムの作成
+### 実行プログラムの作成
 
 index.js として以下を記述したJavaScriptを作成します。<br/>
 (一部Lambdaの環境変数を利用しています。)
@@ -133,7 +140,7 @@ exports.handler = async (event) => {
 
 ```
 
-## 実行ファイルのアップロード
+<h2 id="step3">実行ファイルのアップロード</h2>
 
 Lambdaへアップロードするために実行ファイルをZip化します。<br/>
 (-r オプションをつけて、node_module配下のものもすべてZip化します)
@@ -146,7 +153,7 @@ $ zip -r LambdaFunction.zip index.js node_module/
 
 <img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/aws-lambda_capture6.png">
 
-## 環境変数の設定
+<h2 id="step4">環境変数の設定</h2>
 
 Lambdaの環境変数を設定します。ここに **kintoneのURL / APIトークン / アプリID** を記述します。<br/>
 この環境変数を利用することで、JavaScript上で `process.env.◯◯` と記述できます。<br/>
