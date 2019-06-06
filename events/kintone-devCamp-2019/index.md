@@ -25,7 +25,7 @@ Wi-Fi などの設備が無くとも、このボタン一つで即座に現場�
 
 SORACOM LTE-M Buttonは、省電力型のモバイル通信 "LTE-M" と、組み込み型 SIM "eSIM" を内蔵した「どこでもボタン」を実現するボタン型デバイスです。
 
-![kintone-devCamp2019 / SORACOM LTE-M Button](TODO)
+![kintone-devCamp2019 / SORACOM LTE-M Button](https://docs.google.com/drawings/d/e/2PACX-1vRSi9wEeW_wVzlubiVDseBbTSPR9g0UNNAgak-ddvzTCIPa00YgO3fofi6v83cbEB_gp0omfO80Rldm/pub?w=454&h=236)
 
 Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連携が可能となります。電源は交換可能な単４電池２本で、小型で持ち運びも可能です。接続するセンサーやクラウドに合わせて３モデルあります。
 
@@ -41,20 +41,43 @@ Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連
 
 * SORACOM アカウント x 1
 * SORACOM LTE-M Button x 1
-* kintone アカウント x 1
 
 <h2 id="prepare">作業前の準備</h2>
 
-TODO
+### SORACOM LTE-M Button を借りた方
+
+* [ハンズオンに必要なもの](#check) がお手元にそろっているか確認してください。
+
+### SORACOM LTE-M Button 持ち込みの方
+
+* 有効な SORACOM アカウント x 1
+    * 持っていない場合: 有効なクレジットカード(1枚) と、ハンズオン会場で確認可能なメールアドレス(1つ) を利用し [SORACOM アカウントの作成](https://dev.soracom.io/jp/start/console/#account) の手順に沿って作成します。
+* SOARCOM アカウントに登録済みの SORACOM LTE-M Button x 1
+    * 未登録の場合: [【ステップ１: SIM管理の画面から Enterprise ボタンを確認する】のみ](https://dev.soracom.io/jp/start/enterprise_button_harvest/#enterprise_button) を行って登録します。
 
 <h2 id="index">作業: 目次</h2>
 
 * [ボタンからのデータを SORACOM Harvest に蓄積・収集する](soracom-harvest)
-* [SORACOM Beam で kintone と連携する](kintone)
+* [SORACOM Beam で kintone と連携する](TODO)
 
 <h2 id="clean-up">作業: あとかたづけ</h2>
 
-* TODO (特に無さそう)
+### SORACOM LTE-M Button を借りた方
+
+* SORACOM LTE-M Button を運営に返却ください。
+* SORACOM ユーザーコンソール上で行うことは特にありません。
+
+### SORACOM LTE-M Button 持ち込みの方
+
+特に料金に関する設定項目を OFF にしてください。
+
+* SORACOM Harvest の料金について
+    * 本ハンズオンで使用した SORACOM Harvest は、 **実際の通信の有無によらず** SORACOM Harvest が利用可能状態の SIM(Button) の枚数に応じて日当たりの料金が発生します。詳しくは [SORACOM Harvest のご利用料金](https://soracom.jp/services/harvest/price/) をご覧ください。
+    * SIM グループの設定で SORACOM Harvest を "OFF" にすることで、翌日以降の料金が発生しなくなります。または SIM グループを削除することで、当該 SIM グループに設定されている機能をすべて OFF にすることができます。
+    * 蓄積済みデータは SORACOM Harvest を OFF にしても残りますが、保管費用はかかりません。ただし、標準ではデータ発生から 40 日後に削除されますので、その前にデータエクスポート等を行うようにしてください。
+* SORACOM Beam の料金について
+    * 本ハンズオンで使用した SORACOM Beam は発生したリクエストに応じて料金が発生する完全従量課金制サービスです。詳しくは [SORACOM Beam のご利用料金](https://soracom.jp/services/beam/price/) をご覧ください。
+    * SIM グループの設定で SORACOM Beam が "ON" になっていたとしても、リクエストが発生しなければ料金は発生しませんが、 "OFF" にする、もしくは設定や SIM グループを削除することをおすすめいたします。
 
 ### MEMO: 運営側のあとかたづけ
 
