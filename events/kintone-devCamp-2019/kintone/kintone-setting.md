@@ -29,10 +29,21 @@ kintoneのトップページ右側の「+ボタン」よりアプリ作成画面
 
 <br/><br/>
 
-このままでも良いですが、あとで利用しやすいように配置したフィールドの右上歯車からフィールドの設定を開き、<br/>
-「フィールドコード」を `text` 等のローマ字に変更します。
+配置したフィールドの右上歯車からフィールドの設定を開き、<br/>
+「フィールド名」を `テキスト` に、「フィールドコード」を `text` に変更します。
 
-<img src="https://kintone-devcamp2019-soracom.s3-ap-northeast-1.amazonaws.com/kintone-capture4.png"/>
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRLXZF-xWfqa2JM86fPWty5gltf4dUOT_XrMF2aMS9nvxcshB_kLeIRNFCvgjQu-0SrS_X0xcLVAF2t/pub?w=930&amp;h=489">
+
+<br/>
+
+同様にもう一つ文字列（1行）フィールドを配置して、<br/>
+「フィールド名」を `ユーザー` に、「フィールドコード」を `user` に変更しておきます。
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vR636qxYfpOPWlUoNe4ub5LNVvCyzmt_Fg1mZwonHF9_50Xq5PAMBEmZ5oCU4NmC8ivKRfmk158e5In/pub?w=929&amp;h=487">
+
+<br/>
+
+配置後、「フォームを保存」を選択します。
 
 <h2 id="step3">APIトークンの生成</h2>
 
