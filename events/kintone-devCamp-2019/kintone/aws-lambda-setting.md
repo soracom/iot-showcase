@@ -109,6 +109,33 @@ exports.handler = async (event) => {
 
 ```
 
+#### ポイント
+
+プログラムのポイントだけ軽く説明します。
+
+##### ボタンクリック方法の識別
+
+Lambdaへ送られるevent.body内に `clickType` というプロパティで値が入っています。<br/>
+clickTypeが `1` なら**シングルクリック**、`2` なら**ダブルクリック**、`3` なら**ロングクリック(長押し)** です。
+
+##### kintoneのパラメータ
+
+kintoneはオブジェクト構造でデータを格納しており、文字列（1行）フィールドの場合<br/>
+`record.{フィールドコード}.value` の中に値を入れることでデータをはめることができます。<br/>
+
+```javascript
+record: {
+  text: {
+    value: TEXT,
+  },
+  user: {
+    value: USER,
+  }
+}
+```
+
+(詳しいパラメータの書き方は [cybozu developer network の APIドキュメント](https://developer.cybozu.io/hc/ja/articles/201941754) をご覧ください)
+
 <h2 id="step2">実行ファイルのアップロード</h2>
 
 Lambdaへアップロードするために実行ファイルをzip化します。<br/>
