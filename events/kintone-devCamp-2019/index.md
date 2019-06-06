@@ -17,7 +17,9 @@ Wi-Fi などの設備が無くとも、このボタン一つで即座に現場�
 
 ### ハンズオンのゴール
 
-![kintone-devCamp2019 / overview](https://......)
+ボタンは「シングル押し」「ダブル押し」「長押し」というデータを送ることができるので、ハンズオンの感想を「TODO」「TODO」「TODO」の３つで投票いただく仕組みを作っていきます。
+
+![kintone-devCamp2019 / overview](https://docs.google.com/drawings/d/e/2PACX-1vSeNzwTEbvTHXjZK0l2rUmzJTUaPdWfiYcT27QKTgFAqtH4vUQyAJQxZShbQGz6ttKMGI4_6xGoOjWk/pub?w=1099&h=364)
 
 ### SORACOM LTE-M Button とは？
 
@@ -39,7 +41,7 @@ Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連
 
 * SORACOM アカウント x 1
 * SORACOM LTE-M Button x 1
-* TODO
+* kintone アカウント x 1
 
 <h2 id="prepare">作業前の準備</h2>
 
@@ -52,14 +54,21 @@ TODO
 
 <h2 id="clean-up">作業: あとかたづけ</h2>
 
-TODO
+* TODO (特に無さそう)
+
+### MEMO: 運営側のあとかたづけ
+
+* SIM グループの削除
+    * [SIM グループ] > 当該の SIM グループ > [高度な設定] > 削除
+    * 削除するためには [SIM 管理] からボタンに紐づいているグループを解除する必要があります
+* SORACOM Harvest のデータの削除
 
 <h2 id="afterfollow">今後の自習方法について</h2>
 
 * 本ドキュメントはイベント後でも閲覧いただくことができます。
 * 運営側で準備した Amazon API Gateway / AWS Lambda / kintone の環境はイベント終了後に停止しますが、以下のドキュメントから同等の環境を構築することが可能です。
     * [SORACOM LTE-M Button デザインパターン ― AWS と連携させる / SORACOM Beam + Amazon API Gateway パターン](https://dev.soracom.io/jp/design_patterns/soracom_aws/#aws1)
-    * [kintone 側環境の構築](TODO)
-    * [本日利用した Lambda 関数について](TODO)
+    * [kintone 側環境の構築](kintone/kintone-setting)
+    * [本日利用した Lambda 関数について](kintone/aws-lambda-setting)
 
 [EoT]
