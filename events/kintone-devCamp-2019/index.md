@@ -8,7 +8,7 @@
 
 そこに IoT 技術を組み合わせることで、より省力化、より確実にデータの記録が可能となり、新たに集まるデータで業務改善の幅を広がることは間違いありません。
 
-TODO: iSTC Button 動画
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DEx8Xv5YPWY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 本ハンズオンでは、すでに市販されている「どこでもボタン」 SORACOM LTE-M Button の「ボタンを押した」というデータを kintone に記録していくハンズオンです。
 
