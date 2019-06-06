@@ -92,4 +92,4 @@ https://◯◯.cybozu.com/k/ **{数字}**
 - ドメイン
 - アプリID
 
-を[こちら](aws-lambda-setting.md#step4)のLambda関数の環境変数に指定します。
+を[こちら](aws-lambda-setting.md#step3)のLambda関数の環境変数に指定します。
