@@ -1,50 +1,26 @@
-# if-up 2019 ハンズオン
+<h1>SORACOM LTE-M Button を AWS IoT 1-Click に登録して、メールを使い動作確認</h1>
 
-## ハンズオンの内容
-SORACOM LTE-M Button powered by AWS を使いSORACOM LTE-M Button を押したらメールが送られるように設定しよう！
-### ハンズオンの構成
+[目次に戻る](index#work-a)
+
+SORACOM LTE-M Button が使えるように AWS IoT 1-Click に登録した後、動作確認のためにメールを送ってみましょう。
+
 ![button-mkmk / Email 全体像](https://docs.google.com/drawings/d/e/2PACX-1vQcTupxolXoBHeRzGr_UBp3TIZbV1nniNrINjKl16fwh4Kddle8zG9I5kaJp0SwuZCfjUAxAiKHNTV8/pub?w=721&h=406)
 
-## 本日の貸し出し機材
-* SORACOM LTE-M Button powered by AWS
+## 準備
 
-## お客様の持ち物
-* Wifi に繋がるPC
-* クレジットカード（AWSアカウント作成に必要になります）
-* 会場で着信可能な電話/携帯電話(AWS アカウント作成時に電話音声による認証が必要となります/「非通知」からの電話に対する着信拒否設定の解除が必要となります)
-* 受信可能なメールアドレス
+* SORACOM LTE-M Button を手元に用意してください
 
-
-## 参加費用
-無料（ただしAWSの利用料金、数円は発生します）
-
-## 目次
-1. [AWS アカウントの作成](#content1)
-2. [SORACOM LTE-M Button を AWS IoT 1-Click に登録しよう](#content2)
-3. [メールを送ってみよう](#content3)
-4. [プレイスメントからデバイスの割り当てを外し、SORACOM LTE-M Button を AWS IoT 1-Click から解除](#content4)
-
-<h3 id="content1">1. AWS アカウントの作成</h3>
-<a href="https://aws.amazon.com/jp/register-flow/" target="_blank">AWS アカウント作成の流れ (AWS のページに飛びます)</a> から進み、作成してください。
-
-アカウント作成時のポイント
-電話音声による認証が必要となります
-「非通知」からの着信となるため、必要ならば非通知着信が可能になるようにしてください
-
-AWS サポートプランについて
-理由がない限り「ベーシックプラン」を選択してください。それ以外のプランは費用がかかります
-
-すでにアカウントをお持ちの方はこちらをスキップし「2. SORACOM LTE-M Button を AWS IoT 1-Click に登録しよう」にお進みください。
-
-<h3 id="content2">2. SORACOM LTE-M Button を AWS IoT 1-Click に登録しよう</h3>
+## AWS IoT 1-Click 「テンプレート」「プレイスメント」
 
 AWS IoT 1-Click ではボタンと Lambda 関数を結びつける概念として「プレイスメント」と「テンプレート」そして「プロジェクト」が存在します。これらを全て作成したうえで、それぞれボタンと Lambda 関数に結び付けていきます。
 
 ![mkmk-button / overview-aws-iot-1-click-structure](https://docs.google.com/drawings/d/e/2PACX-1vRNsm3bCso3sEDoLqx0F7ReWgvOUvpyxAxbIkRDHHhhhTCkIbc8xuLW2zwsfSFIkHntgxUSaXCoHC0B/pub?w=927&h=520)
 
-AWS IoT 1-Click へ LTE-M Button を登録する
+以降の作業は全てこの構成を作っていく事になります。
 
-[AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインしたあと、リージョンをオレゴンに変更し、 AWS IoT 1-Click のコンソールを開きます。
+<h2 id="claim">作業1: AWS IoT 1-Click へ SORACOM LTE-M Button を登録する</h2>
+
+[AWS マネジメントコンソール](https://console.aws.amazon.com/console/home) を開きログインしたあと、リージョンを "オレゴン" に変更し、 AWS IoT 1-Click のコンソールを開きます。
 
 ![mkmk-button / 1-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSzawNDQ3RDZ0RiN6lu1nv5Y57aUOlSuYoK47BZIs72nt6bHnlbhHf6QAn4bxmJQnZHmQES6gAAn-j5/pub?w=927&h=284)
 
@@ -54,13 +30,17 @@ AWS IoT 1-Click のコンソールから [デバイスの登録] をクリック
 
 ![mkmk-button / 1-3 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vRZ_OiMuE0UPvKG2QxIBfA1OP0laZJiDG4gWa-zwfcOqW6B82I3T0uCxasen8uCh_ttXJuHKBoye_q4/pub?w=752&h=216)
 
-LTE-M Button の電池カバーを開けて DSN を AWS IoT 1-Click に入力し [登録] をクリックします。
+SORACOM LTE-M Button の電池カバーを開けて DSN を AWS IoT 1-Click に入力し [登録] をクリックします。
+
+* DSN は文字が非常に小さいですが、頑張って読み取ってください (助け合ってください...)
+    * `オー` と 数字の０ 、 `アイ` と 数字の１ などが間違えやすい文字です
+* スマートフォン向けアプリであれば QR コードを読み取ることで登録も可能です。その方法は [Getting Started with SORACOM LTE-M Button](https://dev.soracom.io/jp/start/aws_button_slack/#registration) をご覧ください
 
 ![mkmk-button / 1-4 dsn](https://docs.google.com/drawings/d/e/2PACX-1vT5pWHfUR5phIDYUL0NdfyqZc5_fg3LxgomOqOSSvh6nDriZzSxMWNvRkBo8Hyl_CH9XBgKpJ9-t_iT/pub?w=532&h=352)
 
 ![mkmk-button / 1-5 aws-iot-1-click](https://docs.google.com/drawings/d/e/2PACX-1vR0FV0g7ywhbb7-02pDvuB-ZB3oiwfomAyUur4Lfx0pLKXQT2EcaSv6tK8RKDVg6GeDoLNG8Vk0j8W1/pub?w=578&h=516)
 
-LTE-M Button からのボタン押下を待ち受ける状態になります。このタイミングで LTE-M Button のボタンを１回押してください。
+SORACOM LTE-M Button からのボタン押下を待ち受ける状態になります。このタイミングで SORACOM LTE-M Button のボタンを１回押してください。
 
 * LED が赤点灯 (= データ送信失敗) だった場合は、再度ボタンを１回押してください
 
@@ -81,11 +61,11 @@ LTE-M Button からのボタン押下を待ち受ける状態になります。�
 * デバイスリージョン
     * デバイスが管理されているリージョンです。現在のところ利用者はリージョンを選ぶことができず、オレゴン(us-west-2) 固定となります。
 * 有効
-    * *有効* もしくは *無効* です。初期状態は *無効* です。 *有効* は課金対象デバイスです。 
+    * *有効* もしくは *無効* です。初期状態は *無効* です。 *有効* は課金対象デバイスです。 *無効* にする方法は [SORACOM LTE-M Button を無効化する](closing/disable) をご覧ください。
 * プロジェクト、配置
     * ボタンに紐づいた機能(Lambda 関数)の状況です。初期状態は双方とも _未割り当て_ です。
 * ヘルス
-    * ボタンの寿命です。
+    * ボタンの寿命です。詳しくは後述する [ボタンの「ヘルス」について](#life) をご覧ください。
 
 登録したボタンの右にある [...] をクリックした後、[デバイスの有効化] をクリックします。
 
@@ -93,9 +73,31 @@ LTE-M Button からのボタン押下を待ち受ける状態になります。�
 
 これでボタンが利用可能な状態になりました。
 
-<h3 id="content3">3. メールを送ってみよう！</h3>
+### ボタンを登録解除したい場合
 
-**AWS IoT 1-Click で Email 送信設定を行う**
+登録したボタンは解除することができます。主に別の AWS アカウントへ再登録する際に利用する機能です。
+
+登録解除方法は [SORACOM LTE-M Button を AWS IoT 1-Click から解除](closing/unclaim) をご覧ください。
+
+AWS IoT 1-Click の費用を抑えたい場合は解除ではなく "無効" にすることで実現できます。詳しくは [料金について](index#fee) をご覧ください。
+
+<h3 id="life">ボタンの「ヘルス」について</h3>
+
+**ヘルス** に表示されている % は `1 - 押下回数 / 1500` もしくは `1 - 開始日からの経過日数 / 365` のどちらかで小さいほうが表示されます。
+
+SORACOM LTE-M Button においての *ヘルス* は電池残量ではありません。（他のモデルでは電池残量である場合がありますが異なりますのでご注意ください）
+
+押下回数、開始日からの経過日数、電池残量を具体的に管理したい場合は SORACOM LTE-M Button を SORACOM に登録することで SORACOM ユーザーコンソールおよび API で確認することができます。
+
+SORACOM への登録の方法は [SORACOM LTE-M Button を SORACOM へ登録する](https://dev.soracom.io/jp/start/aws_button_registration/) をご覧ください。  
+**注意：貸し出しの方は SORACOM への登録しないでください！**
+
+## 作業2: AWS IoT 1-Click で Email 送信設定を行う
+
+AWS マネジメントコンソールのリージョンが **オレゴン** (us-west-2) になっている事を確認します。  
+なっていなければ **オレゴン** に切り替えてください。
+
+![mkmk-button / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSgprF60wQZHq5nvPUcueml_-wNwuVn3EWx9FqRV73-7mxS0bapShs6fPVD2LMV-Lrr6GLlb-aEhjIr/pub?w=928&h=189)
 
 AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開いた後 [プロジェクトの作成] をクリックします。
 
@@ -110,11 +112,7 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 プロジェクトのプレイスメントのテンプレートの定義では以下のように設定した後 [プロジェクトの作成] をクリックします。
 
 1. **デバイステンプレートの定義** の [開始] をクリックします
-![device-template1](https://docs.google.com/drawings/d/e/2PACX-1vSiNKEFeTGGTCiEj0SghjYbSd_h_RI41cLzHiwoEUrv9QYAbp2D4DcrH6AwzFTr1FGsABZn7U_XsVSz/pub?w=932&amp;h=323)
-
 2. **テンプレートのデバイスタイプを選択する** 一覧で _すべてのボタンタイプ_ をクリックします
-![device-template2](https://docs.google.com/drawings/d/e/2PACX-1vSISeAl3NGe_o-wT3M115UGi595L9rcvxtrmrwMsYlvXpRXcbQxc9xuMlwUGca_GpbSlgj4Czn2T840/pub?w=926&amp;h=615)
-
 3. 表示されたフォームを下記のように設定します
     * デバイステンプレート名: `Email` (任意の文字列)
     * アクション: _E メールの送信_
@@ -138,7 +136,6 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
     * 先に作成した「テンプレート」で設定した内容が引き継がれています
     * 逆にここでテンプレートから引き継がれた内容を上書きすることも可能です
 
-
 ![mkmk-button / 2-6 placement](https://docs.google.com/drawings/d/e/2PACX-1vQGcMIdUNmqnbc1iY9q75kSZRUmj6NT7GScR-5Ld1Ta9KH0xH8IRNnjTwEegvOQsRqij_p3lhiSmOCE/pub?w=649&h=793)
 
 以下のような画面になれば完了です。  
@@ -146,7 +143,7 @@ AWS IoT 1-Click コンソールから [管理] > [プロジェクト] を開い�
 
 ![mkmk-button / 2-7 placement](https://docs.google.com/drawings/d/e/2PACX-1vR33NlAAkYpwifDiTx1wAMyy6NnGNeBYABdJS3AvlI0V4U3vKhJafNsXgSrrahs1P-FyTUkHTZxEXzL/pub?w=927&h=349)
 
-**Amazon SES で送信先 Email の認証を行う**
+## 作業3: Amazon SES で送信先 Email の認証を行う
 
 Amazon SES (Simple Email Service) のコンソールを開きます。
 
@@ -185,7 +182,7 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 
 ![mkmk-button / 3-6 ses verified](https://docs.google.com/drawings/d/e/2PACX-1vTgN6ur9EWU6-lQ913PWOKHUBi2I7cTYTr9c_ucQsqbj33QiHZoRG5eARmUZwzm8Nd15NRKYyObPiCo/pub?w=928&h=170)
 
-**SORACOM LTE-M Button からメールを送信してみる**
+## 作業4: SORACOM LTE-M Button からメールを送信してみる
 
 ここまでの作業で AWS IoT 1-Click を通じて Amazon SES 経由でメールが送信されるようになりました。
 
@@ -196,34 +193,25 @@ Amazon SES コンソールに戻り [リロードボタン] で表示を更新�
 
 ボタン押下の内容に応じて `SINGLE` の部分が `DOUBLE` や `LONG` に変わりますので試してみてください。
 
+## メールが届いたらこの章は終了です
 
-<h3 id="content4">4. プレイスメントからデバイスの割り当てを外し、SORACOM LTE-M Button を AWS IoT 1-Click から解除</h3>
-AWS IoT 1-Click のコンソールを開きます。リージョンがオレゴンになっていることを確認してください。
-[管理] > [プロジェクト] とクリックした後、解除を行いたいデバイスが所属しているプロジェクトをクリックします。
+メールが届かない場合は [トラブルシューティング](#t) をご覧ください。
 
-![1 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vTKFP7PyM2LajuqPhfZ8Gc3bGus8fbi1xJ6alpcEoOKLmPiM9m0YZ9F8Zn0t8KSQvN61lZh4F4zxov1/pub?w=601&h=591)
+### まとめ
 
-[プレイスメント] から解除したいデバイスの [...] をクリックした後に表示される [プレイスメントの編集] をクリックします。
+* AWS マネジメントコンソールを通して AWS IoT 1-Click へのボタンの登録方法
+* テスト環境としての Email の設定
 
-![2 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vS8f28yZgWHTjGktSFGbSNqRVgbbl1TX7Y99p2zlvbmd6r5rdVqvyCI9cNVvJiXp5KjJiO7XK71b6a-/pub?w=929&h=529)
+### 次へ進む
 
-デバイスが表示されている部分の [クリア] をクリックした後、[プレイスメントの更新] をクリックします。
+* [メールの内容を変えてみる](customize-lambda-function) へ進む
+* [目次に戻る](index#work-a)
 
-![3 unassing placement](https://docs.google.com/drawings/d/e/2PACX-1vSAticSljF3nnjF3xLZrwUNKVY7PHmwzPjSfFJqmcJJ8-n6S1LMqUtdm_IVDrZdkfQThKlSLa-pbMls/pub?w=928&h=407)
+<h2 id="t">トラブルシューティング</h2>
 
-これでデバイスとプレイスメントの割り当てが無くなりました。
+### メールが届かない
 
-[管理] > [デバイス] とクリックした後、解除を行いたいデバイスの [...] をクリックした後に表示される [デバイスの登録解除] をクリックします。  
-最後に確認ダイアログの [登録解除] で解除が完了します。
-
-※プレイスメントに割り当てられているデバイスは解除できませんので、プレイスメントから外してから行ってください。
-
-![mkmk-button / 1 unclaim](https://docs.google.com/drawings/d/e/2PACX-1vTCsBV32iOWgBn8QZJbmiRQIIv1k4JxFmtw3STpYFl_I-iGZn-ejHO_7gSg1Nvv-IxkdtnpbOMHHUB8/pub?w=928&h=269)
-
-一覧から対象デバイスが無くなれば解除完了です。
-
-こちらでハンズオンは終了です。お疲れ様でした。
-
-## 最後に
-最後に貸し出ししたSORACOM LTE-M Buttonをスタッフに手渡してください。
-お渡し頂くタイミングで、プレイスメントの割り当てが無くなっているかを確認させていただきます。
+* 原因: メール受信側で「迷惑メール」として判定されている可能があります
+* 対策: お使いのメールソフトの「迷惑メールフォルダ」を確認してみてください
+    * Amazon SES の管理画面上から *Send a Test Email* をしてみて、届くか確認してください。
+    * Amazon SES 上で verified となった事で「送信先」としては認証できましたが、受信側がどのように判定するかは制御できません。特に Gmail ですと高確率で迷惑メールとして判定されるようです。
