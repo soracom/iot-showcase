@@ -1,4 +1,4 @@
-# 作業B-1 Azure Functions で Slack 通知用 Function を作成
+# B-1 Azure Functions で Slack 通知用 Function を作成
 本ページでは、Azure Functions で Slack へ通知を行うための Function を作成します。
 
 ## Azure Portal へのサインイン
@@ -27,6 +27,7 @@ Azure Portal 左上にある 「＋リソースの作成」ボタンを押して
 ![関数追加](images/function-app-07.png)
 
 関数の名前を変更し（ `button2slack` など）、作成を押すとしばらくして関数の作成が完了し、プログラムコードの編集画面となります。
+
 ![関数追加2](images/function-app-08.png)
 ![関数追加3](images/function-app-09.png)
 
@@ -37,3 +38,5 @@ Azure Portal 左上にある 「＋リソースの作成」ボタンを押して
 最後に、「</> 関数の URL の取得」をクリックし、「コピー」をクリックして、URL をどこかにメモしておきます。
 
 ![URLコピー](images/function-app-10.png)
+
+## 以上で本ページの作業は完了となります

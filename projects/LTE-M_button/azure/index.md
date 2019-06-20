@@ -51,7 +51,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h2 id="work-b">作業B: Slack を使ったクリックイベント通知</h2>
 
 1. [ Azure Functions で Slack 通知用 Function を作成 ](work-b/azure)
-2. [ SORACOM Beam から Function App を呼び出し、Slack に通知を行う ](work-b/soracom)
+2. [ SORACOM Beam から Function App を呼び出す ](work-b/soracom)
 
 <h2 id="work-c">作業C: ボタンと Azure IoT Hub を連携させてデバイス制御</h2>
 
