@@ -40,7 +40,8 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 ## ボタンを押して Function App を呼び出す
 
 ボタンを押して LED が緑色に光れば、呼び出し成功です。
-Azure Portal の Function App のログを確認しましょう。
+
+Azure Portal の Function App のログを確認してみましょう。
 
 ![Function App ログ](images/function-app-11.png)
 
