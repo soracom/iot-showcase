@@ -19,10 +19,10 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 
 転送先を下記のように設定します。
 
-プロトコル： HTTPS
-ホスト名： URL の `oooo.azurewebsites.net` 部分 (`soracom-handson-xxxx.azurewebsites.net`)
-ポート番号： 空 (もしくは 443)
-パス： `/api/button2slack` から後ろの部分すべて
+プロトコル： HTTPS 
+ホスト名： URL の `oooo.azurewebsites.net` 部分 (`soracom-handson-xxxx.azurewebsites.net`) 
+ポート番号： 空 (もしくは 443) 
+パス： `/api/button2slack` から後ろの部分すべて 
 
 ![Beam転送先設定](images/soracom-02.png)
 
@@ -48,3 +48,5 @@ Azure Portal の Function App のログを確認しましょう。
 Slack にクリックイベントが表示されるので、確認します。
 
 ![Slack](images/slack.png)
+
+## 以上で本ページの作業は完了となります
