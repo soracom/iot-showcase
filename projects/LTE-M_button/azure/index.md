@@ -16,12 +16,13 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
     * 会場によっては貸出いたします。また、すでにお持ちの場合は持ち込み可です
     * SORACOM LTE-M Button Plus でもお使いいただけます
 * 有効なクレジットカード / 1 つ
-    * SORAOCM アカウントを作成いただくのに必要となります
-    * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
+    * SORAOCM アカウント、および Azure アカウントを作成いただくのに必要となります
 * 会場で確認可能なメールアドレス / 1 つ
     * SORACOM アカウント作成時を行う際に必要となります
 * Azure アカウント
     * [Azure アカウントを作成する(外部リンク)](https://docs.microsoft.com/ja-jp/learn/modules/create-an-azure-account/5-exercise-create-an-azure-account){:target="_blank"} を参考に作成してください
+        * Azure アカウント作成時に電話音声もしくはテキストメッセージによる認証が必要となるため、携帯電話をご用意ください
+        * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
 
 
 <h2 id="standby">作業前の準備</h2>
@@ -69,10 +70,10 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 #### SORACOM LTE-M Button for Enterprise
 
-販売価格 5980 円 に加えて、ご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。
+販売価格 5980 円 に加えてご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。  
 plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1)をご確認ください。
 
-(*) 目安として、１クリックあたり約 0.5 円程度
+(*) 目安として、１クリックあたり約 0.25 円程度
 
 ※ 料金は全て送料や税抜きです。
 
