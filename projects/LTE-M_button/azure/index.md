@@ -16,14 +16,14 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
     * 会場によっては貸出いたします。また、すでにお持ちの場合は持ち込み可です
     * SORACOM LTE-M Button Plus でもお使いいただけます
 * 有効なクレジットカード / 1 つ
-    * SORAOCM アカウント、および Azure アカウントを作成いただくのに必要となります
+    * SORACOM アカウント、および Azure アカウントを作成いただくのに必要となります
+    * 会場によっては SORACOM アカウントは貸出となる場合があります
 * 会場で確認可能なメールアドレス / 1 つ
-    * SORACOM アカウント作成時を行う際に必要となります
+    * SORACOM アカウント作成時を行う際に必要となります（すでに SORACOM アカウントをお持ちの方、もしくは、貸出の方は不要です）
 * Azure アカウント
     * [Azure アカウントを作成する(外部リンク)](https://docs.microsoft.com/ja-jp/learn/modules/create-an-azure-account/5-exercise-create-an-azure-account){:target="_blank"} を参考に作成してください
         * Azure アカウント作成時に電話音声もしくはテキストメッセージによる認証が必要となるため、携帯電話をご用意ください
         * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
-
 
 <h2 id="standby">作業前の準備</h2>
 
