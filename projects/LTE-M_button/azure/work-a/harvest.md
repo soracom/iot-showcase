@@ -11,7 +11,7 @@ SORACOM Harvest(以下、Harvest) は、IoTデバイスからのデータを収�
 
 ## グループの作成と割り当て、設定
 
-まず Air SIM 管理画面を開いて、Enterprise ボタンの SIM にチェックマークを付けます。続いて、[操作] ボタンから [所属グループ変更] を選択します。
+まず [Air SIM 管理画面](https://console.soracom.io){:target="_blank"} を開いて、Enterprise ボタンの SIM にチェックマークを付けます。続いて、[操作] ボタンから [所属グループ変更] を選択します。
 
 ![](https://dev.soracom.io/jp/img/gs_harvest/gp_group.png)
 

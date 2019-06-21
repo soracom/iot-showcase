@@ -17,16 +17,18 @@ Function App を開いた状態で、上部の「プラットフォーム機能�
 
 ![ライブラリインストール2](images/lib-install-02.png)
 
-`npm install azure-iothub` とコマンド入力します。
+以下のコマンド 2 つを 1 行ずつ入力します
+
+```
+npm init --yes
+npm install azure-iothub
+```
 
 ![ライブラリインストール3](images/lib-install-03.png)
 
 しばらくするとコマンドが完了します。
 
 > WARNING が出ますが、特に問題ありません。
-
-![ライブラリインストール4](images/lib-install-04.png)
-
 
 ## 関数を作成する
 「関数」の右にある「＋」マークをクリックし、「HTTP trigger」をクリックします。
