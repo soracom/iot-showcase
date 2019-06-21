@@ -6,7 +6,7 @@
 > まだアカウントを作成していない場合には、 [こちらのリンク](https://docs.microsoft.com/ja-jp/learn/modules/create-an-azure-account/5-exercise-create-an-azure-account){:target="_blank"} を参考にして、アカウントを作成してください
 
 ## Function App を作成する
-Azure Portal 左上にある 「＋リソースの作成」ボタンを押して検索窓に `Function App` と入力し、作成ボタンを押します
+Azure Portal 左上にある 「＋リソースの作成」ボタンを押して検索窓に `Function App` と入力し、作成ボタンを押します
 
 ![リソースの作成](images/function-app-01.png)
 ![Function App作成1](images/function-app-02.png)
