@@ -17,7 +17,6 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
     * SORACOM LTE-M Button Plus でもお使いいただけます
 * 有効なクレジットカード / 1 つ
     * SORACOM アカウント、および Azure アカウントを作成いただくのに必要となります
-    * 会場によっては SORACOM アカウントは貸出となる場合があります
 * 会場で確認可能なメールアドレス / 1 つ
     * SORACOM アカウント作成時を行う際に必要となります（すでに SORACOM アカウントをお持ちの方、もしくは、貸出の方は不要です）
 * Azure アカウント
