@@ -71,6 +71,8 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 * 本ハンズオンで利用した SIM グループの削除
     * SORACOM LTE-M Button for Enterprise をグループから解除してください
     * グループ解除後、SIM グループの削除をしてください (SIM グループ設定の "高度な設定" から削除ができます)
+* SORACOM Harvest のデータ削除
+    * データを表示した後、対象データのチェックボックスを付けて [削除] をします
 
 <h3 id="fee">料金について</h3>
 
