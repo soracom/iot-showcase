@@ -16,13 +16,13 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
     * 会場によっては貸出いたします。また、すでにお持ちの場合は持ち込み可です
     * SORACOM LTE-M Button Plus でもお使いいただけます
 * 有効なクレジットカード / 1 つ
-    * SORAOCM アカウントを作成いただくのに必要となります
-    * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
+    * SORACOM アカウント、および Azure アカウントを作成いただくのに必要となります
 * 会場で確認可能なメールアドレス / 1 つ
-    * SORACOM アカウント作成時を行う際に必要となります
+    * SORACOM アカウント作成時を行う際に必要となります（すでに SORACOM アカウントをお持ちの方、もしくは、貸出の方は不要です）
 * Azure アカウント
     * [Azure アカウントを作成する(外部リンク)](https://docs.microsoft.com/ja-jp/learn/modules/create-an-azure-account/5-exercise-create-an-azure-account){:target="_blank"} を参考に作成してください
-
+        * Azure アカウント作成時に電話音声もしくはテキストメッセージによる認証が必要となるため、携帯電話をご用意ください
+        * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
 
 <h2 id="standby">作業前の準備</h2>
 
@@ -58,21 +58,48 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 1. [ Azure Functions で デバイス制御用 Function を作成 ](work-c/azure)
 2. [ SORACOM Beam から Function App を呼び出し、デバイスを制御する ](work-c/soracom)
 
-<h2 id="closing">作業: あとかたづけ</h2> TODO
+<h2 id="closing">作業: あとかたづけ</h2>
+
+<h3 id="cleanup-azure">Azure リソース</h3>
+
+* 本ハンズオンで利用したリソースの削除を「リソースグループ」から削除する
+    * [リソース グループ](https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroupBlade/resourceType/Microsoft.Resources%2Fsubscriptions%2FresourceGroups) の一覧から、本ハンズオンで使用した Function App が含まれるリソースグループの削除を行います
+    * リソースグループは、関連する Azure リソースを一括で操作する時に利用できます。削除を行うと、含まれるすべてのリソースが削除されるため便利な反面、**内包されているリソースがすべて削除されるため注意が必要です**。
+
+<h3 id="cleanup-soracom">SORACOM リソース</h3>
+
+* 本ハンズオンで利用した SIM グループの削除
+    * SORACOM LTE-M Button for Enterprise をグループから解除してください
+    * グループ解除後、SIM グループの削除をしてください (SIM グループ設定の "高度な設定" から削除ができます)
+* SORACOM Harvest のデータ削除
+    * データを表示した後、対象データのチェックボックスを付けて [削除] をします
 
 <h3 id="fee">料金について</h3>
 
-#### Azure 各種サービスの利用料金の目安 TODO
+#### Azure 各種サービスの利用料金の目安
 
 * [Azure Functions の価格(外部リンク)](https://azure.microsoft.com/ja-jp/pricing/details/functions/){:target="_blank"}
-    * 1 か月あたりの要求数　1,000,000 が無料枠に含まれます
+    *  1 か月あたりの要求数　1,000,000 が[無料枠](https://azure.microsoft.com/ja-jp/free/){:target="_blank"}に含まれます (アカウント作成後 12 ヵ月以内)
+* [Azure ストレージアカウントの価格(外部リンク)](https://azure.microsoft.com/ja-jp/pricing/details/storage/page-blobs/){:target="_blank"}
+    * LRS File Storage 5 GB が[無料枠](https://azure.microsoft.com/ja-jp/free/){:target="_blank"}に含まれます (アカウント作成後 12 ヵ月以内)
 
 #### SORACOM LTE-M Button for Enterprise
 
-販売価格 5980 円 に加えて、ご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。
-plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1)をご確認ください。
+販売価格 5980 円 に加えてご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。  
+plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1)をご確認ください。  
+SORACOM Harvest 、 SORACOM Beam 等、 SORACOM サービス利用の費用は別途かかります。
 
-(*) 目安として、１クリックあたり約 0.5 円程度
+(*) 目安として、１クリックあたり約 0.25 円程度
+
+#### SORACOM サービスの利用料金の目安
+
+* [SORACOM Harvest 料金](https://soracom.jp/services/harvest/price/)
+    * Harvest を有効にしたグループに所属する 1 SIM カードまたは 1 デバイスあたり 1 日 5 円 (2000リクエスト/日/SIM あたりのリクエスト含む)
+    * 1 アカウントあたり毎月 31 日分の (もしくは 2000リクエスト/日以内)の無料枠があります
+* [SORACOM Beam 料金](https://soracom.jp/services/beam/price/)
+    * SORACOM Beam への IN/OUT それぞれに 0.0009 円/リクエスト
+        * 例) UDP → HTTPS をおこなった場合: SORACOM Beam への UDP/IN で 0.0009 円、HTTPS/OUT で 0.0009 円の計 0.0018 円がかかります
+    * 1 アカウントあたり 100,000リクエスト/月の無料枠があります
 
 ※ 料金は全て送料や税抜きです。
 
