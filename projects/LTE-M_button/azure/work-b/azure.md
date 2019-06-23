@@ -23,8 +23,9 @@ Azure Portal 左上にある 「＋リソースの作成」ボタンを押して
 ![Function App 画面](images/function-app-06.png)
 
 ## 関数を作成する
-「関数」の右にある「＋」マークをクリックし、「HTTP trigger」をクリックします。
+「関数」をクリックし、「新しい関数」をクリックし、「HTTP trigger」をクリックします。
 ![関数追加](images/function-app-07.png)
+![関数追加](images/function-app-07-2.png)
 
 関数の名前を変更し（ `button2slack` など）、作成を押すとしばらくして関数の作成が完了し、プログラムコードの編集画面となります。
 
