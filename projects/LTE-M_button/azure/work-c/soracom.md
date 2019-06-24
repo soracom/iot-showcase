@@ -33,3 +33,10 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 ![Function App ログ](images/function-app-06.png)
 
 ## 以上で本ページの作業は完了となります
+
+## トラブルシュート
+
+* ボタン押下の結果、LED が赤になってしまう
+    * A: 15秒以上経ってから LED が赤になる場合は、電波状況が悪い場合があるため再度試してみてください
+    * B: 10秒程度で LED が赤になる場合は Function Apps の見直しが必要な場合があります
+        * Function Apps のコードで `connectionString / targetDevice` の `運営から入手` の書き換えを見直してください
