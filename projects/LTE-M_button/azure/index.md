@@ -44,7 +44,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 <h2 id="work-a">作業A: Harvest を使ったボタンの動作確認</h2>
 
-1. ユーザコンソールで SORACOM LTE-M Button for Enterprise を 受け取る
+1. [SORACOM ユーザコンソール](https://console.soracom.io){:target="_blank"} で SORACOM LTE-M Button for Enterprise を 受け取る
     - **貸し出されたボタンを利用する場合には必要ありません**
 2. [ボタンのクリックイベントを SORACOM Harvest で確認する](work-a/harvest){:target="_blank"}
 
