@@ -26,7 +26,7 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 
 > シングルクリックで２秒間、ダブルクリックで４秒間、ロングクリックで５秒間、ファンが回ります。
 
-![ボタンとファン](images/buttun_and_fan.gif)
+![ボタンとファン](images/button_and_fan.gif)
 
 また、Azure Portal の Function App のログを確認してみましょう。
 
