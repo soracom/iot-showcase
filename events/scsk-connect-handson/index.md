@@ -5,7 +5,7 @@ SORACOM LTE-M Button powered by AWS を使い、ボタンを押したらTwilio�
 （参考：[SORACOM Buttonで会議脱出ボタンをつくる](https://kizawa.info/soracombutton-escape)）
 
 ### ハンズオンの構成
-![soracombutton-connect全体像](https://drive.google.com/drive/folders/16fTwlonHKrCMoUV5diCqdLlxytkRYt-v)
+![soracombutton-connect全体像](https://drive.google.com/file/d/1szQTuOtgQNUCOkgzIbEBW1UTKoIoKQZm/view?usp=sharing)
 
 ## 本日の貸し出し機材
 * SORACOM LTE-M Button powered by AWS（※ボタン貸出枠で参加の方）
