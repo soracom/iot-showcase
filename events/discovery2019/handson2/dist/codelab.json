@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-06-25T14:13:00+09:00",
+  "id": "dist",
+  "duration": 62,
+  "title": "SORACOM LTE-M Button for Enterprise の位置情報を SORACOM Harvest と SORACOM Funk に連携して可視化と通知を行う",
+  "summary": "LTE-M Button for Enterprise \u0026 SORACOM Funk \u0026 Location Service \u0026 SORACOM Harvests",
+  "source": "index.md",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "lte-m button for enterprise",
+    "funk",
+    "harvest",
+    "location service"
+  ],
+  "tags": [
+    "js"
+  ],
+  "feedback": "https://github.com/soracom/iot-showcase",
+  "ga": "0",
+  "url": "dist"
+}
