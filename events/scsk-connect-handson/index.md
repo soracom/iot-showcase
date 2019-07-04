@@ -159,7 +159,8 @@ Lambda関数を実行させる際、電話の発信元(Amazon Connectの電話�
 
 引き続き同画面で、環境変数値を入力します。電話の発信元や電話の発信先の番号などの入力になります。
 * 環境変数のセクション
-    * キーと値にそれぞれ以下の内容を入力
+![soracombutton-connect/ 6-4 Lambda3](https://drive.google.com/uc?id=1uBwZTCpMLO4Gey107S4RUVpCqV825OC1)
+    * 画像を参考にキーと値にそれぞれ以下の内容を入力
     * FlowID : (ConnectのフローID。Amazon Connectダッシュボードにおいて「追加のフロー情報の表示」をクリック。ARNの値、contact-flow/の右側の値をペースト)
     * InstanceID : (ConnectのインスタンスID。AWSコンソールからAmazon Connect、インスタンスエイリアスを選択。インスタンスARNの値、instance/の右側の値をペースト)
     * YourMobilePhoneNumber : (自分の電話番号。発信先電話番号。国番号(日本は+81)から。空白、ハイフンなし。最初の桁を外す。090-1234-5678なら、+819012345678)
@@ -167,8 +168,60 @@ Lambda関数を実行させる際、電話の発信元(Amazon Connectの電話�
 
 引き続きLambdaにAmazon Connect実行権限を付与します。
 同画面で以下操作をしてください。
-![soracombutton-connect/ 7-1 aws-iot-1-click](https://drive.google.com/uc?id=1a-hWSYeCJtGGqSZjlgDD1UpdcuXFAq03)
+![soracombutton-connect/ 6-5 Lambda4](https://drive.google.com/uc?id=1a-hWSYeCJtGGqSZjlgDD1UpdcuXFAq03)
 
+IAMのページが別タブで開くので、ポリシーをアタッチしますをクリック。
+![soracombutton-connect/ 6-6 Lambda5(IAM)](https://drive.google.com/uc?id=1pdnFv_lEYt1YgZbNzCiVKFzHHwa6nM6q)
+
+検索欄に「connect」と入力し、「AmazonConnectFullAccess」を選択し、ポリシーのアタッチをクリック。
+![soracombutton-connect/ 6-7 Lambda6(IAM)](https://drive.google.com/uc?id=1yx0ZOe5g3hqyL6ZHC5Gz9ceMeSB1y0kY)
+
+ロールにConnectのポリシー（権限）を付与しました。
+![soracombutton-connect/ 6-8 Lambda7(IAM)](https://drive.google.com/uc?id=1zzgcmX4xLhaupgyP3CSPK-_KJGUQpifi)
+
+Lambdaの画面に戻ります。
+Lambdaの画面から動作を確認しましょう。関数への実行時パラメータとなるテストイベントを作成します。
+画面右上、テストイベントの設定をクリック
+![soracombutton-connect/ 6-9 Lambda8(IAM)](https://drive.google.com/uc?id=13VH-l1ubuzmT81vTf1iD48pHO7wpMCvz)
+
+開いた画面で以下入力します。
+* イベント名：任意。TestClickButtonで良い。
+* 入力欄：以下の内容をコピーして上書き。編集不要です。※このclickTypeの値によって処理が変化します。
+
+```
+{
+  "deviceInfo": {
+    "deviceId": "XXXXXXXXXXXXXX",
+    "type": "button",
+    "etc1": "無関係イベントの値は省略しています。"
+  },
+  "deviceEvent": {
+    "buttonClicked": {
+      "clickType": "SINGLE",
+      "reportedTime": "2018-11-09T16:29:40.474Z"
+    }
+  },
+  "placementInfo": {
+    "etc1": "無関係イベントの値は省略しています。"
+  }
+}
+
+```
+
+入力したら作成をクリック。
+![soracombutton-connect/ 6-10 Lambda9(IAM)](https://drive.google.com/uc?id=1WToI3Vf2UfIczmIkVItgJ6_S7ApvxbCK)
+
+
+画面右上の保存をクリックすると準備は完了です。
+
+これでLambdaが動作すると電話がかかる、という形になります。
+
+「テスト」をクリックすると、テストイベントを元に関数が実行されます。
+設定がうまく行けば電話がかかってきます。
+うまく行かない場合はエラーログが出力されています。
+
+テストイベントを編集し、SINGLEとなっているclickTypeをDOUBLEなどに変えてテストを再度実行すると、電話口のメッセージが変わります。
+余裕があれば試してみてください。
 
 最後に画面上方にある「保存」ボタンをクリックして下さい。  
 以上で完了です。
