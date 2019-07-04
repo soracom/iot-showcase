@@ -159,7 +159,7 @@ Lambda関数を実行させる際、電話の発信元(Amazon Connectの電話�
 
 引き続き同画面で、環境変数値を入力します。電話の発信元や電話の発信先の番号などの入力になります。
 * 環境変数のセクション
-![soracombutton-connect/ 6-4 Lambda3](https://drive.google.com/uc?id=1uBwZTCpMLO4Gey107S4RUVpCqV825OC1)
+![soracombutton-connect/ 6-4 Lambda3](https://drive.google.com/uc?id=1yrVQJwLy_6pbUK6uVlUhnF0cZPnpcrU0)
     * 画像を参考にキーと値にそれぞれ以下の内容を入力
     * FlowID : (ConnectのフローID。Amazon Connectダッシュボードにおいて「追加のフロー情報の表示」をクリック。ARNの値、contact-flow/の右側の値をペースト)
     * InstanceID : (ConnectのインスタンスID。AWSコンソールからAmazon Connect、インスタンスエイリアスを選択。インスタンスARNの値、instance/の右側の値をペースト)
