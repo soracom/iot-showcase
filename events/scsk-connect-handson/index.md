@@ -135,9 +135,9 @@ Studio Dashboardに戻りますので、作成したフローのSIDをメモ帳�
 
 <h3 id="content5">5. AWS Lambda関数の設置</h3>
 
-SORACOM LTE-M Buttonが押された際にTwilioを呼び出すプログラム(Lambda関数)を設置します。  
-（※今回はハンズオン時間の関係上、作成済の関数をアップロードして設置します）
-[Lambda関数一式(zip)](https://github.com/kizawa2020/iot-showcase/raw/master/events/soracomug-shinshu6/lambda.zip)をダウンロードしてください。
+SORACOM LTE-M Buttonが押された際にAmazon Connectを呼び出すプログラム(Lambda関数)を設置します。  
+Lambda関数を実行させる際、電話の発信元(Amazon Connectの電話番号)や電話の発信先(自身の携帯電話)の番号が必要ですが、それらの値は環境変数に与えます。
+また、LambdaからAmazon Connectのインスタンスを呼び出せるよう、実行権限を付与します。
 
 [AWS マネジメントコンソール](https://console.aws.amazon.com/console/home)を開きログインした後、リージョンをオレゴンに変更し、Lambdaのコンソールを開きます。  
 ![soracombutton-connect/ 6-1 Lambda1](https://kizawa.info/wp-content/uploads/2019/03/lambda-1.png)
@@ -147,19 +147,28 @@ SORACOM LTE-M Buttonが押された際にTwilioを呼び出すプログラム(La
 
 関数の作成画面が開きます。以下の情報を入力します。
 * 作成方法：一から作成  
-* 関数名：任意の名前
+* 関数名：任意の名前(callbuttonなど)
 * ランタイム：Python3.7
 * 実行ロール：基本的なLambdaアクセス権限で新しいロールを作成
 ![soracombutton-connect/ 6-3 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-3.png)
 
 続いて関数の編集画面が開きます。以下の設定を行います  
 * 関数コードのセクション
-    * コードエントリタイプ：.zipファイルをアップロード
-    * 関数パッケージ：アップロードボタンをクリックし、先程ダウンロードしたzipファイルを指定
-* 基本設定のセクション
-    * タイムアウト時間を 3秒⇒10秒 に変更
-![soracombutton-connect/ 6-4 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-4.png)  
-![soracombutton-connect/ 6-5 Lambda2](https://kizawa.info/wp-content/uploads/2019/03/lambda-5.png)  
+    * コードエントリタイプ：コードをインラインで編集
+    * lambda_function：import jsonから始まる現在の設定をすべて消し、[Lambda関数](https://github.com/kizawa2020/iot-showcase/raw/master/events/scsk-connect-handson/lambda.py)の内容にすべて置き換えてください。(コピーして貼り付けで可)
+
+引き続き同画面で、環境変数値を入力します。電話の発信元や電話の発信先の番号などの入力になります。
+* 環境変数のセクション
+    * キーと値にそれぞれ以下の内容を入力
+    * FlowID : (ConnectのフローID。Amazon Connectダッシュボードにおいて「追加のフロー情報の表示」をクリック。ARNの値、contact-flow/の右側の値をペースト)
+    * InstanceID : (ConnectのインスタンスID。AWSコンソールからAmazon Connect、インスタンスエイリアスを選択。インスタンスARNの値、instance/の右側の値をペースト)
+    * YourMobilePhoneNumber : (自分の電話番号。発信先電話番号。国番号(日本は+81)から。空白、ハイフンなし。最初の桁を外す。090-1234-5678なら、+819012345678)
+    * YourConnectPhoneNumber : (Amazon Connectの電話番号。発信元電話番号。Amazon Connectダッシュボードにおいて「電話番号の表示」をクリック。国番号(日本は+81)から。空白、ハイフンなし。最初の桁を外す。)
+
+引き続きLambdaにAmazon Connect実行権限を付与します。
+同画面で以下操作をしてください。
+![soracombutton-connect/ 7-1 aws-iot-1-click](https://drive.google.com/uc?id=1a-hWSYeCJtGGqSZjlgDD1UpdcuXFAq03)
+
 
 最後に画面上方にある「保存」ボタンをクリックして下さい。  
 以上で完了です。
