@@ -15,7 +15,7 @@ SORACOM LTE-M Button powered by AWS (以下 SORACOM LTE-M Button) を使った�
 * SORACOM LTE-M Button powered by AWS / 1 個
     * 会場によっては貸出いたします。また、すでにお持ちの場合は持ち込み可です
 * 有効なクレジットカード / 1 つ
-    * AWS アカウントならびに SORAOCM アカウントを作成いただくのに必要となります
+    * AWS アカウントならびに SORACOM アカウントを作成いただくのに必要となります
 * 会場で着信可能な電話 (携帯電話) / 1 つ
     * AWS アカウント作成時に電話音声による認証が必要となります
     * 「非通知」からの電話に対する着信拒否設定の解除が必要となります
