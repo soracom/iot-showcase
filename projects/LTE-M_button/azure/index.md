@@ -35,7 +35,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 - 作業B: ボタンのクリックイベントを Slack に送信します
 - 作業C: ボタンのクリックイベントをきっかけに、Azure IoT Hub で接続されたデバイスを制御します
 
-![全体像](https://docs.google.com/drawings/d/e/2PACX-1vSZM2kNBWqLmSPzAlCE6Z1A8gN9Kzmh4YCxF0BLK3PjIjKyPnq8d2Ydgf0Ac1Uod93iOr_Dwb7OUOk3/pub?w=928&h=523)
+![全体像](overview.png)
 
 必要な作業は以下の通りとなります。
 
@@ -56,7 +56,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h2 id="work-c">作業C: ボタンと Azure IoT Hub を連携させてデバイス制御</h2>
 
 1. [ Azure Functions で デバイス制御用 Function を作成 ](work-c/azure)
-2. [ SORACOM Beam から Function App を呼び出し、デバイスを制御する ](work-c/soracom)
+2. [ SORACOM Funk から Function App を呼び出し、デバイスを制御する ](work-c/soracom)
 
 <h2 id="closing">作業: あとかたづけ</h2>
 
@@ -87,7 +87,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 販売価格 5980 円 に加えてご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。  
 plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1)をご確認ください。  
-SORACOM Harvest 、 SORACOM Beam 等、 SORACOM サービス利用の費用は別途かかります。
+SORACOM Harvest 、 SORACOM Beam 、SORACOM Funk 等、 SORACOM サービス利用の費用は別途かかります。
 
 (*) 目安として、１クリックあたり約 0.25 円程度
 
@@ -100,6 +100,11 @@ SORACOM Harvest 、 SORACOM Beam 等、 SORACOM サービス利用の費用は�
     * SORACOM Beam への IN/OUT それぞれに 0.0009 円/リクエスト
         * 例) UDP → HTTPS をおこなった場合: SORACOM Beam への UDP/IN で 0.0009 円、HTTPS/OUT で 0.0009 円の計 0.0018 円がかかります
     * 1 アカウントあたり 100,000リクエスト/月の無料枠があります
+
+* [SORACOM Funk 料金](https://soracom.jp/services/funk/price/)
+    * SORACOM Funk へのリクエスト毎に 0.0018 円/リクエスト
+        * Funk から転送先クラウドサービスへのリクエスト毎に 1 リクエストとカウントします。
+    * 1 アカウントあたり 50,000リクエスト/月の無料枠があります
 
 ※ 料金は全て送料や税抜きです。
 
