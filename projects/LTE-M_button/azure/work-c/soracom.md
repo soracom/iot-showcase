@@ -6,7 +6,7 @@ C-1 の最後にメモしておいた URL を使いますので、もしメモ�
 ## SORACOM Funk とは
 
 SORACOM Funk(以下、Funk) は、クラウドサービスの Function を直接実行できるサービスです。クラウドリソースを活用することでデバイス側の実装をシンプルに保ち、処理をオフロードや低電力消費化が可能となります。
-本賞では、SORACOM Funk の連携先として Function App を設定してみましょう。
+本章では、SORACOM Funk の連携先として Function App を設定してみましょう。
 
 詳細は [SORACOM Funk サービス紹介ページ](https://soracom.jp/services/funk/) をご覧ください。
 
@@ -42,7 +42,7 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 
 ![Funk 設定4](images/soracom-funk4.png)
 
-最後にグループ設定の一番下部にある「Unified Endpoint 設定」を開き、フォーマットから 「SORACOM Funk」を洗濯して、「保存」を押します。
+最後にグループ設定の一番下部にある「Unified Endpoint 設定」を開き、フォーマットから 「SORACOM Funk」を選択して、「保存」を押します。
 
 ![Unified 設定](images/soracom-unified.png)
 
