@@ -16,7 +16,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
     * 会場によっては貸出いたします。また、すでにお持ちの場合は持ち込み可です
     * SORACOM LTE-M Button Plus でもお使いいただけます
 * 有効なクレジットカード / 1 つ
-    * SORACOM アカウント、および Azure アカウントを作成いただくのに必要となります
+    * SORACOM アカウントを作成いただくのに必要となります（すでに SORACOM アカウントをお持ちの方、もしくは、貸出の方は不要です）
 * 会場で確認可能なメールアドレス / 1 つ
     * SORACOM アカウント作成時を行う際に必要となります（すでに SORACOM アカウントをお持ちの方、もしくは、貸出の方は不要です）
 * IFTTT アカウント
@@ -46,7 +46,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 1. [SORACOM ユーザコンソール](https://console.soracom.io){:target="_blank"} で SORACOM LTE-M Button for Enterprise を 受け取る
     - **貸し出されたボタンを利用する場合には必要ありません**
-2. [ボタンのクリックイベントを SORACOM Harvest で確認する](work-a/harvest){:target="_blank"}
+2. [ボタンのクリックイベントを SORACOM Harvest で確認する](../common/harvest){:target="_blank"}
 
 > TODO 位置情報について追記する
 
