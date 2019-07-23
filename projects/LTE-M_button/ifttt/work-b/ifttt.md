@@ -17,7 +17,7 @@
 - Rewview and finish
   - Finish を必ず押す
 
-- [Webhooks settings](https://ifttt.com/services/maker_webhooks/settings)){:target="_blank"} のページを開く
+- [Webhooks settings](https://ifttt.com/services/maker_webhooks/settings){:target="_blank"} のページを開く
   - URL 欄 https://maker.ifttt.com/use/`key` の `key` 部分をメモしておく
 
 ## 以上で本ページの作業は完了となります
