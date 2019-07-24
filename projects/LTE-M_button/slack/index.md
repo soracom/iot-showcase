@@ -1,4 +1,4 @@
-# SORACOM LTE-M Button と IFTTT で簡単IoTを実現
+# SORACOM LTE-M Button と Slack で簡単IoTを実現
 
 SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った自習形式ハンズオンです。  
 作業時間の目安は作業Ａで 10分、作業Ｂで20分となります。
@@ -50,7 +50,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h2 id="work-b">作業B: Slack を使ったクリックイベント通知</h2>
 
 1. Slack Webhook を作成する (運営が用意します)
-2. [ SORACOM Beam から IFTTT を呼び出す ](work-b/soracom){:target="_blank"}
+2. [ SORACOM Beam から Slack を呼び出す ](work-b/soracom){:target="_blank"}
 
 <h2 id="closing">作業: あとかたづけ</h2>
 

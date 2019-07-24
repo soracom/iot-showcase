@@ -1,4 +1,4 @@
-# B-2 SORACOM Beam から Slack Webhook を呼び出す
+# B-2 SORACOM Beam から Slack を呼び出す
 
 本ページでは、ボタンを押した時に先ほど作成した Slack Webhook を呼び出すために、SORACOM Beam の設定を行います。
 
