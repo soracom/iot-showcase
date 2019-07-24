@@ -16,7 +16,7 @@
       - Message :
 
 ```
-ボタン {{Value1}} が {{Value2}} クリックされました<br>{{Value3}}
+ボタン \{\{Value1\}\} が \{\{Value2\}\} クリックされました<br>\{Value3\}}
 ```
 
 - Rewview and finish
