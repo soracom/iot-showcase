@@ -13,7 +13,7 @@
   - LINE
     - Send message
       - Receipient : 「 1:1 で LINE Notify から通知を受け取る」(または特定のグループなど)
-      - Message : `ボタン {{Value1}} が {{Value2}} クリックされました<br>{{Value3}}`
+      - Message : ``ボタン {{Value1}} が {{Value2}} クリックされました<br>{{Value3}}`
 - Rewview and finish
   - Finish を必ず押す
 
