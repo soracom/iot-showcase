@@ -2,9 +2,9 @@
 
 [目次へ戻る](index#index)
 
-## ボタンからのデータを SORACOM Harvest に蓄積・収集する
+## ボタンからのデータを SORACOM Harvest Data に蓄積・収集する
 
-まずはボタンからのデータを、SORACOM のデータ蓄積・収集サービス "SORACOM Harvest" に格納してみましょう。  
+まずはボタンからのデータを、SORACOM のデータ蓄積・収集サービス "SORACOM Harvest Data" に格納してみましょう。  
 外部サービス連携前のデバイス側の動作確認に役立ちます。
 
 ### ハンズオンのゴール
@@ -38,7 +38,7 @@
 
 <h2 id="w2">作業 2: SIM グループの設定を行う</h2>
 
-**解説:** 作成した SIM グループに対して SORACOM Harvest の設定を行います。
+**解説:** 作成した SIM グループに対して SORACOM Harvest Dataの設定を行います。
 
 SIM 管理画面の SIM(Button) のグループ列に表示されている `button` をクリックします。
 
@@ -57,7 +57,7 @@ SIM グループ設定画面内の [SORACOM Air for Cellular 設定] グルー�
 
 <h2 id="w3">作業 3: 動作確認</h2>
 
-**解説:** 以上の作業で SORACOM LTE-M Button が押された時のデータを SORACOM Harvest で可視化できるようになったので動作を確認します。
+**解説:** 以上の作業で SORACOM LTE-M Button が押された時のデータを SORACOM Harvest Data で可視化できるようになったので動作を確認します。
 
 [SIM 管理] を開きます。続いて、SORACOM LTE-M Button の SIM にチェックマークを付け、 [操作] > [データを確認] をクリックします。
 
