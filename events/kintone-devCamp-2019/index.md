@@ -17,7 +17,7 @@ Wi-Fi などの設備が無くとも、このボタン一つで即座に現場�
 
 ### ハンズオンのゴール
 
-ボタンは「シングル押し」「ダブル押し」「長押し」というデータを送ることができるので、ハンズオンの感想を「TODO」「TODO」「TODO」の３つで投票いただく仕組みを作っていきます。
+ボタンは「シングル押し」「ダブル押し」「長押し」というデータを送ることができるため、kintoneアプリ上で識別できるようにしてあります。
 
 ![kintone-devCamp2019 / overview](https://docs.google.com/drawings/d/e/2PACX-1vSeNzwTEbvTHXjZK0l2rUmzJTUaPdWfiYcT27QKTgFAqtH4vUQyAJQxZShbQGz6ttKMGI4_6xGoOjWk/pub?w=1099&h=364)
 
