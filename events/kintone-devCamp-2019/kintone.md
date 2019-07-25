@@ -4,7 +4,7 @@
 
 ## SORACOM Beam で kintone と連携する
 
-ボタンからのデータを SORACOM のデータ転送支援サービス "SORACOM Beam" を用いて kintone と連携します。
+ボタンからのデータを SORACOM のデータ転送支援サービス [SORACOM Beam](https://soracom.jp/services/beam/) を用いて kintone と連携します。
 
 ### ハンズオンのゴール
 
