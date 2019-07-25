@@ -59,6 +59,7 @@ Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連
 
 * [ボタンからのデータを SORACOM Harvest Data に蓄積・収集する](soracom-harvest)
 * [SORACOM Beam で kintone と連携する](kintone)
+* [SORACOM Funk で kintone と連携する](soracom-funk)
 
 <h2 id="clean-up">作業: あとかたづけ</h2>
 
