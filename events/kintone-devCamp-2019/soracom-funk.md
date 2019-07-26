@@ -88,7 +88,13 @@ kintone アプリを表示します。
 
 ボタンを押します。kintone アプリで以下のように押した情報が表示されれば成功です。
 
-![kintone-devCamp2019 / kintone app](https://docs.google.com/drawings/d/e/2PACX-1vRFSl12xG8u74BrLDFMrzfVtayirDbckzcpANMrhVkVWK2NrPz_x0H6RkGdohmex3peglGOm5ZcQnh4/pub?w=1115&h=184)
+この kintone アプリはボタンのクリックに応じて、今日のハンズオンの感想を入れられるようになっています。是非とも入力してみてください。
+
+* シングル = 良かった
+* ダブル = ふつう
+* ロング = いまいち
+
+![kintone-devCamp2019 / kintone app1](https://docs.google.com/drawings/d/e/2PACX-1vSeD4CJEWw5wXsRA9LijBfIHHH7GbnC0QCx8g0k7MwlUzYIqFRhTgFA4gGPzr1ChRG0tgSkVddcL5J2/pub?w=762&h=219)
 
 <h2 id="clear-up">あとかたづけ</h2>
 
