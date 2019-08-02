@@ -30,7 +30,7 @@ Event Name 欄に `button` と入力し、 `Create trigger` をクリックし�
 
 ![IFTTT 06](images/ifttt-06.png)
 
-`Search services` に `LINE` と入力し、 LINE のアイコンをクリックします。
+[Search services] に `LINE` と入力し、 LINE のアイコンをクリックします。
 
 > LINE をご利用されていない場合は、Twitter や Facebook 、Gmail など適宜別のサービスをご選択下さい
 

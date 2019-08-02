@@ -30,29 +30,29 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 
 ![Beam転送先設定](images/soracom-02.png)
 
-> TODO 画像入れ替え
-
 ヘッダ操作
 
 - IMSI ヘッダ または IMEI ヘッダ を オン (通知したい方を選択、両方をオンにした場合は IMEI が優先)
 - 署名ヘッダ付与: オン
-- 事前共有鍵: 運営より入手
+- 事前共有鍵: 「＋」ボタンを押して追加 (事前共有鍵は運営より入手)
 
 ![Beamヘッダ操作設定](images/soracom-03.png)
 
-> TODO 画像入れ替え
+![事前共有鍵追加](images/soracom-04.png)
 
 カスタムヘッダには、下記のの２つを設定します
 
-- x-ifttt-key: B-1 でメモしておいた `key` を指定
 - x-api-key: 運営より入手
+- x-ifttt-key: B-1 でメモしておいた `key` を指定
+
+![カスタムヘッダ](images/soracom-05.png)
 
 最後に、一番下の「保存」を押します。
 
 ### Unified Endpoint 設定
 レスポンスのフォーマットで「Beam」を選び、「保存」を押します。
 
-![Unified Endpoint 設定](images/soracom-04.png)
+![Unified Endpoint 設定](images/soracom-06.png)
 
 ## ボタンを押して IFTTT を呼び出す
 
@@ -74,5 +74,5 @@ LINE にクリックイベントが通知されるので、確認します。
 ## クリックの種類ごとにメッセージを変えるには？
 
 - Beam 転送先設定でパスを `/button/ifttt` → `/button/ifttt/click-type` に変更
-- IFTTT で　`Event Name` を変えて `SIGNLE` / `DOUBLE` / `LONG` それぞれに Applet を作成する
+- IFTTT で　`Event Name` を変えて `SIGNLE` / `DOUBLE` / `LONG` それぞれに 設定 を作成する
   - 例) シングルクリック →「今ここにいます」 / ダブルクリック →「迎えに来て」 / 長押し → 「助けて」
