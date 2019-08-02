@@ -23,7 +23,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h2 id="standby">作業前の準備</h2>
 
 * Wi-Fi に接続してください (接続情報は別途お知らせします)
-* 「進ちょく表」を開いてください (URL は別途お知らせします。完全に自習の場合は不要です)
+* 「進ちょく表」を開いてください (URL は別途お知らせします／完全に自習の場合は不要です)
 
 <h2 id="overview">全体像</h2>
 
@@ -31,8 +31,6 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 - 作業B: ボタンのクリックイベントを Slack の Webhook を経由して通知します
 
 ![全体像](overview.png)
-
-> TODO 画像の追加
 
 必要な作業は以下の通りとなります。
 
