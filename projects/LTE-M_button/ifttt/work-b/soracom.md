@@ -1,7 +1,7 @@
 # B-2 SORACOM Beam から IFTTT を呼び出す
 
 本ページでは、ボタンを押した時に先ほど作成した IFTTT Applet を呼び出すために、SORACOM Beam の設定を行います。
-B-1 の最後にメモしておいた `key` を使いますので、もしメモしていなかった場合は [Webhooks settings](https://ifttt.com/services/maker_webhooks/settings){:target="_blank"} のページで確認してください。
+B-1 の最後にメモしておいた `key` を使いますので、もしメモしていなかった場合は [Webhooks](https://ifttt.com/maker_webhooks/){:target="_blank"} → Documentation ページで確認してください。
 
 ## SORACOM Beam とは
 
