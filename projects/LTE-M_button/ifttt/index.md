@@ -22,6 +22,9 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 * IFTTT アカウント
     * [IFTTT Sign up](https://ifttt.com/join){:target="_blank"} からアカウントを作成できます
         * Google アカウント または Facebook アカウントでのログインが簡単ですが、メールアドレスとパスワードを使った認証も可能です
+* LINE アカウント
+    * メールアドレス認証が必要となります
+    * LINE をご利用でない方は、Twitter Facebook や Gmail など別のサービスを使用してください
 
 <h2 id="standby">作業前の準備</h2>
 
