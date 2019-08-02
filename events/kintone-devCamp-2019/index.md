@@ -17,7 +17,7 @@ Wi-Fi などの設備が無くとも、このボタン一つで即座に現場�
 
 ### ハンズオンのゴール
 
-ボタンは「シングル押し」「ダブル押し」「長押し」というデータを送ることができるので、ハンズオンの感想を「TODO」「TODO」「TODO」の３つで投票いただく仕組みを作っていきます。
+ボタンは「シングル押し」「ダブル押し」「長押し」というデータを送ることができるため、kintoneアプリ上で識別できるようにしてあります。
 
 ![kintone-devCamp2019 / overview](https://docs.google.com/drawings/d/e/2PACX-1vSeNzwTEbvTHXjZK0l2rUmzJTUaPdWfiYcT27QKTgFAqtH4vUQyAJQxZShbQGz6ttKMGI4_6xGoOjWk/pub?w=1099&h=364)
 
@@ -57,8 +57,9 @@ Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連
 
 <h2 id="index">作業: 目次</h2>
 
-* [ボタンからのデータを SORACOM Harvest に蓄積・収集する](soracom-harvest)
-* [SORACOM Beam で kintone と連携する](TODO)
+* [ボタンからのデータを SORACOM Harvest Data に蓄積・収集する](soracom-harvest)
+* [SORACOM Beam で kintone と連携する](kintone)
+* [SORACOM Funk で kintone と連携する](soracom-funk)
 
 <h2 id="clean-up">作業: あとかたづけ</h2>
 
@@ -71,10 +72,10 @@ Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連
 
 特に料金に関する設定項目を OFF にしてください。
 
-* SORACOM Harvest の料金について
-    * 本ハンズオンで使用した SORACOM Harvest は、 **実際の通信の有無によらず** SORACOM Harvest が利用可能状態の SIM(Button) の枚数に応じて日当たりの料金が発生します。詳しくは [SORACOM Harvest のご利用料金](https://soracom.jp/services/harvest/price/) をご覧ください。
-    * SIM グループの設定で SORACOM Harvest を "OFF" にすることで、翌日以降の料金が発生しなくなります。または SIM グループを削除することで、当該 SIM グループに設定されている機能をすべて OFF にすることができます。
-    * 蓄積済みデータは SORACOM Harvest を OFF にしても残りますが、保管費用はかかりません。ただし、標準ではデータ発生から 40 日後に削除されますので、その前にデータエクスポート等を行うようにしてください。
+* SORACOM Harvest Data の料金について
+    * 本ハンズオンで使用した SORACOM Harvest Data は、 **実際の通信の有無によらず** SORACOM Harvest Data が利用可能状態の SIM(Button) の枚数に応じて日当たりの料金が発生します。詳しくは [SORACOM Harvest Data のご利用料金](https://soracom.jp/services/harvest/price/) をご覧ください。
+    * SIM グループの設定で SORACOM Harvest Data を "OFF" にすることで、翌日以降の料金が発生しなくなります。または SIM グループを削除することで、当該 SIM グループに設定されている機能をすべて OFF にすることができます。
+    * 蓄積済みデータは SORACOM Harvest Data を OFF にしても残りますが、保管費用はかかりません。ただし、標準ではデータ発生から 40 日後に削除されますので、その前にデータエクスポート等を行うようにしてください。
 * SORACOM Beam の料金について
     * 本ハンズオンで使用した SORACOM Beam は発生したリクエストに応じて料金が発生する完全従量課金制サービスです。詳しくは [SORACOM Beam のご利用料金](https://soracom.jp/services/beam/price/) をご覧ください。
     * SIM グループの設定で SORACOM Beam が "ON" になっていたとしても、リクエストが発生しなければ料金は発生しませんが、 "OFF" にする、もしくは設定や SIM グループを削除することをおすすめいたします。
@@ -84,7 +85,7 @@ Wi-Fi や Bluetooth のような事前設定をしなくても、クラウド連
 * SIM グループの削除
     * [SIM グループ] > 当該の SIM グループ > [高度な設定] > 削除
     * 削除するためには [SIM 管理] からボタンに紐づいているグループを解除する必要があります
-* SORACOM Harvest のデータの削除
+* SORACOM Harvest Data のデータの削除
 
 <h2 id="afterfollow">今後の自習方法について</h2>
 
