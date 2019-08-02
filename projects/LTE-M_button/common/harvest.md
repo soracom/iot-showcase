@@ -31,9 +31,9 @@ SORACOM Harvest(以下、Harvest) は、IoTデバイスからのデータを収�
 
 ![](https://dev.soracom.io/jp/img/gs_button/group_configuration_3.png)
 
-SIM グループの設定画面内にある [SORACOM Air for Cellular 設定] グループの下方にある[バイナリパーサ設定]スイッチをONに設定し、[フォーマット]に `@button` と入力、保存ボタンをクリックします。
+SIM グループの設定画面内にある [SORACOM Air for Cellular 設定] グループの下方にある [簡易位置測位機能] を ON に設定し、[バイナリパーサ設定]スイッチをONに設定し、[フォーマット]に `@button` と入力、保存ボタンをクリックします。
 
-![](https://dev.soracom.io/jp/img/gs_button/group_configuration_4.png)
+![](https://dev.soracom.io/img/doc_location_service/locationservice01.png)
 
 同じ SIM グループの設定画面内にある [SORACOM Harvest 設定] グループの中にあるスイッチをONに設定し、保存ボタンをクリックし、その後表示される [SORACOM Harvest が有効になっています]のダイアログが表示されたらOKボタンをクリックします。
 
@@ -72,5 +72,9 @@ Harvest の グラフ表示を[集合棒グラフ]に切り替え、ボタンの
 |-------|------|----|
 | clickType	| クリックの種類 | 1:シングルクリック / 2: ダブルクリック / 3: ロングクリック |
 | batteryLevel | バッテリーレベル | 0.25 / 0.5 / 0.75 / 1.0 |
+
+また、位置情報アイコンをクリックして表示を変更すると、LTE-M 通信に使用された基地局の情報を元にした位置情報が表示されます。
+
+![Harvest Map](images/harvest-map.png)
 
 ## 以上で本ページの作業は完了となります
