@@ -25,6 +25,8 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 * LINE アカウント
     * メールアドレス認証が必要となります
     * LINE をご利用でない方は、Twitter Facebook や Gmail など別のサービスを使用してください
+* 運営から入手する情報
+    * [認証情報](https://handson.soracom.io/button/ifttt){:target="_blank"}
 
 <h2 id="standby">作業前の準備</h2>
 
