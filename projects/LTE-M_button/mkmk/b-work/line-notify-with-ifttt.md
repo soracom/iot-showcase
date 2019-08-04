@@ -8,9 +8,9 @@ IFTTT と呼ばれる中継サービスを経由して LINE にメッセージ�
 
 ## 作業1: LINE Notify の設定を行う
 
-LINE へのメッセージ送信に使用する [LINE Notify](https://notify-bot.line.me/ja/) の設定を行います。
+LINE へのメッセージ送信に使用する LINE Notify の設定を行います。
 
-[LINE Notify](https://notify-bot.line.me/ja/) 右上のログインから LINE のアカウントでログインしてください。  
+[LINE Notify](https://notify-bot.line.me/ja/){:target="_blank"} 右上のログインから LINE のアカウントでログインしてください。  
 ※ この時点で LINE にログイン記録が通知されます
 
 ログイン出来れば設定は完了です。  
@@ -24,67 +24,81 @@ LINE へのメッセージ送信に使用する [LINE Notify](https://notify-bot
 
 ### IFTTT のアカウントを作成する
 
-[IFTTT Sing up](https://ifttt.com/join) からアカウントを作成してください。
+[IFTTT Sing up](https://ifttt.com/join){:target="_blank"} からアカウントを作成してください。
 
 Google(gmail) アカウントや Facebook アカウントを利用して作成もできますし、下の `sign up` からメールアドレスでの作成も可能です。
 
-### アプレットを作成する
+### 設定を新規作成する
 
-右上の自分のユーザー名をクリックすると表示される [New Applet] をクリックします。
+[Create your own - IFTTT](https://ifttt.com/create){:target="_blank"} を開いて `This` をクリックします。
 
-**this** をクリックします。
+![IFTTT 01](../../ifttt/work-b/images/ifttt-01.png)
 
-Choose a service では、 **Webhooks** をクリックします。 (`webhooks` で検索すると見つけやすいです)
+[Search services] の所に、`webhooks` とタイプし Webhooks のアイコンをクリックします
 
-**Receive a web request** をクリックします。
+![IFTTT 02](../../ifttt/work-b/images/ifttt-02.png)
 
-Complete trigger fields では、以下のように入力してから [Create Trigger] をクリックします。
+`Connect` を押します
 
-* Event Name: `button` (任意の文字列)
-    * 後ほど使用しますのでメモをしておいてください
+![IFTTT 03](../../ifttt/work-b/images/ifttt-03.png)
 
-![button-mkmk / ifttt / Receive a web request](https://docs.google.com/drawings/d/e/2PACX-1vSr93bOgMd9m-wd_znCau55m5Wwq4R-lXt0d2qmM_kaloVis6TeJWS_M0fxsOo4aB44bXwTv3fN7Moc/pub?w=561&h=575)
+`Receive a web request` をクリックします。
 
-**that** をクリックします。
+![IFTTT 04](../../ifttt/work-b/images/ifttt-04.png)
 
-Choose action service では、 **LINE** をクリックします。 (`line` で検索すると見つけやすいです)
+Event Name 欄に `button` と入力し、 `Create trigger` をクリックします。
 
-**Connect** をクリックすると、別のウィンドウで LINE へのログイン画面が開くのでログインしてください。(もしくはスキップされ、次の画面に移ります)
+> 必ず 小文字で `button` と指定して下さい
 
-LINE Notify と IFTTT との接続確認では、 **同意して連携する** をクリックします。  
-※ この時点で LINE Notify から IFTTT との連携完了が通知されます
+![IFTTT 05](../../ifttt/work-b/images/ifttt-05.png)
 
-Choose action では、 **Send message** をクリックします。
+`That` をクリックします。
 
-Complete action fields では、以下のように入力してから [Create action] をクリックします。
+![IFTTT 06](../../ifttt/work-b/images/ifttt-06.png)
 
-* Recipient: メッセージの送信先を選んでください
-    * 1:1(=自分自身)に送るか、作成済みの LINE グループに送ることができます
-* Message: デフォルトのままでＯＫです
-    * 編集すればメッセージが変わります。Value1 ~ Value3 は AWS IoT 1-Click のプレイスメントで設定した値を入れることができます
-* Photo URL: 空のままでＯＫです
+[Search services] に `LINE` と入力し、 LINE のアイコンをクリックします。
 
-![button-mkmk / ifttt / LINE](https://docs.google.com/drawings/d/e/2PACX-1vRmXPfVwP-IIivA1rMdgzq9cvQvuu-0ADMowxrjM3cPfDQ7FHDL_iUWK5RvDPvQD52tQKM_ZyBAhP45/pub?w=470&h=690)
+![IFTTT 07](../../ifttt/work-b/images/ifttt-07.png)
 
-Review and finish では以下のように入力してから [Finish] をクリックしてください。
+`Connect` をクリックします。
 
-* Receive notifications when this Applet runs: オフにします
-    * 今回作成したアプレットの実行毎に IFTTT でも通知が発生するのを抑制します
+> 既に LINE Notify に Connect 済みだったり、 Google アカウントや Facebook アカウントで IFTTT にログインした場合、この手順はスキップされて後述の "Send message" が表示される場合がありますが正常です。後述の "Send message" の手順から続けてください。
 
-![button-mkmk / ifttt / finish](https://docs.google.com/drawings/d/e/2PACX-1vRvIz9ojhP-emB9r38mRbDa5i_xyiNopwplsRw1ipNOk-t57bPWzCjUF2nOFLT6VJktTExiCTLKApAo/pub?w=441&h=685)
+![IFTTT 08](../../ifttt/work-b/images/ifttt-08.png)
 
-### WebHook のキーを入手する
+LINE アカウントに登録されているメールアドレス・パスワードでログインします。
 
-右上の自分のユーザー名をクリックすると表示される [Services] をクリックします。
+![IFTTT 09](../../ifttt/work-b/images/ifttt-09.png)
 
-一覧の中から **Webhooks** をクリックします。 (`webhooks` で検索すると見つけやすいです)
+> もしメールアドレス認証を指定ない場合には、まず　LINE アプリからメールアドレス認証を行う必要があります
 
-**Documetation** をクリックすると **Your key is** に Webhooks の キーが表示されるのでメモをしておいてください。
+![IFTTT 10](../../ifttt/work-b/images/ifttt-10.png)
 
-![button-mkmk / ifttt / webhook key](https://docs.google.com/drawings/d/e/2PACX-1vT9tXORFG8l287iAG479DCs4kSml1yp_woRoIU2l12NYfh7KgehpXjJoLE4TXAafUZ1OSIF0-W1hd9s/pub?w=960&h=720)
+Send message をクリックします。
 
-以上で IFTTT の設定は終了です。  
-作成したアプレットは IFTTT の **My Applets** で管理・編集できます。
+![IFTTT 11](../../ifttt/work-b/images/ifttt-11.png)
+
+Message 欄を以下のように変更し Create action をクリックします。
+
+> {% raw %}`ボタン {{Value1}} が {{Value2}} クリックされました<br>{{Value3}}`{% endraw %}
+
+![IFTTT 12](../../ifttt/work-b/images/ifttt-12.png)
+
+Finish をクリックします。
+
+> トリガー時にアプリ通知が必要ない場合には `Receive notifications when this Applet runs`　をオフにします
+
+![IFTTT 13](../../ifttt/work-b/images/ifttt-13.png)
+
+[Webhooks](https://ifttt.com/services/maker_webhooks/){:target="_blank"} のページを開き、Documentation をクリックします。
+
+![IFTTT 14](../../ifttt/work-b/images/ifttt-14.png)
+
+`Your key is:` の後ろの文字列をどこかにメモしておきます。
+
+![IFTTT 15](../../ifttt/work-b/images/ifttt-15.png)
+
+以上で IFTTT の設定は終了です。
 
 ## 作業3: AWS Lambda を作成する
 
@@ -95,7 +109,7 @@ AWS IoT 1-Click から呼び出され、IFTTT に送信する Lambda 関数を�
 
 ![mkmk-button / 2-1 aws-console](https://docs.google.com/drawings/d/e/2PACX-1vSgprF60wQZHq5nvPUcueml_-wNwuVn3EWx9FqRV73-7mxS0bapShs6fPVD2LMV-Lrr6GLlb-aEhjIr/pub?w=928&h=189)
 
-AWS Lambda のコンソールを開き、 [関数の作成] をクリックします。
+[AWS Lambda](https://eu-west-2.console.aws.amazon.com/lambda/home?region=eu-west-2#){:target="_blank"} のコンソールを開き、 [関数の作成] をクリックします。
 
 **一から作成** を選んだあと、以下のように入力して [関数の作成] をクリックします。
 
@@ -108,7 +122,7 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 * ハンドラ: `index.handle` (デフォルトで `index.handler` と入っています。**必ず直すようにしてください**)
 
 コードを以下の URL のコードと入れ替えて [保存] をクリックします。  
-[https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js](https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js)
+[https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js](https://github.com/j3tm0t0/1-click/blob/master/functions/ifttt/index.js){:target="_blank"}
 
 ![button-mkmk / AWS Lambda コード (ifttt)](https://docs.google.com/drawings/d/e/2PACX-1vSgN3tcrsHi-BcDvkNE0-Ew-o-9S9NK7RqeaMAOHMkakyeWr8brr9S8Gx-bwNGKHe7uTjhMqEYCdN9M/pub?w=841&h=670)
 
@@ -179,7 +193,6 @@ AWS Lambda 上でテストをして LINE Nofity からメッセージが届け�
         * `value3` = `晩` (任意の文字列)
 
 ![button-mkmk / AWS IoT 1-Click (ifttt)](https://docs.google.com/drawings/d/e/2PACX-1vTKtPdLxGG-_Ek5JdJcrgL63-IfNLEm7wj9xb61Ch5CrS93ZoG7egd4oWZld6A5x0oBP794YZ7QHsm0/pub?w=534&h=720)
-《画像は後ほど用意いたします》
 
 [プレイスメントの作成] をクリックした後、プレイスメント内での設定を以下のようにします。
 
@@ -197,18 +210,19 @@ SORACOM LTE-M Button を押してメッセージが届くか確認してくだ�
 
 * AWS IoT 1-Click のプレイスメントの属性における value1 などを編集してみてください
 * IFTTT のアプレットにおける Message を変更してみたり、 Photo URL を入れてみてください。
-    * 画像サンプル: https://blog.soracom.jp/images/2018-07-04-soracom-lte-m-button/soracom-lte-m-button-powered-by-aws.png
+    * Photo URL で使える画像のサンプル URL: https://blog.soracom.jp/images/2018-07-04-soracom-lte-m-button/soracom-lte-m-button-powered-by-aws.png
 
 #### あとかたづけ
 
 作業は任意です。
 
 * IFTTT と LINE の接続を切断する
-    * [IFTTT の Services から LINE](https://ifttt.com/line) を選択、Settings で *Disconnect LINE* で切断。
-    * [LINE Notify のマイページ](https://notify-bot.line.me/my/) の連携中サービスで IFTTT との接続を解除
+    * [IFTTT の Services から LINE](https://ifttt.com/line){:target="_blank"} を選択、Settings で *Remove LINE* で切断。
+    * [LINE Notify のマイページ](https://notify-bot.line.me/my/){:target="_blank"} の連携中サービスで IFTTT との接続を解除
 * AWS 関連
-    * Lambda 関数の削除
+    * Lambda 関数の削除 (残っていても実行されない限りは費用は発生しません)
     * IAM ロール (自動生成のロールは `Lambda 関数名-role-ランダム文字` となります。テキストに沿って作った場合は `1click-ifttt-role-ランダム文字` となっています)
+      * IAM ポリシー (自動作成のポリシーは `AWSLambdaBasicExecutionRole-ランダム文字` となります。自動作成されたロールから参照されているポリシーを削除してください)
     * AWS IoT 1-Click のプロジェクトの削除
 
 ---
