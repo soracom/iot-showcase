@@ -7,6 +7,7 @@
 * AWS IAM
     * ロール
         * `iot1click_onclick_*`
+        * `[Lambda 関数名]-role-ランダム文字`
     * ポリシー
         * `AWSLambdaIoTButtonSESExecutionRole-*` (Email の場合)
         * `AWSLambdaIoTButtonSNSExecutionRole-*` (SMS の場合)

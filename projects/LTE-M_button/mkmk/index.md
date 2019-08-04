@@ -32,7 +32,7 @@ SORACOM LTE-M Button powered by AWS (以下 SORACOM LTE-M Button) を使った�
 
 SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて AWS Lambda (= あらかじめ作成しておいたプログラム)を実行できます。
 
-![mkmk-button / 全体像](https://docs.google.com/drawings/d/e/2PACX-1vQWfrmF_w_-tmW6ztypukUXverP4_WS_ECeDmGe9ibqVYilMxP0kWPr6arvFE6oWyypQkAH9SNzjZ6s/pub?w=927&h=521)
+![mkmk-button / 全体像](https://docs.google.com/drawings/d/e/2PACX-1vQWfrmF_w_-tmW6ztypukUXverP4_WS_ECeDmGe9ibqVYilMxP0kWPr6arvFE6oWyypQkAH9SNzjZ6s/pub?w=928&h=350)
 
 必要な作業は以下の通りとなります。
 
@@ -63,7 +63,6 @@ SORACOM LTE-M Button はボタンをきっかけに AWS IoT 1-Click を通じて
 
 1. [AWS IoT Core を使って会場にあるデバイスを制御](b-work/device-control-with-awsiotcore-shadow)
     * **追加で必要なもの**: とくに無し
-    * デバイス側も作ってみたい方は[おまけコンテンツ](#appendix)を見てください
 2. [IFTTT を使って LINE に送信](b-work/line-notify-with-ifttt)
     * **追加で必要なもの**: LINE アカウント
 

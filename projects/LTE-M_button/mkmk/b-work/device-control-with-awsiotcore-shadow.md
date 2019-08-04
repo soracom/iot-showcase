@@ -4,7 +4,7 @@ AWS IoT Core を利用して、会場に設置されたデバイスを制御し�
 
 AWS IoT Core とその先の環境は運営側で準備しているため、この章では AWS IoT 1-Click から AWS IoT Core への送信までを行うのがゴールになります。
 
-![mkmk-button / AWS IoT Core 全体像](https://docs.google.com/drawings/d/e/2PACX-1vSs0tF-8s21WZHxe7bWXMOkl5V06Y8hEdLnoQZQyDAMhnw5NCgCNYNJK_R-erEGY3sigR5RNlKS-2nj/pub?w=813&h=457)
+![mkmk-button / AWS IoT Core 全体像](https://docs.google.com/drawings/d/e/2PACX-1vSs0tF-8s21WZHxe7bWXMOkl5V06Y8hEdLnoQZQyDAMhnw5NCgCNYNJK_R-erEGY3sigR5RNlKS-2nj/pub?w=806&h=379)
 
 ## 作業1: AWS Lambda を作成する
 
@@ -20,7 +20,7 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 **一から作成** を選んだあと、以下のように入力して [関数の作成] をクリックします。
 
 * 名前: `1click-updateAWSIoTCoreShadow` (任意の文字列)
-* ランタイム: _Node.js 8.10_
+* ランタイム: _Node.js 10.x_
 * （アクセス権限は編集する必要はありませんが、選択する場合は `基本的な Lambda アクセス権限でロールを作成` を選んでください）
 
 ![mkmk-button / AWS Lambda 作成](https://docs.google.com/drawings/d/e/2PACX-1vSaizKKpVN_v5vhtVed2QzXGAXlVCuSDd7M-nkZKoPWGAiJu-mF6Vi6o1Mo40fWHEZp1f3Fo3qGLlT-/pub?w=929&h=594)
@@ -28,7 +28,7 @@ AWS Lambda のコンソールを開き、 [関数の作成] をクリックし�
 関数コードでは、以下のようにします。
 
 コードを以下の URL のコードと入れ替えて [保存] をクリックします。  
-[https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee](https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee)
+[https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee](https://gist.github.com/ma2shita/7cfc919010bf9050a6edea2b741a31ee){:target="_blank"}
 
 ![mkmk-button / AWS Lambda コード](https://docs.google.com/drawings/d/e/2PACX-1vSovMN3Ab8Ewgx3qFLk2afThD6j_20H8XDM6QlXwg-iSRF-YNBQaOxZMcXYBo2mZOQOhEnytgB6ACaX/pub?w=841&h=670)
 
@@ -113,10 +113,7 @@ AWS Lambda 上でテストをして会場にあるデバイスが動けば成功
 SORACOM LTE-M Button を押して会場にあるデバイスが動くか確認してください。  
 **実施前にスタッフにお声がけください**
 
-ボタンのアクションとデバイスの制御は以下のように対応しています。
-
-* SINGLE = デバイス ON
-* DOUBLE or LONG = デバイス OFF
+デバイスは動き出してから 5~10 秒で自動的に停止します。
 
 #### あとかたづけ
 
@@ -125,6 +122,7 @@ SORACOM LTE-M Button を押して会場にあるデバイスが動くか確認�
 * AWS 関連
     * Lambda 関数の削除
     * IAM ロール (自動生成のロールは `Lambda 関数名-role-ランダム文字` となります。テキストに沿って作った場合は `1click-updateAWSIoTCoreShadow-role-ランダム文字` となっています)
+      * IAM ポリシー (自動作成のポリシーは `AWSLambdaBasicExecutionRole-ランダム文字` となります。自動作成されたロールから参照されているポリシーを削除してください)
     * AWS IoT 1-Click のプロジェクトの削除
 
 ---
