@@ -43,8 +43,6 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
     - **貸し出されたボタンを利用する場合には必要ありません**
 2. [ボタンのクリックイベントを SORACOM Harvest で確認する](../common/harvest){:target="_blank"}
 
-> TODO 位置情報について追記する
-
 <h2 id="work-b">作業B: Slack を使ったクリックイベント通知</h2>
 
 1. Slack Webhook を作成する (運営が用意します)
@@ -83,9 +81,8 @@ SORACOM Harvest 、 SORACOM Beam 、SORACOM Funk 等、 SORACOM サービス利�
         * 例) UDP → HTTPS をおこなった場合: SORACOM Beam への UDP/IN で 0.0009 円、HTTPS/OUT で 0.0009 円の計 0.0018 円がかかります
     * 1 アカウントあたり 100,000リクエスト/月の無料枠があります
 * [簡易位置測位機能](https://dev.soracom.io/jp/docs/location_service/){:target="_blank"}
-    * 簡易位置測位機能 を有効にしている回線あたり 月額 50 円 (750 回まで)
-
-> TODO: 簡易位置測位機能についての表記を確認
+    * 1SIM/1ボタンあたり : 月額 50円（月間750リクエスト含む）
+    * 750回を越したリクエストについては リクエストあたり : 0.15円　となります。
 
 ※ 料金は全て送料や税抜きです。
 

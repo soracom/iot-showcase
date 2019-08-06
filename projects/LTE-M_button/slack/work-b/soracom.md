@@ -29,38 +29,40 @@ SIM 管理画面でボタンの SIM のグループ名をクリックし、グ�
 
 ![Beam転送先設定](images/soracom-02.png)
 
-> TODO 画像入れ替え
-
 ヘッダ操作
 
-- IMSI ヘッダ または IMEI ヘッダ を オン (通知したい方を選択、両方をオンにした場合は IMEI が優先)
+- IMSI ヘッダ を オン
+- IMEI ヘッダ を オン
 - 署名ヘッダ付与: オン
 - 事前共有鍵: 運営より入手
 
 ![Beamヘッダ操作設定](images/soracom-03.png)
+![Beam認証情報設定](images/soracom-04.png)
 
-> TODO 画像入れ替え
-
-カスタムヘッダには、下記のの２つを設定します
+カスタムヘッダに、APIを呼び出すための APIキー を設定します
 
 - x-api-key: 運営より入手
-- x-slack-path: (自分で Slack Webhook を用意した場合には、Webhook URL のうち `/services/...` 以下全てをここに指定します)
+
+![ヘッダ操作設定](images/soracom-05.png)
+![Beam認証情報設定](images/soracom-06.png)
 
 最後に、一番下の「保存」を押します。
 
 ### Unified Endpoint 設定
 レスポンスのフォーマットで「Beam」を選び、「保存」を押します。
 
-![Unified Endpoint 設定](images/soracom-04.png)
+![Unified Endpoint 設定](images/soracom-07.png)
 
 ## ボタンを押して Slack を呼び出す
 
 ボタンを押して LED が緑色に光れば、呼び出し成功です。
 
+![ボタン](images/button.jpg)
+
 ## Slack の通知を確認する
 Slack にクリックイベントが通知されるので、確認します。
 
-> TOOD: スクリーンショット
+![Slack](images/slack.png)
 
 # 以上で本ページの作業は完了となります
 
@@ -73,3 +75,8 @@ Slack にクリックイベントが通知されるので、確認します。
 ## リクエストの詳細情報を確認するには？
 
 - Beam 転送先設定でパスを `/button/slack` → `/button/slack/dump` に変更
+
+## 自分の Slack Workspace を使うには？
+カスタムヘッダー `x-slack-path` に Webhook URL の `/services/...` 以降を指定します。
+
+![カスタムヘッダー設定](images/soracom-08.png)
