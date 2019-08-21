@@ -22,6 +22,9 @@ M5StackはマイコンにESP32を使用しています。Arduino IDEは標準で
 手順は以下の通りです。
 
 * Arduino IDEのメニューから [ファイル] > [環境設定] で表示されるダイアログ上で **追加のボードマネージャのURL** に、以下のURLを記載します。
+    * macOSの場合は [Arduino] > [環境設定] に進んでください
+    * 環境によっては "環境設定" が "Preference" と表示されています
+    * 既に別のURLが記載されている場合は、 "追加のボードマネージャーのURL" のテキストボックスの **右のアイコン** をクリックした後に表示されるテキストボックスに1行追加する形で入力します
 
 ```
 https://dl.espressif.com/dl/package_esp32_index.json
@@ -36,7 +39,7 @@ M5Stack用のライブラリをインストールします。
 
 手順は以下の通りです。
 
-* Arduino IDEのメニューから [ツール] > [ライブラリを管理] で表示されるダイアログ上で `M5Stack by M5Stack` をインストールします。
+* Arduino IDEのメニューから [スケッチ] > [ライブラリをインクルード] > [ライブラリを管理] で表示されるダイアログ上で `M5Stack by M5Stack` をインストールします。
     * ※ TIPS: `m5stack` で検索すると見つけやすいです
 
 ### CP210X Driver (仮想シリアルポートドライバ)
@@ -44,6 +47,8 @@ M5Stack用のライブラリをインストールします。
 M5Stackへスケッチ（Arduino IDEではプログラムを「スケッチ」と称しています）を転送したり、M5Stackのデバッグ出力を受け取るための仮想シリアルポートドライバをインストールします。
 
 [M5Stack公式サイトのDownloadページ](https://m5stack.com/pages/download)の **CP210X Driver** をお使いのOSに合わせてダウンロード、インストールします。
+
+注: Arduino IDEの書き込みの際、macOSの方で「シリアルポートが見つからない」旨のエラーが発生した場合は、仮想シリアルポートドライバを https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers からダウンロードしてインストールしてみてください
 
 ### 3G拡張ボードを利用するための追加ライブラリ
 
