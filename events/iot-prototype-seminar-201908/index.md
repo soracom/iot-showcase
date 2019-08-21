@@ -163,6 +163,14 @@ void loop() {
 
 ##### ブラウザでテスト
 
+先ほど入手した **Client ID** を使って、まずはブラウザで雨雲レーダーを表示してみます。以下のURLをブラウザのアドレスバーに入力してください。
+
+その際、 `<YOUR_CLIENT_ID>` を先ほどの **Client ID** に置き換えてください。
+
+```
+https://map.yahooapis.jp/map/V1/static?appid=<YOUR_CLIENT_ID>&output=jpg&quality=50&width=320&height=208&overlay=type:rainfall%7Cdatelabel:off&mode=map&style=base:simple&z=8&lat=35.6313456&lon=139.7312189
+```
+
 #### 雨雲レーダー表示 (m5stack_rainradar.ino)
 
 ```c++
