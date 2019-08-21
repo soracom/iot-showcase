@@ -344,7 +344,6 @@ uint16_t getColor(uint8_t red, uint8_t green, uint8_t blue) {
     * ポート番号: (なにも入力しません)
     * パス: `/map/V1/static?appid=<YOUR_CLIENT_ID>&output=jpg&quality=50&width=320&height=208&overlay=type:rainfall%7Cdatelabel:off&mode=map&style=base:simple&z=8&lat=35.6313456&lon=139.7312189`
         * **注意:** パスの `<YOUR_CLIENT_ID>` を **Client ID** に置き換えてください
-    * ![SORACOM Beam - HTTP 設定](images/setting-of-soracom-beam.png)
 
 以上で SORACOM Beam の設定は終了です。
 
