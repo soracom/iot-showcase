@@ -20,7 +20,7 @@
 - jq
 - setup_air.shを実行しLTE接続できていること
 
-# 1. 証明書を生成する権限を持つ AWS IAM 資格情報を作成する
+## 証明書を生成する権限を持つ AWS IAM 資格情報を作成する
 
 SORACOM Krypton が thing を作成し、証明書を生成してポリシーを適用するには、適切な権限セットを持つAWS資格情報のセットが必要です。 ここでは、AWS IAMユーザーを作成し、AWS資格情報を取得します。
 
@@ -67,13 +67,16 @@ AWSアクセスキーIDとシークレットキーの両方をコピーして、
   
 ![Krypton-awsiot](images/krypton-awsiot30.png)
 
-## 2-1. SORACOM Krypton を設定する
+アクセスキーIDとシークレットキーを受講生にシェアしてください。
+以上で事前準備は完了です。
 
-次に、SIM が AWS IoT Coreをプロビジョニングするために IoT SIM グループを設定します。 SORACOM 認証情報ストアにエントリを作成し、資格情報IDとAWS IoT関連のパラメータをグループコンフィグレーションで設定します。
+## 1. SORACOM Krypton を設定する
 
-### SORACOM 認証情報ストアに AWS 資格情報を登録する
+SORACOM Krypton が AWS IoT Coreをプロビジョニングするために IoT SIM グループを設定します。 SORACOM 認証情報ストアにエントリを作成し、資格情報IDとAWS IoT関連のパラメータをグループコンフィグレーションで設定します。
 
-SORACOM ユーザーコンソールから、右上のオペレータメニューから「セキュリティ」を選択します。
+### 1-1. SORACOM 認証情報ストアに AWS 資格情報を登録する
+
+SORACOM ユーザーコンソール右上のオペレータメニューから「セキュリティ」を選択します。
 
 ![Krypton-awsiot](images/krypton-awsiot31.png)
 
@@ -82,19 +85,18 @@ SORACOM ユーザーコンソールから、右上のオペレータメニュー
 ![Krypton-awsiot](images/krypton-awsiot32.png)
 
 
-認証情報セットに名前を付け、タイプとして「AWS credentials」を選択します。前のセクションで作成した AWS 認証情報を入力します。
+認証情報セットに名前 `aws-<お名前>` を付け、タイプとして「AWS credentials」を選択します。事前にシェアされたAWS 認証情報を入力します。
 
 ![Krypton-awsiot](images/krypton-awsiot33.png)
 
 
-### グループコンフィグレーションを作成し、SIM をグループに所属させます。
+### 1-2. グループコンフィグレーションを作成し、SIM をグループに所属させます。
 
 SORACOM ユーザーコンソールから SIM グループを表示します。
 
 ![Krypton-awsiot](images/krypton-awsiot34.png)
 
-「追加」ボタンをクリックしてグループを作成します（または既存のグループを使用する場合はグループを選択します）。
-
+「追加」ボタンをクリックしてグループ名 `krypton-<お名前>` を作成します
 
 ![Krypton-awsiot](images/krypton-awsiot35.png)
 
@@ -104,13 +106,13 @@ SORACOM ユーザーコンソールから SIM グループを表示します。
 
 SIMグループに AWS IoT 情報を設定します。
 
-「ステップ1」と「ステップ2」で設定した内容から、次のようにグループを設定します
+手順1で設定した内容から、次のようにグループを設定します
 
 - AWS リージョン: `ap-northeast-1`を入力
 - 認証情報: 当ステップで作成した AWS IoT 用の認証情報を選択します。
 - Policy name: 新しく作成された証明書に割り当てるポリシー名を入力します。
 - Thing name pattern: クライアントが指定していない場合に使用する Thing name を入力します。 Thing name には `$imsi` という文字列を含める必要があります。`$imsi` はアクセス元の SIM の IMSI に置換されます。
-- ルート認証局証明書: ルート認証局証明書を入力します。(入力はオプションです。)
+- ルート認証局証明書: 空のまま
 
 SORACOMユーザーコンソールの「SIM 管理」メニューに移動します。
 
@@ -120,13 +122,15 @@ SORACOMユーザーコンソールの「SIM 管理」メニューに移動しま
 
 ![Krypton-awsiot](images/krypton-awsiot38.png)
 
-グループを選択し、 「更新」をクリックしてください。
+`krypton-<お名前>` グループを選択し、 「更新」をクリックしてください。
 
 ![Krypton-awsiot](images/krypton-awsiot39.png)
 
-# 3. Krypton を使用して Thing を作成し、デバイスを接続する
+これでKryptonの設定は完了です。
 
-ここまでで、IoT SIM および Krypton を使用してデバイスをプロビジョニングする設定を行いました。次にデバイスを起動して、MQTTSによってAWS IoTに接続します。
+# 2. Krypton を使用して Thing を作成し、デバイスを接続する
+
+ここまでで、IoT SIM および Krypton を使用してデバイスをプロビジョニングする設定を行いました。次にデバイスを起動してKryptonのプロビジョニングAPIからx509証明書を受け取り、それを利用してAWS IoT Coreに接続します。
 
 ```bash
 $ curl -X POST https://krypton.soracom.io:8036/v1/provisioning/aws/iot/bootstrap
