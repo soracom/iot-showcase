@@ -15,7 +15,7 @@
     - クレデンシャル作成とグループ設定変更の権限を持つSAMユーザーを行使できること
   - jq
 - Raspberry Pi
-  - mosquitto
+  - mosquitto-clients
   - setup_air.shを実行しLTE接続できていること
 
 ## SAMパーミッション構文の例
@@ -103,6 +103,7 @@ jq '.certificateArn' cert.json
 aws iot attach-policy \
   --profile <AWSプロファイル名> \
   --policy-name PubSubToAnyTopic \
+  --region ap-northeast-1 \
   --target "arn:aws:iot:ap-northeast-1:XXXXXXXXXXXX:cert/XXXXXXXX"
 ```
 
@@ -125,7 +126,7 @@ jq '{credentials:{cert:.certificatePem,key:.keyPair.PrivateKey,ca:"-----BEGIN CE
 soracom credentials create --type x509 \
   --profile <SORACOMプロファイル名> \
   --body @soracom-credential.json \
-  --credentials-id handson-aws-iot-<IMSI>
+  --credentials-id handson-aws-iot-<SIMのIMSIに置き換え>
 ```
 
 これでSORACOMのクレデンシャル設定は完了です。
@@ -137,7 +138,19 @@ soracom credentials create --type x509 \
 SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。
 [+追加]ボタンからSIMグループ名 `beam` でSIMグループを作成します。グループ設定画面にあるグループIDをメモしておきます。
 
-グループ設定にBeam MQTTを追加、クレデンシャル名にIMSIのプレースホルダを含めるように、以下の内容でグループ設定ファイル `group-config.json` をエディタで作成します。
+Beamに設定するAWS IoT Coreのエンドポイントを以下のコマンドで確認しメモしておきます。
+
+```
+aws iot describe-endpoint \
+  --endpoint-type iot:Data-ATS \
+  --profile <AWSプロファイル名> \
+  --region ap-northeast-1
+{
+    "endpointAddress": "XXXXXXXXXXXX-ats.iot.ap-northeast-1.amazonaws.com"
+}
+```
+
+グループ設定にBeam MQTTを追加、クレデンシャル名にIMSIのプレースホルダを含めるように、以下の内容でグループ設定ファイル `group-config.json` をエディタで作成します。先ほど確認したAWS IoT Coreのエンドポイントを `destination` にセットします。
 
 ```json 
 [
@@ -145,13 +158,13 @@ SORACOMユーザーコンソールのメニューから[SIMグループ]をク�
     "key": "mqtt://beam.soracom.io:1883",
     "value": {
       "name": "AWS IoT",
-      "destination": "REPLACE HERE",
+      "destination": "mqtts://<AWS IoT Coreのエンドポイント>:8883",
       "enabled": true,
       "addSubscriberHeader": false,
       "useClientCert": true,
       "clientCerts": {
         "default": {
-          "$credentialsId": "awsiot-#{imsi}"
+          "$credentialsId": "handson-aws-iot-#{imsi}"
         }
       }
     }
@@ -162,6 +175,7 @@ SORACOMユーザーコンソールのメニューから[SIMグループ]をク�
 ```
 soracom groups put-config --namespace SoracomBeam \
   --body @group-config.json \
+  --profile <SORACOMプロファイル名> \
   --group-id <メモしたグループID>
 ```
 
@@ -174,5 +188,5 @@ SORACOMユーザーコンソールのメニューから[SIM管理]をクリッ�
 デバイスでMQTTクライアントである `mosquitto_pub` コマンドを実行し、SORACOM Beamに接続します。
 
 ```
-mosquitto_pub beam.soracom.io
+mosquitto_pub -d -h beam.soracom.io -t topic/test -m "test"
 ```

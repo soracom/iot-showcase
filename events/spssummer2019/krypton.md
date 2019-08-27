@@ -16,7 +16,7 @@
 
 以下のソフトウェアをRaspberry Piに事前にインストールします
 
-- mosquitto
+- mosquitto-clients
 - jq
 - setup_air.shを実行しLTE接続できていること
 
@@ -32,7 +32,7 @@ AWS IAM コンソールを表示します。
 
 ![Krypton-awsiot](images/krypton-awsiot22.png)
 
-ユーザー名を入力し、「プログラムによるアクセス」にチェックをつけ「次のステップ：アクセス権限」をクリックします。
+ユーザー名に `krypton-aws-iot-provisioner-<お名前>` と入力し、「プログラムによるアクセス」にチェックをつけ「次のステップ：アクセス権限」をクリックします。
 
 ![Krypton-awsiot](images/krypton-awsiot23.png)
 
@@ -50,7 +50,7 @@ AWS IAM コンソールを表示します。
 
 ![Krypton-awsiot](images/krypton-awsiot26.png)
 
-名前を入力して「Create policy」をクリックします。
+名前に `AWSIoTCreateKeysAndCertificate<お名前>` を入力して「Create policy」をクリックします。
 
 ![Krypton-awsiot](images/krypton-awsiot27.png)
 
@@ -104,15 +104,18 @@ SORACOM ユーザーコンソールから SIM グループを表示します。
 
 ![Krypton-awsiot](images/krypton-awsiot36.png)
 
-SIMグループに AWS IoT 情報を設定します。
+SIMグループの [SORACOM Krypton設定] を表示、スイッチをONにし [+] - [AWS IoT] を設定します。
 
 手順1で設定した内容から、次のようにグループを設定します
 
 - AWS リージョン: `ap-northeast-1`を入力
-- 認証情報: 当ステップで作成した AWS IoT 用の認証情報を選択します。
-- Policy name: 新しく作成された証明書に割り当てるポリシー名を入力します。
-- Thing name pattern: クライアントが指定していない場合に使用する Thing name を入力します。 Thing name には `$imsi` という文字列を含める必要があります。`$imsi` はアクセス元の SIM の IMSI に置換されます。
+- 認証情報: 当ステップで作成した AWS IoT 用の認証情報を選択します
+- Policy name: `PubSubToAnyTopic` と入力します
+- Thing name pattern: `<お名前>-$imsi` と入力します。 `$imsi` はアクセス元の SIM の IMSI に置換されます
+- ホスト名: Beamのハンズオンで設定した、AWS IoTのエンドポイント名を入力します
 - ルート認証局証明書: 空のまま
+
+[保存] をクリックして設定を保存します。
 
 SORACOMユーザーコンソールの「SIM 管理」メニューに移動します。
 
@@ -133,5 +136,19 @@ SORACOMユーザーコンソールの「SIM 管理」メニューに移動しま
 ここまでで、IoT SIM および Krypton を使用してデバイスをプロビジョニングする設定を行いました。次にデバイスを起動してKryptonのプロビジョニングAPIからx509証明書を受け取り、それを利用してAWS IoT Coreに接続します。
 
 ```bash
-$ curl -X POST https://krypton.soracom.io:8036/v1/provisioning/aws/iot/bootstrap
+curl -X POST https://krypton.soracom.io:8036/v1/provisioning/aws/iot/bootstrap > cert.json
+cat cert.json | jq .privateKey -r > thing-private-key.pem
+cat cert.json | jq .certificate -r > cert.pem
+ATS rootCAのダウンロード
+wget https://www.amazontrust.com/repository/AmazonRootCA1.pem -O rootCA.pem
+```
+
+```
+mosquitto_pub --cafile rootCA.pem --cert cert.pem --key thing-private-key.pem \
+  -h <AWS IoTのエンドポイント名> -p 8883 -q 1 -d -t topic/test -i clientid2 -m "Hello, World"
+Client clientid2 sending CONNECT
+Client clientid2 received CONNACK (0)
+Client clientid2 sending PUBLISH (d0, q1, r0, m1, 'topic/test', ... (12 bytes))
+Client clientid2 received PUBACK (Mid: 1)
+Client clientid2 sending DISCONNECT
 ```
