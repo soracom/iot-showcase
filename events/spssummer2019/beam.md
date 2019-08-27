@@ -1,4 +1,4 @@
-# AWS IoT Core 証明書のプロビジョニング
+# SORACOM Beam Multi Credentials per group機能によるAWS IoT Core 証明書のプロビジョニング
 
 # 事前準備
 
@@ -59,7 +59,7 @@ aws iot create-policy \
   --region ap-northeast-1
 ```
 
-# AWS IoT 証明書の発行と SORACOM への登録
+# 1. AWS IoT 証明書の発行と SORACOM への登録
 
 以下の手順でAWS IoTのx509証明書を発行し、SORACOMのクレデンシャルとして登録します。
 
