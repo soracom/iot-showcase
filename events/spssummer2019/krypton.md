@@ -84,7 +84,7 @@ SORACOM ユーザーコンソール右上のオペレータメニューから「
 ![Krypton-awsiot](images/krypton-awsiot32.png)
 
 
-認証情報セットに名前 `aws-<お名前>` を付け、タイプとして「AWS credentials」を選択します。手順1のアクセスキーIDとシークレットキーを入力します。
+認証情報セットに名前 `aws-<お名前>` を付け、タイプとして「AWS認証情報」を選択します。手順1のアクセスキーIDとシークレットキーを入力します。
 
 ![Krypton-awsiot](images/krypton-awsiot33.png)
 
@@ -96,7 +96,7 @@ SORACOM ユーザーコンソールから SIM グループを表示します。
 
 ![Krypton-awsiot](images/krypton-awsiot34.png)
 
-「追加」ボタンをクリックしてグループ名 `handson-krypton-<お名前>` を作成します
+「追加」ボタンをクリックしてグループ名 `handson-krypton-<お名前>` を作成します。
 
 ![Krypton-awsiot](images/krypton-awsiot35.png)
 
@@ -109,7 +109,7 @@ SIMグループの [SORACOM Krypton設定] を表示、スイッチをONにし [
 手順1で設定した内容から、次のようにグループを設定します
 
 - AWS リージョン: `ap-northeast-1`を入力
-- 認証情報: 当ステップで作成した AWS IoT 用の認証情報を選択します
+- 認証情報: 当ステップで作成した AWS認証情報を選択します
 - Policy name: `PubSubToAnyTopic-<お名前>` と入力します
 - Thing name pattern: `<お名前>-$imsi` と入力します。 `$imsi` はアクセス元の SIM の IMSI に置換されます
 - ホスト名: Beamのハンズオンで設定した、AWS IoTのエンドポイント名を入力します
