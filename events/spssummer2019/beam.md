@@ -7,7 +7,6 @@
 - PC/Mac
   - AWS
     - Management Console(IAMユーザー)
-    - AWS CLI
     - IAMポリシー `arn:aws:iam::aws:policy/AWSIoTFullAccess` をアタッチしたIAMユーザーを行使できること
   - SORACOM
     - SAMユーザー
@@ -27,6 +26,7 @@
       "api": [
         "Credentials:create*",
         "Groups:*"
+        "Subscribers:*"
       ],
       "effect": "allow"
     }
@@ -120,10 +120,10 @@ SORACOM ユーザーコンソールから、右上のオペレータメニュー
 
 ## 2-1. SORACOM Beamの設定
 
-**以下はSORACOMアカウントにつき、1回実行すれば良い設定です。**
+**以下はSIMグループにつき、1回実行すれば良い設定です。**
 
 SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。
-[+追加]ボタンからSIMグループ名 `beam` でSIMグループを作成します。グループ設定画面にあるグループIDをメモしておきます。
+[+追加]ボタンからSIMグループ名 `handson-beam<数字>`(数字は講師から指示があります) でSIMグループを作成します。グループ設定画面にあるグループIDをメモしておきます。
 
 Beamに設定するAWS IoT CoreのエンドポイントをAWS IoT管理画面のメニュー [設定] にある「エンドポイント」をコピーします。
 
@@ -149,7 +149,7 @@ Beamに設定するAWS IoT CoreのエンドポイントをAWS IoT管理画面の
 ]
 ```
 
-以下のコマンドでグループ設定を更新します。
+以下のコマンドでグループ設定を更新します。(`--profile`オプションは任意)
 
 ```
 soracom groups put-config --namespace SoracomBeam \
@@ -162,16 +162,18 @@ soracom groups put-config --namespace SoracomBeam \
 
 SORACOM IoT SIMをセットしたデバイスからSORACOM BeamにMQTT接続し、AWS IoT Coreにアクセス出来る様子を確認します。
 
-SORACOMユーザーコンソールのメニューから[SIM管理]をクリック、自分のSIMを選択して[操作] - [所属グループ変更]をクリック、2-1で作成したSIMグループ`beam`を選択し[グループ変更]をクリックします。
+SORACOMユーザーコンソールのメニューから[SIM管理]をクリック、自分のSIMを選択して[操作] - [所属グループ変更]をクリック、2-1で作成したSIMグループ`handson-beam<数字>`を選択し[グループ変更]をクリックします。
 
 デバイスにログインし、MQTTクライアントである `mosquitto_pub` コマンドを実行、SORACOM Beamに接続します。
 
 ```
 $ mosquitto_pub -d -h beam.soracom.io -t <お名前> -m "test"
+(以下は実行結果の例です)
 Client mosqpub|3518-raspberryp sending CONNECT
 Client mosqpub|3518-raspberryp received CONNACK (0)
 Client mosqpub|3518-raspberryp sending PUBLISH (d0, q0, r0, m1, '<お名前>', ... (4 bytes))
 Client mosqpub|3518-raspberryp sending DISCONNECT
+$
 ```
 
 AWS IoT管理画面のメニューから「テスト」を選択、「トピックのサブスクリプション」に「<お名前>」トピックを入力し、「トピックへのサブスクライブ」をクリックしてサブスクライブを開始します。
