@@ -55,17 +55,14 @@
 ![](images/beam03.png)
 
 下記の３つの証明書をダウンロードのリンクよりダウンロードします(後ほど使用します)。
-また、「有効化」をクリックして証明書を有効化します。
-その後、「ポリシーをアタッチ」をクリックします。
 
 - このモノの証明書 (ファイル名 : `<証明書ID>-certificate.pem.crt`)
 - プライベートキー (ファイル名 : `<証明書ID>-private.pem.key`)
 - AWS IoT のルート CA → [サーバー認証] - [Amazon Trust Services エンドポイント (推奨)] - [Amazon ルート CA 1](右クリックし、ファイルとして保存、ファイル名 : `AmazonRootCA1.pem`)
 
-通常はここで [ポリシーのアタッチ] をクリックしモノにポリシーを割り当てますが、まだポリシーは未作成のため、ここではそのまま [完了] をクリックします。
+また、「有効化」をクリックして証明書を有効化し、「完了」をクリックします。
 
 ![](images/beam04.png)
-
 
 次に 安全性 > ポリシー > ポリシーの作成からデバイスに割り当てるポリシーを作成します。
 
@@ -74,10 +71,10 @@
 今回はどの MQTT topic にも Publish, Subscribe 可能なポリシーを作成します。
 下記のように入力して [作成] をクリックします。
 
-- 名前 : PubSubToAnyTopic
-- アクション : iot:*
-- リソースARN : *
-- 効果 : 許可をチェック
+- 名前 : `PubSubToAnyTopic-<お名前>`
+- アクション : `iot:*`
+- リソースARN : `*`
+- 効果 : 「許可」のチェックをオン
 
 次に作成したポリシーを作成したモノの証明書へ紐付けます。
 
@@ -85,7 +82,7 @@
 
 ![](images/beam06.png)
 
-先ほど作成した「PubSubToAnyTopic」を選択し、[アタッチ] をクリックします。
+先ほど作成した「PubSubToAnyTopic-<お名前>」を選択し、[アタッチ] をクリックします。
 
 ![](images/beam07.png)
 
@@ -167,10 +164,10 @@ SORACOM IoT SIMをセットしたデバイスからSORACOM BeamにMQTT接続し�
 
 SORACOMユーザーコンソールのメニューから[SIM管理]をクリック、自分のSIMを選択して[操作] - [所属グループ変更]をクリック、2-1で作成したSIMグループ`beam`を選択し[グループ変更]をクリックします。
 
-デバイスでMQTTクライアントである `mosquitto_pub` コマンドを実行し、SORACOM Beamに接続します。
+デバイスにログインし、MQTTクライアントである `mosquitto_pub` コマンドを実行、SORACOM Beamに接続します。
 
 ```
-mosquitto_pub -d -h beam.soracom.io -t <お名前> -m "test"
+$ mosquitto_pub -d -h beam.soracom.io -t <お名前> -m "test"
 Client mosqpub|3518-raspberryp sending CONNECT
 Client mosqpub|3518-raspberryp received CONNACK (0)
 Client mosqpub|3518-raspberryp sending PUBLISH (d0, q0, r0, m1, '<お名前>', ... (4 bytes))

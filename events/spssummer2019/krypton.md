@@ -135,6 +135,8 @@ SORACOMユーザーコンソールの「SIM 管理」メニューに移動しま
 
 ここまでで、IoT SIM および Krypton を使用してデバイスをプロビジョニングする設定を行いました。次にデバイスを起動してKryptonのプロビジョニングAPIからx509証明書を受け取り、それを利用してAWS IoT Coreに接続します。
 
+デバイスにログインし、以下の `curl` コマンドでKrypton Provisioning APIにアクセス、KrpytonがAWS IoT Coreのモノを代理生成しその証明書一式をJSONレスポンスとして返すので `cert.json` ファイルに保存します。
+ 
 ```bash
 curl -X POST https://krypton.soracom.io:8036/v1/provisioning/aws/iot/bootstrap > cert.json
 ```
@@ -150,7 +152,7 @@ wget https://www.amazontrust.com/repository/AmazonRootCA1.pem -O rootCA.pem
 `mosquitto_pub` コマンドでAWS IoT Coreに接続します。
 
 ```
-mosquitto_pub --cafile rootCA.pem --cert cert.pem --key thing-private-key.pem \
+$ mosquitto_pub --cafile rootCA.pem --cert cert.pem --key thing-private-key.pem \
   -p 8883 -q 1 -d -t topic/test -i clientid2 -m "Hello, World" -h <AWS IoTのエンドポイント名> 
 Client clientid2 sending CONNECT
 Client clientid2 received CONNACK (0)
