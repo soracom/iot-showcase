@@ -34,102 +34,92 @@
 }
 ```
 
-## AWS IoT Coreのポリシー作成
-
-AWS IoT Coreのサンプルポリシーを作成します。まずは以下の内容の `policy.json` ファイルをエディタで作成します。
-
-```json
-{
-    "Version": "2012-10-17", 
-    "Statement": [{
-        "Effect": "Allow",
-        "Action":["iot:*"],
-        "Resource": ["*"]
-    }]
-}
-```
-
-以下のコマンドで作成します。
-
-```
-aws iot create-policy \
-  --policy-name "PubSubToAnyTopic" \
-  --policy-document file://policy.json \
-  --profile <AWSプロファイル名> \
-  --region ap-northeast-1
-```
-
-以上で事前準備は完了です。
-
-# 1. AWS IoT 証明書の発行と SORACOM への登録
+# 1. AWS IoT Core 証明書の発行と SORACOM への登録
 
 以下の手順でAWS IoTのx509証明書を発行し、SORACOMのクレデンシャルとして登録します。
 
-## 1-1. AWS IoT証明書の発行
+## 1-1. AWS IoT Core証明書の発行
 
-以下のコマンドを実行してAWS IoT証明書を発行し、その内容を `cert.json` ファイルに保存します。
+[AWS IoT コンソール](https://ap-northeast-1.console.aws.amazon.com/iot/home?region=ap-northeast-1#/home)を開き AWS IoT の設定を開始します。
 
-```bash
-aws iot create-keys-and-certificate \
-  --profile <AWSプロファイル名> \
-  --region ap-northeast-1 \
-  --set-as-active > cert.json
-```
+まず 管理 > モノ > 作成 から、使用するデバイスをモノ(Thing)として作成します。
 
-`cert.json` ファイルをメモ帳などで開き、以下のような内容になっていることを確認します。
+![](images/beam01.png)
 
-```json
-{
-    "certificateArn": "arn:aws:iot:ap-northeast-1:XXXXXXXXXXXX:cert/XXXXXXXX",
-    "certificateId": "XXXXXXXX",
-    "certificatePem": "-----BEGIN CERTIFICATE-----\nMII...\n-----END CERTIFICATE-----\n",
-    "keyPair": {
-        "PublicKey": "-----BEGIN PUBLIC KEY-----\nMII...\n-----END PUBLIC KEY-----\n",
-        "PrivateKey": "-----BEGIN RSA PRIVATE KEY-----\nMII...\n-----END RSA PRIVATE KEY-----\n"
-    }
-}
-```
+「単一のモノを作成する」をクリックし名前に「thing-<お名前>」と入力、他の項目は既定のまま「次へ」をクリックします。
 
-`cert.json` ファイルから、証明書の操作に必要な ID(ARN) を抽出しコピーします。
+![](images/beam02.png)
 
-```
-jq '.certificateArn' cert.json
-"arn:aws:iot:ap-northeast-1:XXXXXXXXXXXX:cert/XXXXXXXX"
-```
+モノに証明書を追加します。ここでは1-Click証明書作成の「証明書の作成」をクリックし証明書を作成します。
 
-以下のコマンドを実行し、証明書のアクセス許可を有効にします。コピーしたIDを `--target` オプションに指定します。
+![](images/beam03.png)
 
-```
-aws iot attach-policy \
-  --profile <AWSプロファイル名> \
-  --policy-name PubSubToAnyTopic \
-  --region ap-northeast-1 \
-  --target "arn:aws:iot:ap-northeast-1:XXXXXXXXXXXX:cert/XXXXXXXX"
-```
+下記の３つの証明書をダウンロードのリンクよりダウンロードします(後ほど使用します)。
+また、「有効化」をクリックして証明書を有効化します。
+その後、「ポリシーをアタッチ」をクリックします。
 
-これでAWSの設定は完了です。
+- このモノの証明書 (ファイル名 : `<証明書ID>-certificate.pem.crt`)
+- プライベートキー (ファイル名 : `<証明書ID>-private.pem.key`)
+- AWS IoT のルート CA → [サーバー認証] - [Amazon Trust Services エンドポイント (推奨)] - [Amazon ルート CA 1](右クリックし、ファイルとして保存、ファイル名 : `AmazonRootCA1.pem`)
 
-## 1-2. SORACOM クレデンシャルの登録
+通常はここで [ポリシーのアタッチ] をクリックしモノにポリシーを割り当てますが、まだポリシーは未作成のため、ここではそのまま [完了] をクリックします。
 
-SORACOM Beamにリクエストを送出するSORACOM Air SIMの `IMSI` を確認します。
-SORACOM ユーザーコンソールのSIM一覧画面から確認するSIMを選択し、 [詳細] ボタンをクリックし、表示される `IMSI` をメモしておきます。
+![](images/beam04.png)
 
-以下のコマンドラインを実行し、AWS IoT証明書の情報をSORACOM APIのリクエストボディーに合わせた形式に変換します。
 
-```
-jq '{credentials:{cert:.certificatePem,key:.keyPair.PrivateKey,ca:"-----BEGIN CERTIFICATE-----\nMIIE0zCCA7ugAwIBAgIQGNrRniZ96LtKIVjNzGs7SjANBgkqhkiG9w0BAQUFADCB\nyjELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQL\nExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTowOAYDVQQLEzEoYykgMjAwNiBWZXJp\nU2lnbiwgSW5jLiAtIEZvciBhdXRob3JpemVkIHVzZSBvbmx5MUUwQwYDVQQDEzxW\nZXJpU2lnbiBDbGFzcyAzIFB1YmxpYyBQcmltYXJ5IENlcnRpZmljYXRpb24gQXV0\naG9yaXR5IC0gRzUwHhcNMDYxMTA4MDAwMDAwWhcNMzYwNzE2MjM1OTU5WjCByjEL\nMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQLExZW\nZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTowOAYDVQQLEzEoYykgMjAwNiBWZXJpU2ln\nbiwgSW5jLiAtIEZvciBhdXRob3JpemVkIHVzZSBvbmx5MUUwQwYDVQQDEzxWZXJp\nU2lnbiBDbGFzcyAzIFB1YmxpYyBQcmltYXJ5IENlcnRpZmljYXRpb24gQXV0aG9y\naXR5IC0gRzUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCvJAgIKXo1\nnmAMqudLO07cfLw8RRy7K+D+KQL5VwijZIUVJ/XxrcgxiV0i6CqqpkKzj/i5Vbex\nt0uz/o9+B1fs70PbZmIVYc9gDaTY3vjgw2IIPVQT60nKWVSFJuUrjxuf6/WhkcIz\nSdhDY2pSS9KP6HBRTdGJaXvHcPaz3BJ023tdS1bTlr8Vd6Gw9KIl8q8ckmcY5fQG\nBO+QueQA5N06tRn/Arr0PO7gi+s3i+z016zy9vA9r911kTMZHRxAy3QkGSGT2RT+\nrCpSx4/VBEnkjWNHiDxpg8v+R70rfk/Fla4OndTRQ8Bnc+MUCH7lP59zuDMKz10/\nNIeWiu5T6CUVAgMBAAGjgbIwga8wDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8E\nBAMCAQYwbQYIKwYBBQUHAQwEYTBfoV2gWzBZMFcwVRYJaW1hZ2UvZ2lmMCEwHzAH\nBgUrDgMCGgQUj+XTGoasjY5rw8+AatRIGCx7GS4wJRYjaHR0cDovL2xvZ28udmVy\naXNpZ24uY29tL3ZzbG9nby5naWYwHQYDVR0OBBYEFH/TZafC3ey78DAJ80M5+gKv\nMzEzMA0GCSqGSIb3DQEBBQUAA4IBAQCTJEowX2LP2BqYLz3q3JktvXf2pXkiOOzE\np6B4Eq1iDkVwZMXnl2YtmAl+X6/WzChl8gGqCBpH3vn5fJJaCGkgDdk+bW48DW7Y\n5gaRQBi5+MHt39tBquCWIMnNZBU4gcmU7qKEKQsTb47bDN0lAtukixlE0kF6BWlK\nWE9gyn6CagsCqiUXObXbf+eEZSqVir2G3l6BFoMtEMze/aiCKWE9gyn6CagsCqiUXObXbf+eEZSqVir2G3l6BFoMtEMze/aiCKWE9gyn6CagsCqb7MWE9gyn6CagsCqiUXObXbf+eEZSqVir2G3l6BFoMtEMze/aiCKWE9gyn6CagsCqio7WNq\n-----END CERTIFICATE-----"}}' cert.json > soracom-credential.json
-```
+次に 安全性 > ポリシー > ポリシーの作成からデバイスに割り当てるポリシーを作成します。
 
-以下を実行し、SORACOMクレデンシャルに登録します。クレデンシャルIDの末尾にIMSIを設定することに注意します。
+![](images/beam05.png)
 
-```
-soracom credentials create --type x509 \
-  --profile <SORACOMプロファイル名> \
-  --body @soracom-credential.json \
-  --credentials-id handson-aws-iot-<SIMのIMSIに置き換え>
-```
+今回はどの MQTT topic にも Publish, Subscribe 可能なポリシーを作成します。
+下記のように入力して [作成] をクリックします。
 
-これでSORACOMのクレデンシャル設定は完了です。
+- 名前 : PubSubToAnyTopic
+- アクション : iot:*
+- リソースARN : *
+- 効果 : 許可をチェック
+
+次に作成したポリシーを作成したモノの証明書へ紐付けます。
+
+安全性 > 証明書 を選択し、先ほど作成した証明書の右上の […] から [ポリシーのアタッチ] をクリックします。
+
+![](images/beam06.png)
+
+先ほど作成した「PubSubToAnyTopic」を選択し、[アタッチ] をクリックします。
+
+![](images/beam07.png)
+
+以上で AWS IoT Core へのモノの登録が完了しました。
+
+## 1-2. SORACOMへのクレデンシャル登録
+
+SORACOMユーザーコンソールに先ほど作成した証明書を登録します。
+
+SIMのIMSIをクレデンシャル名に含めるため、SIM管理から自身のSIMを選択、[詳細]ボタンをクリックしIMSIをコピーします。
+
+![](images/cred00.png)
+
+SORACOM ユーザーコンソールから、右上のオペレータメニューから「セキュリティ」を選択します。
+
+![](images/cred01.png)
+
+メニューの「認証情報ストア」から「認証情報を登録」を選択します。
+
+![](images/cred02.png)
+
+以下の内容を入力し、「登録」をクリックします。
+ファイルのダウンロード時とは順番が異なることに注意します。
+
+- 認証情報ID : `handson-aws-iot-<SIMのIMSI>`
+- 概要 : 空欄のまま
+- 種別 : 「X.509証明書」を選択
+- 秘密鍵 (key) : `<証明書ID>-private.pem.key` ファイルの内容をペースト
+- 証明書 (cert) : `<証明書ID>-certificate.pem.crt` ファイルの内容をペースト
+- CA証明局 : `AmazonRootCA1.pem` ファイルの内容をペースト
+
+![](images/cred03.png)
+
+これでクレデンシャルの構成は完了です。
 
 ## 2-1. SORACOM Beamの設定
 
@@ -138,17 +128,7 @@ soracom credentials create --type x509 \
 SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。
 [+追加]ボタンからSIMグループ名 `beam` でSIMグループを作成します。グループ設定画面にあるグループIDをメモしておきます。
 
-Beamに設定するAWS IoT Coreのエンドポイントを以下のコマンドで確認しメモしておきます。
-
-```
-aws iot describe-endpoint \
-  --endpoint-type iot:Data-ATS \
-  --profile <AWSプロファイル名> \
-  --region ap-northeast-1
-{
-    "endpointAddress": "XXXXXXXXXXXX-ats.iot.ap-northeast-1.amazonaws.com"
-}
-```
+Beamに設定するAWS IoT CoreのエンドポイントをAWS IoT管理画面のメニュー [設定] にある「エンドポイント」をコピーします。
 
 グループ設定にBeam MQTTを追加、クレデンシャル名にIMSIのプレースホルダを含めるように、以下の内容でグループ設定ファイル `group-config.json` をエディタで作成します。先ほど確認したAWS IoT Coreのエンドポイントを `destination` にセットします。
 
@@ -158,7 +138,7 @@ aws iot describe-endpoint \
     "key": "mqtt://beam.soracom.io:1883",
     "value": {
       "name": "AWS IoT",
-      "destination": "mqtts://<AWS IoT Coreのエンドポイント>:8883",
+      "destination": "mqtts://<AWS IoTのエンドポイント>:8883",
       "enabled": true,
       "addSubscriberHeader": false,
       "useClientCert": true,
@@ -171,6 +151,8 @@ aws iot describe-endpoint \
   }
 ]
 ```
+
+以下のコマンドでグループ設定を更新します。
 
 ```
 soracom groups put-config --namespace SoracomBeam \
@@ -188,5 +170,17 @@ SORACOMユーザーコンソールのメニューから[SIM管理]をクリッ�
 デバイスでMQTTクライアントである `mosquitto_pub` コマンドを実行し、SORACOM Beamに接続します。
 
 ```
-mosquitto_pub -d -h beam.soracom.io -t topic/test -m "test"
+mosquitto_pub -d -h beam.soracom.io -t <お名前> -m "test"
+Client mosqpub|3518-raspberryp sending CONNECT
+Client mosqpub|3518-raspberryp received CONNACK (0)
+Client mosqpub|3518-raspberryp sending PUBLISH (d0, q0, r0, m1, '<お名前>', ... (4 bytes))
+Client mosqpub|3518-raspberryp sending DISCONNECT
 ```
+
+AWS IoT管理画面のメニューから「テスト」を選択、「トピックのサブスクリプション」に「<お名前>」トピックを入力し、「トピックへのサブスクライブ」をクリックしてサブスクライブを開始します。
+
+何度か `mosquitto_pub` コマンドを再実行し、画面の右下にデバイスからパブリッシュしたメッセージが表示されることを確認します。
+
+![](images/awsiot01.png)
+
+これで、SORACOM Beamによって適切なX.509証明書が付与されAWS IoT Coreで認証し、正常に動作することが確認できました。

@@ -137,18 +137,26 @@ SORACOMユーザーコンソールの「SIM 管理」メニューに移動しま
 
 ```bash
 curl -X POST https://krypton.soracom.io:8036/v1/provisioning/aws/iot/bootstrap > cert.json
+```
+
+以下のコマンドを実行し、取得したJSONデータを `mosquitto_pub` コマンドで利用する各ファイルに出力します。
+
+```bash
 cat cert.json | jq .privateKey -r > thing-private-key.pem
 cat cert.json | jq .certificate -r > cert.pem
-ATS rootCAのダウンロード
 wget https://www.amazontrust.com/repository/AmazonRootCA1.pem -O rootCA.pem
 ```
 
+`mosquitto_pub` コマンドでAWS IoT Coreに接続します。
+
 ```
 mosquitto_pub --cafile rootCA.pem --cert cert.pem --key thing-private-key.pem \
-  -h <AWS IoTのエンドポイント名> -p 8883 -q 1 -d -t topic/test -i clientid2 -m "Hello, World"
+  -p 8883 -q 1 -d -t topic/test -i clientid2 -m "Hello, World" -h <AWS IoTのエンドポイント名> 
 Client clientid2 sending CONNECT
 Client clientid2 received CONNACK (0)
 Client clientid2 sending PUBLISH (d0, q1, r0, m1, 'topic/test', ... (12 bytes))
 Client clientid2 received PUBACK (Mid: 1)
 Client clientid2 sending DISCONNECT
 ```
+
+これでKryptonが発行したX.509証明書を用いてAWS IoT Coreに正常に接続できることが確認できました。
