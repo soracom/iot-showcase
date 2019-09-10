@@ -6,10 +6,12 @@
 - [はじめに](#section1)
 - [概要](#section2)
 - [必要なもの](#section3)
+  - [ハードウェアの準備](#section3-1)
+  - [ソフトウェアの準備](#section3-2)
 
 - [温度センサー DS18B20+ を使う](#section4)
   - [セットアップ](#section4-1)
-  - [Harvestにデータを送る](#section4-2)
+  - [SORACOM Harvest Data にデータを送る](#section4-2)
   - [ユーザコンソール上でデータを確認する](#section4-3)
 
 - [USBカメラを使う](#section5)
@@ -19,56 +21,98 @@
   - [画像をクラウドにアップロードする](#section5-4)
 
 - [おまけ](#section6)
-  - [低速度撮影(time-lapse)動画を作成する](#section6-1)
+  - [低速度撮影 (time-lapse) 動画を作成する](#section6-1)
   - [動画をストリーミングする](#section6-2)
 
 ***
 
 ## <a name="section1">はじめに</a>
-このドキュメントは、ラズパイ(Raspberry Pi)と SORACOM の SIM を使って、観察したいものを定点観測するための仕組みを作る方法を解説します。簡易カメラの用途でもご利用いただけます。
+このドキュメントは、ラズパイ (Raspberry Pi) と SORACOM の SIM を使って、観察したいものを定点観測するための仕組みを作る方法を解説します。簡易カメラの用途でもご利用いただけます。
 
-カメラで撮影したデータと温度データをSORACOMを使ってクラウドに連携し、貯めたデータをタイムラプス動画として表示、温度のデータは SORACOM Harvest を使って可視化します。
+カメラで撮影したデータと温度データを SORACOM を使ってクラウドに連携し、貯めたデータをタイムラプス動画として表示、温度のデータは SORACOM Harvest Data を使って可視化します。
 
 [タイムラプス動画サンプル(YouTube)](https://www.youtube.com/watch?v=3--gMeGOV1I)
 
 ## <a name="section2">概要</a>
 このキットを使うと、以下のような事ができます。
 
-- 温度センサーからの温度データを、毎分アップロードし、可視化(グラフ化)する
-- USBカメラで静止画を取り、クラウドストレージにアップロードして、スマホなどから確認する
+- 温度センサーからの温度データを、毎分アップロードし、可視化 (グラフ化) する
+- USB カメラで静止画を撮り、クラウドストレージにアップロードして、スマホなどから確認する
 - 撮りためた静止画を繋げて、タイムラプス動画を作成する
-
+- USB カメラで撮った動画のストリーミング再生をする
 
 ## <a name="section3">必要なもの</a>
+
+### <a name="section3-1">ハードウェアの準備</a>
+
 ![必要な物](img/kit.png)
 
 1. SORACOM Air で通信が出来ている Raspberry Pi  
- - Raspberry Pi に Raspbian (2016-05-27-raspbian-jessie-lite.img を使用)をインストール
- - Raspberry Pi へ ssh で接続ができる(またはモニターやキーボードを刺してコマンドが実行出来る)
- - Raspberry Pi から SORACOM Air で通信が出来ている
-
-  事前に[こちらのテキスト](../setup/setup.md)を参考に、SORACOM Air の接続ができているものとします
 2. ブレッドボード
-3. 温度センサー DS18B20+  
-  Raspberry Piには接続しやすい、ADコンバータのいらない温度センサー
-4. 抵抗 4.7 kΩ
-  プルアップ抵抗
+3. 温度センサー DS18B20+ (Raspberry Piに接続しやすい、AD コンバータのいらない温度センサー)
+4. 抵抗 4.7 kΩ プルアップ抵抗
 5. ジャンパワイヤ(オス-メス) x 3 (黒・赤・その他の色の３本を推奨)
-6. USB接続のWebカメラ(Raspbianで認識出来るもの)
+6. USB 接続の Web カメラ (Raspbian で認識出来るもの)
+
+### <a name="section3-2">ソフトウェアの準備</a>
+
+1. Raspberry Pi の OS セットアップ (このテキストでは 2019-04-08-raspbian-stretch-lite.img で検証しました)
+2. Raspberry Pi の ssh 接続をセットアップ (またはモニターやキーボードを刺してコマンドが実行出来る)
+3. Raspberry Pi + USB ドングルを用いて SORACOM Air への接続をセットアップ ([こちらのテキスト](../setup/setup.md)を参考に設定ください)
+4. <a name="section3-2-4"></a>Raspberry Pi に必要な各種パッケージ・スクリプトのインストール  
+> **注意**  
+> パッケージ・スクリプトを SORACOM Air 経由でダウンロードすると通信料金が発生するのでご注意ください。より高速な Wifi ・有線 LAN の環境がある場合はそれらからダウンロードすることも検討してください。
+
+<a name="section3-2-4-1">4-1. パッケージのダウンロード・インストール</a>  
+以下のコマンドでダウンロード・インストールしてください。
+
+
+```
+pi@raspberrypi:~ $ sudo apt-get update
+pi@raspberrypi:~ $ # 静止画の撮影に用いるパッケージです
+pi@raspberrypi:~ $ sudo apt-get install -y fswebcam
+pi@raspberrypi:~ $ # Raspberry Pi を web サーバとして扱うために用いるパッケージです
+pi@raspberrypi:~ $ sudo apt-get install -y apache2
+pi@raspberrypi:~ $ sudo ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/
+pi@raspberrypi:~ $ sudo gpasswd -a www-data video
+pi@raspberrypi:~ $ sudo service apache2 restart
+pi@raspberrypi:~ $ # 静止画からタイムラプス動画を作成するのに用いるパッケージです
+pi@raspberrypi:~ $ sudo apt-get install -y libav-tools
+pi@raspberrypi:~ $ # ライブストリーミングに用いるパッケージです
+pi@raspberrypi:~ $ sudo apt-get install subversion libjpeg-dev imagemagick
+pi@raspberrypi:~ $ sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer ~/mjpg-streamer
+```
+
+<a name="section3-2-4-2">4-2. スクリプトのダウンロード</a>  
+以下のコマンドでダウンロードしてください。
+
+```
+pi@raspberrypi:~ $ # 温度を測定し、SORACOM Harvest Data に送信するスクリプトです
+pi@raspberrypi:~ $ sudo wget -O http://soracom-files.s3.amazonaws.com/temperature.sh
+pi@raspberrypi:~ $ # CGI で撮影した静止画を表示するスクリプトです
+pi@raspberrypi:~ $ sudo wget -O /usr/lib/cgi-bin/camera https://soracom-files.s3.amazonaws.com/camera
+pi@raspberrypi:~ $ # 静止画を撮影し、温度を画像内にキャプションして保存するスクリプトです
+pi@raspberrypi:~ $ sudo wget http://soracom-files.s3.amazonaws.com/take_picture.sh
+pi@raspberrypi:~ $ # 静止画をパブリッククラウドにアップロードするスクリプトです
+pi@raspberrypi:~ $ sudo pip install pyjwt
+pi@raspberrypi:~ $ sudo wget http://soracom-files.s3.amazonaws.com/upload_image.py
+pi@raspberrypi:~ $ # 静止画からタイムラプス動画を作成するスクリプトです
+pi@raspberrypi:~ $ sudo wget http://soracom-files.s3.amazonaws.com/timelapse.sh
+```
 
 ##  <a name="section4">温度センサー DS18B20+ を使う</a>
 ### <a name="section4-1">セットアップ</a>
 #### <a name="section4-1.1">配線する</a>
-Raspberry Pi の GPIO(General Purpose Input/Output)端子に、温度センサーを接続します。
+Raspberry Pi の GPIO (General Purpose Input/Output) 端子に、温度センサーを接続します。温度センサーの向きにもご注意ください。
 
 ![回路図](img/circuit.png)
 
-使うピンは、3.3Vの電源ピン(01)、Ground、GPIO 4の３つです。
+使うピンは、3.3V の電源ピン (01)、Ground、GPIO 4 の３つです。
 
 ![配線図](img/wiring3.jpg)
 
 #### <a name="section4-1.2">Raspberry Pi でセンサーを使えるように設定する</a>
-Raspberry Piの設定として、２つのファイルに追記して(以下の例ではcatコマンドで追記していますが、vi や nano などのエディタを利用してもよいです)、適用するために再起動します。
+Raspberry Pi の設定として、２つのファイルに追記して(以下の例では cat コマンドで追記していますが、vi や nano などのエディタを利用してもよいです)、適用するために再起動します。
 
 ```
 pi@raspberrypi:~ $ sudo su -
@@ -84,10 +128,12 @@ w1-therm
 root@raspberrypi:~# reboot
 ```
 
-しばらく待つと、再起動が完了します。もう一度Raspberry Piにログインしてください。
+しばらく待つと、再起動が完了します。もう一度 Raspberry Pi にログインしてください。
 * ログイン方法は[セットアップテキスト](../setup/setup.md#-raspberry-pi-への-ログイン)を参照してください。
+**↑要リンクの修正！！**
 
-ログインできたら、Raspberry Piがセンサーを認識できているか確認します。再起動後、センサーは /sys/bus/w1/devices/ 以下にディレクトリとして現れます(28-で始まるものがセンサーです)。
+
+ログインできたら、Raspberry Pi がセンサーを認識できているか確認します。再起動後、センサーは /sys/bus/w1/devices/ 以下にディレクトリとして現れます (28- で始まるものがセンサーです)。
 
 ```
 pi@raspberrypi:~ $ ls /sys/bus/w1/devices/
@@ -95,9 +141,9 @@ pi@raspberrypi:~ $ ls /sys/bus/w1/devices/
 ```
 
 > トラブルシュート：
-> もし28-で始まるディレクトリが表示されない場合は、配線が間違っている可能性があります
+> もし 28- で始まるディレクトリが表示されない場合は、配線が間違っている可能性があります。特に温度センサーの向きに注意してください。
 
-ファイル名は、センサー１つ１つ異なるIDがついています。センサー値を cat コマンドで読み出してみましょう。
+ファイル名は、センサー１つ１つ異なる ID がついています。センサー値を cat コマンドで読み出してみましょう。
 
 ```
 pi@raspberrypi:~ $ cat /sys/bus/w1/devices/28-*/w1_slave
@@ -105,38 +151,40 @@ ea 01 4b 46 7f ff 06 10 cd : crc=cd YES
 ea 01 4b 46 7f ff 06 10 cd t=30625
 ```
 
-t=30625 で得られた数字は、摂氏温度の1000倍の数字となってますので、この場合は 30.625度となります。センサーを指で温めたり、風を送って冷ましたりして、温度の変化を確かめてみましょう。
+t=30625 で得られた数字は、摂氏温度の 1000 倍の数字となってますので、この場合は 30.625 度となります。センサーを指で温めたり、風を送って冷ましたりして、温度の変化を確かめてみましょう。
 
 > トラブルシュート：
 > もし数値が０となる場合、抵抗のつなぎ方が間違っている可能性があります
 
-### <a name="section4-2">SORACOM Harvest にデータを送信する</a>
+### <a name="section4-2">SORACOM Harvest Data にデータを送信する</a>
 センサーで取得した温度を可視化してみましょう。
 
-本ハンズオンでは SORACOM Harvest を使ってデータの可視化行います。
+本ハンズオンでは SORACOM Harvest Data を使ってデータの可視化行います。
 
 ![構成図](img/4-2.png)
 
-#### <a name="4-2.1">SORCOM Harvest とは</a>
-SORACOM Harvest(以下、Harvest) は、IoTデバイスからのデータを収集、蓄積するサービスです。
+#### <a name="4-2.1">SORCOM Harvest Data とは</a>
+SORACOM Harvest Data (以下、Harvest Data) は、IoT デバイスからのデータを収集、蓄積するサービスです。
 
 SORACOM Air が提供するモバイル通信を使って、センサーデータや位置情報等を、モバイル通信を介して容易に手間なくクラウド上の「SORACOM」プラットフォームに蓄積することができます。
 保存されたデータには受信時刻や SIM の ID が自動的に付与され、「SORACOM」のユーザーコンソール内で、グラフ化して閲覧したり、API を通じて取得することができます。なお、アップロードされたデータは、40日間保存されます。
 
 ![](https://soracom.jp/img/fig_harvest.png)
 
-> 注意: SORACOM Harvest を使うには追加の費用がかかります  
+> 注意: SORACOM Harvest Data を使うには追加の費用がかかります  
 > 書き込みリクエスト: 1日 2000リクエストまで、1SIMあたり 1日5円  
 > 1日で2000回を超えると、1リクエスト当り0.004円  
 
-#### <a name="4-2.2">SORACOM Harvest を有効にする</a>
-SORACOM Harvest を使うには、Group の設定で、Harvest を有効にする必要があります。
+#### <a name="4-2.2">SORACOM Harvest Data を有効にする</a>
+SORACOM Harvest Data を使うには、Group の設定で、Harvest を有効にする必要があります。
 
 グループ設定を開き、SORACOM Harvest を開いて、ON にして、保存を押します。
 
 ![](img/4-2.2.png)
 
-#### <a name="4-2.3">プログラムのダウンロード・実行</a>
+#### <a name="4-2.3">データを送信するスクリプトの実行</a>
+
+※スクリプトをダウンロードしていない場合は [こちら](#section3-2-4)を確認してダウンロードしてください。
 
 #### コマンド
 ```
@@ -173,6 +221,8 @@ SIMを選択して、操作から「データを確認」を選びます。
 スクリプトのデフォルト設定では60秒に一度データが送信されます。自動更新のボタンをオンにすると、グラフも自動的に更新されます。
 
 とても簡単に可視化が出来たのがおわかりいただけたと思います。
+さらに高度な可視化をしたい場合は、SORACOM Lagoon の利用を検討してください。
+
 
 ## <a name="section5">USBカメラを使う</a>
 Raspberry Pi に USBのカメラ(いわゆるWebカメラ)を接続してみましょう。本キットでは Buffalo 社の　BSWHD06M シリーズを使用しています。
@@ -211,7 +261,7 @@ Writing JPEG image to 'test.jpg'.
 scp コマンドなどを使って、PCにファイルを転送して開いてみましょう。
 
 ##### <a name="section5-1.3.1">Macの場合</a>
-**この操作はお手元のMacで行ってください。Raspberry Piにログインする必要はありません。**
+**この操作はお手元のMacで行ってください。Raspberry Pi にログインする必要はありません。**
 
 新しいTerminalウィンドウを開き以下のコマンドを実行します。
 
@@ -229,9 +279,9 @@ WinSCPなど、SCPできるアプリケーションをインストールする�
 もし難しければ、次に進んで Web ブラウザ経由でも確認出来ますので、スキップして構いません
 
 ### <a name="section5-2">Webカメラとして使う</a>
-**この操作はRaspberry Piにログインして行います。Raspberry PiにSSH接続したウィンドウでコマンドを実行してください。**
+**この操作は Raspberry Pi にログインして行います。Raspberry Pi に SSH 接続したウィンドウでコマンドを実行してください。**
 
-Raspberry PiをWebサーバにして、アクセスした時にリアルタイムの画像を確認できるようにしてみましょう。
+Raspberry Pi をWebサーバにして、アクセスした時にリアルタイムの画像を確認できるようにしてみましょう。
 
 まずapache2 パッケージをインストールします
 ```
@@ -270,7 +320,7 @@ pi@raspberrypi:~ $ sudo chmod +x /usr/lib/cgi-bin/camera
 
 http://raspberrypi.local/cgi-bin/camera
 
-> Windowsの場合や、複数のRaspberry PiがLAN内にある場合には、http://{RaspberryPiのIPアドレス}/cgi-bin/camera でアクセスをしてみて下さい。
+> Windows の場合や、複数の Raspberry Pi が LAN 内にある場合には、http://{RaspberryPiのIPアドレス}/cgi-bin/camera でアクセスをしてみて下さい。
 
 リロードをするたびに、新しく画像を撮影しますので、撮影する対象の位置決めをする際などに使えると思います。  
 一度位置を固定したら、カメラの位置や対象物の下にビニールテープなどで位置がわかるように印をしておくとよいでしょう。
@@ -324,7 +374,7 @@ Writing JPEG image to '201607190219.jpg'.
 現在の温度を取得して、温度をキャプションとした画像を保存する事に成功しました。
 
 http://raspberrypi.local/images/
-> Windowsの場合や、複数のRaspberry PiがLAN内にある場合には、http://{RaspberryPiのIPアドレス}/images でアクセスをしてみて下さい。
+> Windows の場合や、複数の Raspberry Pi が LAN 内にある場合には、http://{RaspberryPiのIPアドレス}/images でアクセスをしてみて下さい。
 
 にアクセスするとファイルが出来ていると思います。
 
@@ -412,7 +462,7 @@ SORACOM 側の設定は以上になります。
 > アカウント作成から１年以内であれば、無料利用枠に SORACOM Endorse の SIMカード１枚分が無料となります
 > ２枚以上でEndorseを有効にしたり、作成から１年以上経ちましたアカウントでは、追加の料金が発生する旨、お気をつけください
 
-### <a name="section5-6.2">Raspberry Pi設定</a>
+### <a name="section5-6.2">Raspberry Pi 設定</a>
 次に Raspberry Pi の設定を行います。
 
 #### PyJWT のインストール
