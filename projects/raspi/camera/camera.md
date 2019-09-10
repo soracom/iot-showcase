@@ -63,8 +63,8 @@
 > **注意**  
 > パッケージ・スクリプトを SORACOM Air 経由でダウンロードすると通信料金が発生するのでご注意ください。より高速な Wifi ・有線 LAN の環境がある場合はそれらからダウンロードすることも検討してください。
 
-<a name="section3-2-4-1">4-1. パッケージのダウンロード・インストール</a>  
-以下のコマンドでダウンロード・インストールしてください。
+4-1. パッケージのダウンロード・インストール  
+以下のようにダウンロード・インストールしてください。
 
 
 ```
@@ -83,8 +83,8 @@ pi@raspberrypi:~ $ sudo apt-get install subversion libjpeg-dev imagemagick
 pi@raspberrypi:~ $ sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer ~/mjpg-streamer
 ```
 
-<a name="section3-2-4-2">4-2. スクリプトのダウンロード</a>  
-以下のコマンドでダウンロードしてください。
+4-2. スクリプトのダウンロード  
+以下のようにでダウンロードしてください。
 
 ```
 pi@raspberrypi:~ $ # 温度を測定し、SORACOM Harvest Data に送信するスクリプトです
@@ -184,26 +184,21 @@ SORACOM Harvest Data を使うには、Group の設定で、Harvest を有効に
 
 #### <a name="4-2.3">データを送信するスクリプトの実行</a>
 
-※スクリプトをダウンロードしていない場合は [こちら](#section3-2-4)を確認してダウンロードしてください。
+※スクリプトをダウンロードしていない場合は[こちら](#section3-2-4)を確認してダウンロードしてください。
 
 #### コマンド
 ```
-curl -O http://soracom-files.s3.amazonaws.com/temperature.sh
 bash temperature.sh
 ```
 
 #### 実行結果
 ```
-pi@raspberrypi:~ $ curl -O http://soracom-files.s3.amazonaws.com/temperature.sh
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   519  100   519    0     0    310      0  0:00:01  0:00:01 --:--:--   310
 pi@raspberrypi:~ $ bash temperature.sh
 sending payload={"temperature":25.437}  ... done.
 ```
 
 ##### トラブルシュート
-以下のようなエラーメッセージが出た場合には、設定を確認して下さい
+以下のようなエラーメッセージが出た場合には、設定を確認して下さい。
 - `{"message":"No group ID is specified: xxxxxxxxxxxxxxx"}` → SIM にグループが設定されていない
 - `{"message":"Configuration for SORACOM Harvest is not found"}`  → グループで Harvest を有効にしていない
 
@@ -218,7 +213,7 @@ SIMを選択して、操作から「データを確認」を選びます。
 
 ![Harvestグラフ](img/4-3-2.png)
 
-スクリプトのデフォルト設定では60秒に一度データが送信されます。自動更新のボタンをオンにすると、グラフも自動的に更新されます。
+スクリプトのデフォルト設定では 60 秒に一度データが送信されます。自動更新のボタンをオンにすると、グラフも自動的に更新されます。
 
 とても簡単に可視化が出来たのがおわかりいただけたと思います。
 さらに高度な可視化をしたい場合は、SORACOM Lagoon の利用を検討してください。
@@ -233,18 +228,10 @@ USB カメラは、Raspberry Pi の USB スロットに接続して下さい。
 ![カメラの設定](img/camera_setting.jpg)
 
 #### <a name="section5-1.2">パッケージのインストール</a>
-fswebcam というパッケージを使用します。apt-getコマンドでインストールして下さい。
-
-```
-pi@raspberrypi:~ $ sudo apt-get install -y fswebcam
-```
-
-> トラブルシュート：  
-> E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?  
-> と表示されたら、 sudo apt-get update を行ってから、再度 apt-get install してみてください
+fswebcam というパッケージを使用します。インストールしていない場合は[こちら](#section3-2-4)を確認してダウンロードしてください。
 
 #### <a name="section5-1.3">コマンドラインによるテスト撮影</a>
-インストールが出来たら、実際に撮影してみましょう。先ほどインストールした、fswebcam コマンドを使います。 -r オプションで解像度を指定する事が出来ます。
+実際に撮影してみましょう。 -r オプションで解像度を指定する事が出来ます。
 
 ```
 pi@raspberrypi:~ $ fswebcam -r 640x480 test.jpg
