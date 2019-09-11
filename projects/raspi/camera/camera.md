@@ -16,9 +16,10 @@
 
 - [USBカメラを使う](#section5)
   - [セットアップ](#section5-1)
-  - [Webカメラとして使う](#section5-2)
+  - [SORACOM Napter で Raspberry Pi を Webカメラとして使う](#section5-2)
   - [定点観測を行う](#section5-3)
-  - [画像をクラウドにアップロードする](#section5-4)
+  - [画像を SORACOM Harvest Data にアップロードする](#section5-4)
+  - [画像をクラウドにアップロードする](#section5-5)
 
 - [おまけ](#section6)
   - [低速度撮影 (time-lapse) 動画を作成する](#section6-1)
@@ -59,46 +60,9 @@
 1. Raspberry Pi の OS セットアップ (このテキストでは 2019-04-08-raspbian-stretch-lite.img で検証しました)
 2. Raspberry Pi の ssh 接続をセットアップ (またはモニターやキーボードを刺してコマンドが実行出来る)
 3. Raspberry Pi + USB ドングルを用いて SORACOM Air への接続をセットアップ ([こちらのテキスト](../setup/setup.md)を参考に設定ください)
-4. <a name="section3-2-4"></a>Raspberry Pi に必要な各種パッケージ・スクリプトのインストール  
+
 > **注意**  
-> パッケージ・スクリプトを SORACOM Air 経由でダウンロードすると通信料金が発生するのでご注意ください。より高速な Wifi ・有線 LAN の環境がある場合はそれらからダウンロードすることも検討してください。
-
-4-1. パッケージのダウンロード・インストール  
-以下のようにダウンロード・インストールしてください。
-
-
-```
-pi@raspberrypi:~ $ sudo apt-get update
-pi@raspberrypi:~ $ # 静止画の撮影に用いるパッケージです
-pi@raspberrypi:~ $ sudo apt-get install -y fswebcam
-pi@raspberrypi:~ $ # Raspberry Pi を web サーバとして扱うために用いるパッケージです
-pi@raspberrypi:~ $ sudo apt-get install -y apache2
-pi@raspberrypi:~ $ sudo ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/
-pi@raspberrypi:~ $ sudo gpasswd -a www-data video
-pi@raspberrypi:~ $ sudo service apache2 restart
-pi@raspberrypi:~ $ # 静止画からタイムラプス動画を作成するのに用いるパッケージです
-pi@raspberrypi:~ $ sudo apt-get install -y libav-tools
-pi@raspberrypi:~ $ # ライブストリーミングに用いるパッケージです
-pi@raspberrypi:~ $ sudo apt-get install subversion libjpeg-dev imagemagick
-pi@raspberrypi:~ $ sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer ~/mjpg-streamer
-```
-
-4-2. スクリプトのダウンロード  
-以下のようにでダウンロードしてください。
-
-```
-pi@raspberrypi:~ $ # 温度を測定し、SORACOM Harvest Data に送信するスクリプトです
-pi@raspberrypi:~ $ sudo wget -O http://soracom-files.s3.amazonaws.com/temperature.sh
-pi@raspberrypi:~ $ # CGI で撮影した静止画を表示するスクリプトです
-pi@raspberrypi:~ $ sudo wget -O /usr/lib/cgi-bin/camera https://soracom-files.s3.amazonaws.com/camera
-pi@raspberrypi:~ $ # 静止画を撮影し、温度を画像内にキャプションして保存するスクリプトです
-pi@raspberrypi:~ $ sudo wget http://soracom-files.s3.amazonaws.com/take_picture.sh
-pi@raspberrypi:~ $ # 静止画をパブリッククラウドにアップロードするスクリプトです
-pi@raspberrypi:~ $ sudo pip install pyjwt
-pi@raspberrypi:~ $ sudo wget http://soracom-files.s3.amazonaws.com/upload_image.py
-pi@raspberrypi:~ $ # 静止画からタイムラプス動画を作成するスクリプトです
-pi@raspberrypi:~ $ sudo wget http://soracom-files.s3.amazonaws.com/timelapse.sh
-```
+> SORACOM Air 経由で通信すると通信料金が発生するのでご注意ください。パッケージをダウンロードするときなどは Wifi の利用も検討してください。Raspberry Pi に Wifi が設定されていれば USB ドングルを抜けば Wifi 接続、挿せば SORACOM Air での接続となります。
 
 ##  <a name="section4">温度センサー DS18B20+ を使う</a>
 ### <a name="section4-1">セットアップ</a>
@@ -167,13 +131,14 @@ t=30625 で得られた数字は、摂氏温度の 1000 倍の数字となって
 SORACOM Harvest Data (以下、Harvest Data) は、IoT デバイスからのデータを収集、蓄積するサービスです。
 
 SORACOM Air が提供するモバイル通信を使って、センサーデータや位置情報等を、モバイル通信を介して容易に手間なくクラウド上の「SORACOM」プラットフォームに蓄積することができます。
-保存されたデータには受信時刻や SIM の ID が自動的に付与され、「SORACOM」のユーザーコンソール内で、グラフ化して閲覧したり、API を通じて取得することができます。なお、アップロードされたデータは、40日間保存されます。
+保存されたデータには受信時刻や SIM の ID が自動的に付与され、「SORACOM」のユーザーコンソール内で、グラフ化して閲覧したり、API を通じて取得することができます。なお、アップロードされたデータは、40 日間保存されます。
 
 ![](https://soracom.jp/img/fig_harvest.png)
 
-> 注意: SORACOM Harvest Data を使うには追加の費用がかかります  
-> 書き込みリクエスト: 1日 2000リクエストまで、1SIMあたり 1日5円  
-> 1日で2000回を超えると、1リクエスト当り0.004円  
+> **注意**
+> SORACOM Harvest Data を使うには追加の費用がかかります  
+> 書き込みリクエスト: 1 日 2000 リクエストまで、1SIM あたり 1 日 5 円  
+> 1 日で 2000 回を超えると、1 リクエスト当り 0.004 円  
 
 #### <a name="4-2.2">SORACOM Harvest Data を有効にする</a>
 SORACOM Harvest Data を使うには、Group の設定で、Harvest を有効にする必要があります。
@@ -182,17 +147,20 @@ SORACOM Harvest Data を使うには、Group の設定で、Harvest を有効に
 
 ![](img/4-2.2.png)
 
-#### <a name="4-2.3">データを送信するスクリプトの実行</a>
-
-※スクリプトをダウンロードしていない場合は[こちら](#section3-2-4)を確認してダウンロードしてください。
+#### <a name="4-2.3">プログラムのダウンロード・実行</a>
 
 #### コマンド
 ```
+curl -O http://soracom-files.s3.amazonaws.com/temperature.sh
 bash temperature.sh
 ```
 
 #### 実行結果
 ```
+pi@raspberrypi:~ $ curl -O http://soracom-files.s3.amazonaws.com/temperature.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   519  100   519    0     0    310      0  0:00:01  0:00:01 --:--:--   310
 pi@raspberrypi:~ $ bash temperature.sh
 sending payload={"temperature":25.437}  ... done.
 ```
@@ -218,7 +186,6 @@ SIMを選択して、操作から「データを確認」を選びます。
 とても簡単に可視化が出来たのがおわかりいただけたと思います。
 さらに高度な可視化をしたい場合は、SORACOM Lagoon の利用を検討してください。
 
-
 ## <a name="section5">USBカメラを使う</a>
 Raspberry Pi に USBのカメラ(いわゆるWebカメラ)を接続してみましょう。本キットでは Buffalo 社の　BSWHD06M シリーズを使用しています。
 
@@ -228,7 +195,15 @@ USB カメラは、Raspberry Pi の USB スロットに接続して下さい。
 ![カメラの設定](img/camera_setting.jpg)
 
 #### <a name="section5-1.2">パッケージのインストール</a>
-fswebcam というパッケージを使用します。インストールしていない場合は[こちら](#section3-2-4)を確認してダウンロードしてください。
+fswebcam というパッケージを使用します。apt-getコマンドでインストールして下さい。
+
+```
+pi@raspberrypi:~ $ sudo apt-get install -y fswebcam
+```
+
+> トラブルシュート：  
+> E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?  
+> と表示されたら、 sudo apt-get update を行ってから、再度 apt-get install してみてください
 
 #### <a name="section5-1.3">コマンドラインによるテスト撮影</a>
 実際に撮影してみましょう。 -r オプションで解像度を指定する事が出来ます。
@@ -245,12 +220,12 @@ Captured frame in 0.00 seconds.
 Writing JPEG image to 'test.jpg'.
 ```
 
-scp コマンドなどを使って、PCにファイルを転送して開いてみましょう。
+scp コマンドなどを使って、PC にファイルを転送して開いてみましょう。
 
 ##### <a name="section5-1.3.1">Macの場合</a>
-**この操作はお手元のMacで行ってください。Raspberry Pi にログインする必要はありません。**
+**この操作はお手元の Mac で行ってください。Raspberry Pi にログインする必要はありません。**
 
-新しいTerminalウィンドウを開き以下のコマンドを実行します。
+新しい Terminal ウィンドウを開き以下のコマンドを実行します。
 
 ```
 ~$ scp pi@raspberrypi.local:test.jpg .
@@ -261,14 +236,25 @@ test.jpg                                      100%  121KB 121.0KB/s   00:00
 ```
 ![観察画像](img/plant_photo.jpeg)
 
-##### <a name="section5-1.4">Windowsの場合</a>
-WinSCPなど、SCPできるアプリケーションをインストールすると、手元のPCに画像を転送できます。
+##### <a name="section5-1.4">Windows の場合</a>
+WinSCP など、SCP できるアプリケーションをインストールすると、手元の PC に画像を転送できます。
 もし難しければ、次に進んで Web ブラウザ経由でも確認出来ますので、スキップして構いません
 
-### <a name="section5-2">Webカメラとして使う</a>
+### <a name="section5-2">SORACOM Napter で Raspberry Pi を Webカメラとして使う</a>
 **この操作は Raspberry Pi にログインして行います。Raspberry Pi に SSH 接続したウィンドウでコマンドを実行してください。**
 
-Raspberry Pi をWebサーバにして、アクセスした時にリアルタイムの画像を確認できるようにしてみましょう。
+#### <a name="section5-2.1">SORACOM Napter とは</a>
+SORACOM Napter (以降、Napter) は、IoT SIM を使用したデバイスへ簡単にセキュアにリモートアクセスすることができます。お客様はサーバー環境を用意することなく、また IoT デバイス側にエージェント等をインストールすることなく、IoT SIM を利用している IoT デバイスにリモートからセキュアな Web アクセスや SSH, RDP 接続が可能になります。
+
+![](img/fig_napter_01_jp.png)
+
+> **注意**
+> SORACOM Napter を使うには追加の費用がかかります  
+> SIM 1 枚当たり 300 円 (月額)  
+> ※月に1度でもリモートアクセスを行った場合、月額費用が発生します。当月内は月額費用内で何度でもご利用できます。
+
+#### <a name="section5-2.2">パッケージのインストール</a>
+Raspberry Pi を Web サーバにして、アクセスした時にリアルタイムの画像を確認できるようにしてみましょう。
 
 まずapache2 パッケージをインストールします
 ```
@@ -303,14 +289,25 @@ camera              100%[=====================>]     374  --.-KB/s   in 0s
 pi@raspberrypi:~ $ sudo chmod +x /usr/lib/cgi-bin/camera
 ```
 
-ここまで設定をしたら、Webブラウザでアクセスしてみましょう。
+#### <a name="section5-2.3">SORACOM Napter を有効にする</a>
+**この操作は必ず USB ドングルを挿した状態で行ってください**
 
-http://raspberrypi.local/cgi-bin/camera
+SORACOM Napter を使うには、SIM の設定で、リモートオンデマンドアクセス を有効にする必要があります。
+'SIM 管理' 画面で、アクセスしたい SIM を選択し [操作] > [オンデマンドリモートアクセス] を選択してください。
+![](img/enable_napter.png)
 
-> Windows の場合や、複数の Raspberry Pi が LAN 内にある場合には、http://{RaspberryPiのIPアドレス}/cgi-bin/camera でアクセスをしてみて下さい。
+"デバイス側ポート" を 80 に設定し、"OK" を選択します。
+![](img/configure_napter_80.png)
+
+以下のような画面が出ていれば有効化に成功しています。"HTTP: " に表示されている文字列 `http://[IPアドレス].napter.soracom.io:[ポート番号]` をコピーします。  
+※SORACOM Napter ではデバイスの IP アドレス・ポート番号を SORACOM 側で変換して異なる IP アドレス・ポート番号でアクセスできるようにしています。下図の場合はユーザーからの 37662 番ポートへのアクセスをデバイスの 80 番ポートに変換します。
+![](img/result_napter_80.png)
+
+お手元の PC のブラウザから `http://[IPアドレス].napter.soracom.io:[ポート番号]` にアクセスしてみましょう。リアルタイムな静止画が確認できます。
 
 リロードをするたびに、新しく画像を撮影しますので、撮影する対象の位置決めをする際などに使えると思います。  
 一度位置を固定したら、カメラの位置や対象物の下にビニールテープなどで位置がわかるように印をしておくとよいでしょう。
+なお、SORACOM Napter のアクセス可能時間はデフォルトで 30 分です。アクセス可能時間を過ぎた場合は再度有効にしてアクセスしてください。
 
 ### <a name="section5-3">定点観測を行う</a>
 毎分カメラで撮影した画像を所定のディレクトリに保存してみましょう。
@@ -359,9 +356,9 @@ Writing JPEG image to '201607190219.jpg'.
 ```
 
 現在の温度を取得して、温度をキャプションとした画像を保存する事に成功しました。
+同じく SORACOM Napter でアクセスしてみましょう。
 
-http://raspberrypi.local/images/
-> Windows の場合や、複数の Raspberry Pi が LAN 内にある場合には、http://{RaspberryPiのIPアドレス}/images でアクセスをしてみて下さい。
+`http://[IPアドレス].napter.soracom.io:[ポート番号]`  
 
 にアクセスするとファイルが出来ていると思います。
 
@@ -369,9 +366,9 @@ http://raspberrypi.local/images/
 
 #### <a name="section5-3.3">cron設定</a>
 
-先ほどの温度センサー情報と同じく、cronの設定を行います。crontabを編集して設定を追加しましょう。
+先ほどの温度センサー情報と同じく、cron の設定を行います。crontab を編集して設定を追加しましょう。
 
-以下のコマンドを実行し、crontabの編集画面を開きます。
+以下のコマンドを実行し、crontab の編集画面を開きます。
 
 ```
 pi@raspberrypi:~ $ crontab -e
@@ -392,9 +389,9 @@ crontab: installing new crontab
 * * * * * ~/take_picture.sh &> /dev/null
 ```
 
-画像サイズは場合にもよりますが、640x480ドットでだいたい150キロバイト前後になります。
-もし毎分撮った場合には、１日に約210MB程度の容量となります。
-画像を撮る感覚が狭ければ狭いほど、より滑らかな画像となりますが、SDカードの容量には限りがありますので、もし長期に渡り撮影をするのであれば、
+画像サイズは場合にもよりますが、640x480 ドットでだいたい 150 キロバイト前後になります。
+もし毎分撮った場合には、１日に約 210MB 程度の容量となります。
+画像を撮る感覚が狭ければ狭いほど、タイムラプス動画にした際より滑らかになりますが、SD カードの容量には限りがありますので、もし長期に渡り撮影をするのであれば、
 
 ```
 */5 * * * * ~/take_picture.sh &> /dev/null
@@ -408,13 +405,33 @@ crontab: installing new crontab
 
 のように毎時０分に撮影を行ったりする事で、間隔を間引いてあげるとよいでしょう。
 
-設定を書き込んだら、[Ctrl+W] を押して保存し、[Ctrl+X] を押してcrontab編集画面を閉じてください。
+設定を書き込んだら、[Ctrl+W] を押して保存し、[Ctrl+X] を押して crontab 編集画面を閉じてください。
 
-### <a name="section5-4">画像をクラウドにアップロードする</a>
-撮影した画像をインターネットから参照出来るように、クラウドストレージにアップロードしてみましょう。
-その際、画像がどのSIMを持つデバイスから送信されたのかを証明するために、SORACOM Endorse を利用します。
+### <a name="section5-4">画像を SORACOM Harvest Files にアップロードする</a>
+撮影した画像を安全かつ簡単に SORACOM 上のファイルサービスにアップロードしてみましょう。
 
-#### <a name="section5-4.1">SORACOM Endorse とは</a>
+#### <a name="section5-4.1">SORACOM Harvest Files とは</a>
+SORACOM Harvest Files (以下、Harvest Files) とは、IoT デバイスからのファイルを収集するサービスです。SORACOM Air が提供するセルラー通信を使って、IoT デバイスの画像やログファイル等を手間なくクラウドにアップロードできます。Harvest Data が JSON 形式でデータを送信してグラフなどの形式で可視化できるのに対して、Harvest Files は画像やログなどファイルを保管できるサービスです。
+
+> **注意**  
+>SORACOM Harvest Files を使うには追加の費用がかかります  
+>アップロードが完了したファイルの合計ファイルサイズ 1GB あたり 200 円/月  
+>Harvest Files に保存したファイルのエクスポート (ダウンロード) 通信量 1GB あたり 20 円
+
+**SORACOM Harvest Files を有効にする**
+SORACOM Harvest Files を使うには、Group の設定で、Harvest Data を有効にする必要があります。
+
+グループ設定を開き、SORACOM Harvest Data を開いて、ON にして、保存を押します。
+
+![](img/5-4-1.png)
+
+**curl でアップロードする**
+**アップロードされていることをコンソールから確認する**
+
+### <a name="section5-5">画像をクラウドにアップロードする</a>
+SORACOM Harvest Files ではなく、外部クラウドのストレージサービスにもアップロードしてみましょう。インターネット経由でのアップロードとなるのでセキュリティが重要になります。このような場合、画像がどのSIMを持つデバイスから送信されたのかを証明するために、SORACOM Endorse を利用します。
+
+#### <a name="section5-5.1">SORACOM Endorse とは</a>
 SORACOM Endorse(以下、Endorse) は、Air SIM を使用しているデバイスに対して、SORACOM が認証プロバイダーとしてデバイスの認証サービスを提供します。 SIM を使用した認証を Wi-Fi などの SIM 以外の通信にも使うことが可能となります。
 
 ![SORACOM Endorse](https://soracom.jp/img/fig_endorse01.png)
@@ -430,16 +447,16 @@ Air SIM で接続後、Endorse に対して認証トークンの発行リクエ�
 
 1. SORACOM Endorse にアクセスをしてトークンを取得
 2. 一番最近撮影した画像に、1. で得られたトークン情報をカスタムヘッダとして付与して、アップロード
-3. AWS上のプログラム(Lambda)でヘッダ(トークン)が正しいものかどうかを確認し、正しいものと確認できた場合にのみ公開用の領域にコピー
-4. スマホ等からIMSI毎の公開URLにアクセスすると、アップロードされた画像にアクセスできます
+3. AWS 上のプログラム (Lambda) でヘッダ(トークン)が正しいものかどうかを確認し、正しいものと確認できた場合にのみ公開用の領域にコピー
+4. スマホ等から IMSI 毎の公開 URL にアクセスすると、アップロードされた画像にアクセスできます
 
-> 3番のクラウド側の処理は、SORACOM側で用意してあります
+> 3 番のクラウド側の処理は、SORACOM 側で用意してあります
 
 ### <a name="section5-6">設定</a>
-#### SORACOM Endorse設定
-SORACOM Endose を有効にします。
+#### SORACOM Endorse 設定
+SORACOM Endorse を有効にします。
 
-1. グループ設定画面で、SORACOM Endorseを開き、下記のように IMSI にチェックボックスを入れて、保存を押します
+1. グループ設定画面で、SORACOM Endorse を開き、下記のように IMSI にチェックボックスを入れて、保存を押します
 ![Endorse設定その１](img/endorse1.png)
 2. 下記のようなダイアログが表示されますので、OKを押します
 ![Endorse設定その2](img/endorse2.png)
@@ -447,9 +464,9 @@ SORACOM Endose を有効にします。
 SORACOM 側の設定は以上になります。
 
 > アカウント作成から１年以内であれば、無料利用枠に SORACOM Endorse の SIMカード１枚分が無料となります
-> ２枚以上でEndorseを有効にしたり、作成から１年以上経ちましたアカウントでは、追加の料金が発生する旨、お気をつけください
+> ２枚以上で Endorse を有効にしたり、作成から１年以上経ちましたアカウントでは、追加の料金が発生する旨、お気をつけください
 
-### <a name="section5-6.2">Raspberry Pi 設定</a>
+### <a name="section5-6.2">Raspberry Pi設定</a>
 次に Raspberry Pi の設定を行います。
 
 #### PyJWT のインストール
@@ -502,7 +519,7 @@ status: 200
 
 #### 定期的な実行(cron設定)
 毎分撮影したとしても、必ずしも毎分画像をアップロードする必要はありません。  
-仮に画像サイズが平均150KBであるとすると、月間の転送にかかる費用(s1.minimumを使用した場合)は、下記のようになります。
+仮に画像サイズが平均 150KB であるとすると、月間の転送にかかる費用 (s1.minimumを使用した場合) は、下記のようになります。
 
 |頻度|転送回数/月|転送容量/月|概算費用/月|
 |---|---:|---:|---:|
@@ -510,9 +527,9 @@ status: 200
 |5分毎|8640|約 1.3GB|約 253円|
 |10分毎|4320|約 0.6GB|約 126円|
 
-用途やニーズに合わせて頻度を調整してみるとよいでしょう。
+用途やニーズに合わせて頻度を調整してみるとよいでしょう。直近の画像を見たいときは SORACOM Napter でアクセスして見て、全画像は通信料金の安い夜間にスクリプトでアップロードするということも考えられます。
 
-頻度の調整は、やはりcronの設定で行います。
+頻度の調整は、やはり cron の設定で行います。
 
 ##### 毎分
 ```
@@ -524,22 +541,20 @@ status: 200
 */5 * * * * python upload_image.py /var/www/html/image.jpg &> /dev/null
 ```
 
-しばらくしてから、先ほどのURLをリロードし、画像が更新されていることを確かめましょう。
+しばらくしてから、先ほどの URL をリロードし、画像が更新されていることを確かめましょう。
 
 ## <a name="section6">おまけ</a>
-### <a name="section6-1">低速度撮影(time-lapse)動画を作成する</a>
+### <a name="section6-1">低速度撮影 (time-lapse) 動画を作成する</a>
 撮りためた画像を使用して、低速度撮影(タイムラプス)動画を作成してみましょう。
 
-植物の成長や雲の動きなど、ゆっくり変化をするようなものを一定間隔(例えば１分毎)に撮影した画像を使って、仮に１秒間に30コマ使用すると１時間が動画では約２秒となるような動画を作成する事が出来ます。こういった映像を「低速度撮影(タイムラプス)映像」と呼びます。
+植物の成長や雲の動きなど、ゆっくり変化をするようなものを一定間隔(例えば１分毎)に撮影した画像を使って、仮に１秒間に 30 コマ使用すると１時間が動画では約２秒となるような動画を作成する事が出来ます。こういった映像を「低速度撮影(タイムラプス)映像」と呼びます。
 
 #### パッケージのインストール
-動画へのコンバートには、avconv というプログラムを利用しますので、下記のコマンドでパッケージをインストールして下さい。
+動画へのコンバートには、avconv というプログラムを利用しますので、下記のコマンドでパッケージをインストールして下さい。非常に多くのパッケージをダウンロードしますので、少し時間がかかります。3G接続を切って有線接続でインストールした方がよいかもしれません。3G 接続を切るには USB ドングルを抜きます。再度 USB ドングルを挿せば 3G 接続が有効になります。
 
 ```
 pi@raspberrypi:~ $ sudo apt-get install -y libav-tools
 ```
-
-非常に多くのパッケージをダウンロードしますので、少し時間がかかります。3G接続を切って有線接続でインストールした方がよいかもしれません。
 
 #### スクリプトのダウンロード
 スクリプトをダウンロードします。
@@ -579,7 +594,7 @@ Options:
 
 それでは、実際に画像を動画を変換してみましょう。
 
-オプションをを指定しない場合、/var/www/html/images 以下の画像ファイルを全て使用して、動画を作成します。
+オプションを指定しない場合、/var/www/html/images 以下の画像ファイルを全て使用して、動画を作成します。
 変換が終わった後の動画をすぐにブラウザで見れるように、/var/www/html/ 以下に動画ファイルを出力しておくと便利です。
 画像の枚数やラズパイのバージョンによって変換にかかる時間が変わるので、変換が終わるまで気長に待ちましょう。
 
@@ -632,9 +647,50 @@ video:669kB audio:0kB other streams:0kB global headers:0kB muxing overhead: 0.79
 -- 4. cleanup...
 ```
 
-上記の例で出力されたファイルは、 http://raspberrypi.local/timelapse.mp4 でアクセスする事が出来ます。
+上記の例で出力されたファイルは、 http://[]/timelapse.mp4 でアクセスする事が出来ます。動画再生には大きな通信量がかかりますので注意してください。
 
 [サンプル動画](http://soracom-files.s3.amazonaws.com/timelapse.mp4)
 
 ### <a name="section6-2">動画をストリーミングする</a>
-Coming soon...
+
+#### パッケージのインストール
+動画の撮影・ストリーミングには MJPG-streamer というプログラムを利用しますので、下記のコマンドでパッケージをインストールして下さい。非常に多くのパッケージをダウンロードしますので、少し時間がかかります。3G接続を切って有線接続でインストールした方がよいかもしれません。3G 接続を切るには USB ドングルを抜きます。再度 USB ドングルを挿せば 3G 接続が有効になります。
+
+```
+pi@raspberrypi:~ $ sudo apt-get install subversion libjpeg-dev imagemagick
+pi@raspberrypi:~ $ svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer ~/mjpg-streamer
+pi@raspberrypi:~ $ cd ~/mjpg-streamer
+pi@raspberrypi:~ $ make
+```
+
+#### プログラムの実行
+```
+cd ~/mjpg-streamer
+sudo ./mjpg_streamer -i "./input_uvc.so -f 10 -r 320x240 -d /dev/video0 -y -n" -o "./output_http.so -w ./www -p 8080"
+```
+
+終了するときは `Ctrl+C` を押してください。
+
+#### SORACOM の設定
+上記のプログラムでは 8080 番ポートで動画ストリーミングが見られるように設定しました。
+SORACOM Napter も 8080 ポートに対して有効にしましょう。
+
+![](img/configure_napter_8080.png)
+
+また、ストリーミング動画では通信速度が必要となります。SIM 管理画面より [詳細] > [速度クラス変更] で通信速度を 's1.fast' にしましょう。
+なお 3G 回線のため、SORACOM 側で最高速度に設定しても動画がリアルタイムに再生されないことがあります。リアルタイムな再生が重要であれば以下のサイトより LTE 対応の USB ドングルの購入をご検討ください。  
+https://soracom.jp/products/
+
+![](img/change_speedClass1.png)
+![](img/change_speedClass2.png)
+
+作成された IP アドレス、ポート番号をもとに下記の URL アクセスしてストリーミング動画を見ることができます。ストリーミング動画では大きな通信量が発生するのでご注意ください。
+
+`http://[IPアドレス]/stream_simple.html:[ポート番号]`
+
+おめでとうございます！皆さんは、IoT 体験キット 〜簡易監視カメラ〜を完了しました。SORACOM を使ったハンズオンを楽しんで頂けましたでしょうか？
+
+さらに SORACOM に興味を持っていただいた方は、以下の Getting Started もご覧ください！
+
+SORACOM Getting Started
+https://dev.soracom.io/jp/start/
