@@ -48,13 +48,13 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 <h2 id="work-b">作業B: Slack を使ったクリックイベント通知</h2>
 
-1. [ Cloud Functions で Slack 通知用 Function を作成 ](work-b/gcp)
-2. [ SORACOM Funk から Functions を呼び出す ](work-b/soracom)
+1. [ Cloud Functions で Slack 通知用 Function を作成 ](work-b/gcp){:target="_blank"}
+2. [ SORACOM Funk から Functions を呼び出す ](work-b/soracom){:target="_blank"}
 
 <h2 id="work-c">作業C: ボタンと Cloud IoT Core を連携させてデバイス制御</h2>
 
-1. [ Cloud Functions で デバイス制御用 Function を作成 ](work-c/gcp)
-2. [ SORACOM Funk から Functions を呼び出し、デバイスを制御する ](work-c/soracom)
+1. [ Cloud Functions で デバイス制御用 Function を作成 ](work-c/gcp){:target="_blank"}
+2. [ SORACOM Funk から Functions を呼び出し、デバイスを制御する ](work-c/soracom){:target="_blank"}
 
 <h2 id="closing">作業: あとかたづけ</h2>
 
@@ -75,23 +75,23 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 #### GCP 各種サービスの利用料金の目安
 本テキストの内容であれば、よほどの事がない限り(月間200万回以上クリックするなど)、無料枠の範囲内でご利用いただけます
-詳細については [Cloud Functions の料金](https://cloud.google.com/functions/pricing) をご参照ください
+詳細については [Cloud Functions の料金](https://cloud.google.com/functions/pricing){:target="_blank"} をご参照ください
 
 #### SORACOM LTE-M Button for Enterprise
 
 販売価格 5980 円 に加えてご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。  
-plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1)をご確認ください。  
+plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1){:target="_blank"} をご確認ください。  
 SORACOM Harvest 、 SORACOM Beam 、SORACOM Funk 等、 SORACOM サービス利用の費用は別途かかります。
 
 (*) 目安として、１クリックあたり約 0.25 円程度
 
 #### SORACOM サービスの利用料金の目安
 
-* [SORACOM Harvest 料金](https://soracom.jp/services/harvest/price/)
+* [SORACOM Harvest 料金](https://soracom.jp/services/harvest/price/){:target="_blank"}
     * Harvest を有効にしたグループに所属する 1 SIM カードまたは 1 デバイスあたり 1 日 5 円 (2000リクエスト/日/SIM あたりのリクエスト含む)
     * 1 アカウントあたり毎月 31 日分の (もしくは 2000リクエスト/日以内)の無料枠があります
 
-* [SORACOM Funk 料金](https://soracom.jp/services/funk/price/)
+* [SORACOM Funk 料金](https://soracom.jp/services/funk/price/){:target="_blank"}
     * SORACOM Funk へのリクエスト毎に 0.0018 円/リクエスト
         * Funk から転送先クラウドサービスへのリクエスト毎に 1 リクエストとカウントします。
     * 1 アカウントあたり 50,000リクエスト/月の無料枠があります
