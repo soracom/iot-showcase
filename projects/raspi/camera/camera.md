@@ -425,8 +425,43 @@ SORACOM Harvest Files を使うには、Group の設定で、Harvest Data を有
 
 ![](img/5-4-1.png)
 
-**curl でアップロードする**
-**アップロードされていることをコンソールから確認する**
+#### <a name="5-4.2">プログラムのダウンロード・実行</a>
+
+#### コマンド
+```
+curl -O http://soracom-files.s3.amazonaws.com/upload_harvestFiles.sh
+bash upload_harvestFiles.sh /var/www/html/image.jpg
+```
+
+#### 実行結果
+```
+pi@raspberrypi:~ $ curl -O http://soracom-files.s3.amazonaws.com/temperature.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   519  100   519    0     0    310      0  0:00:01  0:00:01 --:--:--   310
+pi@raspberrypi:~ $ bash upload_harvestFiles.sh /var/www/html/image.jpg
+upload path is /images/upload.jpg
+uploading /var/www/html/image.jpg ...
+200
+```
+
+##### トラブルシュート
+以下のようなエラーメッセージが出た場合には、設定を確認して下さい。
+- `{"message":"No group ID is specified: xxxxxxxxxxxxxxx"}400` → SIM にグループが設定されていない
+- `{"message":"Harvest files is disabled. Please set { enabled: true }"}400`  → グループで Harvest を有効にしていない
+- `jpgファイルが指定されていません` → 実行結果例のように、引数にアップロードしたい画像のパスを指定していない
+
+#### <a name="5-4.3">画像のアップロードを確認</a>
+
+**ユーザーコンソールでアップロードされたファイルを確認する**
+
+コンソールから、アップロードされたファイルを確認してみましょう。
+
+![](img/5-4-3.png)
+
+images/ フォルダの配下に画像ファイルがアップロードされていることが確認できます。
+
+![](img/5-4-4.png)
 
 #### 定期的な実行 (cron設定)
 毎分撮影したとしても、必ずしも毎分画像をアップロードする必要はありません。  
@@ -444,15 +479,15 @@ SORACOM Harvest Files を使うには、Group の設定で、Harvest Data を有
 
 ##### 毎分
 ```
-* * * * * python upload_image.py /var/www/html/image.jpg &> /dev/null
+* * * * * bash upload_harvestFiles.sh /var/www/html/image.jpg /var/www/html/image.jpg &> /dev/null
 ```
 
 ##### ５分毎
 ```
-*/5 * * * * python upload_image.py /var/www/html/image.jpg &> /dev/null
+*/5 * * * * bash upload_harvestFiles.sh /var/www/html/image.jpg /var/www/html/image.jpg &> /dev/null
 ```
 
-しばらくしてから、先ほどの URL をリロードし、画像が更新されていることを確かめましょう。
+しばらくしてから、先ほどの SORACOM Harvest Files の画面をリロードし、画像が更新されていることを確かめましょう。
 
 ## <a name="section6">おまけ</a>
 ### <a name="section6-1">低速度撮影 (time-lapse) 動画を作成する</a>
