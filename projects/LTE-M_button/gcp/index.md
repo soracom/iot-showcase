@@ -74,7 +74,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h3 id="fee">料金について</h3>
 
 #### GCP 各種サービスの利用料金の目安
-本テキストの内容であれば、よほどの事がない限り(月間200万回以上クリックするなど)、無料枠の範囲内でご利用いただけます
+本テキストの内容であれば、よほどの事がない限り(月間200万回以上クリックするなど)、無料枠の範囲内でご利用いただけます。  
 詳細については [Cloud Functions の料金](https://cloud.google.com/functions/pricing){:target="_blank"} をご参照ください
 
 #### SORACOM LTE-M Button for Enterprise
