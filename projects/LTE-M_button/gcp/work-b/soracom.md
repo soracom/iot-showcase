@@ -1,4 +1,4 @@
-# B-2 SORACOM Funk から 関数(Function) を呼び出し、通知を行う
+# B-2 SORACOM Funk から 関数(Function) を呼び出し Slack へ通知を行う
 
 本ページでは、ボタンを押した時に先ほど作成した 関数(Function) を呼び出すために、SORACOM Funk の設定を行います。
 B-1 の最後にメモしておいた URL を使いますので、もしメモしていなかった場合は GCP コンソール で確認してください。
@@ -8,12 +8,12 @@ B-1 の最後にメモしておいた URL を使いますので、もしメモ�
 SORACOM Funk(以下、Funk) は、クラウドサービスの Function を直接実行できるサービスです。クラウドリソースを活用することでデバイス側の実装をシンプルに保ち、処理をオフロードや低電力消費化が可能となります。
 本章では、SORACOM Funk の連携先として 先ほど作成した Function を設定してみましょう。
 
-詳細は [SORACOM Funk サービス紹介ページ](https://soracom.jp/services/funk/) をご覧ください。
+詳細は [SORACOM Funk サービス紹介ページ](https://soracom.jp/services/funk/){:target="_blank"} をご覧ください。
 
 ## グループの設定
 作業A で作成したグループを使用します。
 
-SIM 管理画面でボタンの SIM のグループ名をクリックし、グループ詳細画面を開きます。
+[SORACOM ユーザーコンソール](https://console.soracom.io/){:target="_blank"} を開き、SIM 管理画面でボタンの SIM のグループ名をクリックし、グループ詳細画面を開きます。
 > または、SORACOM ユーザコンソール 左上の「≡ Menu」から `SORACOM Air for Cellular` ＞ `SIM グループ` を開き、ボタンに割り当てているグループ詳細画面を開きます。
 
 ### SORACOM Funk 設定

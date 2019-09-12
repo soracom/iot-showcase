@@ -1,4 +1,4 @@
-# C-2 SORACOM Funk から 関数(Function) を呼び出し、デバイスを制御する
+# C-2 SORACOM Funk から 関数(Function) を呼び出しデバイスを制御する
 
 本ページでは、ボタンを押した時に先ほど作成した Function を呼び出すために、SORACOM Funk の設定を行います。
 C-1 の最後にメモしておいた URL を使いますので、もしメモしていなかった場合は GCP コンソール で確認してください。
@@ -6,7 +6,7 @@ C-1 の最後にメモしておいた URL を使いますので、もしメモ�
 ## グループの設定
 作業A で作成したグループを使用します。
 
-SIM 管理画面でボタンの SIM のグループ名をクリックし、グループ詳細画面を開きます。
+[SORACOM ユーザーコンソール](https://console.soracom.io/){:target="_blank"} を開き、SIM 管理画面でボタンの SIM のグループ名をクリックし、グループ詳細画面を開きます。
 > または、SORACOM ユーザコンソール 左上の「≡ Menu」から `SORACOM Air for Cellular` ＞ `SIM グループ` を開き、ボタンに割り当てているグループ詳細画面を開きます。
 
 ### SORACOM Funk 設定
