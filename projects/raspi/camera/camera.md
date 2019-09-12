@@ -19,11 +19,11 @@
   - [SORACOM Napter で Raspberry Pi を Webカメラとして使う](#section5-2)
   - [定点観測を行う](#section5-3)
   - [画像を SORACOM Harvest Data にアップロードする](#section5-4)
-  - [画像をクラウドにアップロードする](#section5-5)
 
 - [おまけ](#section6)
   - [低速度撮影 (time-lapse) 動画を作成する](#section6-1)
   - [動画をストリーミングする](#section6-2)
+  - [画像を外部クラウドにアップロードする](#section6-3)
 
 ***
 
@@ -299,11 +299,11 @@ SORACOM Napter を使うには、SIM の設定で、リモートオンデマン�
 "デバイス側ポート" を 80 に設定し、"OK" を選択します。
 ![](img/configure_napter_80.png)
 
-以下のような画面が出ていれば有効化に成功しています。"HTTP: " に表示されている文字列 `http://[IPアドレス].napter.soracom.io:[ポート番号]` をコピーします。  
+以下のような画面が出ていれば有効化に成功しています。"HTTP: " に表示されている文字列 `http://[Napter のホスト名]:[ポート番号]` をコピーします。  
 ※SORACOM Napter ではデバイスの IP アドレス・ポート番号を SORACOM 側で変換して異なる IP アドレス・ポート番号でアクセスできるようにしています。下図の場合はユーザーからの 37662 番ポートへのアクセスをデバイスの 80 番ポートに変換します。
 ![](img/result_napter_80.png)
 
-お手元の PC のブラウザから `http://[IPアドレス].napter.soracom.io:[ポート番号]` にアクセスしてみましょう。リアルタイムな静止画が確認できます。
+お手元の PC のブラウザからパス`/cgi-bin/camera` を加えて `http://[Napter のホスト名]/cgi-bin/camera:[ポート番号]` にアクセスしてみましょう。リアルタイムな静止画が確認できます。
 
 リロードをするたびに、新しく画像を撮影しますので、撮影する対象の位置決めをする際などに使えると思います。  
 一度位置を固定したら、カメラの位置や対象物の下にビニールテープなどで位置がわかるように印をしておくとよいでしょう。
@@ -356,9 +356,9 @@ Writing JPEG image to '201607190219.jpg'.
 ```
 
 現在の温度を取得して、温度をキャプションとした画像を保存する事に成功しました。
-同じく SORACOM Napter でアクセスしてみましょう。
+同じく SORACOM Napter でアクセスしてみましょう。`/images`パスを加えて
 
-`http://[IPアドレス].napter.soracom.io:[ポート番号]`  
+`http://http://[Napter のホスト名]/images:[ポート番号]`  
 
 にアクセスするとファイルが出来ていると思います。
 
@@ -428,96 +428,7 @@ SORACOM Harvest Files を使うには、Group の設定で、Harvest Data を有
 **curl でアップロードする**
 **アップロードされていることをコンソールから確認する**
 
-### <a name="section5-5">画像をクラウドにアップロードする</a>
-SORACOM Harvest Files ではなく、外部クラウドのストレージサービスにもアップロードしてみましょう。インターネット経由でのアップロードとなるのでセキュリティが重要になります。このような場合、画像がどのSIMを持つデバイスから送信されたのかを証明するために、SORACOM Endorse を利用します。
-
-#### <a name="section5-5.1">SORACOM Endorse とは</a>
-SORACOM Endorse(以下、Endorse) は、Air SIM を使用しているデバイスに対して、SORACOM が認証プロバイダーとしてデバイスの認証サービスを提供します。 SIM を使用した認証を Wi-Fi などの SIM 以外の通信にも使うことが可能となります。
-
-![SORACOM Endorse](https://soracom.jp/img/fig_endorse01.png)
-
-Air SIM で接続後、Endorse に対して認証トークンの発行リクエストを送ると、Endorse が IMSI、IMEI などのデータを含んだ認証トークンを発行します。このトークンは SORACOM の秘密鍵で署名がされています。
-
-デバイスがこのトークンをサーバーに送信すると、サーバー側はこのトークンが SORACOM が発行した正しいものかどうかを、SORACOM の公開鍵で検証することができます。一旦トークンの受け渡しが終われば、サーバーは接続元のデバイスがどの SIM を持っているかを把握できるため、例えばそのままサーバーにログインするような仕組みを作ることもできます。そして一旦認証トークンの受け渡しが終わり認証が完了すれば、接続経路が Air SIM ではなく、Wi-Fi を使用していても、利用者のシステムではどの SIM から接続されているのかを確かなものとして扱うことができます。
-
-### <a name="section5-5">システム構成</a>
-下図のような仕組みで、画像をアップロードします。
-
-![構成図](img/upload_image.png)
-
-1. SORACOM Endorse にアクセスをしてトークンを取得
-2. 一番最近撮影した画像に、1. で得られたトークン情報をカスタムヘッダとして付与して、アップロード
-3. AWS 上のプログラム (Lambda) でヘッダ(トークン)が正しいものかどうかを確認し、正しいものと確認できた場合にのみ公開用の領域にコピー
-4. スマホ等から IMSI 毎の公開 URL にアクセスすると、アップロードされた画像にアクセスできます
-
-> 3 番のクラウド側の処理は、SORACOM 側で用意してあります
-
-### <a name="section5-6">設定</a>
-#### SORACOM Endorse 設定
-SORACOM Endorse を有効にします。
-
-1. グループ設定画面で、SORACOM Endorse を開き、下記のように IMSI にチェックボックスを入れて、保存を押します
-![Endorse設定その１](img/endorse1.png)
-2. 下記のようなダイアログが表示されますので、OKを押します
-![Endorse設定その2](img/endorse2.png)
-
-SORACOM 側の設定は以上になります。
-
-> アカウント作成から１年以内であれば、無料利用枠に SORACOM Endorse の SIMカード１枚分が無料となります
-> ２枚以上で Endorse を有効にしたり、作成から１年以上経ちましたアカウントでは、追加の料金が発生する旨、お気をつけください
-
-### <a name="section5-6.2">Raspberry Pi設定</a>
-次に Raspberry Pi の設定を行います。
-
-#### PyJWT のインストール
-Python で Endorse で使われている JWT(JSON Web Token) を扱うためのライブラリ、PyJWTをインストールします。
-```
-pi@raspberrypi:~ $ sudo pip install pyjwt
-Downloading/unpacking pyjwt
-  Downloading PyJWT-1.4.1-py2.py3-none-any.whl
-Installing collected packages: pyjwt
-Successfully installed pyjwt
-Cleaning up...
-```
-
-#### スクリプトのダウンロード＆実行
-```
-pi@raspberrypi:~ $ wget http://soracom-files.s3.amazonaws.com/upload_image.py
---2016-07-22 05:27:36--  http://soracom-files.s3.amazonaws.com/upload_image.py
-Resolving soracom-files.s3.amazonaws.com (soracom-files.s3.amazonaws.com)... 52.219.4.1
-Connecting to soracom-files.s3.amazonaws.com (soracom-files.s3.amazonaws.com)|52.219.4.1|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1073 (1.0K) [text/plain]
-Saving to: ‘upload_image.py’
-
-upload_image.py                     100%[====================================================================>]   1.05K  --.-KB/s   in 0s
-
-2016-07-22 05:27:36 (32.9 MB/s) - ‘upload_image.py’ saved [1073/1073]
-
-pi@raspberrypi:~ $ python upload_image.py /var/www/html/image.jpg
-- SORACOM Endorse にアクセスして token を取得中 ...
-{
-    "aud": "soracom-endorse-audience",
-    "iss": "https://soracom.io",
-    "soracom-endorse-claim": {
-        "imsi": "440101111111111"
-    },
-    "jti": "kENUDfNrej4LE2N1VQawlQ",
-    "exp": 1469165906,
-    "iat": 1469165306,
-    "nbf": 1469165246,
-    "sub": "soracom-endorse"
-}
-- Amazon S3 にファイルをアップロード中 ...
-PUT https://soracom-handson.s3.amazonaws.com/incoming/camera/kENUDfNrej4LE2N1VQawlQ
-status: 200
-```
-
-最後に status が 200 となっていれば、アップロードが無事完了しています。
-
-アップロードが完了してから数秒おいて、 ```http://soracom-handson.s3.amazonaws.com/camera/{IMSI}``` にアクセスすると、アップロードした画像にアクセスすることが出来ます。
-
-#### 定期的な実行(cron設定)
+#### 定期的な実行 (cron設定)
 毎分撮影したとしても、必ずしも毎分画像をアップロードする必要はありません。  
 仮に画像サイズが平均 150KB であるとすると、月間の転送にかかる費用 (s1.minimumを使用した場合) は、下記のようになります。
 
@@ -545,16 +456,18 @@ status: 200
 
 ## <a name="section6">おまけ</a>
 ### <a name="section6-1">低速度撮影 (time-lapse) 動画を作成する</a>
-撮りためた画像を使用して、低速度撮影(タイムラプス)動画を作成してみましょう。
+撮りためた画像を使用して、低速度撮影 (タイムラプス) 動画を作成してみましょう。
 
-植物の成長や雲の動きなど、ゆっくり変化をするようなものを一定間隔(例えば１分毎)に撮影した画像を使って、仮に１秒間に 30 コマ使用すると１時間が動画では約２秒となるような動画を作成する事が出来ます。こういった映像を「低速度撮影(タイムラプス)映像」と呼びます。
+植物の成長や雲の動きなど、ゆっくり変化をするようなものを一定間隔(例えば１分毎)に撮影した画像を使って、仮に１秒間に 30 コマ使用すると１時間が動画では約２秒となるような動画を作成する事が出来ます。こういった映像を「低速度撮影 (タイムラプス) 映像」と呼びます。
 
 #### パッケージのインストール
-動画へのコンバートには、avconv というプログラムを利用しますので、下記のコマンドでパッケージをインストールして下さい。非常に多くのパッケージをダウンロードしますので、少し時間がかかります。3G接続を切って有線接続でインストールした方がよいかもしれません。3G 接続を切るには USB ドングルを抜きます。再度 USB ドングルを挿せば 3G 接続が有効になります。
+動画へのコンバートには、avconv というプログラムを利用しますので、下記のコマンドでパッケージをインストールして下さい。
 
 ```
 pi@raspberrypi:~ $ sudo apt-get install -y libav-tools
 ```
+
+非常に多くのパッケージをダウンロードしますので、少し時間がかかります。3G 接続を切って有線や Wifi 接続でインストールした方がよいかもしれません。3G 接続を切るには USB ドングルを抜きます。再度 USB ドングルを挿せば 3G 接続が有効になります。
 
 #### スクリプトのダウンロード
 スクリプトをダウンロードします。
@@ -647,7 +560,7 @@ video:669kB audio:0kB other streams:0kB global headers:0kB muxing overhead: 0.79
 -- 4. cleanup...
 ```
 
-上記の例で出力されたファイルは、 http://[]/timelapse.mp4 でアクセスする事が出来ます。動画再生には大きな通信量がかかりますので注意してください。
+上記の例で出力されたファイルは、 `http://[Napter のホスト名]/timelapse.mp4:[ポート番号]` でアクセスする事が出来ます。動画再生には大きな通信量がかかりますので注意してください。
 
 [サンプル動画](http://soracom-files.s3.amazonaws.com/timelapse.mp4)
 
@@ -684,9 +597,98 @@ https://soracom.jp/products/
 ![](img/change_speedClass1.png)
 ![](img/change_speedClass2.png)
 
-作成された IP アドレス、ポート番号をもとに下記の URL アクセスしてストリーミング動画を見ることができます。ストリーミング動画では大きな通信量が発生するのでご注意ください。
+作成された ホスト名、ポート番号をもとに下記の URL アクセスしてストリーミング動画を見ることができます。ストリーミング動画では大きな通信量が発生するのでご注意ください。
 
-`http://[IPアドレス]/stream_simple.html:[ポート番号]`
+`http://[Napter のホスト名]/stream_simple.html:[ポート番号]`
+
+### <a name="section6-3">画像を外部クラウドにアップロードする</a>
+SORACOM Harvest Files ではなく、外部クラウドのストレージサービスにもアップロードしてみましょう。インターネット経由でのアップロードとなるのでセキュリティが重要になります。このような場合、画像がどの SIM を持つデバイスから送信されたのかを証明するために、SORACOM Endorse を利用します。
+
+#### SORACOM Endorse とは
+SORACOM Endorse (以下、Endorse) は、Air SIM を使用しているデバイスに対して、SORACOM が認証プロバイダーとしてデバイスの認証サービスを提供します。 SIM を使用した認証を Wi-Fi などの SIM 以外の通信にも使うことが可能となります。
+
+![SORACOM Endorse](https://soracom.jp/img/fig_endorse01.png)
+
+Air SIM で接続後、Endorse に対して認証トークンの発行リクエストを送ると、Endorse が IMSI、IMEI などのデータを含んだ認証トークンを発行します。このトークンは SORACOM の秘密鍵で署名がされています。
+
+デバイスがこのトークンをサーバーに送信すると、サーバー側はこのトークンが SORACOM が発行した正しいものかどうかを、SORACOM の公開鍵で検証することができます。一旦トークンの受け渡しが終われば、サーバーは接続元のデバイスがどの SIM を持っているかを把握できるため、例えばそのままサーバーにログインするような仕組みを作ることもできます。そして一旦認証トークンの受け渡しが終わり認証が完了すれば、接続経路が Air SIM ではなく、Wi-Fi を使用していても、利用者のシステムではどの SIM から接続されているのかを確かなものとして扱うことができます。
+
+### システム構成
+下図のような仕組みで、画像をアップロードします。
+
+![構成図](img/upload_image.png)
+
+1. SORACOM Endorse にアクセスをしてトークンを取得
+2. 一番最近撮影した画像に、1. で得られたトークン情報をカスタムヘッダとして付与して、アップロード
+3. AWS 上のプログラム (Lambda) でヘッダ (トークン) が正しいものかどうかを確認し、正しいものと確認できた場合にのみ公開用の領域にコピー
+4. スマホ等から IMSI 毎の公開 URL にアクセスすると、アップロードされた画像にアクセスできます
+
+> 3 番のクラウド側の処理は、SORACOM 側で用意してあります
+
+### 設定
+#### SORACOM Endorse 設定
+SORACOM Endorse を有効にします。
+
+1. グループ設定画面で、SORACOM Endorse を開き、下記のように IMSI にチェックボックスを入れて、保存を押します
+![Endorse設定その１](img/endorse1.png)
+2. 下記のようなダイアログが表示されますので、OK を押します
+![Endorse設定その2](img/endorse2.png)
+
+SORACOM 側の設定は以上になります。
+
+> アカウント作成から１年以内であれば、無料利用枠に SORACOM Endorse の SIMカード１枚分が無料となります
+> ２枚以上で Endorse を有効にしたり、作成から１年以上経ちましたアカウントでは、追加の料金が発生する旨、お気をつけください
+
+### Raspberry Pi設定
+次に Raspberry Pi の設定を行います。
+
+#### PyJWT のインストール
+Python で Endorse で使われている JWT(JSON Web Token) を扱うためのライブラリ、PyJWT をインストールします。
+```
+pi@raspberrypi:~ $ sudo pip install pyjwt
+Downloading/unpacking pyjwt
+  Downloading PyJWT-1.4.1-py2.py3-none-any.whl
+Installing collected packages: pyjwt
+Successfully installed pyjwt
+Cleaning up...
+```
+
+#### スクリプトのダウンロード＆実行
+```
+pi@raspberrypi:~ $ wget http://soracom-files.s3.amazonaws.com/upload_image.py
+--2016-07-22 05:27:36--  http://soracom-files.s3.amazonaws.com/upload_image.py
+Resolving soracom-files.s3.amazonaws.com (soracom-files.s3.amazonaws.com)... 52.219.4.1
+Connecting to soracom-files.s3.amazonaws.com (soracom-files.s3.amazonaws.com)|52.219.4.1|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1073 (1.0K) [text/plain]
+Saving to: ‘upload_image.py’
+
+upload_image.py                     100%[====================================================================>]   1.05K  --.-KB/s   in 0s
+
+2016-07-22 05:27:36 (32.9 MB/s) - ‘upload_image.py’ saved [1073/1073]
+
+pi@raspberrypi:~ $ python upload_image.py /var/www/html/image.jpg
+- SORACOM Endorse にアクセスして token を取得中 ...
+{
+    "aud": "soracom-endorse-audience",
+    "iss": "https://soracom.io",
+    "soracom-endorse-claim": {
+        "imsi": "440101111111111"
+    },
+    "jti": "kENUDfNrej4LE2N1VQawlQ",
+    "exp": 1469165906,
+    "iat": 1469165306,
+    "nbf": 1469165246,
+    "sub": "soracom-endorse"
+}
+- Amazon S3 にファイルをアップロード中 ...
+PUT https://soracom-handson.s3.amazonaws.com/incoming/camera/kENUDfNrej4LE2N1VQawlQ
+status: 200
+```
+
+最後に status が 200 となっていれば、アップロードが無事完了しています。
+
+アップロードが完了してから数秒おいて、 ```http://soracom-handson.s3.amazonaws.com/camera/{IMSI}``` にアクセスすると、アップロードした画像にアクセスすることが出来ます。
 
 おめでとうございます！皆さんは、IoT 体験キット 〜簡易監視カメラ〜を完了しました。SORACOM を使ったハンズオンを楽しんで頂けましたでしょうか？
 
