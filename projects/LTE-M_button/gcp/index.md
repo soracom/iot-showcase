@@ -48,13 +48,13 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 <h2 id="work-b">作業B: Slack を使ったクリックイベント通知</h2>
 
-1. [ Cloud Functions で Slack 通知用 Function を作成 ](work-b/gcp){:target="_blank"}
-2. [ SORACOM Funk から Functions を呼び出す ](work-b/soracom){:target="_blank"}
+1. [ Cloud Functions で Slack 通知用 Function(関数) を作成 ](work-b/gcp){:target="_blank"}
+2. [ SORACOM Funk から 関数(Function) を呼び出し Slack へ通知を行う ](work-b/soracom){:target="_blank"}
 
 <h2 id="work-c">作業C: ボタンと Cloud IoT Core を連携させてデバイス制御</h2>
 
-1. [ Cloud Functions で デバイス制御用 Function を作成 ](work-c/gcp){:target="_blank"}
-2. [ SORACOM Funk から Functions を呼び出し、デバイスを制御する ](work-c/soracom){:target="_blank"}
+1. [ loud Functions で デバイス制御用 関数(Function) を作成 ](work-c/gcp){:target="_blank"}
+2. [ SORACOM Funk から 関数(Function) を呼び出しデバイスを制御する ](work-c/soracom){:target="_blank"}
 
 <h2 id="closing">作業: あとかたづけ</h2>
 
@@ -74,7 +74,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h3 id="fee">料金について</h3>
 
 #### GCP 各種サービスの利用料金の目安
-本テキストの内容であれば、よほどの事がない限り(月間200万回以上クリックするなど)、無料枠の範囲内でご利用いただけます
+本テキストの内容であれば、よほどの事がない限り(月間200万回以上クリックするなど)、無料枠の範囲内でご利用いただけます。  
 詳細については [Cloud Functions の料金](https://cloud.google.com/functions/pricing){:target="_blank"} をご参照ください
 
 #### SORACOM LTE-M Button for Enterprise
