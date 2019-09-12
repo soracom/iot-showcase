@@ -46,3 +46,37 @@ Slack にクリックイベントが表示されるので、確認します。
         * package.json で追加パッケージが指定されているか
         * 実行関数を `main` に書き換えたか
         * Function のページで「ログを表示」をクリックし、メッセージを確認
+
+## 参考情報
+SORACOM Funk から Google Cloud Functions を HTTP トリガーで呼ぶ際に、x-soraocm-token というヘッダに呼び出し元のアカウントや SIM に関する情報が JWT (JSON Web Token)形式で渡されます。
+
+デバッグログを見て以下のような文字列が出てきますので、これを [jwt.io](https://jwt.io/){:target="_blank"} でデコードしてみましょう。
+PAYLOAD の所を見ると、ctx というキーの下に SIM やデバイスの固有番号、オペレータID(ソラコムのユーザID)などがあります。
+例えば特定のオペレータIDしか許可しない、といったような形で使う事ができますし、クリック時の基地局のIDを利用した簡易的な位置情報なども取得できます。
+
+#### PAYLAOD のサンプル
+```
+{
+  "iss": "https://soracom.io",
+  "aud": "srn:soracom:OP0059150966:jp:Subscriber:440525060013710",
+  "jti": "m7m5s0emq88",
+  "iat": 1568272434,
+  "typ": "soracom/token/v1",
+  "sub": "funk.soracom.io",
+  "ctx": {
+    "operatorId": "OP0059150966",
+    "coverage": "jp",
+    "resourceType": "Subscriber",
+    "resourceId": "440525060013710",
+    "sourceProtocol": "udp",
+    "srn": "srn:soracom:OP0059150966:jp:Subscriber:440525060013710",
+    "imsi": "440525060013710",
+    "imei": "359565091023647",
+    "locationQueryResult": "success",
+    "location": {
+      "lat": 35.660842139821305,
+      "lon": 139.729163646698
+    }
+  }
+}
+```
