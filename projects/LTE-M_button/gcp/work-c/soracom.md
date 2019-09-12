@@ -44,3 +44,12 @@ C-1 の最後にメモしておいた URL を使いますので、もしメモ�
         * package.json で追加パッケージが指定されているか
         * 実行関数を `main` に書き換えたか
         * Function のページで「ログを表示」をクリックし、メッセージを確認
+
+## 参考情報
+デバイス側のサンプルコードは以下を参考にしてください。
+
+- SORACOM Beam を使って Google Cloud IoT Core の MQTT Broker に接続します
+- /devices/wiolte/commands 以下の topic を subscribe します
+- クリックのタイプ(1 or 2 or 3)に応じて、異なる動作をするようになっています
+
+<script src="https://gist.github.com/j3tm0t0/0c1470134cefbe87b876eaf69a94b460.js"></script>
