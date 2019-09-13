@@ -12,7 +12,6 @@
 - [温度センサー DS18B20+ を使う](#section4)
   - [セットアップ](#section4-1)
   - [SORACOM Harvest Data にデータを送る](#section4-2)
-  - [ユーザコンソール上でデータを確認する](#section4-3)
 
 - [USBカメラを使う](#section5)
   - [セットアップ](#section5-1)
@@ -170,7 +169,7 @@ sending payload={"temperature":25.437}  ... done.
 - `{"message":"No group ID is specified: xxxxxxxxxxxxxxx"}` → SIM にグループが設定されていない
 - `{"message":"Configuration for SORACOM Harvest is not found"}`  → グループで Harvest を有効にしていない
 
-### <a name="section4-3">ユーザコンソールで可視化されたデータを確認する</a>
+#### <a name="section4-2-4">ユーザーコンソールで可視化されたデータを確認する</a>
 コンソールから、送信されたデータを確認してみましょう。
 
 SIMを選択して、操作から「データを確認」を選びます。
@@ -358,7 +357,7 @@ Writing JPEG image to '201607190219.jpg'.
 現在の温度を取得して、温度をキャプションとした画像を保存する事に成功しました。
 同じく SORACOM Napter でアクセスしてみましょう。`/images`パスを加えて
 
-`http://http://[Napter のホスト名]/images:[ポート番号]`  
+`http://[Napter のホスト名]/images:[ポート番号]`  
 
 にアクセスするとファイルが出来ていると思います。
 
@@ -430,16 +429,18 @@ SORACOM Harvest Files を使うには、Group の設定で、Harvest Data を有
 #### コマンド
 ```
 curl -O http://soracom-files.s3.amazonaws.com/upload_harvestFiles.sh
+chmod +x take_picture.sh
 bash upload_harvestFiles.sh /var/www/html/image.jpg
 ```
 
 #### 実行結果
 ```
-pi@raspberrypi:~ $ curl -O http://soracom-files.s3.amazonaws.com/temperature.sh
+pi@raspberrypi:~ $ curl -O http://soracom-files.s3.amazonaws.com/upload_harvestFiles.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   519  100   519    0     0    310      0  0:00:01  0:00:01 --:--:--   310
-pi@raspberrypi:~ $ bash upload_harvestFiles.sh /var/www/html/image.jpg
+pi@raspberrypi:~ $ chmod +x upload_harvestFiles.sh
+pi@raspberrypi:~ $ upload_harvestFiles.sh /var/www/html/image.jpg
 upload path is /images/upload.jpg
 uploading /var/www/html/image.jpg ...
 200
@@ -479,15 +480,15 @@ images/ フォルダの配下に画像ファイルがアップロードされて
 
 ##### 毎分
 ```
-* * * * * bash upload_harvestFiles.sh /var/www/html/image.jpg /var/www/html/image.jpg &> /dev/null
+* * * * * ~/upload_harvestFiles.sh /var/www/html/image.jpg &> /dev/null
 ```
 
 ##### ５分毎
 ```
-*/5 * * * * bash upload_harvestFiles.sh /var/www/html/image.jpg /var/www/html/image.jpg &> /dev/null
+*/5 * * * * ~/upload_harvestFiles.sh /var/www/html/image.jpg &> /dev/null
 ```
 
-しばらくしてから、先ほどの SORACOM Harvest Files の画面をリロードし、画像が更新されていることを確かめましょう。
+しばらくしてから、先ほどの SORACOM Harvest Files の画面をリロードし、画像が増えていることを確かめましょう。
 
 ## <a name="section6">おまけ</a>
 ### <a name="section6-1">低速度撮影 (time-lapse) 動画を作成する</a>
