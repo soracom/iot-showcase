@@ -581,6 +581,7 @@ python send_to_harvest.py
 #### 実行結果
 ```
 pi@raspberrypi:~ $ sudo apt-get install -y python-pip libssl-dev
+pi@raspberrypi:~ $ pip install requests
 :
 pi@raspberrypi:~ $ curl -O http://soracom-files.s3.amazonaws.com/send_to_harvest.py
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
