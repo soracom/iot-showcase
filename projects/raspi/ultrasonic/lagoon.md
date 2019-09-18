@@ -1,131 +1,157 @@
-## <a name = "section7">7章 Twitterと連携してみる
+## 7 章 SORACOM Lagoon によるさらに高度な可視化とアラート通知
 
-IFTTTというサービスを使うと、デバイスから簡単に様々なサービスと連携を行う事が出来ます。
-この章では、センサーで障害物を検知した際に、SORACOM Beam 経由で IFTTT の Maker Channel を呼び出し、Twitter へとリアルタイムに通知を行ってみましょう。
+SORACOM のもう一つのサービス、Lagoon を体験しましょう。
 
-#### <a name = "section7-1">1.	IFTTT とは
-IFTTT(https://ifttt.com/) とは、IF-This-Then-That の略で、もし「これ」が起きたら「あれ」を実行する、つまり「これ」がトリガーとなって、「あれ」をアクションとして実行する、サービスとなります。
-様々なサービスや機器と連携していて、何度かクリックするだけで簡単な仕組みを作る事が出来ます。
-今回のハンズオンでは、HTTPSのリクエストをトリガーとして、アクションとして Twitter につぶやくために、IFTTTTを使います。
+### SORACOM Lagoon とは
 
-#### <a name = "section7-2">2.	IFTTT の設定
-まずアカウントをお持ちでない方は、IFTTT のサイト https://ifttt.com/ で、Sign Up してください。
+SORACOM Lagoon はダッシュボード作成/共有サービスです。先ほどのハンズオンで使ったデータ収集、蓄積サービス SORACOM Harvest に集められたデータを対象に目的に応じて複数のグラフ、テーブル、地図等を組み合わせたダッシュボードを作成し、それらを共有できます。また、 収集するデータに対して閾値を設定しメール送信、LINE への通知、Webhook 等のアラートを設定することができます。
 
-![](image/iffft_wh00.png)
+![](https://soracom.jp/img/fig_lagoon01.png)
 
-#### <a name = "section7-3">3.	IFFFT アプレットの作成
-次にサービス同士の組み合わせ(Applet = アプレットと呼ばれます)を作成します。
-https://ifttt.com/my_applets にアクセスして、右上の New Applet をクリックします。
+### このハンズオンで作成するダッシュボード
 
-表示された文字列から this をクリックし、表示された検索ボックスで webhooks 検索します。次に表示された Webhooks のパネルを選択してください。
+はじめに今回のハンズオンで作成するダッシュボードを見てみましょう。
 
-![](image/iffft_wh02.png)
+![](image/9-1.png)
 
-トリガーとして Receive a web request が書いてあるパネルを選択します。
-![](image/iffft_wh03.png)
+![](image/9-2.png)
 
+このダッシュボードは以下の機能を実現します。
 
-Event Name を設定します(ここでは sensor とします)
+- 左側のパネル (SORACOM Dynamic Image Panel)
+  - センサーが検知した距離に応じて表示する画像を変えます。近づくと不審者アイコンに変わります。
+- 右側のパネル (Graph Panel)
+  - センサーが検知した距離の履歴をグラフで表示します。
+  - 近距離の値が一定期間継続するとメールでアラートを送信します。
+    - 赤い直線が閾値を表します。
+    - アラート状態とそうでないときにグラフのタイトルのハートアイコンが変わります。
 
-これでトリガーの設定は完了です。次にアクションとして、Twitter の設定を行います。
+これらの機能がすべて Lagoon の標準機能で作成できます。
 
-that をクリックし、表示された検索ボックスで Twitter を検索します。次に表示された Twitter のパネルを選択してください。
-IFFFT で初めて Twitter と連携する場合は、認証画面に遷移するのでご自身のアカウントでログインして認証を完了する必要があります。
+### SORACOM Lagoon を有効にする
 
-アクションは左上の、Post a tweet を選んでください。 ![](image/iffft_wh10.png)
+SORACOM Lagoon を使うために設定を有効化しパスワードを設定します。
 
-Twitter の Tweet text には、例えば下記のような文言を入れてみてください。グレーの ``Value1`` などの文字は ``Add ingredient`` をクリックすることにより選択して入力することも可能です。
-![](image/iffft_wh11.png)
+> Lagoon はダッシュボードを第三者と共有できますので、SORACOM ユーザーコンソールと異なる認証情報を使用します。そのため、最初にパスワードを設定します。
 
-> センサーの状態が "{{Value1}}" に変化しました(前回からの経過時間:{{Value2}}秒) 時刻:{{OccurredAt}} #soracomhandson
+サイドメニューのデータ収集・蓄積・可視化セクションから SORACOM Lagoon をクリックし「SORACOM Lagoon の利用を開始する」ボタンをクリックします。
 
-最後に Webhooks のページ https://ifttt.com/maker_webhooks を開いて、右上の Documentation をクリックしたあとに表示される画面で key を確認します(後ほど使います)
+![](image/9-3.png)
 
-![](image/iffft_wh13.png)
+パスワードを設定したら「SORACOM Lagoon console にアクセス」ボタンをクリックします。
 
-![](image/iffft_wh14.png)
+![](image/9-4.png)
 
+ログイン画面が表示されますので、メールアドレスと設定したパスワードでログインします。
 
+![](image/9-5.png)
 
-#### <a name = "section7-4">4.	SORACOM Beam の設定</a>
+### Lagoon ダッシュボードの作成
 
-IFTTTへのデータ転送を設定します。IFTTTへのデータ転送は[HTTPエントリポイント]を使用します。[SORACOM Beam 設定] から[HTTPエントリポイント]をクリックします。
-![](image/7-8.png)
+それでは実際にダッシュボードの作成です。左上の `+` アイコンをクリックしダッシュボードを作成します。 `New dashboard` という名前でダッシュボードが作成されパネルの選択画面が表示されます。
 
-表示された画面で以下のように設定してください。
+![](image/9-6-0.png)
 
-- 設定名： `IFTTT` (別の名前でも構いません)
-- エントリポイントパス： `/`
-- 転送先プロトコル： *HTTPS*
-- 転送先ホスト名： `maker.ifttt.com`
-- 転送先パス： `/trigger/sensor/with/key/{maker_key}/`
-  - {maker_key} は、Maker Channelをコネクトすると発行される文字列です。 https://ifttt.com/maker から確認できます。
+#### Graph Panel の作成
 
-![](image/7-9.png)
+まずは可視化の効果がすぐに見えるグラフから作成していきましょう。
 
+パネルの選択画面が表示されていると思いますので Graph アイコンをクリックします。
 
-[保存]をクリックします。
-以上でBeamの設定は完了です。
+![](image/9-6.png)
 
-```
- 	ここで設定した通り、IFTTTへのアクセスURLは、{maker_key}を含んでいますが、Beamを使用することで、デバイスに認証情報をもたせる必要がなくなります。
-これにより、認証情報が盗まれるリスクを回避できます。また、変更になった場合もたくさんのデバイスに手を入れることなく、変更を適用することができます。
-```
+全般タブで適当な名前をつけます。
 
-#### <a name = "section7-5">5.	プログラムのダウンロード・実行
+![](image/9-7.png)
 
-IFTTTへの送信をおこないます。
-以下のコマンドを実行し、プログラムをダウンロード・実行し、Beamを経由して正しくデータが送信できるか確認しましょう。
+メトリックタブでは使用している SIM を選択し(モザイク部分)、グラフに表示するメトリックとして `distance` が選択されていることを確認します。
 
-SORACOM Harvest の場合と同様に、Beamを使用する(「send_to_ifttt.py」の実行時)には、SORACOM Airで通信している必要があります。
+![](image/9-8.png)
 
-```
-pi@raspberrypi ~ $ wget http://soracom-files.s3.amazonaws.com/send_to_ifttt.py
---2016-03-24 03:24:30--  http://soracom-files.s3.amazonaws.com/send_to_ifttt.py
-soracom-files.s3.amazonaws.com (soracom-files.s3.amazonaws.com) をDNSに問いあわせています...<br>
- 54.231.226.26
-soracom-files.s3.amazonaws.com (soracom-files.s3.amazonaws.com)|54.231.226.26|:80 に接続しています... 接続しました。
-HTTP による接続要求を送信しました、応答を待っています... 200 OK<br>
-長さ: 2457 (2.4K) [text/plain]
-`send_to_ifttt.py' に保存中
+左上の「ダッシュボードに戻る」ボタンをクリックします。Harvest に送信されているデータがグラフ化されていることが確認できます。
 
-100%[====================================================>] 2,457       --.-K/s 時間 0s
+#### SORACOM Dynamic Image Panel の作成
 
-2016-03-24 03:24:31 (31.7 MB/s) - `send_to_ifttt.py' へ保存完了 [2457/2457]
+SORACOM Dynamic Image Panel ではデータに応じて表示する画像を動的に変更できます。今回表示する画像データは AWS S3 にアップロードしていますが、ネットワーク経由でアクセスできる場所であればどこでも構いません。
 
-pi@raspberrypi ~ $ python send_to_ifttt.py
-- 条件設定
-障害物を 10 cm 以内に 3 回検知したら IFTTT にデータを送信します
-センサーを手で遮ったり、何か物を置いてみたりしてみましょう
-- 準備完了
-距離(cm): 5.3 <= 10 , 回数: 1 / 3
-距離(cm): 5.6 <= 10 , 回数: 2 / 3
-距離(cm): 5.2 <= 10 , 回数: 3 / 3
-- ステータスが 'in'(何か物体がある) に変化しました
-- Beam 経由でデータを送信します
-status changed to 'in' : {"value3": "", "value2": "5", "value1": "in"}
-<Response [200]> ← 正常にデータが送信されたら 200 になります
-距離(cm): 54.9 > 10 , 回数: 1 / 3
-距離(cm): 55.2 > 10 , 回数: 2 / 3
-距離(cm): 55.3 > 10 , 回数: 3 / 3
-- ステータスが 'out'(何も物体がない) に変化しました
-- Beam 経由でデータを送信します
-status changed to 'out' : {"value3": "", "value2": "9", "value1": "out"}
-<Response [200]> ← 正常にデータが送信されたら 200 になります
-```
+画面上部の「パネルを追加」ボタンをクリックします。
 
-すると、下記のようなツイートが行われます。
-![](image/7-10.png)
+![](image/9-9.png)
 
+パネルの選択画面を下にスクロールし SORACOM Dynamic Image Panel アイコンをクリックします。
 
+![](image/9-10.png)
 
-ハッシュタグで検索してみましょう
-https://twitter.com/search?f=tweets&q=%23soracomhandson&src=typd
+全般タブで適当なタイトルをつけます。
 
+![](image/9-11.png)
 
-おめでとうございます！皆さんは、IoT 体験キット 〜距離測定センサー〜を完了しました。SORACOMを使ったハンズオンを楽しんで頂けましたでしょうか？
+メトリックタブでは使用している SIM を選択し(モザイク部分)、グラフに表示するメトリックとして `distance` が選択されていることを確認します。
 
-さらにSORACOMに興味を持っていただいた方は、以下の Getting Startedもご覧ください！
+![](image/9-12.png)
+
+設定タブで「変数を追加」ボタンをクリックし、以下のように入力します。
+
+- 背景画像の URL: `https://binary-parser-playground-dev.s3.amazonaws.com/`
+- 最小値: 50
+- 間隔: 200
+- 最大値: 200
+
+クエリ A の結果 `distance` の値が 50 から 200 のとき変数に `50` がセットされ 200 以上の時に `200` がセットされます。この数値を元にファイル名を算出しパネルに表示します。
+
+![](image/9-13.png)
+
+左上の「ダッシュボードに戻る」ボタンをクリックします。センサーとの距離を変えて画像が変わることを確認してください。また、パネルのサイズや配置をお好みに応じて調整するとよいでしょう。
+
+##### トラブルシュート
+
+画像がうまく表示されない場合は以下を確認してください。
+
+「すべての画像リンクを表示」ボタンをクリックします。
+
+![](image/9-14.png)
+
+最小値・間隔・最大値を元に計算された取り得る値(potential values)に応じて複数の画像の URL が表示されますので、想定した URL となっているかを確認してください。
+
+![](image/9-15.png)
+
+「プレビュー」ボタンをクリックすると、それぞれの URL にアクセスできるかを確認できます。
+
+![](image/9-16.png)
+
+### アラートメールの送信設定
+
+#### 通知チャネルの作成
+
+Lagoon のアラートは、別途設定した通知チャネルヘ送信します。複数のパネルで通知先を共通化したい場合に便利です。チャネルはメール、LINE、Slack などさまざまありますが、このハンズオンではメールを使用します。
+
+![](image/9-16.png)
+![](image/9-17.png)
+![](image/9-18.png)
+![](image/9-19.png)
+![](image/9-20.png)
+
+#### グラフへのアラートの設定
+
+![](image/9-20.png)
+![](image/9-21.png)
+![](image/9-22.png)
+![](image/9-23.png)
+![](image/9-24.png)
+![](image/9-25.png)
+![](image/9-26.png)
+![](image/9-27.png)
+![](image/9-28.png)
+![](image/9-29.png)
+![](image/9-30.png)
+![](image/9-31.png)
+![](image/9-32.png)
+
+### おわり
+
+おめでとうございます！皆さんは、IoT 体験キット 〜距離測定センサー〜を完了しました。SORACOM を使ったハンズオンを楽しんで頂けましたでしょうか？
+
+さらに SORACOM に興味を持っていただいた方は、以下の Getting Started もご覧ください！
 
 SORACOM Getting Started
 https://dev.soracom.io/jp/start/
