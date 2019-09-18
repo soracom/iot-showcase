@@ -84,7 +84,7 @@ https://console.soracom.io/#/signup にアクセスします。
 
 
 
-
+
 #### <a name="section1-4">支払情報の設定
 通信料の支払い方法はクレジットカードになります。クレジットカードの情報を登録するには、メイン画面上部のユーザー名から[お支払い方法設定]を開きます。
 
@@ -96,7 +96,7 @@ https://console.soracom.io/#/signup にアクセスします。
 
 ![](image/7.png)
 
-
+
 ### <a name="section1-5">3.Air SIM の登録
 
 #### <a name="section1-6">ユーザーコンソールでの Air SIM の登録
@@ -123,7 +123,7 @@ SORACOMではSIMの登録や「使用開始」「休止」「解約」といっ�
 
 
 なお、初めての通信、もしくは、ユーザーコンソール/APIで使用開始処理を行うことで、状態は「使用中」に変わります。 まだ通信を行いたくない場合は、ユーザーコンソールもしくはAPIで休止処理を行ってください。これにより「休止中」の状態となり通信は行われません。
-
+
 ## <a name = "section2">2章 Raspberry Piのセットアップ</a>
 ### <a name="raspbian-install">Raspbian のインストール</a>
 #### Raspbian とは
@@ -136,14 +136,14 @@ SORACOMのハンズオンでは、特に理由がない限りは Raspbian を利
 
 - PC(Mac、Windowsなど)
 - SDカードリーダー/ライター (PC本体にSDスロットがある場合には不要)
-- Micro SD カード (8GB以上が望ましい)  
+- Micro SD カード (8GB以上が望ましい)
  ※もし初代Raspberry Piを利用する場合には、通常サイズのSDカードを用意して下さい
 
 #### OSイメージファイルのダウンロード
-Raspbian は、デスクトップGUI環境を含む通常版と、CUIのみのLite版があります。  
+Raspbian は、デスクトップGUI環境を含む通常版と、CUIのみのLite版があります。
 本ハンズオンでは Raspberry Pi にキーボードやマウスを接続して操作を行わないので、Lite版を利用します。
 
-Raspbian Lite の イメージは、下記URLのミラーサイトからダウンロードするとよいでしょう。  
+Raspbian Lite の イメージは、下記URLのミラーサイトからダウンロードするとよいでしょう。
 http://ftp.jaist.ac.jp/pub/raspberrypi/raspbian_lite/images/
 
 - [2016-05-27バージョン(292MB)](http://ftp.jaist.ac.jp/pub/raspberrypi/raspbian_lite/images/raspbian_lite-2016-05-31/2016-05-27-raspbian-jessie-lite.zip) をダウンロード
@@ -152,7 +152,7 @@ http://ftp.jaist.ac.jp/pub/raspberrypi/raspbian_lite/images/
 #### イメージの書き込み(Macの場合)
 ##### SDカードの接続
 PC本体にSDカードスロットがある場合には、変換アダプタを介して接続して下さい。
-![SDカードアダプタ](../common/image/raspbian-install-001.jpg) ![SDカードスロット](../common/image/raspbian-install-002.jpg)  
+![SDカードアダプタ](../common/image/raspbian-install-001.jpg) ![SDカードスロット](../common/image/raspbian-install-002.jpg)
 もしPC本体にSDカードスロットがない場合には、USB接続カードリーダー/ライターなどを使って接続して下 さい。
 ![USB接続カードリーダー/ライター](../common/image/raspbian-install-003.jpg)
 
@@ -198,8 +198,8 @@ PC本体にSDカードスロットがない場合には、USB接続カー�
 [Win32 Disk Imager](https://osdn.jp/projects/sfnet_win32diskimager/)のサイトから、インストーラーをダウンロード・実行します。
 
 ##### イメージファイルの書き込み
-Win32 Disk Imager を起動し、右上のDeviceがSDカードのドライブ名である事を確認します。  
-ドライブ名の左のボタンを押し、イメージファイルの場所を指定します。  
+Win32 Disk Imager を起動し、右上のDeviceがSDカードのドライブ名である事を確認します。
+ドライブ名の左のボタンを押し、イメージファイルの場所を指定します。
 Write を押すと、SDカードへの書き込みが開始されます。
 
 ![Win32 Disk Imager](../common/image/raspbian-install-004.png)
@@ -446,7 +446,7 @@ ping コマンドの応答からインターネットへの疎通が取れてい
 
 Air SIMに監視の設定をしましょう。当ハンズオンの間に通知がくるように、1MiBで設定します。
 
-「SIM詳細」画面で [監視] タブを開き、[SIM] をクリックして、監視設定を行ったら [設定を更新] ボタンをクリックして保存します。  
+「SIM詳細」画面で [監視] タブを開き、[SIM] をクリックして、監視設定を行ったら [設定を更新] ボタンをクリックして保存します。
 
 
 ![](image/4-5.png)
@@ -558,9 +558,9 @@ SORACOM Air が提供するモバイル通信を使って、センサーデー�
 
 ![](https://soracom.jp/img/fig_harvest.png)
 
-> 注意: SORACOM Harvest を使うには追加の費用がかかります  
-> 書き込みリクエスト: 1日 2000リクエストまで、1SIMあたり 1日5円  
-> 1日で2000回を超えると、1リクエスト当り0.004円  
+> 注意: SORACOM Harvest を使うには追加の費用がかかります
+> 書き込みリクエスト: 1日 2000リクエストまで、1SIMあたり 1日5円
+> 1日で2000回を超えると、1リクエスト当り0.004円
 
 ### <a name="6-2">SORACOM Harvest を有効にする</a>
 SORACOM Harvest を使うには、Group の設定で、Harvest を有効にする必要があります。
@@ -683,7 +683,7 @@ IFTTTへのデータ転送を設定します。IFTTTへのデータ転送は[HTT
 - 転送先プロトコル： *HTTPS*
 - 転送先ホスト名： `maker.ifttt.com`
 - 転送先パス： `/trigger/sensor/with/key/{maker_key}/`
-  - {maker_key} は、Maker Channelをコネクトすると発行される文字列です。 https://ifttt.com/maker から確認できます。 
+  - {maker_key} は、Maker Channelをコネクトすると発行される文字列です。 https://ifttt.com/maker から確認できます。
 
 ![](image/7-9.png)
 
