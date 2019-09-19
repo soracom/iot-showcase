@@ -11,13 +11,13 @@ SORACOM Air が提供するモバイル通信を使って、センサーデー�
 
 ![](https://soracom.jp/img/fig_harvest.png)
 
-> 注意: SORACOM Harvest を使うには追加の費用がかかります。
+> 注意: SORACOM Harvest Data を使うには追加の費用がかかります。
 > 書き込みリクエスト: 1 日 2000 リクエストまで、1 SIM あたり 1 日 5 円
 > 1 日で 2000 回を超えると、1 リクエスト当り 0.004 円
 
-### SORACOM Harvest を有効にする
+### SORACOM Harvest Data を有効にする
 
-SORACOM Harvest を使うには、SIM グループの設定で、Harvest を有効にする必要があります。
+SORACOM Harvest Data を使うには、SIM グループの設定で、Harvest を有効にする必要があります。
 
 SIM グループ設定の SORACOM Harvest 設定を開き、ON にして、保存を押します。
 
@@ -28,7 +28,7 @@ SIM グループ設定の SORACOM Harvest 設定を開き、ON にして、保�
 以下のコマンドで、センサーデータを Harvest へ送信するプログラムをダウンロード・実行し、センサー情報が Harvest へ届いていることを確認しましょう。
 
 ```console
-$ sudo apt-get install -y python-pip libssl-dev
+$ sudo apt install -y python-pip libssl-dev
 $ pip install requests
 $ curl -O http://soracom-files.s3.amazonaws.com/send_to_harvest.py
 $ python send_to_harvest.py
@@ -57,6 +57,8 @@ pi@raspberrypi:~ $ python send_to_harvest.py
 - データを送信します
 <Response [201]>
 ```
+
+プログラムを終了するには `Ctrl-C` を押してください。
 
 #### トラブルシュート
 
