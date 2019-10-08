@@ -11,11 +11,29 @@ SORACOM Lagoon はダッシュボード作成/共有サービスです。
 
 ## SORACOM Lagoon の有効化と SORACOM Lagoon ユーザの作成
 
-TODO
+### ボタンを借りた方 (SAM ユーザでログイン)
+
+[Menu] > [SORACOM Lagoon] > [ユーザー追加]
+
+- 権限: **編集可能**
+- メールアドレス: 運営から入手 (Lagoon メールアドレス列)
+- パスワード: 運営から入手 (Lagoon パスワード列)
+
+[SORACOM Lagoon Console へアクセス]
+
+### ボタンを持ち込んだ方 (ルートアカウントでログイン)
+
+[Menu] > [SORACOM Lagoon] > [SORACOM Lagoon の利用を開始する]
+
+Free を選択
+パスワードを設定
+
+[SORACOM Lagoon Console へアクセス]
 
 ## SORACOM Lagoon へのログイン
 
-TODO
+- メールアドレス: 運営から入手 (Lagoon メールアドレス列)
+- パスワード: 運営から入手 (Lagoon パスワード列)
 
 ## 通知チャンネルの作成
 
@@ -28,9 +46,11 @@ TODO
 
 [送信テスト]
 
-このようなメールが届けば設定成功です。 [保存]
+このようなメールが届けば設定成功です。
 
 ![送信テストの結果](images/)
+
+[保存]
 
 ## 新規ダッシュボードの作成
 
@@ -40,9 +60,11 @@ TODO
 
 [新規パネル作成] > [Graph] を選択
 
+[Panel Title] > [編集]
+
 ### メトリックタブ
 
-- **Air** / LTE-M Button の SIM を選択  / **Standard** / **clickType**
+- **Air** / [LTE-M Button の SIM を選択]  / **Standard** / **clickType**
 
 ### 表示タブ
 
@@ -50,7 +72,13 @@ TODO
     - 棒 (チェックをつける)
     - 線 (チェックを外す)
 
+ここで一度 [ダッシュボードを保存] します。
+
+ダッシュボードに戻ったら、再度 [Panel Title] > [編集] を開き、設定を続けます。
+
 ### アラートタブ
+
+[アラートを作成]
 
 #### アラート設定
 
