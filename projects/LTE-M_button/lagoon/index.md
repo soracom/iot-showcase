@@ -37,8 +37,6 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 ![overview.png](https://docs.google.com/drawings/d/e/2PACX-1vS-3EnPq0oOCPQgcPK4CDXHGYX76iE_TGR8fqo3zxbMSdiqobdpuDyZgbAsXUfBEdoCkO654KqtKSNF/pub?w=744&h=213)
 
-必要な作業は以下の通りとなります。
-
 <h2 id="workflow">進め方</h2>
 
 作業A → 作業B の順番で実施してください
