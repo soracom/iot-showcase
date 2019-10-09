@@ -79,9 +79,11 @@ SORACOM Lagoon へログイン後、左のメニューから通知チャンネ�
 
 ![create-alert-channel.png](https://docs.google.com/drawings/d/e/2PACX-1vRPDVWEk7QGQPvRbLabfolka-eLIVUksBddvPapx3JdHC9YQTPvdpKYJTsRGJJaEdLA-fuKDTsxBKsx/pub?w=496&h=686)
 
-このようなメールが届けば設定成功です。 新しい通知チャンネルの画面に戻り [保存] をクリックしてください。
+このようなメールが届けば設定成功です。
 
 ![testing-alert.png](https://docs.google.com/drawings/d/e/2PACX-1vSATHIhIHnkMeV4yE0qpYwVGWuIfJFNmHYjF8r6sPdYo3v8_60dlxpyoIt8bfFKnfrbQFuvwoZ8wfmC/pub?w=675&h=562)
+
+"新しい通知チャンネル" の画面に戻り [保存] をクリックしてください。
 
 ## 新規ダッシュボードの作成
 
@@ -94,13 +96,13 @@ SORACOM Lagoon でダッシュボードを作成します。
 ## 新規グラフパネルの作成と設定
 
 "New Panel" が表示されている場合は [Add] > [Graph] と進みます。  
-（もしも "New Panel" が表示されていない場合は、画面左上の ![パネルを追加](images/new-panel-icon.png) をクリックすると "New Panel" が表示されます）
+（もしも "New Panel" が表示されていない場合は、画面右上の ![パネルを追加](images/new-panel-icon.png) をクリックすると "New Panel" が表示されます）
 
 ![new-panel-graph.png](https://docs.google.com/drawings/d/e/2PACX-1vQSGp7g3hI8m7Z0Ds80mJdxUf6sFgmudhWOm8ym5VYM5049JFIrZFTsp6ahVuF_pioYjqG441ohSx98/pub?w=547&h=377)
 
-グラフ(まだデータはありませんが)が表示されたら "Panel Title" となっている部分をクリックし [編集] と進みます。
+グラフ（まだデータはありませんが）が表示されたら "Panel Title" となっている部分をクリックし [編集] と進みます。
 
-![go-edit-panel.png]](https://docs.google.com/drawings/d/e/2PACX-1vQOK6CCu9o6ynUb0FEEmk4S0krgRlKrTgaTmxnuREYm6lRs-I9PNRS3l4NrJ6yA0uoL1EFZHSPzJmKH/pub?w=309&h=280)
+![go-edit-panel.png](https://docs.google.com/drawings/d/e/2PACX-1vQOK6CCu9o6ynUb0FEEmk4S0krgRlKrTgaTmxnuREYm6lRs-I9PNRS3l4NrJ6yA0uoL1EFZHSPzJmKH/pub?w=309&h=280)
 
 ### メトリックタブ
 
@@ -121,7 +123,7 @@ SORACOM Lagoon でダッシュボードを作成します。
 
 ![panel-behavior.png](https://docs.google.com/drawings/d/e/2PACX-1vQ6-zDL4P_WAZAZ5dxTJrREMYY-45CsCtJcxEFLBbSrUC8iplUaS8kuhadU8-uTeYlNmthZcK_sx78N/pub?w=549&h=306)
 
-ここまで設定したら、画面左上の ![ダッシュボードを保存](images/save-dashboard.png) をクリックし、ダッシュボードを保存します。  
+ここまで設定したら、画面右上の ![ダッシュボードを保存](images/save-dashboard.png) をクリックし、ダッシュボードを保存します。  
 ダッシュボード名は任意で構いません。
 
 ダッシュボードに戻ったら、再度 [Panel Title] > [編集] を開き、設定を続けます。
