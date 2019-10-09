@@ -81,7 +81,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 #### SORACOM LTE-M Button for Enterprise
 
 販売価格 5980 円 に加えてご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。  
-plan-KM1の料金は[ご利用料金 - 特定地域向け IoT SIM (plan-KM1)](https://soracom.jp/services/air/cellular/price/#plan-km1){:target="_blank"} をご確認ください。  
+plan-KM1の料金は[ご利用料金 - 特定地域向け IoT SIM (plan-KM1)](https://soracom.jp/services/air/cellular/price_specific_area_sim/#plan-km1){:target="_blank"} をご確認ください。  
 SORACOM Harvest Data 、 SORACOM Lagoon 等、 SORACOM サービス利用の費用は別途かかります。
 
 (*) 目安として、１クリックあたり約 0.25 ~ 0.3 円程度
