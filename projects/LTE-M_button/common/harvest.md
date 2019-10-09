@@ -20,7 +20,7 @@ SORACOM ユーザコンソールへのログインは、ボタンを借りた方
 ### ボタンを借りた方 (SAM ユーザでログイン)
 
 ボタンを借りた方は、ユーザアカウントも借りてログインすることになります。  
-[SAM ユーザとしてログイン](https://console.soracom.io/#/sam_login) を開き、以下の情報を入力してログインしてください。
+[SAM ユーザとしてログイン](https://console.soracom.io/#/sam_login){:target="_blank"} を開き、以下の情報を入力してログインしてください。
 
 - オペレータ ID (運営から入手)
 - ユーザ名 (運営から入手)
@@ -34,7 +34,7 @@ SORACOM ユーザコンソールへのログインは、ボタンを借りた方
 
 ボタンを持ち込んだ方は、メールアドレスを利用したログインとなります。
 
-[SORACOM アカウントにログイン](https://console.soracom.io/#/login) を開き、ログインしてください。
+[SORACOM アカウントにログイン](https://console.soracom.io/#/login){:target="_blank"} を開き、ログインしてください。
 
 ![login-root.png](https://docs.google.com/drawings/d/e/2PACX-1vTOZ4zauvjy6_XL7s2kxofVDjH7UiJ-hqZ31jOWoQyTvAHdu9ld6isGV1JLTN7Mv9LsZF8pDPyKOyRn/pub?w=637&h=279)
 
