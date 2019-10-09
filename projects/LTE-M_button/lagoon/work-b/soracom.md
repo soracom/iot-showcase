@@ -1,6 +1,6 @@
 # B-1 SORACOM Lagoon で通知を送る
 
-SORACOM Harvest Data 
+SORACOM Harvest Data に蓄積されたデータを基に、SORACOM Lagoon で通知を送ってみます。
 
 ## SORACOM Lagoon とは
 
@@ -13,54 +13,94 @@ SORACOM Lagoon はダッシュボード作成/共有サービスです。
 
 ### ボタンを借りた方 (SAM ユーザでログイン)
 
-[Menu] > [SORACOM Lagoon] > [ユーザー追加]
+左上の [Menu] から [データ収集・蓄積・可視化] > [SORACOM Lagoon] を開きます。
+
+![go-lagoon.png](https://docs.google.com/drawings/d/e/2PACX-1vRcLctepbC1RZLYJOXThPrqh_ViEclBUfCwWpfrcPq7umjHxdpIdI7uquKBiu9q0JiWiGqdj1jXTJwH/pub?w=290&h=395)
+
+[ユーザー追加] をクリックします。
+
+![add-lagoon-user.png](https://docs.google.com/drawings/d/e/2PACX-1vSnhhU3G_7Th69n1hPon0VqeKp7XvEpXg-FPwPMKs-AKFFEW9AQma5gRp0RpDxVuEwaXEqbDgSq0eB3/pub?w=641&h=371)
+
+SORACOM Lagoon ユーザを作成します。以下のように設定してから [追加] をクリックします。
 
 - 権限: **編集可能**
 - メールアドレス: 運営から入手 (Lagoon メールアドレス列)
 - パスワード: 運営から入手 (Lagoon パスワード列)
 
-[SORACOM Lagoon Console へアクセス]
+![add-lagoon-user-dialog.png](https://docs.google.com/drawings/d/e/2PACX-1vQv1DzgEWC_j3djqPRJpqSOd0t9NVgQPGCSzQRACkdAunlxHg4j1ABiOIyvtFtUfW5g9NDOQjq-92jV/pub?w=608&h=687)
+
+[SORACOM Lagoon Console へアクセス] をクリックします。
+
+![open-lagoon.png](https://docs.google.com/drawings/d/e/2PACX-1vSTZxgjBlrIr8RUvz9lYf2DiMZqjP7QKW6TpijcN30ftCcirEgCoKdgiC-3OjnahUCIbT7SGTLwMbHN/pub?w=739&h=377)
 
 ### ボタンを持ち込んだ方 (ルートアカウントでログイン)
 
-[Menu] > [SORACOM Lagoon] > [SORACOM Lagoon の利用を開始する]
+左上の [Menu] から [データ収集・蓄積・可視化] > [SORACOM Lagoon] を開きます。
 
-Free を選択
-パスワードを設定
+![go-lagoon.png](https://docs.google.com/drawings/d/e/2PACX-1vRcLctepbC1RZLYJOXThPrqh_ViEclBUfCwWpfrcPq7umjHxdpIdI7uquKBiu9q0JiWiGqdj1jXTJwH/pub?w=290&h=395)
 
-[SORACOM Lagoon Console へアクセス]
+[SORACOM Lagoon の利用を開始する] をクリックして、表示されたダイアログでは "Free" を選択し、[続行する] をクリックします。
+
+![start-lagoon.png](https://docs.google.com/drawings/d/e/2PACX-1vSeBfLfdpGTvtP7-bbOWPOXlWYzzygw5A_f8j3LxpAVe_u_ihDhae391NTn-6H8ZJQMYLiEO3HWIzTz/pub?w=676&h=572)
+
+初期の SORACOM Lagoon ユーザーのパスワードを設定します。すべて☑が付くようになるようなパスワードを設定して [利用開始] をクリックします。
+
+![start-lagoon-set-password.png](https://docs.google.com/drawings/d/e/2PACX-1vT33cPmL9cEdhTK03Kzpcp8XwWa4sOsYzS4MwKYTH1uNpVFApHpQsau-Pn5VSMgOM7nfUDsWIMsJqs9/pub?w=632&h=651)
+
+[SORACOM Lagoon Console へアクセス] をクリックします。
+
+![open-lagoon.png](https://docs.google.com/drawings/d/e/2PACX-1vSTZxgjBlrIr8RUvz9lYf2DiMZqjP7QKW6TpijcN30ftCcirEgCoKdgiC-3OjnahUCIbT7SGTLwMbHN/pub?w=739&h=377)
 
 ## SORACOM Lagoon へのログイン
 
-- メールアドレス: 運営から入手 (Lagoon メールアドレス列)
-- パスワード: 運営から入手 (Lagoon パスワード列)
+SORACOM Lagoon へのログイン画面が表示されます。下記の情報でログインしてください。
+
+- メールアドレス: ルートユーザーのメールアドレス、もしくは Lagoon メールアドレス列)
+- パスワード: 先ほど設定したパスワード、もしくは Lagoon パスワード列
+
+![login-lagoon](https://docs.google.com/drawings/d/e/2PACX-1vTDTewEk3BnTvARpg8LFxDlX6kIqp71w-fI7CRuGcEZZ88bi4MQiLRb-od3d5vf2JX2UpYdv-ffg3uR/pub?w=634&h=288)
 
 ## 通知チャンネルの作成
 
-[チャンネルを追加]
+SORACOM Lagoon へログイン後、左のメニューから通知チャンネルを作成します。
+
+[鈴のアイコン] > [通知チャンネル] > [チャンネルを追加] と進みます。
+
+![go-alert-channel.png](https://docs.google.com/drawings/d/e/2PACX-1vSQsOTKTsmw6xOGLz4deQY0rWU2BVVMobrfGl61PQgxP4zfcqlcyKdu06qEAMaBuihXv5JQwofTQKuu/pub?w=719&h=562)
+
+新しい通知チャンネルを追加で、以下のように入力します。
 
 - 名前: `メール` (任意の文字列)
 - タイプ: **Email**
 - 全てのアラートで送信: (チェックせず)
 - Email Addresses: 通知の送信先のメールアドレスを記載してください
 
-[送信テスト]
+入力が終わったら、まず [送信テスト] をクリックします。
 
-このようなメールが届けば設定成功です。
+![create-alert-channel.png](https://docs.google.com/drawings/d/e/2PACX-1vRPDVWEk7QGQPvRbLabfolka-eLIVUksBddvPapx3JdHC9YQTPvdpKYJTsRGJJaEdLA-fuKDTsxBKsx/pub?w=496&h=686)
 
-![送信テストの結果](images/)
+このようなメールが届けば設定成功です。 新しい通知チャンネルの画面に戻り [保存] をクリックしてください。
 
-[保存]
+![testing-alert.png](https://docs.google.com/drawings/d/e/2PACX-1vSATHIhIHnkMeV4yE0qpYwVGWuIfJFNmHYjF8r6sPdYo3v8_60dlxpyoIt8bfFKnfrbQFuvwoZ8wfmC/pub?w=675&h=562)
 
 ## 新規ダッシュボードの作成
 
-[ダッシュボード]
+SORACOM Lagoon でダッシュボードを作成します。
+
+[＋のアイコン] > [ダッシュボード] と進みます。
+
+![lagoon-new-dashboard.png](https://docs.google.com/drawings/d/e/2PACX-1vS40fmPex1A5ycG3JXqyL0MhGSoCnOuresDPzj3KVdESLs0b0j08OoinIPIpp23mpzIllBMkGDRMNzC/pub?w=282&h=181)
 
 ## 新規グラフパネルの作成と設定
 
-[新規パネル作成] > [Graph] を選択
+"New Panel" が表示されている場合は [Add] > [Graph] と進みます。  
+（もしも "New Panel" が表示されていない場合は、画面左上の ![パネルを追加](images/new-panel-icon.png) をクリックすると "New Panel" が表示されます）
 
-[Panel Title] > [編集]
+![new-panel-graph.png](https://docs.google.com/drawings/d/e/2PACX-1vQSGp7g3hI8m7Z0Ds80mJdxUf6sFgmudhWOm8ym5VYM5049JFIrZFTsp6ahVuF_pioYjqG441ohSx98/pub?w=547&h=377)
+
+グラフ(まだデータはありませんが)が表示されたら "Panel Title" となっている部分をクリックし [編集] と進みます。
+
+![go-edit-panel.png]](https://docs.google.com/drawings/d/e/2PACX-1vQOK6CCu9o6ynUb0FEEmk4S0krgRlKrTgaTmxnuREYm6lRs-I9PNRS3l4NrJ6yA0uoL1EFZHSPzJmKH/pub?w=309&h=280)
 
 ### メトリックタブ
 
