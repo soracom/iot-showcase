@@ -1,7 +1,11 @@
 # SORACOM LTE-M Button と SORACOM Lagoon で簡単IoTを実現
 
+<!--
+Google Drive Images: https://drive.google.com/open?id=14yESi7Uem0lpooGA9_QXZ1CmxNT5xl9C
+-->
+
 SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った自習形式ハンズオンです。  
-作業時間の目安は作業Ａで 10分、作業Ｂで20分となります。
+作業時間の目安は作業Ａで 15分、作業Ｂで20分となります。
 
 <h2 id="prepare">必要なもの</h2>
 
@@ -31,11 +35,12 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 - 作業A: ボタンのクリックイベントを SORACOM Harvest Data を使って可視化
 - 作業B: ボタンのクリックイベントを SORACOM Lagoon のアラート機能を利用して通知します
 
-![全体像](overview.png)
+![overview.png](https://docs.google.com/drawings/d/e/2PACX-1vS-3EnPq0oOCPQgcPK4CDXHGYX76iE_TGR8fqo3zxbMSdiqobdpuDyZgbAsXUfBEdoCkO654KqtKSNF/pub?w=744&h=213)
 
 必要な作業は以下の通りとなります。
 
 <h2 id="workflow">進め方</h2>
+
 作業A → 作業B の順番で実施してください
 
 <h2 id="work-a">作業A: SORACOM Harvest Data を使ったボタンの動作確認</h2>
@@ -46,13 +51,21 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 <h2 id="work-b">作業B: SORACOM Lagoon のアラート機能を利用して通知を送る</h2>
 
-1. [ SORACOM Lagoon を作成する ](work-b/soracom){:target="_blank"}
+1. [ SORACOM Lagoon の設定を行う ](work-b/soracom){:target="_blank"}
 
 <h2 id="closing">作業: あとかたづけ</h2>
 
-<h3 id="cleanup-lagoon">SORACOM Lagoon</h3>
+<h3 id="cleanup-button-rent">ボタンを借りた方</h3>
 
-TODO
+#### ボタンの片付け
+
+「カード」「ボタン」を袋に入れて、返却願います。
+
+![putaway.png](https://docs.google.com/drawings/d/e/2PACX-1vTJxR3bnH6RusgsetXhsVssKjm--KbD77INqxbPP6XcYRjkaTRe7OOLS45hfyIb_Xlb4jKIL0rv7Jzm/pub?w=532&h=378)
+
+<h3 id="cleanup-button-self">ボタンを持ち込まれた方</h3>
+
+後述の [料金について](#fee) をご確認の上、不要な SORACOM リソースを削除してください。
 
 <h3 id="cleanup-soracom">SORACOM リソース</h3>
 
@@ -67,31 +80,20 @@ TODO
 #### SORACOM LTE-M Button for Enterprise
 
 販売価格 5980 円 に加えてご利用にあたっては plan-KM1 の基本料金(月額100円)、データ通信量に応じたデータ通信料(*)が発生します。  
-plan-KM1の料金は[ご利用料金 - 日本向け Air SIM](https://soracom.jp/services/air/cellular/price/#plan-km1){:target="_blank"} をご確認ください。  
-SORACOM Harvest Data 、 SORACOM Beam 、SORACOM Funk 等、 SORACOM サービス利用の費用は別途かかります。
+plan-KM1の料金は[ご利用料金 - 特定地域向け IoT SIM (plan-KM1)](https://soracom.jp/services/air/cellular/price/#plan-km1){:target="_blank"} をご確認ください。  
+SORACOM Harvest Data 、 SORACOM Lagoon 等、 SORACOM サービス利用の費用は別途かかります。
 
-(*) 目安として、１クリックあたり約 0.25 円程度
+(*) 目安として、１クリックあたり約 0.25 ~ 0.3 円程度
 
 #### SORACOM サービスの利用料金の目安
 
 * [SORACOM Harvest Data 料金](https://soracom.jp/services/harvest/price/){:target="_blank"}
     * SORACOM Harvest Data を有効にしたグループに所属する 1 SIM カードまたは 1 デバイスあたり 1 日 5 円 (2000リクエスト/日/SIM あたりのリクエスト含む)
     * 1 アカウントあたり毎月 31 日分の (もしくは 2000リクエスト/日以内)の無料枠があります
-* [SORACOM Beam 料金](https://soracom.jp/services/beam/price/){:target="_blank"}
-    * SORACOM Beam への IN/OUT それぞれに 0.0009 円/リクエスト
-        * 例) UDP → HTTPS をおこなった場合: SORACOM Beam への UDP/IN で 0.0009 円、HTTPS/OUT で 0.0009 円の計 0.0018 円がかかります
-    * 1 アカウントあたり 100,000リクエスト/月の無料枠があります
+* [SORACOM Lagoon 料金](https://soracom.jp/services/lagoon/price/){:target="_blank"}
+    * 本テキストにおいては "Free プラン" を利用しています
 * [簡易位置測位機能](https://dev.soracom.io/jp/docs/location_service/){:target="_blank"}
     * 1SIM/1ボタンあたり : 月額 50円（月間750リクエスト含む）
     * 750回を越したリクエストについては リクエストあたり : 0.15円　となります。
 
 ※ 料金は全て送料や税抜きです。
-
-<!--
-
-### 資料集
-
-<h2 id="appendix">おまけコンテンツ</h2>
-
-
--->
