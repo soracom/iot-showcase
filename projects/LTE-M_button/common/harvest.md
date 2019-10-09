@@ -1,5 +1,9 @@
 # A-2 Harvest を使ったボタンの動作確認
 
+<!--
+Google Drive Images: https://drive.google.com/open?id=14yESi7Uem0lpooGA9_QXZ1CmxNT5xl9C
+-->
+
 SORACOM Harvest を使って、ボタンが正常に動作しているか確認しましょう。
 
 ## SORACOM Harvest とは
@@ -8,6 +12,31 @@ SORACOM Harvest(以下、Harvest) は、IoTデバイスからのデータを収�
 クラウドのセットアップをすることなく、 SORACOM アカウントのみでデータの可視化を素早く行っていただくことができます。
 
 詳細は [SORACOM Harvest サービス紹介ページ](https://soracom.jp/services/harvest/) をご覧ください。
+
+## SORACOM ユーザコンソールへログインする
+
+SORACOM ユーザコンソールへのログインは、ボタンを借りた方と、持ち込んだ方で異なります。
+
+### ボタンを借りた方 (SAM ユーザでログイン)
+
+ボタンを借りた方は、ユーザアカウントも借りてログインすることになります。  
+[SAM ユーザとしてログイン](https://console.soracom.io/#/sam_login){:target="_blank"} を開き、以下の情報を入力してログインしてください。
+
+- オペレータ ID (運営から入手)
+- ユーザ名 (運営から入手)
+- パスワード (運営から入手)
+
+※ "SORACOM アカウントにログイン" のページを表示した方は、右上の [SAM ユーザーとしてログイン »] をクリックすれば移動できます。
+
+![login-sam.png](https://docs.google.com/drawings/d/e/2PACX-1vQhoVDf6KPw2wk70ceGQa6LTjp1CBU0Iw2CdmuRu3RiY_1BJ4HorWvwILqEhsEqQw2RF2LwBa4k9Xq1/pub?w=668&h=352)
+
+### ボタンを持ち込んだ方 (ルートアカウントでログイン)
+
+ボタンを持ち込んだ方は、メールアドレスを利用したログインとなります。
+
+[SORACOM アカウントにログイン](https://console.soracom.io/#/login){:target="_blank"} を開き、ログインしてください。
+
+![login-root.png](https://docs.google.com/drawings/d/e/2PACX-1vTOZ4zauvjy6_XL7s2kxofVDjH7UiJ-hqZ31jOWoQyTvAHdu9ld6isGV1JLTN7Mv9LsZF8pDPyKOyRn/pub?w=637&h=279)
 
 ## グループの作成と割り当て、設定
 
