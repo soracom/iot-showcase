@@ -104,21 +104,31 @@ SORACOM Lagoon でダッシュボードを作成します。
 
 ### メトリックタブ
 
+[メトリック] タブをクリックした後、以下のように設定します。
+
+- データソース: **default**
 - **Air** / [LTE-M Button の SIM を選択]  / **Standard** / **clickType**
 
+![panel-metrics.png](https://docs.google.com/drawings/d/e/2PACX-1vRVL7tCT_mxj7_FWfh0z_vUdw90i7DjuCOqI047vaPX1WXvQO1rHDZ6RvrVqPcORBTAE6pdWEcJzgxu/pub?w=741&h=285)
+
 ### 表示タブ
+
+[表示] タブをクリックした後、以下のように設定します。
 
 - 描画モード
     - 棒 (チェックをつける)
     - 線 (チェックを外す)
 
-ここで一度 [ダッシュボードを保存] します。
+![panel-behavior.png](https://docs.google.com/drawings/d/e/2PACX-1vQ6-zDL4P_WAZAZ5dxTJrREMYY-45CsCtJcxEFLBbSrUC8iplUaS8kuhadU8-uTeYlNmthZcK_sx78N/pub?w=549&h=306)
+
+ここまで設定したら、画面左上の ![ダッシュボードを保存](images/save-dashboard.png) をクリックし、ダッシュボードを保存します。  
+ダッシュボード名は任意で構いません。
 
 ダッシュボードに戻ったら、再度 [Panel Title] > [編集] を開き、設定を続けます。
 
 ### アラートタブ
 
-[アラートを作成]
+[アラート] タブをクリックした後、以下のように設定します。
 
 #### アラート設定
 
@@ -132,11 +142,15 @@ SORACOM Lagoon でダッシュボードを作成します。
 
 - 送り先: **メール** (通知チャンネルで作成した名前を選択)
 
-[ダッシュボードを保存]
+![panel-alert.png](https://docs.google.com/drawings/d/e/2PACX-1vRwPQoeeKG9Tk6Ig-DnWBQshekzrTRsTNnL9fXgXenRnzGHiEnQmMXF1OP6DTzuhSyArXGn312Wn5qQ/pub?w=717&h=693)
+
+ここまで設定したら、画面左上の ![ダッシュボードを保存](images/save-dashboard.png) をクリックし、ダッシュボードを保存します。  
 
 ## 通知を試してみる
 
 ボタンを押すと、それに対応してメールに通知されます。
+
+![lagoon-notify.png](https://docs.google.com/drawings/d/e/2PACX-1vSL9up4bpUwVjMuJXcEgXY7EMEhWbg4wB4G_IN68-673IwK-QxR7YqT9dh0b44RRfzx1WNhf1a5t6A3/pub?w=825&h=517)
 
 **注意点;**
 
@@ -148,4 +162,3 @@ SORACOM Lagoon でダッシュボードを作成します。
 # 以上で本ページの作業は完了となります
 
 ## トラブルシュート
-
