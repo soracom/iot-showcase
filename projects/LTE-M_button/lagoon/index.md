@@ -57,9 +57,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 #### ボタンの片付け
 
-「カード」「ボタン」を袋に入れて、返却願います。
-
-![putaway.png](https://docs.google.com/drawings/d/e/2PACX-1vTJxR3bnH6RusgsetXhsVssKjm--KbD77INqxbPP6XcYRjkaTRe7OOLS45hfyIb_Xlb4jKIL0rv7Jzm/pub?w=532&h=378)
+SORACO LTE-M Button は運営にお返しください。
 
 <h3 id="cleanup-button-self">ボタンを持ち込まれた方</h3>
 
