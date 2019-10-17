@@ -45,7 +45,7 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 
 1. [SORACOM ユーザコンソール](https://console.soracom.io){:target="_blank"} で SORACOM LTE-M Button for Enterprise を 受け取る  
    **貸し出されたボタンを利用する場合には必要ありません**
-2. [ボタンのクリックイベントを SORACOM Harvest Data で確認する](../common/harvest){:target="_blank"}
+2. [ボタンのクリックイベントを SORACOM Harvest Data で確認する](../../projects/LTE-M_button/common/harvest){:target="_blank"}
 
 <h2 id="work-b">作業B: ボタンで EC2 インスタンスを操る</h2>
 
