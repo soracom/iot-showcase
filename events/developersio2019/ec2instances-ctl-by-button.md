@@ -184,16 +184,3 @@ Invoke start_instances
 LONG で起動
 DOUBLE で停止
 
-## あとかたづけ
-
-### AWS リソースの削除
-
-- EC2 インスタンス (+ EBS)
-    - セキュリティグループ: 
-- IAM
-    - ロール: `ec2-instance-controller-by-button-role-*`
-        - 管理ポリシー: `AWSLambdaBasicExecutionRole-*`
-    - ユーザー: SORACOM Funk 用に作成したユーザ
-- AWS Lambda: `ec2-instance-controller-by-button`
-
-※ EC2 インスタンスは停止していたとしても EBS が残る限り費用が掛かる可能性があるため必ず削除するようにしてください。
