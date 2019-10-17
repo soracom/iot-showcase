@@ -69,6 +69,10 @@ Key = `Button-de`, Value = `Go!` というタグが割り当てられている E
 - FuncName: `ec2-instance-controller-by-button`
 - Runtime: **Python 3.7**
 
+### 関数の ARN をメモする
+
+右上からコピって。
+
 ### 基本設定
 
 タイムアウト: 15 秒
@@ -178,6 +182,19 @@ Invoke start_instances
 ### SORACOM Funk を設定する
 
 ええ感じに。TBD
+
+- SIM 選択 >> 新規グループ作成 >> 進捗表のグループ名で作る >> 割り当て
+- 作ったグループ選択 >> SORACOM Funk
+    - サービス: AWS Lambda
+    - 送信データ形式：JSON
+    - 認証情報 >> 認証情報を新規作成
+        - 認証情報 ID: 進捗表の認証情報 ID
+        - 概要: てきとうに
+        - AWS Access Key ID: さっきメモったやつ
+        - AWS Secret Access Key: さっきメモったやつ
+    - 関数の ARN: さっきメモったやつ
+
+[保存]
 
 ### 実際にやってみる
 
