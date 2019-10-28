@@ -151,7 +151,7 @@ Lambda関数の実行ロールに、EC2インスタンスを操作するポリ�
 
 ### テストイベントの作成
 
-Lambda関数の設定画面に戻り、画面右上の[テスト]をクリックします。
+Lambda関数の設定画面に戻り、画面右上の[テスト]をクリックします。
 
 イベント名に`SORACOMFunk`と入力、画面中央のエディタの内容を削除し、以下をペーストします。
 
@@ -214,23 +214,22 @@ Invoke start_instances
 
 ### SORACOM Funk を設定する
 
-ええ感じに。TBD
+作業Aで設定した`button`グループにSORACOM Funkを追加し、ボタンクリックからAWS Lambdaを呼びだせるようにします。
 
-- SIM 選択 >> 新規グループ作成 >> 進捗表のグループ名で作る >> 割り当て
-- 作ったグループ選択 >> SORACOM Funk
+- SORACOM ユーザコンソールを表示し、画面左のメニューから[SIMグループ] - [`button`]をクリック
+- [SORACOM Funk設定]を開き、以下を設定
+    - スイッチをON
     - サービス: AWS Lambda
     - 送信データ形式：JSON
-    - 認証情報 >> 認証情報を新規作成
-        - 認証情報 ID: 進捗表の認証情報 ID
-        - 概要: てきとうに
-        - AWS Access Key ID: さっきメモったやつ
-        - AWS Secret Access Key: さっきメモったやつ
-    - 関数の ARN: さっきメモったやつ
-
-[保存]
+    - 認証情報 >> 認証情報を新規作成する...
+        - 認証情報 ID: `aws-lambda-credential`
+        - AWS Access Key ID: 手順「AWS IAM を準備する」で作成したIAMユーザーのアクセスキー ID
+        - AWS Secret Access Key: 手順「AWS IAM を準備する」で作成したIAMユーザーのシークレットアクセスキー
+    - 関数の ARN: 手順「AWS Lambda を準備する」でメモした関数のARN
+    - [保存]をクリック
 
 ### 実際にやってみる
 
-LONG で起動
-DOUBLE で停止
+LTE-Mボタンを操作してみましょう。ダブルクリックで3台のインスタンスが停止、ロングクリックで3台のインスタンスが開始するはずです。
 
+以上で本ページの作業は完了です。
