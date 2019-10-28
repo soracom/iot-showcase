@@ -33,9 +33,9 @@ SORACOM LTE-M Button for Enterprise (以下 SORACOM LTE-M Button) を使った�
 <h2 id="overview">全体像</h2>
 
 - 作業A: ボタンのクリックイベントを SORACOM Harvest Data を使って可視化
-- 作業B: ボタンのクリックイベントを SORACOM Lagoon のアラート機能を利用して通知します
+- 作業B: ボタンのクリックイベントを SORACOM Funk で AWS Lambda に連携、Lambda関数からEC2 APIを呼び出し、EC2インスタンスを操作
 
-![overview.png](https://docs.google.com/drawings/d/e/2PACX-1vS-3EnPq0oOCPQgcPK4CDXHGYX76iE_TGR8fqo3zxbMSdiqobdpuDyZgbAsXUfBEdoCkO654KqtKSNF/pub?w=744&h=213)
+![figure1.png](images/figure1.png)
 
 <h2 id="workflow">進め方</h2>
 
