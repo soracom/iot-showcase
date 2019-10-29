@@ -137,7 +137,8 @@ def lambda_handler(event, context):
 
 Lambda関数の実行ロールに、EC2インスタンスを操作するポリシーを追加します。
 
-- 画面を下にスクロールし、[実行ロール] - [既存のロール]にある「ec2-instance-controller-by-button-role-<ランダム文字列>ロールを表示」のリンクをクリック
+- 画面を下にスクロールし、[実行ロール] - [既存のロール]にある `ec2-instance-controller-by-button-role-<ランダム文字列>` ロールを表示のリンクをクリック
+  ![figure6a.png](images/figure6a.png)
 - IAM管理画面が表示されたら、[アクセス権限]タブ - [Permissions policies (1 適用済みポリシー)]の[ポリシーをアタッチします]ボタンをクリック
   ![figure6.png](images/figure6.png)
 - 検索テキストボックスに`AmazonEC2FullAccess`と入力、表示される同名のポリシーの左にあるチェックボックスをオンにし、[ポリシーをアタッチ]ボタンをクリック
