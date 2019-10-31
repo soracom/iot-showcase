@@ -75,6 +75,7 @@ var device = null;
             // Manually retrieve the interface name string descriptors
             let tempDevice = new dfu.Device(device_, interfaces[0]);
             await tempDevice.device_.open();
+            await tempDevice.device_.selectConfiguration(1);
             let mapping = await tempDevice.readInterfaceNames();
             await tempDevice.close();
 
