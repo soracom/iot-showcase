@@ -322,7 +322,12 @@ systemctl --user enable timer_shooting.timer
 systemctl --user start timer_shooting.timer
 ```
 
-これで、10分に1回カメラ撮影がされて SORACOM Harvest Files にアップロードされるようになりました。
+これで、10分に1回カメラ撮影がされて SORACOM Harvest Files にアップロードされるようになりました。  
+次回の起動までの残り時間といった状態は以下のコマンドで確認できます。
+
+```
+systemctl --user status timer_shooting.timer
+``` 
 
 ## GPIO からの信号をきっかけにカメラ撮影 (タクトスイッチ版)
 
