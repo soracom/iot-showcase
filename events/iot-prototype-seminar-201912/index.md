@@ -2,8 +2,21 @@
 
 ## イベントページ
 
-- [Day1]()
-- [Day2]()
+- [Day1](){:target="_blank"}
+- [Day2](){:target="_blank"}
+
+## 準備するもの
+
+* Raspberry Pi 3 model B+ x 1 ※
+    * microUSB ケーブル x 1 ※
+    * Raspberry Pi 3 用電源アダプタ x 1 ※ (PCからの給電でも可能な場合があります)
+* microSD (16GB以上) x 1 ※
+    * microSD と PC を接続するアダプタ等 x 1
+* 有線 LAN (USB 型のアダプタ等形状問わず) x 1
+    * LAN ケーブル x 1
+* USB カメラ x 1 ※
+* SORACOM 特定地域向け IoT SIM (標準サイズ) x 1
+* AK-020 (USB ドングル型モデム) x 1
 
 # Day1
 
@@ -11,12 +24,12 @@
 
 ### Raspbian (OS) のダウンロードと microSD カードへの書き込み
 
-* [Download Raspbian](https://www.raspberrypi.org/downloads/raspbian/) のページから **Raspbian Buster Lite** (約430MB) をダウンロードして、ZIP ファイル内の `.img` ファイルを取り出します。
-* [balenaEtcher](https://www.balena.io/etcher/) 等のイメージ書込みソフトウェアを利用して、 先ほどの `.img` ファイルを microSD カードに書き込みます。
+* [Download Raspbian](https://www.raspberrypi.org/downloads/raspbian/){:target="_blank"} のページから **Raspbian Buster Lite** (約430MB) をダウンロードして、ZIP ファイル内の `.img` ファイルを取り出します。
+* [balenaEtcher](https://www.balena.io/etcher/){:target="_blank"} 等のイメージ書込みソフトウェアを利用して、 先ほどの `.img` ファイルを microSD カードに書き込みます。
 
 ### 書き込んだ後の設定
 
-PC 上で以下二つのファイルを作成します。
+PC 上で以下二つのファイルを作成します。テキストエディタで作成してください。
 
 * `wpa_supplicant.conf`
 * `ssh`
@@ -52,20 +65,21 @@ network={
 
 microSD を Raspberry Pi に **入れる前に** 、再度 PC 側に差し込むと **boot** というディスクが見えるので、その中に先ほどのファイルをすべてコピーし、そして microSD を PC から取り外します。
 
----
-
 ## Raspberry Pi の起動から OS の最新化
 
-microSD を Raspberry Pi に取り付け、電源を入れます。  
+有線 LAN と PC を接続し、また、microSD を Raspberry Pi に取り付けてから電源を入れます。  
 しばらく経ってから Mac もしくは Windows 10 最新版 で以下のように入力し、Raspberry Pi へリモートログインを行います。
 
-※Windows 10の以前の場合(最新版でない場合も同様)は、 Apple iTunes をインストールしてください。 (mDNS が使える必要があります)
+* ※ Windows 10の以前の場合(最新版でない場合も同様)は、 Apple iTunes をインストールしてください。 (mDNS が使える必要があります)
+* ※ 電源を接続する **前に** 有線 LAN を接続しないと、リモートログインできない場合があります。
 
 ### PC 側で実行
 
 ```
 ssh pi@raspberrypi.local
 ```
+
+初期パスワードは [Raspbian のドキュメント](https://www.raspberrypi.org/documentation/linux/usage/users.md){:target="_blank"} に記載されていますので、それを利用してログインしてください。
 
 ### 以降は Raspberry Pi 側で実行
 
@@ -76,6 +90,8 @@ sudo systemctl reboot
 ```
 
 ## USB カメラを動作させる
+
+USB カメラを接続します。接続先 USB ポートはどこでも構いません。
 
 ### PC 側で実行
 
@@ -129,16 +145,6 @@ python3 -m http.server 8000
 
 Raspberry Pi 側に戻り `CTRL + C` を押して、Webサーバを止めます。
 
-### 以降は Raspberry Pi 側で実行
-
-```
-sudo systemctl halt
-```
-
-これでカメラの動作の確認、そして Raspberry Pi のシステム停止ができました。
-
-# Day2
-
 ## SORACOM Air の接続
 
 ### PC 側で実行
@@ -156,6 +162,8 @@ sudo bash setup_air.sh
 
 USB ドングル型モデムに SIM を挿入し、Raspberry Pi に接続します。  
  (ポートはどこでも構いませんが、この後に接続する USB カメラとの位置で競合しないようにしてください。USB ドングル型モデム、USB カメラ共に Raspberry Pi の電源が ON 状態でもいつでも抜き挿し可能です)
+
+**確認**: この段階で SIM の登録がまだの方は [SORACOM IoT SIM の登録](https://dev.soracom.io/jp/start/begin_soracom/#register){:target="_blank"} を参考に SIM の登録を完了してください。
 
 USB ドングル型モデムの LED を見ながら接続状態になったのを見計らって、以下に進みます。
 
@@ -177,13 +185,28 @@ PING metadata.soracom.io (100.127.100.127) 56(84) bytes of data.
 
 これで Raspberry Pi から SORACOM Air を通じてインターネット接続が可能になりました。
 
+### 以降は Raspberry Pi 側で実行
+
+最後に Raspberry Pi のシステム停止を紹介します。
+
+```
+sudo systemctl halt
+```
+
+LED 点灯が落ち着いたら microUSB ケーブルを抜くことができます。
+
+# Day2
+
 ## カメラの画像を SORACOM Harvest Files にアップロードする
 
 USB カメラが接続されていない場合は、ここで接続します。
 
 ### SORACOM Harvest Files を有効化
 
-TODO
+* デフォルトパス: `/online-seminar/:time.jpg`
+* ロール: *<空>*
+
+![harvest-files-setting1](https://docs.google.com/drawings/d/e/2PACX-1vRhb4VxcHUxuxrOylVojtK7hTWvVp64U5cFnRauwhC0KLDjRfe-vuSkYRV1sHsic0QM11zdcIXRxG8X/pub?w=902&h=462)
 
 ### 以降は Raspberry Pi 側で実行
 
@@ -194,7 +217,7 @@ curl -X POST -H 'Content-Type: image/jpeg' --data-binary '@test2.jpg' harvest-fi
 
 SORACOM Harvest Files 上にファイルができているか、確認します。
 
-TODO
+![harvest-files-list1]()
 
 ファイルを作らずにカメラから直接 SORACOM Harvest Files にアップロードしてみます。
 
@@ -206,13 +229,18 @@ fswebcam -q --device /dev/video0 - | curl -X POST -H 'Content-Type: image/jpeg' 
 
 SORACOM Harvest Files 上に新しくファイルができているか、確認します。
 
+![harvest-files-list2]()
+
 これで、カメラの画像を手動で SORACOM Harvest Files にアップロードできるようになりました。
 
 ## SORACOM Harvest Files と SORACOM Lagoon を連動させる
 
 ### SORACOM Harvest Files の追加設定
 
-TODO
+* Harvest Data 連携設定
+    * 保存対象のパス: `/online-seminar/`
+
+![harvest-files-setting2]()
 
 ### 以降は Raspberry Pi 側で実行
 
@@ -222,9 +250,11 @@ fswebcam -q --device /dev/video0 - | curl -X POST -H 'Content-Type: image/jpeg' 
 
 SORACOM Harvest Data にデータが作成されているか確認します。
 
+![harvest-data]()
+
 ### SORACOM Lagoon の SORACOM Dynamic Image Panel で表示
 
-TODO
+![lagoon-dynamic-image-panel]()
 
 これで、カメラの画像を SORACOM Lagoon で表示できるようになりました。
 
@@ -276,6 +306,8 @@ Nov 05 12:56:37 raspberrypi bash[2505]: [237B blob data]
 Nov 05 12:56:37 raspberrypi systemd[677]: camera_shooting@6-127.0.0.1:19000-127.0.0.1:53164.service: Succeeded.
 ```
 
+うまく動作していれば、また新たな画像が SORACOM Harvest Files にアップロードされているので、SORACOM Lagoon 上で確認することができます。
+
 もしこの時、SORACOM Harvest Files の設定がされていない場合は、以下のような出力がされます。SIM グループの設定や SORACOM Harvest Files の設定を見直してください。
 
 ```
@@ -283,8 +315,6 @@ Nov 05 12:35:21 raspberrypi bash[1790]: {"message":"Harvest files is disabled. P
 ```
 
 これで、10分に1回カメラ撮影がされて SORACOM Harvest Files にアップロードされるようになりました。
-
----
 
 ## GPIO からの信号をきっかけにカメラ撮影 (タクトスイッチ版)
 
