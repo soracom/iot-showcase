@@ -272,6 +272,7 @@ ln -s ~/camera_shooting@.service ~/.config/systemd/user/
 ln -s ~/camera_shooting.socket ~/.config/systemd/user/
 systemctl --user enable camera_shooting.socket
 systemctl --user start camera_shooting.socket
+journalctl -n 1
 ```
 
 最後の `journalctl` で期待される出力は以下の通りです。
