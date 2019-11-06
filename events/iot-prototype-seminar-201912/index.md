@@ -204,7 +204,7 @@ USB カメラが接続されていない場合は、ここで接続します。
 ### SORACOM Harvest Files を有効化
 
 * デフォルトパス: `/online-seminar/:time.jpg`
-* ロール: *<空>*
+* ロール: *空*
 
 ![harvest-files-setting1](https://docs.google.com/drawings/d/e/2PACX-1vRhb4VxcHUxuxrOylVojtK7hTWvVp64U5cFnRauwhC0KLDjRfe-vuSkYRV1sHsic0QM11zdcIXRxG8X/pub?w=902&h=462)
 
@@ -217,7 +217,7 @@ curl -X POST -H 'Content-Type: image/jpeg' --data-binary '@test2.jpg' harvest-fi
 
 SORACOM Harvest Files 上にファイルができているか、確認します。
 
-![harvest-files-list1]()
+![harvest-files-list1](https://docs.google.com/drawings/d/e/2PACX-1vR-ZLsYEmwBcYhBaYqJRGnDu5EJNutxmzisAWx8KG1ga8JPiY5zsbZCWCI0obhAoiTADWpLZ-Xov3Qr/pub?w=590&h=229)
 
 ファイルを作らずにカメラから直接 SORACOM Harvest Files にアップロードしてみます。
 
@@ -229,7 +229,7 @@ fswebcam -q --device /dev/video0 - | curl -X POST -H 'Content-Type: image/jpeg' 
 
 SORACOM Harvest Files 上に新しくファイルができているか、確認します。
 
-![harvest-files-list2]()
+![harvest-files-list2](https://docs.google.com/drawings/d/e/2PACX-1vQjMN2nTig48k-GS34r603iV0Gv0Q60AZFgdKAuKg_Avsq2I2nNZazuSfXkVDo1EDhnUoO-1M254ayR/pub?w=607&h=258)
 
 これで、カメラの画像を手動で SORACOM Harvest Files にアップロードできるようになりました。
 
@@ -258,8 +258,6 @@ SORACOM Harvest Data にデータが作成されているか確認します。
 
 これで、カメラの画像を SORACOM Lagoon で表示できるようになりました。
 
----
-
 ## タイマーで定期的にカメラ撮影を行い、SORACOM Harvest Files へアップロードする
 
 ### 以降は Raspberry Pi 側で実行
@@ -270,14 +268,10 @@ mkdir -p ~/.config/systemd/user
 curl -O https://gist.githubusercontent.com/ma2shita/e0545e6c1b51ac32026f1ae197226512/raw/ee292aaba9f319167e4de50a599725fdb959e34c/camera_shooting.bash
 curl -O https://gist.githubusercontent.com/ma2shita/c79aad276c0b0f3eccb8e0040b5bc106/raw/2fc0171be99191d3b67490d3d167db42ffac1b1a/camera_shooting@.service
 curl -O https://gist.githubusercontent.com/ma2shita/61ba5f98b3e50a025e0b51a43417d6e2/raw/258c0b8749cbba6ac3f4164049997e974ef14553/camera_shooting.socket
-curl -O https://gist.githubusercontent.com/ma2shita/ce40d5794146dbd147d5cb63eb3eb841/raw/22248196a776adac0b92d995865e3eebbd6f412a/timer_shooting.bash
-curl -O https://gist.githubusercontent.com/ma2shita/7004d3f35f03a67815e734042eea9cf2/raw/4d5cbc3985a9dd4bbd494ee3b6da6b306d4aa7b1/timer_shooting.service
-curl -O https://gist.githubusercontent.com/ma2shita/97519a3f0a6cb936f7480b5de11dc444/raw/9d607f3a86f1bcae07e824b821c284e0a5e30f53/timer_shooting.timer
 ln -s ~/camera_shooting@.service ~/.config/systemd/user/
 ln -s ~/camera_shooting.socket ~/.config/systemd/user/
 systemctl --user enable camera_shooting.socket
 systemctl --user start camera_shooting.socket
-journalctl -n 1
 ```
 
 最後の `journalctl` で期待される出力は以下の通りです。
@@ -312,6 +306,20 @@ Nov 05 12:56:37 raspberrypi systemd[677]: camera_shooting@6-127.0.0.1:19000-127.
 
 ```
 Nov 05 12:35:21 raspberrypi bash[1790]: {"message":"Harvest files is disabled. Please set { enabled: true }"}
+```
+
+### 以降は Raspberry Pi 側で実行
+
+引き続き、タイマーの設定を行います。
+
+```
+curl -O https://gist.githubusercontent.com/ma2shita/ce40d5794146dbd147d5cb63eb3eb841/raw/22248196a776adac0b92d995865e3eebbd6f412a/timer_shooting.bash
+curl -O https://gist.githubusercontent.com/ma2shita/7004d3f35f03a67815e734042eea9cf2/raw/4d5cbc3985a9dd4bbd494ee3b6da6b306d4aa7b1/timer_shooting.service
+curl -O https://gist.githubusercontent.com/ma2shita/97519a3f0a6cb936f7480b5de11dc444/raw/9d607f3a86f1bcae07e824b821c284e0a5e30f53/timer_shooting.timer
+ln -s ~/timer_shooting.service ~/.config/systemd/user/
+ln -s ~/timer_shooting.timer ~/.config/systemd/user/
+systemctl --user enable timer_shooting.timer
+systemctl --user start timer_shooting.timer
 ```
 
 これで、10分に1回カメラ撮影がされて SORACOM Harvest Files にアップロードされるようになりました。
