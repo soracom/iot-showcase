@@ -331,7 +331,12 @@ systemctl --user status timer_shooting.timer
 
 ### タクトスイッチの取り付け
 
-TODO
+GPIO の BCM Pin 番号の 6 と GND に接続します。
+
+![gpio6](https://docs.google.com/drawings/d/e/2PACX-1vR_7n4UvxIb4u1NNxaJhYPhuX8BJnN9QeMC6zZHoI8xk6VTgNZfevlezYjQ9OwhlJsl56x4VPHrv3wD/pub?w=573&h=396    )
+
+Raspberry Pi 3 modeb B+ は [内部にプルアップ/プルダウン抵抗を持っている](https://github.com/raspberrypilearning/physical-computing-guide/blob/master/pull_up_down.md) ため、タクトスイッチのようなセンサーを直接接続することが可能です。  
+また、同様のセンサーとしては CdS セル(フォトトランジスタ; 光量の強弱で抵抗値が変化)するものや、磁気式リードスイッチといったものがあり、これらの入力をトリガーに GPIO の値をhん化させることが可能です。
 
 ### 以降は Raspberry Pi 側で実行
 
@@ -344,8 +349,15 @@ bash gpio6_shooting.bash
 テストをしてみます。期待される出力は以下の通りです。
 
 ```
-TODO
+gpio6_shooting.bash
+Diff!: 1 -> 0
+gpio6_shooting.bash END
+gpio6_shooting.bash
+Diff!: 0 -> 1
+gpio6_shooting.bash END
 ```
+
+ボタンを押すと `0` として認識されます。そのため `1 -> 0` に変化したときに TCP localhost:19000 を呼び出す(= camera_shooting を起動) するようになっています。
 
 あとはこのプログラムがバックグラウンドで起動するようにします
 
@@ -353,9 +365,8 @@ TODO
 
 ```
 curl -O https://gist.githubusercontent.com/ma2shita/8ee3f93a209025433c5a44bddbcdaaba/raw/2d62931aadf85807b98c3d356617798fc942ce2c/gpio6_shooting.service
-ln ~/gpio6_shooting.service ~/.config/systemd/user/
-systemctl --user enable gpio6_shooting.timer
-systemctl --user start gpio6_shooting.timer
+systemctl --user enable $PWD/gpio6_shooting.service
+systemctl --user start gpio6_shooting.service
 ```
 
 EoT
