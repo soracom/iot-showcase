@@ -2,11 +2,11 @@
 
 ## イベントページ
 
-- [Day1](){:target="_blank"}
-- [Day2](){:target="_blank"}
+- [Let's try IoT プロトタイピング](https://lp.soracom.jp/201912-online-seminar){:target="_blank"}
 
 ## 準備するもの
 
+* PC（最新のGoogle Chromeが利用可能なこと）
 * Raspberry Pi 3 model B+ x 1 ※
     * microUSB ケーブル x 1 ※
     * Raspberry Pi 3 用電源アダプタ x 1 ※ (PCからの給電でも可能な場合があります)
@@ -16,7 +16,9 @@
     * LAN ケーブル x 1
 * USB カメラ x 1 ※
 * SORACOM 特定地域向け IoT SIM (標準サイズ) x 1
-* AK-020 (USB ドングル型モデム) x 1
+* AK-020 (USB ドングル型モデム) x 1 ※
+
+※印がついているものは、ソラコムが提供する [IoT 体験キット 〜簡易監視カメラ〜](https://soracom.jp/products/kit/camera_kit/) に含まれています。
 
 # Day1
 
