@@ -240,7 +240,7 @@ SORACOM Harvest Files 上に新しくファイルができているか、確認�
 * Harvest Data 連携設定
     * 保存対象のパス: `/online-seminar/`
 
-![harvest-files-setting2]()
+![harvest-files-setting2](https://docs.google.com/drawings/d/e/2PACX-1vQnZqsh1LtDE0-M69lByXvgVz0LepdAAKsqJAydPHBHXhcYz1PO6NAL4Nt_G7HmOnk00bn3p1eE2iRJ/pub?w=743&h=574)
 
 ### 以降は Raspberry Pi 側で実行
 
@@ -250,11 +250,11 @@ fswebcam -q --device /dev/video0 - | curl -X POST -H 'Content-Type: image/jpeg' 
 
 SORACOM Harvest Data にデータが作成されているか確認します。
 
-![harvest-data]()
+![harvest-data](https://docs.google.com/drawings/d/e/2PACX-1vQA612U2QirB4vz1r2irVA2vpx9KZkwLz6DaZfvOs9bP5EWS0AK09CUoZWDjtAGIb9ls7bshbzkgLrr/pub?w=658&h=172)
 
 ### SORACOM Lagoon の SORACOM Dynamic Image Panel で表示
 
-![lagoon-dynamic-image-panel]()
+![lagoon-dynamic-image-panel](https://docs.google.com/drawings/d/e/2PACX-1vQud_4JqPa2vmciWJwSNczK35dlqKxqjInlIGXoLe-Zh42efjVcID38IyzfHzEobyPM6xk8DMRI1waz/pub?w=638&h=538)
 
 これで、カメラの画像を SORACOM Lagoon で表示できるようになりました。
 
@@ -264,13 +264,11 @@ SORACOM Harvest Data にデータが作成されているか確認します。
 
 ```
 sudo loginctl enable-linger $USER
-mkdir -p ~/.config/systemd/user
 curl -O https://gist.githubusercontent.com/ma2shita/e0545e6c1b51ac32026f1ae197226512/raw/ee292aaba9f319167e4de50a599725fdb959e34c/camera_shooting.bash
 curl -O https://gist.githubusercontent.com/ma2shita/c79aad276c0b0f3eccb8e0040b5bc106/raw/2fc0171be99191d3b67490d3d167db42ffac1b1a/camera_shooting@.service
 curl -O https://gist.githubusercontent.com/ma2shita/61ba5f98b3e50a025e0b51a43417d6e2/raw/258c0b8749cbba6ac3f4164049997e974ef14553/camera_shooting.socket
-ln -s ~/camera_shooting@.service ~/.config/systemd/user/
-ln -s ~/camera_shooting.socket ~/.config/systemd/user/
-systemctl --user enable camera_shooting.socket
+systemctl --user enable $PWD/camera_shooting.socket
+systemctl --user enable $PWD/camera_shooting@.service
 systemctl --user start camera_shooting.socket
 journalctl -n 1
 ```
@@ -317,9 +315,8 @@ Nov 05 12:35:21 raspberrypi bash[1790]: {"message":"Harvest files is disabled. P
 curl -O https://gist.githubusercontent.com/ma2shita/ce40d5794146dbd147d5cb63eb3eb841/raw/22248196a776adac0b92d995865e3eebbd6f412a/timer_shooting.bash
 curl -O https://gist.githubusercontent.com/ma2shita/7004d3f35f03a67815e734042eea9cf2/raw/4d5cbc3985a9dd4bbd494ee3b6da6b306d4aa7b1/timer_shooting.service
 curl -O https://gist.githubusercontent.com/ma2shita/97519a3f0a6cb936f7480b5de11dc444/raw/9d607f3a86f1bcae07e824b821c284e0a5e30f53/timer_shooting.timer
-ln -s ~/timer_shooting.service ~/.config/systemd/user/
-ln -s ~/timer_shooting.timer ~/.config/systemd/user/
-systemctl --user enable timer_shooting.timer
+systemctl --user enable $PWD/timer_shooting.timer
+systemctl --user enable $PWD/timer_shooting.service
 systemctl --user start timer_shooting.timer
 ```
 
