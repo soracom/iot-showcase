@@ -121,13 +121,16 @@ SIM の "グループ" が、先ほど作った SIM グループ名になって�
 Raspberry Piで以下のコマンドラインを実行し、SORACOM Funkにリクエストを送ります。レスポンスとしてLambda関数の戻り値が返っていることを確認します。
 
 ```console
-$ cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
-
+cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
 ```
 
-
-
-
+実行結果の例(FunkのレスポンスはBase64でエンコードされているため、デコードして確認します)
+```console
+$ cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
+{"result":"ok","detail":{"SoracomFunnel":{"statusCode":204},"SoracomFunk":{"statusCode":200,"body":"InNpbXBsZSByZXNwb25zZSEhIg==","encoding":"base64"},"SoracomHarvest":{"statusCode":201}}}
+$ echo "InNpbXBsZSByZXNwb25zZSEhIg==" | base64 -d
+"simple response!!"
+```
 
 以上で本ページの作業は完了です。
 
