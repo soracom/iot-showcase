@@ -67,7 +67,7 @@ AWS Management Consoleを表示し、画面上部の[サービス]をクリッ�
 - [IAM ロール]は「新しいIAMロールの作成」を選択し、[ロール名]に`firehose_delivery_role-<お名前>`と入力、[許可]ボタンをクリック(「成功」と表示され元の画面に戻ります)
 - [Next]をクリックし、確認画面で[Create delivery stream]ボタンをクリック
 
-作成したDelivery streamのステータスが「Active」になったら完了です。
+作成したDelivery streamの[Status]列が「Active」になったら完了です。[Destination]列のリンクをクリックし、S3管理画面を表示させておきます。
 
 ## 3. SORACOM Funnel 設定
 
@@ -124,7 +124,34 @@ Raspberry PiにSSH接続している端末上で以下のコマンドを何度�
 cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
 ```
 
+手順2で表示したS3管理画面のリロードアイコンをクリックし、データが格納されるのを待ちます。
 
+実行した年(例:`2019`)のフォルダが表示されたら、クリックし、その下の階層のフォルダを何度かクリックすると `soracom-funnel-<お名前>-<数字>-<タイムスタンプ>`というファイルが確認できます。
+
+ファイルを選択し[S3 Select]タブをクリック、ファイル形式の「JSON」を選択し[プレビュー] - [ファイルプレビュー表示]でファイルの内容が確認出来ます。
+
+```json
+[
+    {
+        "operatorId": "OP00XXXXXXXX",
+        "timestamp": 1573713415392,
+        "destination": {
+            "resourceUrl": "https://firehose.ap-northeast-1.amazonaws.com/soracom-funnel-<お名前>",
+            "service": "firehose",
+            "provider": "aws"
+        },
+        "credentialsId": "handson-funnel-<お名前>",
+        "payloads": {
+            "uptime": 58805.86
+        },
+        "sourceProtocol": "http",
+        "imsi": "XXXXXXXXXXXXXXX"
+    },
+    :
+]
+```
+
+これでSORACOM FunnelによってデバイスからのデータをAmazon Kinesis Data Firehoseに転送、S3にデータが保存される様子を確認できました。
 
 ## 以上で本章は終了です
 

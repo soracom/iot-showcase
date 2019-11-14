@@ -15,7 +15,7 @@ AWS Managent Console 表示し、画面上部の[サービス]メニューから
 画面左側のメニューから[関数]をクリックしてLambda関数一覧を表示、右側の[関数の作成]ボタンをクリックして、以下のようにLambda関数を作成します。
 
 - [一から作成]が選択されていることを確認
-- 関数名に `ec2-instance-controller-by-button-<お名前>` と入力
+- 関数名に `soracom-funk-test-<お名前>` と入力
 - ランタイムを「**Python 3.7**」に変更
 - 右下の[関数の作成]ボタンをクリック
 
@@ -30,41 +30,19 @@ AWS Managent Console 表示し、画面上部の[サービス]メニューから
 [関数コード]内のエディタに表示されているコードを全て削除し、以下のコードをコピー&ペーストします。
 
 ```python
-# FuncName: `ec2-instance-controller-by-button`
+# FuncName: `soracom-funk-test`
 # Runtime: **Python 3.7**
-BUTTON_OP_MAP = {
-    'DOUBLE': 'stop',
-    'LONG':   'start'
-}
-
-import boto3
-ec2 = boto3.client('ec2')
-def get_instance_ids(Key='Button-de', Value='Go!'):
-    targetIds = []
-    instances = ec2.describe_instances()
-    for reservation in instances['Reservations']:
-        for instance in reservation['Instances']:
-            if 'Tags' in instance:
-                for tag in instance['Tags']:
-                    if tag['Key'] == Key and tag['Value'] == Value:
-                        targetIds.append(instance['InstanceId'])
-    return targetIds
+import json
+import os
+import pprint
 
 def lambda_handler(event, context):
+    print('event: ')
     print(event)
-    targetIds = get_instance_ids()
-    print("targetIds are {}".format(targetIds))
+    print('context: ')
+    pprint.pprint(context.client_context.custom)
 
-    try:
-        invoke_method_name = "{}_instances".format(BUTTON_OP_MAP[event['clickTypeName']])
-    except KeyError:
-        print("Ignored (No Mapping)")
-        return {'statusCode': 204}
-    
-    if targetIds:
-        print("Invoke {}".format(invoke_method_name))
-        getattr(ec2, invoke_method_name)(InstanceIds=targetIds) # It's black magic..
-    return {'statusCode': 204}
+    return 'simple response'
 ```
 
 ### テストイベントの作成
@@ -75,10 +53,7 @@ Lambda関数の設定画面に戻り、画面右上の[テスト]をクリック
 
 ```json
 {
-  "clickType": 1,
-  "clickTypeName": "SINGLE",
-  "batteryLevel": 1,
-  "binaryParserEnabled": true
+  "uptime": 100.00
 }
 ```
 
@@ -86,13 +61,7 @@ Lambda関数の設定画面に戻り、画面右上の[テスト]をクリック
 
 ### Lambdaの動作確認
 
-画面右上の[テスト]をクリックして、`SINGLE`(シングルクリック)イベントの動作を確認します。画面上部に「実行結果: 成功」が表示されるので[▼ 詳細]をクリックし[ログ出力]の中から後述のテストの出力サンプルが含まれることを確認します。
-
-画面右上のテスト名「SORACOM Funk ▼」をクリック、[テストイベントの設定]からエディタ内の`clickTypeName` を `DOUBLE` や `LONG` に変更して[保存]をクリックし再度[テスト]をクリックして動作を確認します。それぞれ、「インスタンス停止」「インスタンス開始」と動作することを確認しましょう。
-
-#### テストの出力サンプル:
-
-##### `clickTypeName: "SINGLE"` の時
+画面右上の[テスト]をクリックして、`SINGLE`(シングルクリック)イベントの動作を確認します。画面上部に「実行結果: 成功」が表示されるので[▼ 詳細]をクリックし[ログ出力]の中に以下のような出力が含まれることを確認します。
 
 ```
 {'clickType': 1, 'clickTypeName': 'SINGLE', 'batteryLevel': 1, 'binaryParserEnabled': True}
@@ -169,12 +138,12 @@ SIM の "グループ" が、先ほど作った SIM グループ名になって�
 
 ## 3. 動作確認
 
-Raspberry Piで以下のコマンドラインを実行し、SORACOM Funkにリクエストを送ります。
-
-<!-- TODO -->
+Raspberry Piで以下のコマンドラインを実行し、SORACOM Funkにリクエストを送ります。レスポンスとしてLambda関数の戻り値が返っていることを確認します。
 
 ```console
+$ cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
 
+```
 ```
 
 
