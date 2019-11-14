@@ -4,7 +4,9 @@
 
 ## ハンズオンのゴール
 
-Raspberry Piから Funk にリクエストを送信し、 AWS Lambda関数を実行します。
+Raspberry Piから Funk にリクエストを送信しAWS Lambda関数を実行、レスポンスを受け取れることを確認します。
+
+![6-funk.png](images/6-funk.png)
 
 ## 1. AWS Lambda を準備する
 

@@ -7,6 +7,8 @@
 
 Raspberry PiからデータをMQTTで送信し、Beam によってデータに x509証明書を付与、MQTTSで AWS IoT Coreに接続できることを確認します。
 
+![5-beam.png](images/5-beam.png)
+
 ## 1. AWS IoT Core証明書の発行
 
 以下の手順でAWS IoTのx509証明書を発行し、SORACOMのクレデンシャルとして登録します。

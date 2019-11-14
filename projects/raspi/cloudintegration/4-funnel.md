@@ -6,6 +6,8 @@
 
 Raspberry Piからデータを送信し、Funnel によってデータが Amazon Kinesis Data Firehose に連携、 Amazon S3 に保存されることを確認します。
 
+![4-funnel.png](images/4-funnel.png)
+
 ## 1. SORACOM へ認証情報を保管する
 
 ## 1-1. AWS IAM を準備する

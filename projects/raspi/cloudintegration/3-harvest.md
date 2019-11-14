@@ -6,6 +6,8 @@
 
 Raspberry Piからデータを送信し、Harvestでデータが保存されることを確認します。
 
+![3-harvest.png](images/3-harvest.png)
+
 ## 1. SORACOM Harvest の設定をする
 
 [SORACOM Webコンソール](https://console.soracom.io/) で 左上[Menu] > [SIM グループ]をクリックします
