@@ -1,76 +1,14 @@
-# ボタンで EC2 インスタンスを操る
+# SORACOM Funk を使用した AWS Lamdbaの連携
 
-## 全体の構成
+本章では SORACOM Funk を使用して Raspberry Piから AWS Lambda を連携します。
 
-Key = `Button-de`, Value = `Go!` というタグが割り当てられている EC2 インスタンスを対象に、以下のボタンの動作で start_instances もしくは stop_instances してみます。
+## ハンズオンのゴール
 
-- シングル : 何もしない
-- ダブル : インスタンス停止(stop_instances)
-- ロング : インスタンス開始(start_instances)
+Raspberry Piから Funk にリクエストを送信し、 AWS Lambda関数を実行します。
 
-### 注意
+## 1. AWS Lambda を準備する
 
-**本ハンズオンは他のインスタンスに影響がないことは検証済みではありますが、インスタンスの操作を伴う作業となるため適切なアカウントもしくはリージョンを選択するようにしてください。本作業によって発生した問題は免責させていただくことをご留意ください**
-
-## 必要なもの
-
-- AWS アカウント (持っていない場合の作成方法は [AWS アカウントの作成](create-aws-account){:target="_blank"} をご覧ください)
-- SORACOM アカウント
-
-## EC2 インスタンスを準備する
-
-ここではボタンで操作するEC2インスタンスを作成します。
-
-AWS Management Consoleにログインして画面右上のリージョン選択メニューをクリック、[アジアパシフィック(東京)]をクリックして東京リージョンを選択します。
-
-続いて、画面上部の[サービス]メニューから [コンピューティング] - [EC2]を選択し、EC2の管理画面を表示します。
-
-![figure2.png](images/figure2.png)
-
-[インスタンスの作成] - [インスタンスの作成]ボタンをクリックし、インスタンスの作成ウィザードを開きます。
-
-### ステップ 1: Amazon マシンイメージ (AMI)
-
-AMI一覧から 「Amazon Linux 2 AMI (HVM), SSD Volume Type* >> **64 ビット (x86)**」が選択されていることを確認し、[選択]ボタンをクリック
-
-### ステップ 2: インスタンスタイプの選択
-
-インスタンスタイプ一覧から「**t2.micro (無料枠の対象)**」が選択されていることを確認し、[次のステップ: インスタンスの詳細の設定]ボタンをクリック
-
-### ステップ 3: インスタンスの詳細の設定
-
-[インスタンス数]を`3`に変更します。他の項目は初期値のまま、[次のステップ: ストレージの追加]ボタンをクリック
-
-### ステップ 4: ストレージの追加
-
-初期値のまま、[次のステップ: タグの追加]ボタンをクリック
-
-### ステップ 5: タグの追加
-
-[タグの追加]ボタンをクリックし、以下を入力します
-
-- キー: `Button-de`
-- 値: `Go!`
-
-青い[確認と作成]ボタンをクリック
-
-### ステップ 7: インスタンス作成の確認
-
-[起動]ボタンをクリックします。「既存のキーペアを選択するか...」ダイアログが表示されるので、ドロップダウンメニューから「**キーペア無しで続行**」を選択し、「この AMI に組み込まれたパスワードがわからないと...」のチェックを付けて、青い[インスタンスの作成]ボタンをクリックします。
-
-これでEC2インスタンス3台が起動するので、[インスタンスの表示]ボタンをクリックし、インスタンス一覧画面で3台のインスタンスが`pending`→`running`に変わり起動する様子を確認します。
-
-### 確認
-
-起動しているインスタンスを1つ選択し、[タグ]タブをクリックします。一覧からキーが「Button-de」、値が「Go!」になっていることを確認します。
-
-![figure3.png](images/figure3.png)
-
-これでEC2インスタンスの準備は完了です。
-
-## AWS Lambda を準備する
-
-画面上部の[サービス]メニューから [コンピューティング] - [Lambda]を選択し、AWS Lambdaの管理画面を表示します。
+AWS Managent Console 表示し、画面上部の[サービス]メニューから [コンピューティング] - [Lambda]を選択し、AWS Lambdaの管理画面を表示します。
 
 ### 関数の作成
 
@@ -199,13 +137,11 @@ Invoke start_instances
 - ※ 対象インスタンスの状態が running もしくは stopped の時に操作可能です。それ以外の時には ClientError が発生します。
 - ※ この時、他のインスタンスに影響が無かったか確認するようにしてください。
 
-## SORACOM Funk を設定する
+## 2. SORACOM Funk の設定
 
-ここではボタンをトリガーにLambdaを呼び出す SORACOM Funk を設定します。
+## 2-1. AWS IAM を準備する
 
-### AWS IAM を準備する
-
-Lambda関数を実行する権限を持つIAMユーザーを作成します。
+Funkから呼び出すために、Lambda関数を実行する権限を持つIAMユーザーを作成します。
 
 AWS Management Consoleを表示し、画面上部の[サービス]をクリック、検索のテキストボックスに「IAM」と入力して表示される[IAM]を選択し、IAMの管理画面を表示します。
 
@@ -223,11 +159,40 @@ AWS Management Consoleを表示し、画面上部の[サービス]をクリッ�
 
 ![figure9.png](images/figure9.png)
 
-### SORACOM Funk を設定する
+### 2-2. SIMグループの作成とSIMの割り当て
 
-作業Aで設定した`button`グループにSORACOM Funkを追加し、ボタンクリックからAWS Lambdaを呼びだせるようにします。
+SIMグループで SORACOM Funk を有効にします。まだSIMグループを作成していない場合は以下の手順で作成してください。作成済みの場合は手順2-3に進んでください。
 
-- SORACOM ユーザコンソールを表示し、画面左のメニューから[SIMグループ] - [`button`]をクリック
+[SORACOM Webコンソール](https://console.soracom.io/) で 左上[Menu] > [SIM グループ]をクリックします
+
+![soracom-menu](https://docs.google.com/drawings/d/e/2PACX-1vRhgmsjqpncv2HQ0jAZwiYf0knTfvmCMl6x_flrdeGQV4N60trp8M981gCAfitVSmXU4tqAYm6MmyRb/pub?w=331&h=410)
+![soracom-menu-sim-group](https://docs.google.com/drawings/d/e/2PACX-1vTqI-f2K8n-TuUvVEGPnmDcFxG2f87so3Qfe5K11sn0pXG8Q4v2lJX0UT9tjlH7sDQRb1FC7aFfckjb/pub?w=353&h=290)
+
+[追加] で、SIMグループを作成します。グループ名は`handson-<お名前>`と入力します。
+
+![soracom-menu-sim-group-create](https://docs.google.com/drawings/d/e/2PACX-1vQ-wJ7Ixk-BQDtxXweBkhl-deBJzh3behOo_rQNNxm3gO73sKHEV_RvqO7cWrSKJT0AZltPaF_K0qPf/pub?w=381&h=315)
+
+![soracom-menu-sim-group-create-dialog](https://docs.google.com/drawings/d/e/2PACX-1vRjDUj0AzCWEBNyy9GTqWf6jPANTk4WIEZcarMaYd9GhbM-_2AhBru9WglGRplqo0jUroC9rIq82G8h/pub?w=631&h=306)
+
+続いて、SIMグループにSIMを追加します。左上[Menu] > [SIM 管理]をクリックします
+
+![soracom-menu](https://docs.google.com/drawings/d/e/2PACX-1vRhgmsjqpncv2HQ0jAZwiYf0knTfvmCMl6x_flrdeGQV4N60trp8M981gCAfitVSmXU4tqAYm6MmyRb/pub?w=331&h=410)
+![soracom-sim-mgr](https://docs.google.com/drawings/d/e/2PACX-1vTUi6LN6Hsctv4KdaZj8uOUFg_ZyROx73f1TzFq41KIlRzjUmE_bc2NR5UnS8cn15TD_S2s8FA-DHzA/pub?w=353&h=290)
+
+SIM を選択 > [操作] > [所属グループ変更]をクリックします
+
+![soracom-select-sim](https://docs.google.com/drawings/d/e/2PACX-1vQpULGXvkk5htY266aDd2iWJueVphdm8DFRVy_BF5JnWnZfBBLF19U42ni5lU6VxN5ucmwqKHx4ACjg/pub?w=526&h=489)
+
+先ほど作成した SIMグループ に SIM を所属させます
+
+![sim-group-select](https://docs.google.com/drawings/d/e/2PACX-1vR1DJQnKw0NVvv83qxiTiDkh0AYfF6u8g3En7EDQtt2M2OjCRzl_tmlB-02cyiLBHLwWHjpOshFKTAA/pub?w=643&h=334)
+
+SIM の "グループ" が、先ほど作った SIM グループ名になっていれば成功です
+
+### 2-3. SORACOM Funkの有効化
+
+グループにSORACOM Funkを追加し、ボタンクリックからAWS Lambdaを呼びだせるようにします。
+
 - [SORACOM Funk設定]を開き、以下を設定
     - スイッチをON
     - サービス: AWS Lambda
@@ -239,9 +204,17 @@ AWS Management Consoleを表示し、画面上部の[サービス]をクリッ�
     - 関数の ARN: 手順「AWS Lambda を準備する」でメモした関数のARN
     - [保存]をクリック
 
-### 実際にやってみる
+## 3. 動作確認
 
-LTE-Mボタンを操作してみましょう。ダブルクリックで3台のインスタンスが停止、ロングクリックで3台のインスタンスが開始するはずです。
+Raspberry Piで以下のコマンドラインを実行し、SORACOM Funkにリクエストを送ります。
+
+<!-- TODO -->
+
+```console
+
+```
+
+
 
 以上で本ページの作業は完了です。
 

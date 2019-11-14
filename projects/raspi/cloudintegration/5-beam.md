@@ -1,8 +1,15 @@
-# 1. AWS IoT Core 証明書の発行と SORACOM への登録
+
+# SORACOM Beam を使用した IoT データの AWS への連携
+
+本章では SORACOM Beam を使用して Raspberry PiからMQTTのデータを AWS に連携します。
+
+## ハンズオンのゴール
+
+Raspberry PiからデータをMQTTで送信し、Beam によってデータに x509証明書を付与、MQTTSで AWS IoT Coreに接続できることを確認します。
+
+## 1. AWS IoT Core証明書の発行
 
 以下の手順でAWS IoTのx509証明書を発行し、SORACOMのクレデンシャルとして登録します。
-
-## 1-1. AWS IoT Core証明書の発行
 
 [AWS IoT コンソール](https://ap-northeast-1.console.aws.amazon.com/iot/home?region=ap-northeast-1#/home)を開き AWS IoT の設定を開始します。
 
@@ -52,7 +59,9 @@
 
 以上で AWS IoT Core へのモノの登録が完了しました。
 
-## 1-2. SORACOMへのクレデンシャル登録
+このあとの手順のために、AWS IoTコンソールのメニュー [設定] にある「エンドポイント」をコピーしておきます。
+
+## 2. SORACOMへのクレデンシャル登録
 
 SORACOMユーザーコンソールに先ほど作成した証明書を登録します。
 
@@ -71,7 +80,7 @@ SORACOM ユーザーコンソールから、右上のオペレータメニュー
 以下の内容を入力し、「登録」をクリックします。
 ファイルのダウンロード時とは順番が異なることに注意します。
 
-- 認証情報ID : `handson-aws-iot-<SIMのIMSI>`
+- 認証情報ID : `handson-aws-iot-<お名前>`
 - 概要 : 空欄のまま
 - 種別 : 「X.509証明書」を選択
 - 秘密鍵 (key) : `<証明書ID>-private.pem.key` ファイルの内容をペースト
@@ -82,16 +91,50 @@ SORACOM ユーザーコンソールから、右上のオペレータメニュー
 
 これでクレデンシャルの構成は完了です。
 
-## 2-1. SORACOM Beamの設定
+## 3. SORACOM Beamの設定
 
-**以下はSIMグループにつき、1回実行すれば良い設定です。**
+SIMグループで SORACOM Beam を有効にします。まだSIMグループを作成していない場合は以下の手順で作成してください。作成済みの場合は手順3-2に進んでください。
 
-SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。
-[+追加]ボタンからSIMグループ名 `handson-beam<数字>`(数字は講師から指示があります) でSIMグループを作成します。グループ設定画面にあるグループIDをメモしておきます。
+### 3-1. SIMグループの作成とSIMの割り当て
 
-Beamに設定するAWS IoT CoreのエンドポイントをAWS IoT管理画面のメニュー [設定] にある「エンドポイント」をコピーします。
+[SORACOM Webコンソール](https://console.soracom.io/) で 左上[Menu] > [SIM グループ]をクリックします
 
-グループ設定にBeam MQTTを追加、クレデンシャル名にIMSIのプレースホルダを含めるように、以下の内容でグループ設定ファイル `group-config.json` をエディタで作成します。先ほど確認したAWS IoT Coreのエンドポイントを `destination` にセットします。
+![soracom-menu](https://docs.google.com/drawings/d/e/2PACX-1vRhgmsjqpncv2HQ0jAZwiYf0knTfvmCMl6x_flrdeGQV4N60trp8M981gCAfitVSmXU4tqAYm6MmyRb/pub?w=331&h=410)
+![soracom-menu-sim-group](https://docs.google.com/drawings/d/e/2PACX-1vTqI-f2K8n-TuUvVEGPnmDcFxG2f87so3Qfe5K11sn0pXG8Q4v2lJX0UT9tjlH7sDQRb1FC7aFfckjb/pub?w=353&h=290)
+
+[追加] で、SIMグループを作成します。グループ名は`handson-<お名前>`と入力します。
+
+![soracom-menu-sim-group-create](https://docs.google.com/drawings/d/e/2PACX-1vQ-wJ7Ixk-BQDtxXweBkhl-deBJzh3behOo_rQNNxm3gO73sKHEV_RvqO7cWrSKJT0AZltPaF_K0qPf/pub?w=381&h=315)
+
+![soracom-menu-sim-group-create-dialog](https://docs.google.com/drawings/d/e/2PACX-1vRjDUj0AzCWEBNyy9GTqWf6jPANTk4WIEZcarMaYd9GhbM-_2AhBru9WglGRplqo0jUroC9rIq82G8h/pub?w=631&h=306)
+
+続いて、SIMグループにSIMを追加します。左上[Menu] > [SIM 管理]をクリックします
+
+![soracom-menu](https://docs.google.com/drawings/d/e/2PACX-1vRhgmsjqpncv2HQ0jAZwiYf0knTfvmCMl6x_flrdeGQV4N60trp8M981gCAfitVSmXU4tqAYm6MmyRb/pub?w=331&h=410)
+![soracom-sim-mgr](https://docs.google.com/drawings/d/e/2PACX-1vTUi6LN6Hsctv4KdaZj8uOUFg_ZyROx73f1TzFq41KIlRzjUmE_bc2NR5UnS8cn15TD_S2s8FA-DHzA/pub?w=353&h=290)
+
+SIM を選択 > [操作] > [所属グループ変更]をクリックします
+
+![soracom-select-sim](https://docs.google.com/drawings/d/e/2PACX-1vQpULGXvkk5htY266aDd2iWJueVphdm8DFRVy_BF5JnWnZfBBLF19U42ni5lU6VxN5ucmwqKHx4ACjg/pub?w=526&h=489)
+
+先ほど作成した SIMグループ に SIM を所属させます
+
+![sim-group-select](https://docs.google.com/drawings/d/e/2PACX-1vR1DJQnKw0NVvv83qxiTiDkh0AYfF6u8g3En7EDQtt2M2OjCRzl_tmlB-02cyiLBHLwWHjpOshFKTAA/pub?w=643&h=334)
+
+SIM の "グループ" が、先ほど作った SIM グループ名になっていれば成功です
+
+## 3-2. SORACOM Beamの設定
+
+SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。グループ設定からSORACOM Beamアコーディオンメニューを開き、設定を ON にし、以下を入力して Beam を有効化します。
+
+* 転送先サービス: *AWS IoT*
+* 転送先URL: **進捗表から入手 (endpoint-url)**
+* 認証情報: (先ほど作成した認証情報 進捗表の **cred-name1** を選ぶ)
+* 送信データ形式: *JSON*
+
+<!-- TODO -->
+
+以下の内容でグループ設定ファイル `group-config.json` をエディタで作成します。先ほど確認したAWS IoT Coreのエンドポイントを `destination` にセットします。
 
 ```json 
 [
@@ -122,11 +165,11 @@ soracom groups put-config --namespace SoracomBeam \
   --group-id <メモしたグループID>
 ```
 
-## 2-2. SORACOM Beamの動作確認
+## 4. SORACOM Beamの動作確認
 
 SORACOM IoT SIMをセットしたデバイスからSORACOM BeamにMQTT接続し、AWS IoT Coreにアクセス出来る様子を確認します。
 
-SORACOMユーザーコンソールのメニューから[SIM管理]をクリック、自分のSIMを選択して[操作] - [所属グループ変更]をクリック、2-1で作成したSIMグループ`handson-beam<数字>`を選択し[グループ変更]をクリックします。
+SORACOMユーザーコンソールのメニューから[SIM管理]をクリック、自分のSIMを選択して[操作] - [所属グループ変更]をクリック、自分のSIMグループを選択し[グループ変更]をクリックします。
 
 デバイスにログインし、MQTTクライアントである `mosquitto_pub` コマンドを実行、SORACOM Beamに接続します。
 
