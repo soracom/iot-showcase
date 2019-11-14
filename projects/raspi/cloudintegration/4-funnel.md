@@ -8,6 +8,28 @@ Raspberry Piからデータを送信し、Funnel によってデータが Amazon
 
 ## 1. SORACOM へ認証情報を保管する
 
+## 1-1. AWS IAM を準備する
+
+Funnelから呼び出すために、Kinesis Data Firehoseにデータを投入する権限を持つIAMユーザーを作成します。
+
+AWS Management Consoleを表示し、画面上部の[サービス]をクリック、検索のテキストボックスに「IAM」と入力して表示される[IAM]を選択し、IAMの管理画面を表示します。
+
+画面左のメニューから[ユーザー]を選択、[ユーザーを追加]ボタンをクリックして以下の通りIAMユーザーを作成します。
+
+- [ユーザー詳細の設定]画面
+    - ユーザー名 : `soracom-funnel-test-<お名前>`
+    - アクセスの種類 : [プログラムによるアクセス]のチェックをオン
+- [アクセス許可の設定]画面
+    - 「既存のポリシーを直接アタッチ」を選択
+    - 検索テキストボックスに`Firehose`と入力して表示される「AmazonKinesisFirehoseFullAccess」ポリシーのチェックボックスをオン
+- 残りの項目は既定のまま[ユーザーの作成]ボタンをクリックしてIAMユーザーを作成
+
+作成完了画面の「アクセスキー ID」と「シークレットアクセスキー」([表示]リンクをクリックして表示))を控えておきます。
+
+![figure9.png](images/figure9.png)
+
+## 1-2. SORACOMに認証情報を登録
+
 [SORACOM Webコンソール](https://console.soracom.io/) で [右上のユーザー名] > [セキュリティ]をクリックします
 
 ![soracom-menu-security](https://docs.google.com/drawings/d/e/2PACX-1vRjYW4eP-Cv1GTPmgGD01OEGiszvYmy1gmbsAQx50O6knq0UEPBozSQ8W3ezngFS6Z7B-8ArZkIXSWW/pub?w=344&h=334)
@@ -18,21 +40,40 @@ Raspberry Piからデータを送信し、Funnel によってデータが Amazon
 
 認証情報を登録する画面では下記の通り入力し、保存してください
 
-* 認証情報 ID: **進捗表から入手 (cred-name1)**
-* 概要: `AWS IoT Core DataAccess`
+* 認証情報 ID: `handson-funnel-<お名前>`
+* 概要: `Amazon Kinesis Firehose Access`
 * 種別: *AWS 認証情報* (これを選択すると、下記IDを入力するテキストボックスが増えます)
-* AWS Access Key ID: **進捗表から入手 (aws-accesskey-id)**
-* AWS Secret Access Key ID: **進捗表から入手 (aws-secret-accesskey-id)**
+* AWS Access Key ID: 手順1-1の「アクセスキー ID」
+* AWS Secret Access Key ID: 手順1-1の「シークレットアクセスキー」
 
 ![soracom-cred-save](https://docs.google.com/drawings/d/e/2PACX-1vR6S9T-9TZbcdB8XwcUrBE7MQCyIsT-zOA2LQGspbv5r72CxT_qc1pyIdgmIXqVU79qOEKfOzuA8vXZ/pub?w=644&h=642)
 
-※進捗表から入手する情報は、本来ご自身でご用意いただくことになります。実際の準備方法は [AWS IoT Core の準備](#setup-awsiotcore) をご覧ください
+## 2. Amazon Kinesis Data Firehoseの構成
 
-## 2. SORACOM Funnel 設定
+ここでは、Funnelが連携するKinesis Data Firehoseを設定します。
 
-SIMグループで SORACOM Funnel を有効にします。まだSIMグループを作成していない場合は以下の手順で作成してください。作成済みの場合は手順2-2に進んでください。
+AWS Management Consoleを表示し、画面上部の[サービス]をクリック、検索のテキストボックスに「kinesis」と入力して表示される[Kinesis]を選択し、Amazon Kinesisの管理画面を表示します。
 
-### 2-1. SIMグループの作成とSIMの割り当て
+以下の手順でFirehoseからS3にデータを保管する設定を追加します。
+
+- 画面左側のメニューから[Data Firehose]をクリック、[Create delivery stream]ボタンをクリック
+- [Delivery stream name]に `soracom-funnel-<お名前>`と入力、他の項目は既定のまま[Next]ボタンをクリック
+- [Process records]画面は既定のまま[Next]ボタンをクリック
+- [Select a destination]画面では[Destination]に「S3」が選択されていることを確認、[S3 bucket]の項目右側にある[Create new]ボタンをクリック
+- S3 bucket nameに`soracom-funnel-<お名前>`と入力、Regionは既定のまま[Create S3 bucket]ボタンをクリック
+- 元の画面に戻り、[Next]ボタンをクリック
+- [Configure settings]画面では[S3 buffer conditions] - [Buffer interval]を `60` に変更
+- 同じ画面の[Permissions] - [IAM role]にある「Create new or choose」ボタンをクリック
+- [IAM ロール]は「新しいIAMロールの作成」を選択し、[ロール名]に`firehose_delivery_role-<お名前>`と入力、[許可]ボタンをクリック(「成功」と表示され元の画面に戻ります)
+- [Next]をクリックし、確認画面で[Create delivery stream]ボタンをクリック
+
+作成したDelivery streamのステータスが「Active」になったら完了です。
+
+## 3. SORACOM Funnel 設定
+
+SIMグループで SORACOM Funnel を有効にします。まだSIMグループを作成していない場合は以下の手順で作成してください。作成済みの場合は手順3-2に進んでください。
+
+### 3-1. SIMグループの作成とSIMの割り当て
 
 [SORACOM Webコンソール](https://console.soracom.io/) で 左上[Menu] > [SIM グループ]をクリックします
 
@@ -60,20 +101,28 @@ SIM を選択 > [操作] > [所属グループ変更]をクリックします
 
 SIM の "グループ" が、先ほど作った SIM グループ名になっていれば成功です
 
-### 2-2. Funnelの有効化
+### 3-2. Funnelの有効化
 
 [SORACOM Webコンソール](https://console.soracom.io/) で 左上[Menu] > [SIM グループ]
 
-自身のSIM グループを選択します。
+自身のSIM グループを選択、SORACOM Funnel のアコーディオンメニューを開き設定を ON 、下記の通り入力し、保存してください
 
-SORACOM Funnel のアコーディオンメニューを開き設定を ON 、下記の通り入力し、保存してください
-
-* 転送先サービス: *AWS IoT*
-* 転送先URL: **進捗表から入手 (endpoint-url)**
-* 認証情報: (先ほど作成した認証情報 進捗表の **cred-name1** を選ぶ)
+* 転送先サービス: Amazon Kinesis Firehose
+* 転送先URL: `https://firehose.ap-northeast-1.amazonaws.com/<手順2で作成したDelivery stream名>` (東京リージョンの場合)
+* 認証情報: 手順1-2で作成した`handson-funnel-<お名前>`
 * 送信データ形式: *JSON*
 
 ![soracom-funnel](https://docs.google.com/drawings/d/e/2PACX-1vQ1u87_1m7Mlk-t9G33ho7s8f_4-F8pIGjksjJxBFRhgYYVwJiBWAOVRr0_XWv5ehjU_4hqDvH7kXI_/pub?w=926&h=435)
+
+これでFunnelの設定は完了です。
+
+## 4. 動作確認
+
+Raspberry PiにSSH接続している端末上で以下のコマンドを何度か実行します
+
+```console
+cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
+```
 
 
 

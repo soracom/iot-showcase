@@ -125,45 +125,17 @@ SIM の "グループ" が、先ほど作った SIM グループ名になって�
 
 ## 3-2. SORACOM Beamの設定
 
-SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。グループ設定からSORACOM Beamアコーディオンメニューを開き、設定を ON にし、以下を入力して Beam を有効化します。
+SORACOMユーザーコンソールのメニューから[SIMグループ]をクリックします。グループ設定からSORACOM Beamアコーディオンメニューを開き、[+] - [MQTTエンドポイント]をクリック、以下を入力して Beam を有効化します。
 
-* 転送先サービス: *AWS IoT*
-* 転送先URL: **進捗表から入手 (endpoint-url)**
-* 認証情報: (先ほど作成した認証情報 進捗表の **cred-name1** を選ぶ)
-* 送信データ形式: *JSON*
+- 種別: `Standard MQTT Broker`のまま
+- プロトコル: 「MQTTS」を選択
+- ホスト名: 手順1でコピーしたAWS IoT Coreのエンドポイント
+- ポート番号: 8883
+- ユーザー名,パスワード,パススルー: 空欄/OFFのまま
+- 証明書: ON
+- 認証情報: `handson-aws-iot-<お名前>` を選択
 
-<!-- TODO -->
-
-以下の内容でグループ設定ファイル `group-config.json` をエディタで作成します。先ほど確認したAWS IoT Coreのエンドポイントを `destination` にセットします。
-
-```json 
-[
-  {
-    "key": "mqtt://beam.soracom.io:1883",
-    "value": {
-      "name": "AWS IoT",
-      "destination": "mqtts://<AWS IoTのエンドポイント>:8883",
-      "enabled": true,
-      "addSubscriberHeader": false,
-      "useClientCert": true,
-      "clientCerts": {
-        "default": {
-          "$credentialsId": "handson-aws-iot-#{imsi}"
-        }
-      }
-    }
-  }
-]
-```
-
-以下のコマンドでグループ設定を更新します。(`--profile`オプションは任意)
-
-```
-soracom groups put-config --namespace SoracomBeam \
-  --body @group-config.json \
-  --profile <SORACOMプロファイル名> \
-  --group-id <メモしたグループID>
-```
+[保存]ボタンをクリックして設定完了です。
 
 ## 4. SORACOM Beamの動作確認
 

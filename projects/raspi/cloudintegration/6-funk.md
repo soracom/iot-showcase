@@ -15,7 +15,7 @@ AWS Managent Console 表示し、画面上部の[サービス]メニューから
 画面左側のメニューから[関数]をクリックしてLambda関数一覧を表示、右側の[関数の作成]ボタンをクリックして、以下のようにLambda関数を作成します。
 
 - [一から作成]が選択されていることを確認
-- 関数名に `ec2-instance-controller-by-button` と入力
+- 関数名に `ec2-instance-controller-by-button-<お名前>` と入力
 - ランタイムを「**Python 3.7**」に変更
 - 右下の[関数の作成]ボタンをクリック
 
@@ -67,23 +67,6 @@ def lambda_handler(event, context):
     return {'statusCode': 204}
 ```
 
-### ポリシーの追加アタッチ
-
-Lambda関数の実行ロールに、EC2インスタンスを操作するポリシーを追加します。
-
-- 画面を下にスクロールし、[実行ロール] - [既存のロール]にある `ec2-instance-controller-by-button-role-<ランダム文字列>` ロールを表示のリンクをクリック
-  ![figure6a.png](images/figure6a.png)
-- IAM管理画面が表示されたら、[アクセス権限]タブ - [Permissions policies (1 適用済みポリシー)]の[ポリシーをアタッチします]ボタンをクリック
-  ![figure6.png](images/figure6.png)
-- 検索テキストボックスに`AmazonEC2FullAccess`と入力、表示される同名のポリシーの左にあるチェックボックスをオンにし、[ポリシーをアタッチ]ボタンをクリック
-- [Permissions policies]に`AmazonEC2FullAccess`(EC2を操作する権限ポリシー)が追加されていることを確認
-  ![figure7.png](images/figure7.png)  
-- IAM管理画面を閉じる
-
-### 基本設定
-
-[基本設定] - [タイムアウト]の秒数を`15`に変更します。
-
 ### テストイベントの作成
 
 Lambda関数の設定画面に戻り、画面右上の[テスト]をクリックします。
@@ -101,7 +84,7 @@ Lambda関数の設定画面に戻り、画面右上の[テスト]をクリック
 
 画面右下の[作成]をクリックします。Lambda関数の設定画面に戻ったら、画面右上の[保存]をクリックしLambda関数の設定を保存します。
 
-### 動作確認
+### Lambdaの動作確認
 
 画面右上の[テスト]をクリックして、`SINGLE`(シングルクリック)イベントの動作を確認します。画面上部に「実行結果: 成功」が表示されるので[▼ 詳細]をクリックし[ログ出力]の中から後述のテストの出力サンプルが含まれることを確認します。
 
@@ -116,26 +99,6 @@ Lambda関数の設定画面に戻り、画面右上の[テスト]をクリック
 targetIds are ['i-00143e861c65de56b', 'i-0e31228ddd9abf022', 'i-085caececdf653209']
 Ignored (No Mapping)
 ```
-
-##### `clickTypeName: "DOUBLE"` の時
-
-```
-{'clickType': 1, 'clickTypeName': 'DOUBLE', 'batteryLevel': 1, 'binaryParserEnabled': True}
-targetIds are ['i-00143e861c65de56b', 'i-0e31228ddd9abf022', 'i-085caececdf653209']
-Invoke stop_instances
-```
-
-##### `clickTypeName: "LONG"` の時
-
-```
-{'clickType': 1, 'clickTypeName': 'LONG', 'batteryLevel': 1, 'binaryParserEnabled': True}
-targetIds are ['i-00143e861c65de56b', 'i-0e31228ddd9abf022', 'i-085caececdf653209']
-Invoke start_instances
-```
-
-- ※ `clickType` や他の値は今回は利用しません。
-- ※ 対象インスタンスの状態が running もしくは stopped の時に操作可能です。それ以外の時には ClientError が発生します。
-- ※ この時、他のインスタンスに影響が無かったか確認するようにしてください。
 
 ## 2. SORACOM Funk の設定
 
@@ -198,10 +161,10 @@ SIM の "グループ" が、先ほど作った SIM グループ名になって�
     - サービス: AWS Lambda
     - 送信データ形式：JSON
     - 認証情報 >> 認証情報を新規作成する...
-        - 認証情報 ID: `aws-lambda-credential`
-        - AWS Access Key ID: 手順「AWS IAM を準備する」で作成したIAMユーザーのアクセスキー ID
-        - AWS Secret Access Key: 手順「AWS IAM を準備する」で作成したIAMユーザーのシークレットアクセスキー
-    - 関数の ARN: 手順「AWS Lambda を準備する」でメモした関数のARN
+        - 認証情報 ID: `handson-aws-lambda-<お名前>`
+        - AWS Access Key ID: 手順2-1で作成したIAMユーザーのアクセスキー ID
+        - AWS Secret Access Key: 手順2-1で作成したIAMユーザーのシークレットアクセスキー
+    - 関数の ARN: 手順1でメモした関数のARN
     - [保存]をクリック
 
 ## 3. 動作確認
