@@ -45,29 +45,7 @@ def lambda_handler(event, context):
     return 'simple response'
 ```
 
-### テストイベントの作成
-
-Lambda関数の設定画面に戻り、画面右上の[テスト]をクリックします。
-
-イベント名に`SORACOMFunk`と入力、画面中央のエディタの内容を削除し、以下をペーストします。
-
-```json
-{
-  "uptime": 100.00
-}
-```
-
-画面右下の[作成]をクリックします。Lambda関数の設定画面に戻ったら、画面右上の[保存]をクリックしLambda関数の設定を保存します。
-
-### Lambdaの動作確認
-
-画面右上の[テスト]をクリックして、`SINGLE`(シングルクリック)イベントの動作を確認します。画面上部に「実行結果: 成功」が表示されるので[▼ 詳細]をクリックし[ログ出力]の中に以下のような出力が含まれることを確認します。
-
-```
-{'clickType': 1, 'clickTypeName': 'SINGLE', 'batteryLevel': 1, 'binaryParserEnabled': True}
-targetIds are ['i-00143e861c65de56b', 'i-0e31228ddd9abf022', 'i-085caececdf653209']
-Ignored (No Mapping)
-```
+画面右下の[作成]をクリックします。Lambda関数の設定画面に戻ったら、画面右上の[保存]をクリックしLambda関数の設定を保存します。
 
 ## 2. SORACOM Funk の設定
 
