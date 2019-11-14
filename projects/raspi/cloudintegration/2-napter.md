@@ -6,7 +6,7 @@
 
 遠隔操作用の PC から、 Raspberry Pi に SSH でログインし、Raspberry Pi 内の設定を変更します。
 
-## SORACOM Air SIM に SORACOM Napter を設定する
+## 1. SORACOM Air SIM に SORACOM Napter を設定する
 
 NapterでSSH(22番ポート)にリモートアクセスする設定を以下の手順で追加します。
 
@@ -28,17 +28,9 @@ SORACOM ユーザーコンソールの左上 [Menu] から [SIM 管理] をク�
 
 [閉じる] ボタンをクリックし設定ダイアログを閉じます。
 
-## 遠隔操作用の PC からログインする
+## 2. 遠隔操作用の PC からSSHでログインする
 
-遠隔操作用の PC から、Raspberry Pi に SSH でログインしてみましょう。  
-
-**メモした IP アドレス、アクセスポート番号が必要となります。**
-
-### SSH でログインして Raspberry Pi の LED を制御する
-
-SORACOM Air SIM 経由で SSH ログインをし、ログイン先 Raspberry Pi の LED を制御してみましょう。
-
-他の端末から、自分の Raspberry Pi にログインします。  
+PCやMacから、自分の Raspberry Pi にログインします。  
 ※ 以下は macOS の場合です。Windows の場合は TeraTerm 等でメモしたホスト名とポート番号、ユーザー名 `pi` 、パスワード `raspberry` でログインしてください
 
 ```console

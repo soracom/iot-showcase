@@ -122,7 +122,8 @@ Raspberry Piで以下のコマンドラインを実行し、SORACOM Funkにリ�
 $ cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST http://uni.soracom.io -d @-
 
 ```
-```
+
+
 
 
 
