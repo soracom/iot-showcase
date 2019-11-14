@@ -128,7 +128,7 @@ cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST 
 
 実行した年(例:`2019`)のフォルダが表示されたら、クリックし、その下の階層のフォルダを何度かクリックすると `soracom-funnel-<お名前>-<数字>-<タイムスタンプ>`というファイルが確認できます。
 
-ファイルを選択し[S3 Select]タブをクリック、ファイル形式の「JSON」を選択し[プレビュー] - [ファイルプレビュー表示]でファイルの内容が確認出来ます。
+ファイルを選択し[S3 Select]タブをクリック、ファイル形式の「JSON」を選択し[プレビュー] - [ファイルプレビュー表示]で以下のような内容が確認出来ます。
 
 ```json
 [
@@ -146,8 +146,7 @@ cat /proc/uptime | cut -d ' ' -f 1 | echo '{"uptime": '$(cat)'}' | curl -X POST 
         },
         "sourceProtocol": "http",
         "imsi": "XXXXXXXXXXXXXXX"
-    },
-    :
+    }
 ]
 ```
 
