@@ -49,7 +49,7 @@ def lambda_handler(event, context):
 
 ## 2. SORACOM Funk の設定
 
-## 2-1. AWS IAM を準備する
+### 2-1. AWS IAM を準備する
 
 Funkから呼び出すために、Lambda関数を実行する権限を持つIAMユーザーを作成します。
 
