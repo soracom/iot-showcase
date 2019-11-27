@@ -15,15 +15,7 @@ Raspberry PiからデータをMQTTで送信し、Beam によってデータに x
 
 [AWS IoT コンソール](https://ap-northeast-1.console.aws.amazon.com/iot/home?region=ap-northeast-1#/home)を開き AWS IoT の設定を開始します。
 
-まず 管理 > モノ > 作成 から、使用するデバイスをモノ(Thing)として作成します。
-
-![](images/beam01.png)
-
-「単一のモノを作成する」をクリックし名前に「thing-<お名前>」と入力、他の項目は既定のまま「次へ」をクリックします。
-
-![](images/beam02.png)
-
-モノに証明書を追加します。ここでは1-Click証明書作成の「証明書の作成」をクリックし証明書を作成します。
+メニューから 安全性 を選択し、証明書を作成します。右上の「作成」をクリックして1-Click証明書作成の「証明書の作成」ボタンをクリック、証明書を作成します。
 
 ![](images/beam03.png)
 
