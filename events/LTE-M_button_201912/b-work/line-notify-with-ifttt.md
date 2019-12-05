@@ -32,71 +32,71 @@ Google(gmail) アカウントや Facebook アカウントを利用して作成�
 
 [Create your own - IFTTT](https://ifttt.com/create){:target="_blank"} を開いて `This` をクリックします。
 
-![IFTTT 01](../../ifttt/work-b/images/ifttt-01.png)
+![IFTTT 01](images/ifttt-01.png)
 
 [Search services] の所に、`webhooks` とタイプし Webhooks のアイコンをクリックします
 
-![IFTTT 02](../../ifttt/work-b/images/ifttt-02.png)
+![IFTTT 02](images/ifttt-02.png)
 
 `Connect` を押します
 
-![IFTTT 03](../../ifttt/work-b/images/ifttt-03.png)
+![IFTTT 03](images/ifttt-03.png)
 
 `Receive a web request` をクリックします。
 
-![IFTTT 04](../../ifttt/work-b/images/ifttt-04.png)
+![IFTTT 04](images/ifttt-04.png)
 
 Event Name 欄に `button` と入力し、 `Create trigger` をクリックします。
 
 > 必ず 小文字で `button` と指定して下さい
 
-![IFTTT 05](../../ifttt/work-b/images/ifttt-05.png)
+![IFTTT 05](images/ifttt-05.png)
 
 `That` をクリックします。
 
-![IFTTT 06](../../ifttt/work-b/images/ifttt-06.png)
+![IFTTT 06](images/ifttt-06.png)
 
 [Search services] に `LINE` と入力し、 LINE のアイコンをクリックします。
 
-![IFTTT 07](../../ifttt/work-b/images/ifttt-07.png)
+![IFTTT 07](images/ifttt-07.png)
 
 `Connect` をクリックします。
 
 > 既に LINE Notify に Connect 済みだったり、 Google アカウントや Facebook アカウントで IFTTT にログインした場合、この手順はスキップされて後述の "Send message" が表示される場合がありますが正常です。後述の "Send message" の手順から続けてください。
 
-![IFTTT 08](../../ifttt/work-b/images/ifttt-08.png)
+![IFTTT 08](images/ifttt-08.png)
 
 LINE アカウントに登録されているメールアドレス・パスワードでログインします。
 
-![IFTTT 09](../../ifttt/work-b/images/ifttt-09.png)
+![IFTTT 09](images/ifttt-09.png)
 
 > もしメールアドレス認証を指定ない場合には、まず　LINE アプリからメールアドレス認証を行う必要があります
 
-![IFTTT 10](../../ifttt/work-b/images/ifttt-10.png)
+![IFTTT 10](images/ifttt-10.png)
 
 Send message をクリックします。
 
-![IFTTT 11](../../ifttt/work-b/images/ifttt-11.png)
+![IFTTT 11](images/ifttt-11.png)
 
 Message 欄を以下のように変更し Create action をクリックします。
 
 > {% raw %}`ボタン {{Value1}} が {{Value2}} クリックされました<br>{{Value3}}`{% endraw %}
 
-![IFTTT 12](../../ifttt/work-b/images/ifttt-12.png)
+![IFTTT 12](images/ifttt-12.png)
 
 Finish をクリックします。
 
 > トリガー時にアプリ通知が必要ない場合には `Receive notifications when this Applet runs`　をオフにします
 
-![IFTTT 13](../../ifttt/work-b/images/ifttt-13.png)
+![IFTTT 13](images/ifttt-13.png)
 
 [Webhooks](https://ifttt.com/services/maker_webhooks/){:target="_blank"} のページを開き、Documentation をクリックします。
 
-![IFTTT 14](../../ifttt/work-b/images/ifttt-14.png)
+![IFTTT 14](images/ifttt-14.png)
 
 `Your key is:` の後ろの文字列をどこかにメモしておきます。
 
-![IFTTT 15](../../ifttt/work-b/images/ifttt-15.png)
+![IFTTT 15](images/ifttt-15.png)
 
 以上で IFTTT の設定は終了です。
 
