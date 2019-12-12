@@ -338,7 +338,7 @@ GPIO の BCM Pin 番号の 6 と GND に接続します。
 ![gpio6](https://docs.google.com/drawings/d/e/2PACX-1vR_7n4UvxIb4u1NNxaJhYPhuX8BJnN9QeMC6zZHoI8xk6VTgNZfevlezYjQ9OwhlJsl56x4VPHrv3wD/pub?w=573&h=396    )
 
 Raspberry Pi 3 modeb B+ は [内部にプルアップ/プルダウン抵抗を持っている](https://github.com/raspberrypilearning/physical-computing-guide/blob/master/pull_up_down.md) ため、タクトスイッチのようなセンサーを直接接続することが可能です。  
-また、同様のセンサーとしては CdS セル(フォトトランジスタ; 光量の強弱で抵抗値が変化)するものや、磁気式リードスイッチといったものがあり、これらの入力をトリガーに GPIO の値をhん化させることが可能です。
+また、同様のセンサーとしては CdS セル(フォトトランジスタ; 光量の強弱で抵抗値が変化)するものや、磁気式リードスイッチといったものがあり、これらの入力をトリガーに GPIO の値を変化させることが可能です。
 
 ### 以降は Raspberry Pi 側で実行
 
@@ -370,5 +370,9 @@ curl -O https://gist.githubusercontent.com/ma2shita/8ee3f93a209025433c5a44bddbcd
 systemctl --user enable $PWD/gpio6_shooting.service
 systemctl --user start gpio6_shooting.service
 ```
+
+<h2 id="structure">Raspberry Pi 内におけるプログラムやファイルの関係図</h2>
+
+![iot-prototype-seminar-201912 / structure](https://docs.google.com/drawings/d/e/2PACX-1vQJCrEuiRiZQuKmaZSU2iGAxHQ6yIIGV_GK5LlW1ZATlA6FvylCYh2VAA2IEnE6VRRUavvffChBYoTC/pub?w=1146&h=645)
 
 EoT
