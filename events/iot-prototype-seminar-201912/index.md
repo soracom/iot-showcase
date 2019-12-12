@@ -371,4 +371,8 @@ systemctl --user enable $PWD/gpio6_shooting.service
 systemctl --user start gpio6_shooting.service
 ```
 
+<h2 id="structure">Raspberry Pi 内におけるプログラムやファイルの関係図</h2>
+
+![iot-prototype-seminar-201912 / structure](https://docs.google.com/drawings/d/e/2PACX-1vQJCrEuiRiZQuKmaZSU2iGAxHQ6yIIGV_GK5LlW1ZATlA6FvylCYh2VAA2IEnE6VRRUavvffChBYoTC/pub?w=1146&h=645)
+
 EoT
